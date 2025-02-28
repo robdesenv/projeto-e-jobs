@@ -12,8 +12,6 @@
         }
     ],
     "require": {
-        "codeigniter4/shield": "dev-develop"
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+        "codeigniter4/shield": "^1.1"
+    }
 }

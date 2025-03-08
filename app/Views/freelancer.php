@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iJobs -Freelancer</title>
+    <title>iJobs - Freelancer</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -93,18 +93,6 @@
                                 <label for="cidade" class="form-label">Cidade:</label>
                                 <input type="text" name="cidade" class="form-control" required>
                             </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="formacoes" class="form-label">Formações:</label>
-                            <textarea name="formacoes" class="form-control" rows="3" required></textarea>
-                            <small class="text-muted"></small>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="cargos" class="form-label">Cargos:</label>
-                            <textarea name="cargos" class="form-control" rows="3" required></textarea>
-                            <small class="text-muted">Liste os cargos que você tem experiencia.</small>
                         </div>
 
                         <div class="d-grid">

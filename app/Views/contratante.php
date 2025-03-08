@@ -94,11 +94,6 @@
                             </div>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="empresa" class="form-label">Empresa:</label>
-                            <input type="text" name="empresa" class="form-control">
-                        </div>
-
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary">Cadastrar</button>
                         </div>

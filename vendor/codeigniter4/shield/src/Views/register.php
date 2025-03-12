@@ -9,15 +9,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro - iJobs</title>
+    <title>Registro - e-Jobs</title>
 
-    <!-- Bootstrap CSS -->
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Ícones do Font Awesome -->
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
-    <!-- Estilos Personalizados -->
+
     <style>
         body {
             background-color: #f3f2ef;
@@ -133,7 +133,7 @@
 <body>
     <div class="container d-flex justify-content-center p-5">
         <div class="auth-container">
-            <h2>Registro - iJobs</h2>
+            <h2>Registro e-Jobs</h2>
 
             <?php if (session('error') !== null) : ?>
                 <div class="alert alert-danger" role="alert"><?= session('error') ?></div>
@@ -202,7 +202,7 @@
         </div>
     </div>
 
-    <!-- Script do selecionar oque e -->
+    <!-- Script pra selecionar oque e free ou ... -->
     <script>
         function selectUserType(type) {
            
@@ -217,7 +217,6 @@
         }
     </script>
 
-    <!-- Bootstrap js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

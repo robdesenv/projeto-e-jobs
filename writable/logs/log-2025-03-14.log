@@ -346,3 +346,153 @@ DEBUG - 2025-03-14 01:35:28 --> Session: Class initialized using 'CodeIgniter\Se
 DEBUG - 2025-03-14 01:35:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2025-03-14 01:35:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2025-03-14 01:35:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 01:41:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 01:41:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 01:41:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 01:41:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 01:41:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 01:41:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 01:42:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 01:42:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 01:43:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 01:43:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 01:43:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 01:43:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 01:43:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 01:43:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 01:43:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 01:43:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 01:43:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 01:43:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 01:43:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 01:43:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 01:43:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 01:43:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 01:43:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 01:44:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 01:44:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 01:44:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 01:44:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 01:44:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 01:44:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 01:44:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 01:44:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 01:44:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 22:05:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 22:05:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 22:05:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 22:05:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 22:05:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-03-14 22:05:23 --> mysqli_sql_exception: MySQL server has gone away in C:\xampp\htdocs\projeto-e-jobs\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\projeto-e-jobs\system\Database\MySQLi\Connection.php(327): mysqli->query('UPDATE `auth_id...', 0)
+#1 C:\xampp\htdocs\projeto-e-jobs\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `auth_id...')
+#2 C:\xampp\htdocs\projeto-e-jobs\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `auth_id...')
+#3 C:\xampp\htdocs\projeto-e-jobs\system\Database\BaseBuilder.php(2521): CodeIgniter\Database\BaseConnection->query('UPDATE `auth_id...', Array, false)
+#4 C:\xampp\htdocs\projeto-e-jobs\system\Model.php(461): CodeIgniter\Database\BaseBuilder->update()
+#5 C:\xampp\htdocs\projeto-e-jobs\system\BaseModel.php(1027): CodeIgniter\Model->doUpdate(Array, Array)
+#6 C:\xampp\htdocs\projeto-e-jobs\system\Model.php(863): CodeIgniter\BaseModel->update(Array, Array)
+#7 C:\xampp\htdocs\projeto-e-jobs\vendor\codeigniter4\shield\src\Models\UserIdentityModel.php(553): CodeIgniter\Model->update('15', Object(CodeIgniter\Shield\Entities\UserIdentity))
+#8 C:\xampp\htdocs\projeto-e-jobs\system\BaseModel.php(748): CodeIgniter\Shield\Models\UserIdentityModel->update('15', Object(CodeIgniter\Shield\Entities\UserIdentity))
+#9 C:\xampp\htdocs\projeto-e-jobs\vendor\codeigniter4\shield\src\Models\UserIdentityModel.php(447): CodeIgniter\BaseModel->save(Object(CodeIgniter\Shield\Entities\UserIdentity))
+#10 C:\xampp\htdocs\projeto-e-jobs\vendor\codeigniter4\shield\src\Entities\User.php(225): CodeIgniter\Shield\Models\UserIdentityModel->touchIdentity(Object(CodeIgniter\Shield\Entities\UserIdentity))
+#11 C:\xampp\htdocs\projeto-e-jobs\vendor\codeigniter4\shield\src\Authentication\Authenticators\Session.php(169): CodeIgniter\Shield\Entities\User->touchIdentity(Object(CodeIgniter\Shield\Entities\UserIdentity))
+#12 C:\xampp\htdocs\projeto-e-jobs\vendor\codeigniter4\shield\src\Controllers\LoginController.php(71): CodeIgniter\Shield\Authentication\Authenticators\Session->attempt(Array)
+#13 C:\xampp\htdocs\projeto-e-jobs\system\CodeIgniter.php(933): CodeIgniter\Shield\Controllers\LoginController->loginAction()
+#14 C:\xampp\htdocs\projeto-e-jobs\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(CodeIgniter\Shield\Controllers\LoginController))
+#15 C:\xampp\htdocs\projeto-e-jobs\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#16 C:\xampp\htdocs\projeto-e-jobs\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#17 C:\xampp\htdocs\projeto-e-jobs\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#18 C:\xampp\htdocs\projeto-e-jobs\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#19 {main}
+CRITICAL - 2025-03-14 22:05:23 --> CodeIgniter\Database\Exceptions\DatabaseException: MySQL server has gone away
+[Method: POST, Route: login]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2521): CodeIgniter\Database\BaseConnection->query('UPDATE `auth_identities` SET `last_used_at` = :last_used_at:, `updated_at` = :updated_at:
+WHERE `auth_identities`.`id` IN :auth_identities.id:', [...], false)
+ 2 SYSTEMPATH\Model.php(461): CodeIgniter\Database\BaseBuilder->update()
+ 3 SYSTEMPATH\BaseModel.php(1027): CodeIgniter\Model->doUpdate([...], [...])
+ 4 SYSTEMPATH\Model.php(863): CodeIgniter\BaseModel->update([...], [...])
+ 5 VENDORPATH\codeigniter4\shield\src\Models\UserIdentityModel.php(553): CodeIgniter\Model->update('15', Object(CodeIgniter\Shield\Entities\UserIdentity))
+ 6 SYSTEMPATH\BaseModel.php(748): CodeIgniter\Shield\Models\UserIdentityModel->update('15', Object(CodeIgniter\Shield\Entities\UserIdentity))
+ 7 VENDORPATH\codeigniter4\shield\src\Models\UserIdentityModel.php(447): CodeIgniter\BaseModel->save(Object(CodeIgniter\Shield\Entities\UserIdentity))
+ 8 VENDORPATH\codeigniter4\shield\src\Entities\User.php(225): CodeIgniter\Shield\Models\UserIdentityModel->touchIdentity(Object(CodeIgniter\Shield\Entities\UserIdentity))
+ 9 VENDORPATH\codeigniter4\shield\src\Authentication\Authenticators\Session.php(169): CodeIgniter\Shield\Entities\User->touchIdentity(Object(CodeIgniter\Shield\Entities\UserIdentity))
+10 VENDORPATH\codeigniter4\shield\src\Controllers\LoginController.php(71): CodeIgniter\Shield\Authentication\Authenticators\Session->attempt([...])
+11 SYSTEMPATH\CodeIgniter.php(933): CodeIgniter\Shield\Controllers\LoginController->loginAction()
+12 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(CodeIgniter\Shield\Controllers\LoginController))
+13 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+15 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+16 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-03-14 22:05:23 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: MySQL server has gone away
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `auth_identities` SET `last_used_at` = \'2025-03-14 22:05:22\', `updated_at` = \'2025-03-14 22:05:22\'
+WHERE `auth_identities`.`id` IN (\'15\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `auth_identities` SET `last_used_at` = \'2025-03-14 22:05:22\', `updated_at` = \'2025-03-14 22:05:22\'
+WHERE `auth_identities`.`id` IN (\'15\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2521): CodeIgniter\Database\BaseConnection->query('UPDATE `auth_identities` SET `last_used_at` = :last_used_at:, `updated_at` = :updated_at:
+WHERE `auth_identities`.`id` IN :auth_identities.id:', [...], false)
+ 4 SYSTEMPATH\Model.php(461): CodeIgniter\Database\BaseBuilder->update()
+ 5 SYSTEMPATH\BaseModel.php(1027): CodeIgniter\Model->doUpdate([...], [...])
+ 6 SYSTEMPATH\Model.php(863): CodeIgniter\BaseModel->update([...], [...])
+ 7 VENDORPATH\codeigniter4\shield\src\Models\UserIdentityModel.php(553): CodeIgniter\Model->update('15', Object(CodeIgniter\Shield\Entities\UserIdentity))
+ 8 SYSTEMPATH\BaseModel.php(748): CodeIgniter\Shield\Models\UserIdentityModel->update('15', Object(CodeIgniter\Shield\Entities\UserIdentity))
+ 9 VENDORPATH\codeigniter4\shield\src\Models\UserIdentityModel.php(447): CodeIgniter\BaseModel->save(Object(CodeIgniter\Shield\Entities\UserIdentity))
+10 VENDORPATH\codeigniter4\shield\src\Entities\User.php(225): CodeIgniter\Shield\Models\UserIdentityModel->touchIdentity(Object(CodeIgniter\Shield\Entities\UserIdentity))
+11 VENDORPATH\codeigniter4\shield\src\Authentication\Authenticators\Session.php(169): CodeIgniter\Shield\Entities\User->touchIdentity(Object(CodeIgniter\Shield\Entities\UserIdentity))
+12 VENDORPATH\codeigniter4\shield\src\Controllers\LoginController.php(71): CodeIgniter\Shield\Authentication\Authenticators\Session->attempt([...])
+13 SYSTEMPATH\CodeIgniter.php(933): CodeIgniter\Shield\Controllers\LoginController->loginAction()
+14 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(CodeIgniter\Shield\Controllers\LoginController))
+15 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+16 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+17 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+18 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-03-14 22:05:23 --> [Caused by] mysqli_sql_exception: MySQL server has gone away
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('UPDATE `auth_identities` SET `last_used_at` = \'2025-03-14 22:05:22\', `updated_at` = \'2025-03-14 22:05:22\'
+WHERE `auth_identities`.`id` IN (\'15\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `auth_identities` SET `last_used_at` = \'2025-03-14 22:05:22\', `updated_at` = \'2025-03-14 22:05:22\'
+WHERE `auth_identities`.`id` IN (\'15\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `auth_identities` SET `last_used_at` = \'2025-03-14 22:05:22\', `updated_at` = \'2025-03-14 22:05:22\'
+WHERE `auth_identities`.`id` IN (\'15\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2521): CodeIgniter\Database\BaseConnection->query('UPDATE `auth_identities` SET `last_used_at` = :last_used_at:, `updated_at` = :updated_at:
+WHERE `auth_identities`.`id` IN :auth_identities.id:', [...], false)
+ 5 SYSTEMPATH\Model.php(461): CodeIgniter\Database\BaseBuilder->update()
+ 6 SYSTEMPATH\BaseModel.php(1027): CodeIgniter\Model->doUpdate([...], [...])
+ 7 SYSTEMPATH\Model.php(863): CodeIgniter\BaseModel->update([...], [...])
+ 8 VENDORPATH\codeigniter4\shield\src\Models\UserIdentityModel.php(553): CodeIgniter\Model->update('15', Object(CodeIgniter\Shield\Entities\UserIdentity))
+ 9 SYSTEMPATH\BaseModel.php(748): CodeIgniter\Shield\Models\UserIdentityModel->update('15', Object(CodeIgniter\Shield\Entities\UserIdentity))
+10 VENDORPATH\codeigniter4\shield\src\Models\UserIdentityModel.php(447): CodeIgniter\BaseModel->save(Object(CodeIgniter\Shield\Entities\UserIdentity))
+11 VENDORPATH\codeigniter4\shield\src\Entities\User.php(225): CodeIgniter\Shield\Models\UserIdentityModel->touchIdentity(Object(CodeIgniter\Shield\Entities\UserIdentity))
+12 VENDORPATH\codeigniter4\shield\src\Authentication\Authenticators\Session.php(169): CodeIgniter\Shield\Entities\User->touchIdentity(Object(CodeIgniter\Shield\Entities\UserIdentity))
+13 VENDORPATH\codeigniter4\shield\src\Controllers\LoginController.php(71): CodeIgniter\Shield\Authentication\Authenticators\Session->attempt([...])
+14 SYSTEMPATH\CodeIgniter.php(933): CodeIgniter\Shield\Controllers\LoginController->loginAction()
+15 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(CodeIgniter\Shield\Controllers\LoginController))
+16 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+17 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+18 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+19 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-03-14 22:05:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 22:05:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 22:05:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 22:05:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 22:05:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 22:05:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 22:05:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 22:05:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 22:05:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 22:06:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 22:06:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 22:06:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 22:06:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 22:06:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 22:06:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 22:06:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 22:06:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 22:06:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 22:06:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 22:06:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 22:06:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 22:06:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 22:06:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

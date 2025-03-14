@@ -9,3 +9,107 @@ DEBUG - 2025-03-14 00:19:41 --> Session: Class initialized using 'CodeIgniter\Se
 DEBUG - 2025-03-14 00:19:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2025-03-14 00:19:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2025-03-14 00:19:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 00:36:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 00:36:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 00:36:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 00:36:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 00:37:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-03-14 00:37:17 --> CodeIgniter\Exceptions\BadMethodCallException: Call to undefined method CodeIgniter\Shield\Models\UserModel::addGroup
+[Method: POST, Route: register]
+in SYSTEMPATH\Model.php on line 930.
+ 1 VENDORPATH\codeigniter4\shield\src\Controllers\RegisterController.php(127): CodeIgniter\Model->__call('addGroup', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(933): CodeIgniter\Shield\Controllers\RegisterController->registerAction()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(CodeIgniter\Shield\Controllers\RegisterController))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-03-14 00:41:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 00:41:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 00:41:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-03-14 00:41:24 --> CodeIgniter\Shield\Authorization\AuthorizationException: freelancer não é um grupo válido.
+[Method: POST, Route: register]
+in VENDORPATH\codeigniter4\shield\src\Authorization\AuthorizationException.php on line 24.
+ 1 VENDORPATH\codeigniter4\shield\src\Authorization\Traits\Authorizable.php(50): CodeIgniter\Shield\Authorization\AuthorizationException::forUnknownGroup('freelancer')
+ 2 VENDORPATH\codeigniter4\shield\src\Models\UserModel.php(175): CodeIgniter\Shield\Entities\User->addGroup('freelancer')
+ 3 VENDORPATH\codeigniter4\shield\src\Controllers\RegisterController.php(127): CodeIgniter\Shield\Models\UserModel->addFreelancerGroup(Object(CodeIgniter\Shield\Entities\User))
+ 4 SYSTEMPATH\CodeIgniter.php(933): CodeIgniter\Shield\Controllers\RegisterController->registerAction()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(CodeIgniter\Shield\Controllers\RegisterController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-03-14 00:43:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 00:43:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 00:43:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 00:43:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 00:43:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 00:43:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 00:44:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-03-14 00:44:15 --> CodeIgniter\Shield\Authorization\AuthorizationException: contratante não é um grupo válido.
+[Method: POST, Route: register]
+in VENDORPATH\codeigniter4\shield\src\Authorization\AuthorizationException.php on line 24.
+ 1 VENDORPATH\codeigniter4\shield\src\Authorization\Traits\Authorizable.php(50): CodeIgniter\Shield\Authorization\AuthorizationException::forUnknownGroup('contratante')
+ 2 VENDORPATH\codeigniter4\shield\src\Models\UserModel.php(187): CodeIgniter\Shield\Entities\User->addGroup('Contratante')
+ 3 VENDORPATH\codeigniter4\shield\src\Controllers\RegisterController.php(129): CodeIgniter\Shield\Models\UserModel->addContratanteGroup(Object(CodeIgniter\Shield\Entities\User))
+ 4 SYSTEMPATH\CodeIgniter.php(933): CodeIgniter\Shield\Controllers\RegisterController->registerAction()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(CodeIgniter\Shield\Controllers\RegisterController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-03-14 00:48:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 00:48:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 00:49:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-03-14 00:49:25 --> Error: Call to a member function addGroup() on null
+[Method: POST, Route: register]
+in VENDORPATH\codeigniter4\shield\src\Models\UserModel.php on line 175.
+ 1 VENDORPATH\codeigniter4\shield\src\Controllers\RegisterController.php(127): CodeIgniter\Shield\Models\UserModel->addFreelancerGroup(null)
+ 2 SYSTEMPATH\CodeIgniter.php(933): CodeIgniter\Shield\Controllers\RegisterController->registerAction()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(CodeIgniter\Shield\Controllers\RegisterController))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-03-14 00:56:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 00:56:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 00:56:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-03-14 00:56:26 --> CodeIgniter\Shield\Exceptions\InvalidArgumentException: --not found-- não é um grupo válido.
+[Method: POST, Route: register]
+in VENDORPATH\codeigniter4\shield\src\Models\UserModel.php on line 171.
+ 1 VENDORPATH\codeigniter4\shield\src\Controllers\RegisterController.php(127): CodeIgniter\Shield\Models\UserModel->addFreelancerGroup(Object(CodeIgniter\Shield\Entities\User))
+ 2 SYSTEMPATH\CodeIgniter.php(933): CodeIgniter\Shield\Controllers\RegisterController->registerAction()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(CodeIgniter\Shield\Controllers\RegisterController))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-03-14 00:58:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 00:58:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 00:58:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-03-14 00:58:13 --> Error: Call to a member function addGroup() on null
+[Method: POST, Route: register]
+in VENDORPATH\codeigniter4\shield\src\Models\UserModel.php on line 171.
+ 1 VENDORPATH\codeigniter4\shield\src\Controllers\RegisterController.php(127): CodeIgniter\Shield\Models\UserModel->addFreelancerGroup(null)
+ 2 SYSTEMPATH\CodeIgniter.php(933): CodeIgniter\Shield\Controllers\RegisterController->registerAction()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(CodeIgniter\Shield\Controllers\RegisterController))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-03-14 00:58:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 00:58:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 00:58:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 00:58:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 00:58:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 00:59:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 00:59:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 00:59:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 00:59:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 00:59:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 00:59:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 00:59:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 00:59:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 01:00:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 01:00:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-14 01:00:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

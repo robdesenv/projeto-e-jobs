@@ -121,7 +121,14 @@ class RegisterController extends BaseController
         $user = $users->findById($users->getInsertID());
 
         // Add to default group
-        $users->addToDefaultGroup($user);
+        //$users->addToDefaultGroup($user);
+        // Adicionando grupo selecionado ao usúario 
+        $grupo = $_POST['user_type'];
+        if ($grupo === 'freelancer'){
+            $users->addFreelancerGroup($user);
+        }elseif ($grupo === 'contratante'){
+            $users->addcontratanteGroup($user);
+        }
 
         Events::trigger('register', $user);
 

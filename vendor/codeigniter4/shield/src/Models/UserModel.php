@@ -163,6 +163,22 @@ class UserModel extends BaseModel
         $user->addGroup($defaultGroup);
     }
 
+    public function addFreelancerGroup(User $user): void
+    {
+        $allowedGroups = array_keys(setting('AuthGroups.groups'));
+
+        $user->addGroup('freelancer');
+    }
+
+    public function addContratanteGroup(User $user): void
+    {
+        $allowedGroups = array_keys(setting('AuthGroups.groups'));
+
+
+        $user->addGroup('contratante');
+    }
+
+
     public function fake(Generator &$faker): User
     {
         $this->checkReturnType();

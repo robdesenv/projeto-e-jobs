@@ -61,6 +61,14 @@ class AuthGroups extends ShieldAuthGroups
             'title'       => 'Beta User',
             'description' => 'Has access to beta-level features.',
         ],
+        'freelancer' => [
+            'title'       => 'Freelancer User',
+            'description' => 'Acesso a área do freelancer',
+        ],
+        'contratante' => [
+            'title'       => 'Contratante User',
+            'description' => 'Acesso a área de contratante',
+        ],
     ];
 
     /**
@@ -79,6 +87,8 @@ class AuthGroups extends ShieldAuthGroups
         'users.edit'          => 'Can edit existing non-admin users',
         'users.delete'        => 'Can delete existing non-admin users',
         'beta.access'         => 'Can access beta-level features',
+        'freelancer.access'         => 'Can access freelancer-level features',
+        'contratante.access'         => 'Can access contratante-level features',
     ];
 
     /**
@@ -110,6 +120,12 @@ class AuthGroups extends ShieldAuthGroups
             'beta.access',
         ],
         'user' => [],
+        'freelancer' => [
+            'freelancer.access',
+        ],
+        'contratante' => [
+            'contratante.access',
+        ],
         'beta' => [
             'beta.access',
         ],

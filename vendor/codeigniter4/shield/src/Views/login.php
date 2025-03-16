@@ -37,7 +37,7 @@
         }
 
         .card-title {
-            color: #0a66c2;
+            color: #004182;
             font-weight: 700;
             text-align: center;
         }
@@ -51,12 +51,12 @@
         }
 
         .form-control:focus {
-            border-color: #0a66c2;
+            border-color: #004182;
             box-shadow: 0 0 8px rgba(10, 102, 194, 0.3);
         }
 
         .btn-primary {
-            background-color: #0a66c2;
+            background-color: #004182;
             border: none;
             width: 100%;
             padding: 12px;
@@ -66,7 +66,7 @@
         }
 
         .btn-primary:hover {
-            background-color: #004182;
+            background-color: #0a66c2;
         }
 
         .alert {

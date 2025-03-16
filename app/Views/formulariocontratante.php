@@ -4,16 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iJobs - Contratante</title>
+    <title>e-Jobs - Contratante</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
         body {
             background-color: #f3f2ef;
         }
 
         .navbar {
-            background-color: #0a66c2;
+            background-color: #004182;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
@@ -36,7 +37,7 @@
         }
 
         .footer {
-            background-color: #0a66c2;
+            background-color: #004182;
             padding: 20px 0;
             margin-top: 40px;
             text-align: center;
@@ -48,7 +49,6 @@
 
 <body>
 
-    <!-- Barra de Menu  -->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand" href="#">
@@ -74,13 +74,12 @@
         </div>
     </nav>
 
-    <!-- form  -->
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="form-section">
-                    <h3 class="mb-4">Contratante</h3>
-                    <form action="/contratante/store" method="post">
+                    <h3 class="mb-4">Freelancer</h3>
+                    <form action="" method="post">
 
                         <div class="mb-3">
                             <label for="nome" class="form-label">Nome:</label>
@@ -111,6 +110,18 @@
                                 <label for="cidade" class="form-label">Cidade:</label>
                                 <input type="text" name="cidade" class="form-control" required>
                             </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="empresa" class="form-label">Empresa:</label>
+                                <input type="text" name="empresa" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="avaliacaotexto" class="form-label">Avaliação em texto:</label>
+                            <input type="text" name="avaliacaotexto" class="form-control" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="avaliacaonumero" class="form-label">Avaliação de 0 a 10:</label>
+                            <input type="text" name="avaliacaonumero" class="form-control" required>
                         </div>
 
                         <div class="d-grid">
@@ -122,7 +133,6 @@
         </div>
     </div>
 
-    <!-- rodape -->
     <footer class="footer">
         <div class="container">
             <p class="mb-0">&copy; 2025 e-Jobs. Todos os direitos reservados.</p>

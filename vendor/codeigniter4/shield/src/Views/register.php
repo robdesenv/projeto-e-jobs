@@ -11,12 +11,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro - e-Jobs</title>
 
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-
 
     <style>
         body {
@@ -44,7 +40,7 @@
         .auth-container h2 {
             text-align: center;
             margin-bottom: 25px;
-            color: #0a66c2;
+            color: #004182;
             font-weight: 700;
             font-size: 28px;
         }
@@ -57,11 +53,11 @@
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
         .form-control:focus {
-            border-color: #0a66c2;
+            border-color: #004182;
             box-shadow: 0 0 8px rgba(10, 102, 194, 0.3);
         }
         .btn-primary {
-            background-color: #0a66c2;
+            background-color: #004182;
             border: none;
             width: 100%;
             padding: 12px;
@@ -70,7 +66,7 @@
             transition: background-color 0.3s ease;
         }
         .btn-primary:hover {
-            background-color: #004182;
+            background-color: #0a66c2;
         }
         .alert {
             margin-bottom: 20px;
@@ -87,13 +83,13 @@
             color: #666;
         }
         .footer a {
-            color: #0a66c2;
+            color: #004182;
             text-decoration: none;
             transition: color 0.3s ease;
         }
         .footer a:hover {
             text-decoration: underline;
-            color: #004182;
+            color: #0a66c2;
         }
         .user-type-selector {
             display: flex;
@@ -111,29 +107,53 @@
             margin: 0 5px;
         }
         .user-type-option:hover {
-            border-color: #0a66c2;
+            border-color: #004182;
             background-color: #f0f8ff;
         }
         .user-type-option.active {
-            border-color: #0a66c2;
+            border-color: #004182;
             background-color: #e6f0ff;
         }
         .user-type-option i {
             font-size: 24px;
             margin-bottom: 10px;
-            color: #0a66c2;
+            color: #004182;
         }
         .user-type-option span {
             font-size: 16px;
             font-weight: 500;
             color: #333;
         }
+        .btn-voltar {
+            background-color: #004182;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            color: #ffffff;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            margin-bottom: 20px;
+        }
+        .btn-voltar:hover {
+            background-color: #0a66c2;
+        }
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
     <div class="container d-flex justify-content-center p-5">
         <div class="auth-container">
+            <!-- Botão Voltar -->
+            <a href="login" class="btn btn-voltar"><i class="fas fa-arrow-left"></i> Voltar</a>
+
             <h2>Registro e-Jobs</h2>
+
+            <!-- Mensagem de erro para tipo de usuário não selecionado -->
+            <div id="userTypeError" class="alert alert-danger hidden" role="alert">
+                Por favor, selecione se você é um Freelancer ou Contratante.
+            </div>
 
             <?php if (session('error') !== null) : ?>
                 <div class="alert alert-danger" role="alert"><?= session('error') ?></div>
@@ -150,7 +170,7 @@
                 </div>
             <?php endif ?>
 
-            <form action="<?= url_to('register') ?>" method="post">
+            <form id="registerForm" action="<?= url_to('register') ?>" method="post">
                 <?= csrf_field() ?>
 
                 <!-- Seleção de Tipo de Usuário -->
@@ -158,12 +178,12 @@
                     <div class="user-type-option" onclick="selectUserType('freelancer')">
                         <i class="fas fa-user-tie"></i>
                         <span>Freelancer</span>
-                        <input type="radio" name="user_type" id="freelancer" value="freelancer" required hidden>
+                        <input type="radio" name="user_type" id="freelancer" value="freelancer" required>
                     </div>
                     <div class="user-type-option" onclick="selectUserType('contratante')">
                         <i class="fas fa-briefcase"></i>
                         <span>Contratante</span>
-                        <input type="radio" name="user_type" id="contratante" value="contratante" required hidden>
+                        <input type="radio" name="user_type" id="contratante" value="contratante" required >
                     </div>
                 </div>
 
@@ -202,10 +222,10 @@
         </div>
     </div>
 
-    <!-- Script pra selecionar oque e free ou ... -->
+    <!-- Scripts -->
     <script>
+        // Função para selecionar o tipo de usuário
         function selectUserType(type) {
-           
             document.querySelectorAll('.user-type-option').forEach(option => {
                 option.classList.remove('active');
             });
@@ -214,7 +234,19 @@
             selectedOption.classList.add('active');
 
             document.getElementById(type).checked = true;
+            document.getElementById('userTypeError').classList.add('hidden'); // Oculta o erro ao selecionar
         }
+
+        // Validação do formulário
+        document.getElementById('registerForm').addEventListener('submit', function (e) {
+            const freelancer = document.getElementById('freelancer').checked;
+            const contratante = document.getElementById('contratante').checked;
+
+            if (!freelancer && !contratante) {
+                e.preventDefault(); // Impede o envio do formulário
+                document.getElementById('userTypeError').classList.remove('hidden'); // Exibe o erro
+            }
+        });
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -222,4 +254,3 @@
 </html>
 
 <?= $this->endSection() ?>
-

@@ -17,7 +17,7 @@
         }
 
         .navbar {
-            background-color: #0a66c2;
+            background-color: #004182;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
@@ -35,7 +35,7 @@
         }
 
         .navbar-nav .nav-link:hover {
-            color: #cce4ff;
+            color: #0a66c2;
         }
 
         .welcome-section {
@@ -47,7 +47,7 @@
         }
 
         .welcome-section h1 {
-            color: #0a66c2;
+            color: #004182;
             font-weight: 700;
             margin-bottom: 20px;
         }
@@ -60,7 +60,7 @@
         .footer {
             text-align: center;
             padding: 20px;
-            background-color: #0a66c2;
+            background-color: #004182;
             color: #ffffff;
             margin-top: 40px;
         }
@@ -78,7 +78,7 @@
 </head>
 
 <body>
-    <!-- Barra de Menu -->
+
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand" href="/iniciofreelancer">e-Jobs</a>
@@ -104,12 +104,14 @@
                         <a class="nav-link" href="/freelancer/buscar-servicos"><i class="fas fa-search"></i> Buscar
                             serviços</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn-logout" href="logout"><i class="fas fa-sign-out-alt"></i> Sair</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Mensagem de inicio se quiser -->
     <div class="container">
         <div class="welcome-section text-center">
             <!-- comentei pq tava dando erro, quando tiver pronto tem que colocar pra puxar o nome do usuario, colocar  <> <h1>Bem-vindo, ?= $user_name ?!</h1> -->
@@ -117,7 +119,6 @@
         </div>
     </div>
 
-    <!-- Rodapé qualquer coisa muda, ou coloca informação de contato etc-->
     <footer class="footer">
         <div class="container">
             <p>&copy; 2025 e-Jobs. Todos os direitos reservados.</p>

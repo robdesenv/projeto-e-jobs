@@ -7,7 +7,6 @@
     <title>Início - Contratante</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
     <style>
@@ -17,7 +16,7 @@
         }
 
         .navbar {
-            background-color: #0a66c2;
+            background-color: #004182;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
@@ -35,7 +34,7 @@
         }
 
         .navbar-nav .nav-link:hover {
-            color: #cce4ff;
+            color: #0a66c2;
         }
 
         .welcome-section {
@@ -60,7 +59,7 @@
         .footer {
             text-align: center;
             padding: 20px;
-            background-color: #0a66c2;
+            background-color: #004182;
             color: #ffffff;
             margin-top: 40px;
         }
@@ -78,7 +77,7 @@
 </head>
 
 <body>
-    <!-- Barra de Menu  -->
+
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand" href="#">e-Jobs</a>
@@ -98,23 +97,23 @@
                         <a class="nav-link" href="#"><i class="fas fa-search"></i> Buscar freelancer</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa-dollar-sign"></i> Ver pagamentos efetuados</a>
+                        <a class="nav-link" href="#"><i class="fas fa-dollar-sign"></i> Ver pagamentos efetuados</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn-logout" href="logout"><i class="fas fa-sign-out-alt"></i> Sair</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-
-    <!-- Mensagem inicio se quiser-->
     <div class="container">
         <div class="welcome-section text-center">
             <!-- comentei pq tava dando erro, quando tiver pronto tem que colocar pra puxar o nome do usuario e colocar <> <h1>Bem-vindo, ?= $user_name ?!</h1> -->
-            <p>Gerencie seu currículo, serviços e finanças de forma fácil e eficiente.</p>
+            <p>Gerencie seus contratos, serviços e finanças de forma fácil e eficiente.</p>
         </div>
     </div>
 
-    <!-- Rodapé se quiser tbm-->
     <footer class="footer">
         <div class="container">
             <p>&copy; 2025 e-Jobs. Todos os direitos reservados.</p>

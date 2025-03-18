@@ -438,7 +438,7 @@ class Auth extends ShieldAuth
     {
         $session = session();
         if (auth()->user()->can('freelancer.access')) {
-            return '/freelancer';
+            return '/freelancer/index';
         }elseif  (auth()->user()->can('contratante.access')) {
             return '/contratante';
         }
@@ -467,7 +467,7 @@ class Auth extends ShieldAuth
     public function registerRedirect(): string
     {
         if (auth()->user()->can('freelancer.access')) {
-            return '/freelancer';
+            return '/freelancer/index';
         }elseif  (auth()->user()->can('contratante.access')) {
             return '/contratante';
         }
@@ -495,7 +495,7 @@ class Auth extends ShieldAuth
     public function permissionDeniedRedirect(): string
     {
         if (auth()->user()->can('freelancer.access')) {
-            return '/freelancer';
+            return '/freelancer/index';
         }elseif  (auth()->user()->can('contratante.access')) {
             return '/contratante';
         }
@@ -512,7 +512,7 @@ class Auth extends ShieldAuth
     public function groupDeniedRedirect(): string
     {
         if (auth()->user()->can('freelancer.access')) {
-            return '/freelancer';
+            return '/freelancer/index';
         }elseif  (auth()->user()->can('contratante.access')) {
             return '/contratante';
         }

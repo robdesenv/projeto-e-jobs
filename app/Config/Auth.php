@@ -457,7 +457,7 @@ class Auth extends ShieldAuth
     {
         $url = setting('Auth.redirects')['logout'];
 
-        return $this->getUrl($url);
+        return '/';
     }
 
     /**

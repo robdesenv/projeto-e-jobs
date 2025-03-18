@@ -9,6 +9,6 @@ class ContratanteController extends BaseController
 {
     public function index()
     {
-        return view(name: 'iniciocontratante');
+        return view(name: 'contratante/iniciocontratante');
     }
 }

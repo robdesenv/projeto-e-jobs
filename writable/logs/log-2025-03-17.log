@@ -1,0 +1,69 @@
+DEBUG - 2025-03-17 23:46:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-17 23:46:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-17 23:46:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-17 23:46:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-17 23:46:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-17 23:46:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-17 23:46:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-17 23:46:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-03-17 23:46:45 --> mysqli_sql_exception: MySQL server has gone away in C:\xampp\htdocs\projeto-e-jobs\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\projeto-e-jobs\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `au...', 0)
+#1 C:\xampp\htdocs\projeto-e-jobs\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `au...')
+#2 C:\xampp\htdocs\projeto-e-jobs\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `au...')
+#3 C:\xampp\htdocs\projeto-e-jobs\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `au...', Array, false)
+#4 C:\xampp\htdocs\projeto-e-jobs\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\projeto-e-jobs\system\BaseModel.php(839): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\projeto-e-jobs\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\projeto-e-jobs\vendor\codeigniter4\shield\src\Models\LoginModel.php(77): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\projeto-e-jobs\vendor\codeigniter4\shield\src\Authentication\Authenticators\Session.php(302): CodeIgniter\Shield\Models\LoginModel->recordLoginAttempt('email_password', 'freelancer@gmai...', true, '::1', 'Mozilla/5.0 (Wi...', 14)
+#9 C:\xampp\htdocs\projeto-e-jobs\vendor\codeigniter4\shield\src\Authentication\Authenticators\Session.php(179): CodeIgniter\Shield\Authentication\Authenticators\Session->recordLoginAttempt(Array, true, '::1', 'Mozilla/5.0 (Wi...', 14)
+#10 C:\xampp\htdocs\projeto-e-jobs\vendor\codeigniter4\shield\src\Controllers\LoginController.php(71): CodeIgniter\Shield\Authentication\Authenticators\Session->attempt(Array)
+#11 C:\xampp\htdocs\projeto-e-jobs\system\CodeIgniter.php(933): CodeIgniter\Shield\Controllers\LoginController->loginAction()
+#12 C:\xampp\htdocs\projeto-e-jobs\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(CodeIgniter\Shield\Controllers\LoginController))
+#13 C:\xampp\htdocs\projeto-e-jobs\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#14 C:\xampp\htdocs\projeto-e-jobs\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#15 C:\xampp\htdocs\projeto-e-jobs\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#16 C:\xampp\htdocs\projeto-e-jobs\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#17 {main}
+CRITICAL - 2025-03-17 23:46:45 --> CodeIgniter\Shield\Models\DatabaseException: Query error: 2006, MySQL server has gone away, query: INSERT INTO `auth_logins` (`ip_address`, `user_agent`, `id_type`, `identifier`, `user_id`, `date`, `success`) VALUES ('::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36', 'email_password', 'freelancer@gmail.com', 14, '2025-03-17 23:46:42', 1)
+[Method: POST, Route: login]
+in VENDORPATH\codeigniter4\shield\src\Models\CheckQueryReturnTrait.php on line 38.
+ 1 VENDORPATH\codeigniter4\shield\src\Models\LoginModel.php(87): CodeIgniter\Shield\Models\BaseModel->checkQueryReturn(false)
+ 2 VENDORPATH\codeigniter4\shield\src\Authentication\Authenticators\Session.php(302): CodeIgniter\Shield\Models\LoginModel->recordLoginAttempt('email_password', 'freelancer@gmail.com', true, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36', 14)
+ 3 VENDORPATH\codeigniter4\shield\src\Authentication\Authenticators\Session.php(179): CodeIgniter\Shield\Authentication\Authenticators\Session->recordLoginAttempt([...], true, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36', 14)
+ 4 VENDORPATH\codeigniter4\shield\src\Controllers\LoginController.php(71): CodeIgniter\Shield\Authentication\Authenticators\Session->attempt([...])
+ 5 SYSTEMPATH\CodeIgniter.php(933): CodeIgniter\Shield\Controllers\LoginController->loginAction()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(CodeIgniter\Shield\Controllers\LoginController))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-03-17 23:46:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-03-17 23:46:55 --> CodeIgniter\Shield\Exceptions\LogicException: The user has User Info in Session, so already logged in or in pending login state. If a logged in user logs in again with other account, the session data of the previous user will be used as the new user. Fix your code to prevent users from logging in without logging out or delete the session data. user_id: 14
+[Method: POST, Route: login]
+in VENDORPATH\codeigniter4\shield\src\Authentication\Authenticators\Session.php on line 651.
+ 1 VENDORPATH\codeigniter4\shield\src\Authentication\Authenticators\Session.php(177): CodeIgniter\Shield\Authentication\Authenticators\Session->startLogin(Object(CodeIgniter\Shield\Entities\User))
+ 2 VENDORPATH\codeigniter4\shield\src\Controllers\LoginController.php(71): CodeIgniter\Shield\Authentication\Authenticators\Session->attempt([...])
+ 3 SYSTEMPATH\CodeIgniter.php(933): CodeIgniter\Shield\Controllers\LoginController->loginAction()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(CodeIgniter\Shield\Controllers\LoginController))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-03-17 23:47:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-17 23:47:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-17 23:47:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-17 23:47:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-17 23:47:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-17 23:47:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-17 23:47:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-17 23:47:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-17 23:52:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-17 23:52:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-17 23:53:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-17 23:53:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-17 23:56:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-17 23:56:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-17 23:58:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-17 23:58:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

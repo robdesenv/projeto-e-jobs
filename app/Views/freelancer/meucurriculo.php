@@ -138,7 +138,7 @@
     <div class="container">
         <div class="curriculo-section">
             <h1>Meu Currículo</h1>
-            <form id="curriculoForm" enctype="multipart/form-data">
+            <form method="post" id="curriculoForm" enctype="multipart/form-data" >
                 <div class="row">
                     <div class="col-md-6">
                         <label for="nome">Nome:</label>
@@ -156,7 +156,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="dataNascimento">Data de Nascimento:</label>
-                        <input type="date" id="dataNascimento" name="dataNascimento" required>
+                        <input type="date" id="data_nasc" name="dataNasc" required>
                     </div>
                 </div>
                 <div class="row">
@@ -181,16 +181,19 @@
                         <textarea id="cargos" name="cargos" rows="4" placeholder="Descreva seus cargos" required></textarea>
                     </div>
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-md-12">
                         <label for="curriculoPdf">Anexar Currículo (PDF):</label>
-                        <input type="file" id="curriculoPdf" name="curriculoPdf" accept="application/pdf" required>
-                    </div>
-                </div>
+                        <input type="file" id="curriculoPdf" name="curriculoPdf" accept="application/pdf">
+                    </div> 
+                </div> -->
                 <div class="row">
                     <div class="col-md-12 text-center">
                         <button type="submit">Salvar Alterações</button>
                     </div>
+                </div>
+                <div>
+                    <strong><?php echo $msg ?></strong>
                 </div>
             </form>
         </div>

@@ -14,8 +14,7 @@ class contratante extends Model
     protected $returnType     = 'array';
     protected $useSoftDeletes = true;
 
-    protected $allowedFields = ['nome', 'telefone','email','data_nasc','estado','cidade','empresa',
-    'avaliacao_text','avaliacao_num'];
+    protected $allowedFields = ['nome', 'telefone','email','data_nasc','estado','cidade','empresa'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;

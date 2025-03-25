@@ -192,9 +192,6 @@
                         <button type="submit">Salvar Alterações</button>
                     </div>
                 </div>
-                <div>
-                    <strong><?php echo $msg ?></strong>
-                </div>
             </form>
         </div>
     </div>

@@ -142,7 +142,7 @@
     <div class="container">
         <div class="curriculo-section">
             <h1>Meu Currículo</h1>
-            <form method="post" id="curriculoForm" enctype="multipart/form-data">
+            <form method="post" id="curriculoForm">
                 <div class="row">
                     <div class="col-md-6">
                         <label for="nome">Nome:</label>

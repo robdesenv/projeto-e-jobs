@@ -13,6 +13,7 @@
         body {
             font-family: 'Segoe UI', sans-serif;
             background-color: #f8f9fa;
+           
         }
 
         .navbar {
@@ -43,6 +44,7 @@
             border-radius: 10px;
             margin: 20px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 20px;
         }
 
         .curriculo-section h1 {
@@ -102,7 +104,7 @@
 
 <body>
 
-        
+
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand" href="index">e-Jobs</a>
@@ -129,7 +131,8 @@
                             serviços</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link btn-logout" href="/projeto-e-jobs/public/index.php/logout"><i class="fas fa-sign-out-alt"></i> Sair</a>
+                        <a class="nav-link btn-logout" href="/projeto-e-jobs/public/index.php/logout"><i
+                                class="fas fa-sign-out-alt"></i> Sair</a>
                     </li>
                 </ul>
             </div>
@@ -139,7 +142,7 @@
     <div class="container">
         <div class="curriculo-section">
             <h1>Meu Currículo</h1>
-            <form method="post" id="curriculoForm" enctype="multipart/form-data" >
+            <form method="post" id="curriculoForm" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-md-6">
                         <label for="nome">Nome:</label>
@@ -157,7 +160,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="dataNascimento">Data de Nascimento:</label>
-                        <input type="date" id="data_nasc" name="dataNasc" required>
+                        <input type="date" id="dataNasc" name="dataNasc" required>
                     </div>
                 </div>
                 <div class="row">
@@ -173,21 +176,17 @@
                 <div class="row">
                     <div class="col-md-12">
                         <label for="formacoes">Formações:</label>
-                        <textarea id="formacoes" name="formacoes" rows="4" placeholder="Descreva suas formações" required></textarea>
+                        <textarea id="formacoes" name="formacoes" rows="4" placeholder="Descreva suas formações"
+                            required></textarea>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <label for="cargos">Cargos:</label>
-                        <textarea id="cargos" name="cargos" rows="4" placeholder="Descreva seus cargos" required></textarea>
+                        <textarea id="cargos" name="cargos" rows="4" placeholder="Descreva seus cargos"
+                            required></textarea>
                     </div>
                 </div>
-                <!-- <div class="row">
-                    <div class="col-md-12">
-                        <label for="curriculoPdf">Anexar Currículo (PDF):</label>
-                        <input type="file" id="curriculoPdf" name="curriculoPdf" accept="application/pdf">
-                    </div> 
-                </div> -->
                 <div class="row">
                     <div class="col-md-12 text-center">
                         <button type="submit">Salvar Alterações</button>
@@ -208,21 +207,6 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Simulação de salvamento dos dados (pode ser substituído por uma requisição AJAX para o backend)
-        document.getElementById('curriculoForm').addEventListener('submit', function (event) {
-            event.preventDefault();
-
-            // Verifica se um arquivo PDF foi selecionado
-            const arquivoPdf = document.getElementById('curriculoPdf').files[0];
-            if (arquivoPdf && arquivoPdf.type === 'application/pdf') {
-                alert('Dados e currículo salvos com sucesso!');
-                // Aqui você pode adicionar uma requisição AJAX para enviar os dados e o arquivo ao servidor
-            } else {
-                alert('Por favor, anexe um arquivo PDF válido.');
-            }
-        });
-    </script>
 </body>
 
 </html>

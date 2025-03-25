@@ -7,6 +7,7 @@
 </head>
 <body>
     <?php echo $msg ?>
+    
     <form method="post">
         <label for="">nome: </label>
         <input type="text" name="nome"> <br>

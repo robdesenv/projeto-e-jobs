@@ -16,25 +16,40 @@ class FreelancerController extends BaseController
 
         $data['titulo'] = 'teste';
         $data['msg'] = $this->request->getMethod();
-
-        if($this->request->getMethod() === 'POST'){
-            $freelancerModel = new \App\Models\freelancerModel();
-            $freelancerModel->set('nome', $this->request->getPost('nome'));
-            $freelancerModel->set('telefone', $this->request->getPost('telefone'));
-            $freelancerModel->set('email', $this->request->getPost('email'));
-            $freelancerModel->set('dataNasc', $this->request->getPost('datNasc'));
-            $freelancerModel->set('estado', $this->request->getPost('estado'));
-            $freelancerModel->set('cidade', $this->request->getPost('cidade'));
-            $freelancerModel->set('formacoes', $this->request->getPost('formacoes'));
-            $freelancerModel->set('cargos', $this->request->getPost('cargos'));
-
-            if($freelancerModel->insert()){
-                $data['msg'] = 'Curriculo cadastrado';
-            }else{
-                $data['msg'] = 'Erro ao cadastrar';
+        $user_id = user_id();
+        $db = db_connect();
+        $sql = 'SELECT user_id FROM `freelancer` WHERE user_id = ' .$user_id ;
+        $resultado = $db->connID->query($sql);
+        $num_rows = mysqli_num_rows($resultado);
+       
+        if ($num_rows >= 1){
+            return view('freelancer/meucurriculo', $data);
+        }else{
+            if($this->request->getMethod() === 'POST'){
+                $freelancerModel = new \App\Models\freelancerModel();
+                $freelancerModel->set('nome', $this->request->getPost('nome'));
+                $freelancerModel->set('telefone', $this->request->getPost('telefone'));
+                $freelancerModel->set('email', $this->request->getPost('email'));
+                $freelancerModel->set('dataNasc', $this->request->getPost('dataNasc'));
+                $freelancerModel->set('estado', $this->request->getPost('estado'));
+                $freelancerModel->set('cidade', $this->request->getPost('cidade'));
+                $freelancerModel->set('formacoes', $this->request->getPost('formacoes'));
+                $freelancerModel->set('cargos', $this->request->getPost('cargos'));
+                $freelancerModel->set('user_id', user_id());
+    
+                if($freelancerModel->insert()){
+                    $data['msg'] = 'Curriculo cadastrado';
+                }else{
+                    $data['msg'] = 'Erro ao cadastrar';
+                }
             }
+            return view('curriculoteste', $data);
         }
-        return view('freelancer\meucurriculo', $data);
+
+        
+
+
+        
     }
 
     public function servicosprestados(){

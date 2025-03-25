@@ -23,7 +23,7 @@ class FreelancerController extends BaseController
         $num_rows = mysqli_num_rows($resultado);
        
         if ($num_rows >= 1){
-            return view('freelancer/meucurriculo', $data);
+            return view('freelancer/exibircurriculo', $data);
         }else{
             if($this->request->getMethod() === 'POST'){
                 $freelancerModel = new \App\Models\freelancerModel();
@@ -42,8 +42,9 @@ class FreelancerController extends BaseController
                 }else{
                     $data['msg'] = 'Erro ao cadastrar';
                 }
+                header("Refresh: 0");
             }
-            return view('curriculoteste', $data);
+            return view('freelancer/meucurriculo', $data);
         }
 
         

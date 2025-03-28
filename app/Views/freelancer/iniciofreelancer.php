@@ -16,28 +16,6 @@
             background-color: #f8f9fa;
         }
 
-        .navbar {
-            background-color: #004182;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .navbar-brand {
-            font-weight: bold;
-            font-size: 24px;
-            color: #ffffff;
-        }
-
-        .navbar-nav .nav-link {
-            color: #ffffff;
-            font-size: 16px;
-            margin-right: 20px;
-            transition: color 0.3s ease;
-        }
-
-        .navbar-nav .nav-link:hover {
-            color: #0a66c2;
-        }
-
         .welcome-section {
             padding: 50px 0;
             background-color: #ffffff;
@@ -79,38 +57,8 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container">
-            <a class="navbar-brand" href="index">e-Jobs</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="meucurriculo"><i class="fas fa-file-alt"></i> Meu
-                            currículo</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="servicosprestados"><i class="fas fa-tasks"></i> Serviços
-                            prestados</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="transrecebidas"><i class="fa-dollar-sign"></i>
-                            Transferências recebidas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="telabusca"><i class="fas fa-search"></i> Buscar
-                            serviços</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn-logout" href="/projeto-e-jobs/public/index.php/logout"><i class="fas fa-sign-out-alt"></i> Sair</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <!-- chamando o Menu no arquivo menuFreelancer -->
+    <?php include 'menuFreelancer.php'; ?>
 
     <div class="container">
         <div class="welcome-section text-center">

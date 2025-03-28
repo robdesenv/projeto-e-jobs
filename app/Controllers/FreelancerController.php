@@ -15,6 +15,7 @@ class FreelancerController extends BaseController
     public function meucurriculo(){
 
         $data['titulo'] = 'teste';
+        $data['acao'] = 'Salvar';
         $data['msg'] = $this->request->getMethod();
         $user_id = user_id();
         $db = db_connect();
@@ -23,6 +24,10 @@ class FreelancerController extends BaseController
         $num_rows = mysqli_num_rows($resultado);
        
         if ($num_rows >= 1){
+
+            $freelancerModel = new \App\Models\freelancerModel();
+            $data['freelancers'] = $freelancerModel->where('user_id',$user_id)->find();;
+        
             return view('freelancer/exibircurriculo', $data);
         }else{
             if($this->request->getMethod() === 'POST'){
@@ -46,12 +51,34 @@ class FreelancerController extends BaseController
             }
             return view('freelancer/meucurriculo', $data);
         }
-
-        
-
-
-        
     }
+
+    public function editCurriculo($id){
+
+        $data['acao'] = 'Editar';
+        $freelancerModel = new \App\Models\freelancerModel();
+        $freelancer = $freelancerModel->find($id);
+
+        if($this->request->getMethod() == 'POST'){
+            $freelancer['nome'] = $this->request->getPost('nome');
+            $freelancer['telefone'] = $this->request->getPost('telefone');
+            $freelancer['email'] = $this->request->getPost('email');
+            $freelancer['dataNasc'] = $this->request->getPost('dataNasc');
+            $freelancer['estado'] = $this->request->getPost('estado');
+            $freelancer['cidade'] = $this->request->getPost('cidade');
+            $freelancer['formacoes'] = $this->request->getPost('formacoes');
+            $freelancer['cargos'] = $this->request->getPost('cargos');
+
+            if ($freelancerModel->update($id, $freelancer)) {
+                return redirect('freelancer/meucurriculo');
+            }
+        }
+        $data['freelancer'] = $freelancer;
+
+        echo view('freelancer/meucurriculo', $data);
+
+}
+
 
     public function servicosprestados(){
         return view('freelancer/servicosprestados');

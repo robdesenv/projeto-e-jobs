@@ -15,28 +15,6 @@
             background-color: #f8f9fa;
         }
 
-        .navbar {
-            background-color: #004182;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .navbar-brand {
-            font-weight: bold;
-            font-size: 24px;
-            color: #ffffff;
-        }
-
-        .navbar-nav .nav-link {
-            color: #ffffff;
-            font-size: 16px;
-            margin-right: 20px;
-            transition: color 0.3s ease;
-        }
-
-        .navbar-nav .nav-link:hover {
-            color: #0a66c2;
-        }
-
         .curriculo-section {
             padding: 50px 0;
             background-color: #ffffff;
@@ -95,65 +73,40 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container">
-            <a class="navbar-brand" href="index">e-Jobs</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="meucurriculo"><i class="fas fa-file-alt"></i> Meu currículo</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="servicosprestados"><i class="fas fa-tasks"></i> Serviços prestados</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="transrecebidas"><i class="fa-dollar-sign"></i> Transferências
-                            recebidas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="telabusca"><i class="fas fa-search"></i> Buscar serviços</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn-logout" href="/projeto-e-jobs/public/index.php/logout"><i
-                                class="fas fa-sign-out-alt"></i> Sair</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <!-- chamando o Menu no arquivo menuFreelancer -->
+    <?php include 'menuFreelancer.php'; ?>
+
 
     <div class="container">
         <div class="curriculo-section">
             <h1>Meu Currículo</h1>
 
-            <div class="info-label">Nome:</div>
+            <?php foreach ($freelancers as $freelancer): ?>
+            <div class="info-label">Nome: <?php echo $freelancer['nome'] ?></div>
 
-            <div class="info-label">Telefone:</div>
-
-
-            <div class="info-label">E-mail:</div>
+            <div class="info-label">Telefone: <?php echo $freelancer['telefone'] ?></div>
 
 
-            <div class="info-label">Data de Nascimento:</div>
+            <div class="info-label">E-mail: <?php echo $freelancer['email'] ?></div>
 
 
-            <div class="info-label">Estado:</div>
+            <div class="info-label">Data de Nascimento: <?php echo $freelancer['dataNasc'] ?></div>
 
 
-            <div class="info-label">Cidade:</div>
+            <div class="info-label">Estado: <?php echo $freelancer['estado'] ?> </div>
 
 
-            <div class="info-label">Formações:</div>
+            <div class="info-label">Cidade: <?php echo $freelancer['cidade'] ?> </div>
 
-            <div class="info-label">Cargos:</div>
 
+            <div class="info-label">Formações: <?php echo $freelancer['formacoes'] ?> </div>
+
+            <div class="info-label">Cargos: <?php echo $freelancer['cargos'] ?> </div>
+
+            <?php endforeach; ?>
 
             <div class="text-center">
-                <a href="meucurriculo" class="edit-btn"><i class="fas fa-edit"></i> Alterar Informações</a>
+                <a href="<?php echo base_url('freelancer/editarcurriculo/'.$freelancer['id'])?>" class="edit-btn"><i class="fas fa-edit"></i> Alterar Informações</a>
             </div>
 
         </div>

@@ -16,28 +16,6 @@
            
         }
 
-        .navbar {
-            background-color: #004182;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .navbar-brand {
-            font-weight: bold;
-            font-size: 24px;
-            color: #ffffff;
-        }
-
-        .navbar-nav .nav-link {
-            color: #ffffff;
-            font-size: 16px;
-            margin-right: 20px;
-            transition: color 0.3s ease;
-        }
-
-        .navbar-nav .nav-link:hover {
-            color: #0a66c2;
-        }
-
         .curriculo-section {
             padding: 50px 0;
             background-color: #ffffff;
@@ -104,92 +82,63 @@
 
 <body>
 
-
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container">
-            <a class="navbar-brand" href="index">e-Jobs</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="meucurriculo"><i class="fas fa-file-alt"></i> Meu
-                            currículo</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="servicosprestados"><i class="fas fa-tasks"></i> Serviços
-                            prestados</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="transrecebidas"><i class="fa-dollar-sign"></i>
-                            Transferências recebidas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="telabusca"><i class="fas fa-search"></i> Buscar
-                            serviços</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn-logout" href="/projeto-e-jobs/public/index.php/logout"><i
-                                class="fas fa-sign-out-alt"></i> Sair</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
+    <!-- chamando o Menu no arquivo menuFreelancer -->
+    <?php include 'menuFreelancer.php'; ?>
+    
     <div class="container">
         <div class="curriculo-section">
             <h1>Meu Currículo</h1>
             <form method="post" id="curriculoForm">
                 <div class="row">
+
+                    <input type="hidden" name="id" value="<?php echo (isset($freelancer) ? $freelancer['id'] : '')?>">
+
                     <div class="col-md-6">
                         <label for="nome">Nome:</label>
-                        <input type="text" id="nome" name="nome" placeholder="Digite seu nome" required>
+                        <input type="text" id="nome" name="nome" value="<?php echo (isset($freelancer) ? $freelancer['nome'] : '')?>" placeholder="Digite seu nome" required>
                     </div>
                     <div class="col-md-6">
                         <label for="telefone">Telefone:</label>
-                        <input type="tel" id="telefone" name="telefone" placeholder="Digite seu telefone" required>
+                        <input type="tel" id="telefone" name="telefone" value="<?php echo (isset($freelancer) ? $freelancer['telefone'] : '')?>" placeholder="Digite seu telefone" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <label for="email">E-mail:</label>
-                        <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
+                        <input type="email" id="email" name="email" value="<?php echo (isset($freelancer) ? $freelancer['email'] : '')?>" placeholder="Digite seu e-mail" required>
                     </div>
                     <div class="col-md-6">
                         <label for="dataNascimento">Data de Nascimento:</label>
-                        <input type="date" id="dataNasc" name="dataNasc" required>
+                        <input type="date" id="dataNasc" name="dataNasc" value="<?php echo (isset($freelancer) ? $freelancer['dataNasc'] : '')?>" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <label for="estado">Estado:</label>
-                        <input type="text" id="estado" name="estado" placeholder="Digite seu estado" required>
+                        <input type="text" id="estado" name="estado" value="<?php echo (isset($freelancer) ? $freelancer['estado'] : '')?>" placeholder="Digite seu estado" required>
                     </div>
                     <div class="col-md-6">
                         <label for="cidade">Cidade:</label>
-                        <input type="text" id="cidade" name="cidade" placeholder="Digite sua cidade" required>
+                        <input type="text" id="cidade" name="cidade" value="<?php echo (isset($freelancer) ? $freelancer['cidade'] : '')?>" placeholder="Digite sua cidade" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <label for="formacoes">Formações:</label>
                         <textarea id="formacoes" name="formacoes" rows="4" placeholder="Descreva suas formações"
-                            required></textarea>
+                        required><?php echo (isset($freelancer) ? $freelancer['formacoes'] : '')?></textarea>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <label for="cargos">Cargos:</label>
-                        <textarea id="cargos" name="cargos" rows="4" placeholder="Descreva seus cargos"
-                            required></textarea>
+                        <textarea id="cargos" name="cargos" rows="4" value="<?php echo (isset($freelancer) ? $freelancer['cidade'] : '')?>" placeholder="Descreva seus cargos"
+                            required><?php echo (isset($freelancer) ? $freelancer['cargos'] : '')?></textarea>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <button type="submit">Salvar Alterações</button>
+                        <button type="submit"><?php echo $acao ?></button>
                     </div>
                 </div>
             </form>

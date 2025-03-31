@@ -73,53 +73,11 @@
 </head>
 
 <body>
-    <!-- chamando o Menu no arquivo menuFreelancer -->
-    <?php include 'menuFreelancer.php'; ?>
+
+<?php include 'menuContratante.php'; ?>
 
 
-    <div class="container">
-        <div class="curriculo-section">
-            <h1>Meu Currículo</h1>
 
-            <?php foreach ($freelancers as $freelancer): ?>
-                <div class="info-label">Nome: <?php echo $freelancer['nome'] ?></div>
-
-                <div class="info-label">Telefone: <?php echo $freelancer['telefone'] ?></div>
-
-
-                <div class="info-label">E-mail: <?php echo $freelancer['email'] ?></div>
-
-
-                <div class="info-label">Data de Nascimento: <?php echo $freelancer['dataNasc'] ?></div>
-
-
-                <div class="info-label">Estado: <?php echo $freelancer['estado'] ?> </div>
-
-
-                <div class="info-label">Cidade: <?php echo $freelancer['cidade'] ?> </div>
-
-
-                <div class="info-label">Formações: <?php echo $freelancer['formacoes'] ?> </div>
-
-                <div class="info-label">Cargos: <?php echo $freelancer['cargos'] ?> </div>
-
-            <?php endforeach; ?>
-
-            <div class="text-center">
-                <a href="<?php echo base_url('freelancer/editarcurriculo/' . $freelancer['id']) ?>" class="edit-btn"><i
-                        class="fas fa-edit"></i> Alterar Informações</a>
-            </div>
-
-        </div>
-    </div>
-
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 e-Jobs. Todos os direitos reservados.</p>
-        </div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

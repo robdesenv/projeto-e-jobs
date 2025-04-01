@@ -19,6 +19,10 @@ $routes->get('/freelancer/transrecebidas', 'FreelancerController::transrecebidas
 
 //contratante
 $routes->get('/contratante', 'ContratanteController::index', ['filter' => 'group:contratante']);
+$routes->get('/contratante/minhaempresa', 'ContratanteController::minhaempresa', ['filter' => 'group:contratante']);
+$routes->get('/contratante/vagaspub', 'ContratanteController::vagaspub', ['filter' => 'group:contratante']);
+$routes->get('/contratante/busca', 'ContratanteController::busca', ['filter' => 'group:contratante']);
+$routes->get('/contratante/pagamentos', 'ContratanteController::pagamentos', ['filter' => 'group:contratante']);
 
 
 service('auth')->routes($routes);

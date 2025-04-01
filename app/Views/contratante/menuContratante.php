@@ -48,16 +48,16 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url('contratante')?>"><i class="fas fa-building"></i> Ver minha empresa</a>
+                        <a class="nav-link" href="<?php echo base_url('contratante/minhaempresa')?>"><i class="fas fa-building"></i> Ver minha empresa</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url('contratante')?>"><i class="fas fa-briefcase"></i> Ver vagas publicadas</a>
+                        <a class="nav-link" href="<?php echo base_url('contratante/vagaspub')?>"><i class="fas fa-briefcase"></i> Ver vagas publicadas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url('contratante')?>"><i class="fas fa-search"></i> Buscar freelancer</a>
+                        <a class="nav-link" href="<?php echo base_url('contratante/busca')?>"><i class="fas fa-search"></i> Buscar freelancer</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url('contratante')?>"><i class="fas fa-dollar-sign"></i> Ver pagamentos efetuados</a>
+                        <a class="nav-link" href="<?php echo base_url('contratante/pagamentos')?>"><i class="fas fa-dollar-sign"></i> Ver pagamentos efetuados</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link btn-logout" href="<?php echo base_url('logout')?>"><i class="fas fa-sign-out-alt"></i> Sair</a>

@@ -11,4 +11,20 @@ class ContratanteController extends BaseController
     {
         return view(name: 'contratante/iniciocontratante');
     }
+    public function minhaempresa()
+    {
+        return view(name: 'contratante/minhaempresa');
+    }
+    public function vagaspub()
+    {
+        return view(name: 'contratante/vagaspub');
+    }
+    public function busca()
+    {
+        return view(name: 'contratante/busca');
+    }
+    public function pagamentos()
+    {
+        return view(name: 'contratante/pagamentos');
+    }
 }

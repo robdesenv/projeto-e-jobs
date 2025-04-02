@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Currículo - Freelancer</title>
+    <title>Minha Empresa - e-Jobs</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
@@ -13,70 +13,155 @@
         body {
             font-family: 'Segoe UI', sans-serif;
             background-color: #f8f9fa;
+            padding-top: 20px;
         }
 
-        .curriculo-section {
-            padding: 50px 0;
+        .empresa-section {
             background-color: #ffffff;
             border-radius: 10px;
-            margin: 20px;
+            margin-bottom: 30px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            padding: 20px;
+            padding: 30px;
         }
 
-        .curriculo-section h1 {
+        .empresa-section h1 {
             color: #004182;
             font-weight: 700;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            text-align: center;
         }
 
-        .info-label {
+        .empresa-section label {
             font-weight: bold;
             color: #333;
-            margin-top: 10px;
+            margin-bottom: 5px;
+            display: block;
         }
 
-        .info-value {
-            margin-bottom: 15px;
-            padding: 8px;
-            background-color: #f8f9fa;
+        .empresa-section input,
+        .empresa-section textarea,
+        .empresa-section select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
             border-radius: 5px;
-            border-left: 4px solid #004182;
+            transition: border-color 0.3s;
         }
 
-        .edit-btn {
+        .empresa-section input:focus,
+        .empresa-section textarea:focus {
+            border-color: #004182;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0, 65, 130, 0.2);
+        }
+
+        .btn-enviar {
             background-color: #004182;
             color: #ffffff;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 25px;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin-top: 20px;
-            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 16px;
+            margin-top: 10px;
             display: inline-block;
         }
 
-        .edit-btn:hover {
+        .btn-enviar:hover {
             background-color: #0a66c2;
-            color: #ffffff;
+            transform: translateY(-2px);
         }
 
         .footer {
             text-align: center;
-            padding: 20px;
+            padding: 25px;
             background-color: #004182;
             color: #ffffff;
             margin-top: 40px;
+        }
+
+        .footer a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: #cce4ff;
+            text-decoration: underline;
         }
     </style>
 </head>
 
 <body>
+    <?php include 'menuContratante.php'; ?>
 
-<?php include 'menuContratante.php'; ?>
+    <div class="container">
+        <div class="empresa-section">
+            <h1><i class="fas fa-building me-2"></i>Minha Empresa</h1>
+            <form method="post" id="empresaForm" action="processa_empresa.php">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="nome">Nome:</label>
+                        <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="telefone">Telefone:</label>
+                        <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
+                    </div>
+                </div>
 
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="email">E-mail:</label>
+                        <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="data_nasc">Data de Nascimento:</label>
+                        <input type="date" id="data_nasc" name="data_nasc" required>
+                    </div>
+                </div>
 
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="estado">Estado:</label>
+                        <input type="text" id="estado" name="estado" placeholder="Seu estado" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="cidade">Cidade:</label>
+                        <input type="text" id="cidade" name="cidade" placeholder="Sua cidade" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <label for="empresa">Sobre a Empresa:</label>
+                        <textarea id="empresa" name="empresa" rows="5"
+                            placeholder="Descreva sua empresa e os serviços que oferece" required></textarea>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-12 text-center">
+                        <button type="submit" class="btn-enviar">Enviar
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 e-Jobs. Todos os direitos reservados.</p>
+            <p><a href="#">Política de Privacidade</a> | <a href="#">Termos de Uso</a></p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 

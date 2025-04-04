@@ -93,7 +93,12 @@ class ContratanteController extends BaseController
 
     public function busca()
     {
-        return view(name: 'contratante/busca');
+        $freelancerModel = new \App\Models\freelancerModel();
+        $data = [
+            'freelacers' => $freelancerModel->paginate(10),
+            'pager' => $freelancerModel->pager
+        ];
+        return view(name: 'contratante/busca',data: $data);
     }
     public function pagamentos()
     {

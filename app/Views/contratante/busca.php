@@ -153,25 +153,22 @@
                 </button>
             </div>
 
-
+            <?php foreach($freelacers as $freelancer): ?>
             <div id="listafreelancer">
                 <!-- exemplo dos Freelancer -->
                 <div class="servico-card">
-                    <h3>Motorista</h3>
-                    <p><strong>Categoria:</strong> Motorista</p>
-                    <p><strong>Localização:</strong> Viçosa, MG</p>
+                    <h3><?php echo $freelancer['nome']?></h3>
+                    <p><strong>Cargos:</strong> <?php echo $freelancer['cargos']?></p>
+                    <p><strong>Cidade:</strong> <?php echo $freelancer['cidade']?></p>
+                    <p><strong>Estado:</strong> <?php echo $freelancer['estado']?></p>
                     <button class="btn-candidatar" onclick="contratar(1)">Entrar em contato</button>
                 </div>
-
-                <div class="servico-card">
-                    <h3>Garçom</h3>
-                    <p><strong>Categoria:</strong> Garçom</p>
-                    <p><strong>Localização:</strong> Viçosa, MG</p>
-                    <button class="btn-candidatar" onclick="contratar(2)">Entrar em contato</button>
-                </div>
             </div>
+            <?php endforeach; ?>
         </div>
     </div>
+
+    <?= $pager->links() ?>
 
     <footer class="footer">
         <div class="container">

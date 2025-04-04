@@ -14,9 +14,7 @@ class FreelancerController extends BaseController
 
     public function meucurriculo(){
 
-        $data['titulo'] = 'teste';
         $data['acao'] = 'Salvar';
-        $data['msg'] = $this->request->getMethod();
         $user_id = user_id();
         $db = db_connect();
         $sql = 'SELECT user_id FROM `freelancer` WHERE user_id = ' .$user_id ;

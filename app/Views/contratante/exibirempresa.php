@@ -79,9 +79,9 @@
 
     <div class="container">
         <div class="curriculo-section">
-            <h1>Minha empresa</h1>
+            <h1>Meus dados</h1>
 
-            <?php foreach ($freelancers as $freelancer): ?>
+            <?php foreach ($contratantes as $contratante): ?>
                 <div class="info-label">Nome: <?php echo $contratante['nome'] ?></div>
 
                 <div class="info-label">Telefone: <?php echo $contratante['telefone'] ?></div>
@@ -96,15 +96,19 @@
                 <div class="info-label">Estado: <?php echo $contratante['estado'] ?> </div>
 
 
-                <div class="info-label">Cidade: <?php echo $contratante['cidade'] ?> </div>
+                <div class="info-label">Cidade: <?php echo $contratante['cidade'] ?> </div><br>
 
+                <h1>Minha empresa</h1>
 
                 <div class="info-label">Empresa: <?php echo $contratante['empresa'] ?> </div>
 
                 
             <?php endforeach; ?>
 
-               <!--<a href="<?php echo base_url('contratante/editar_empresa') ?>" class="edit-btn">Editar</a>-->
+            <div class="text-center">
+                <a href="<?php echo base_url('contratante/editarinformacoes/' . $contratante['id']) ?>" class="edit-btn"><i
+                        class="fas fa-edit"></i> Alterar Informações</a>
+            </div>
 
         </div>
     </div>

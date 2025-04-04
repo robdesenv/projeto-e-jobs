@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class contratante extends Model
+class contratanteModel extends Model
 {
     protected $table      = 'contratante';
     protected $primaryKey = 'id';
@@ -12,9 +12,9 @@ class contratante extends Model
     protected $useAutoIncrement = true;
 
     protected $returnType     = 'array';
-    protected $useSoftDeletes = true;
+    protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['nome', 'telefone','email','data_nasc','estado','cidade','empresa'];
+    protected $allowedFields = ['user_id','nome', 'telefone','email','data_nasc','estado','cidade','empresa'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;

@@ -101,46 +101,51 @@
 
     <div class="container">
         <div class="empresa-section">
-            <h1><i class="fas fa-building me-2"></i>Minha Empresa</h1>
-            <form method="post" id="empresaForm" action="processa_empresa.php">
+            <h1>Meus dados</h1>
+            <form method="post" id="empresaForm">
+
+                <input type="hidden" name="id" value="<?php echo isset($contratante) ? $contratante['id'] : "" ?>">
+
                 <div class="row">
                     <div class="col-md-6">
                         <label for="nome">Nome:</label>
-                        <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required>
+                        <input type="text" id="nome" name="nome" value="<?php echo isset($contratante) ? $contratante['nome'] : "" ?>" placeholder="Digite seu nome completo" required>
                     </div>
                     <div class="col-md-6">
                         <label for="telefone">Telefone:</label>
-                        <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
+                        <input type="tel" id="telefone" name="telefone" value="<?php echo isset($contratante) ? $contratante['telefone'] : "" ?>" placeholder="(00) 00000-0000" required>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6">
                         <label for="email">E-mail:</label>
-                        <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+                        <input type="email" id="email" name="email" value="<?php echo isset($contratante) ? $contratante['email'] : "" ?>" placeholder="seu@email.com" required>
                     </div>
                     <div class="col-md-6">
                         <label for="data_nasc">Data de Nascimento:</label>
-                        <input type="date" id="data_nasc" name="data_nasc" required>
+                        <input type="date" id="data_nasc" name="data_nasc" value="<?php echo isset($contratante) ? $contratante['data_nasc'] : "" ?>" required>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6">
                         <label for="estado">Estado:</label>
-                        <input type="text" id="estado" name="estado" placeholder="Seu estado" required>
+                        <input type="text" id="estado" name="estado" value="<?php echo isset($contratante) ? $contratante['estado'] : "" ?>" placeholder="Seu estado" required>
                     </div>
                     <div class="col-md-6">
                         <label for="cidade">Cidade:</label>
-                        <input type="text" id="cidade" name="cidade" placeholder="Sua cidade" required>
+                        <input type="text" id="cidade" name="cidade" value="<?php echo isset($contratante) ? $contratante['cidade'] : "" ?>" placeholder="Sua cidade" required>
                     </div>
                 </div>
+
+                <h1><i class="fas fa-building me-2"></i>Minha Empresa</h1>
 
                 <div class="row">
                     <div class="col-md-12">
                         <label for="empresa">Sobre a Empresa:</label>
                         <textarea id="empresa" name="empresa" rows="5"
-                            placeholder="Descreva sua empresa e os serviços que oferece" required></textarea>
+                            placeholder="Descreva sua empresa e os serviços que oferece" required><?php echo isset($contratante) ? $contratante['empresa'] : "" ?></textarea>
                     </div>
                 </div>
 

@@ -100,22 +100,22 @@
 
     <div class="container">
         <div class="servicos-section">
-            <h1>Vagas disponiveis</h1>
+            <h1>Eventos</h1>
             <button class="btn-adicionar" onclick="abrirModalAdicionar()">
-                <i class="fas fa-plus"></i> Adicionar vagas
+                <i class="fas fa-plus"></i> Criar evento
             </button>
 
     <div class="modal fade" id="modalAdicionarServico" tabindex="-1" aria-labelledby="modalAdicionarServicoLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalAdicionarServicoLabel">Adicionar vagas</h5>
+                    <h5 class="modal-title" id="modalAdicionarServicoLabel">Criar evento</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="formAdicionarServico">
+                    <form id="formAdicionarServico" method="post">
                         <div class="mb-3">
-                            <label for="nomeServico" class="form-label">Nome do Serviço:</label>
+                            <label for="nomeServico" class="form-label">Nome do Evento:</label>
                             <input type="text" class="form-control" id="nomeServico" required>
                         </div>
                         <div class="mb-3">
@@ -127,18 +127,31 @@
                             <input type="date" class="form-control" id="dataServico" required>
                         </div>
                         <div class="mb-3">
+                            <label for="endereco" class="form-label">Endereço:</label>
+                            <input type="text" class="form-control" id="endereco" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="cidade" class="form-label">Cidade:</label>
+                            <input type="text" class="form-control" id="cidade" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="vagas" class="form-label">Vagas:</label>
+                            <textarea class="form-control" id="vagas" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
                             <label for="statusServico" class="form-label">Status:</label>
                             <select class="form-select" id="statusServico" required>
                                 <option value="Concluído">Disponivel</option>
                                 <option value="Pendente">Esgotado</option>
                             </select>
                         </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+                        </div>
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary" onclick="adicionarServico()">Salvar</button>
-                </div>
+                
             </div>
         </div>
     </div>

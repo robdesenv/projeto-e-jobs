@@ -105,6 +105,8 @@
                 <i class="fas fa-plus"></i> Criar evento
             </button>
 
+        <p><?php echo $msg?></p>   
+
     <div class="modal fade" id="modalAdicionarServico" tabindex="-1" aria-labelledby="modalAdicionarServicoLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -116,33 +118,33 @@
                     <form id="formAdicionarServico" method="post">
                         <div class="mb-3">
                             <label for="nomeServico" class="form-label">Nome do Evento:</label>
-                            <input type="text" class="form-control" id="nomeServico" required>
+                            <input type="text" class="form-control" id="nomeServico" name="nome" required>
                         </div>
                         <div class="mb-3">
                             <label for="descricaoServico" class="form-label">Descrição:</label>
-                            <textarea class="form-control" id="descricaoServico" rows="3" required></textarea>
+                            <textarea class="form-control" id="descricaoServico" name="descricao" rows="3" required></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="dataServico" class="form-label">Data:</label>
-                            <input type="date" class="form-control" id="dataServico" required>
+                            <input type="date" class="form-control" id="dataServico" name="data" required>
                         </div>
                         <div class="mb-3">
                             <label for="endereco" class="form-label">Endereço:</label>
-                            <input type="text" class="form-control" id="endereco" required>
+                            <input type="text" class="form-control" id="endereco" name="endereco" required>
                         </div>
                         <div class="mb-3">
                             <label for="cidade" class="form-label">Cidade:</label>
-                            <input type="text" class="form-control" id="cidade" required>
+                            <input type="text" class="form-control" id="cidade" name="cidade" required>
                         </div>
                         <div class="mb-3">
                             <label for="vagas" class="form-label">Vagas:</label>
-                            <textarea class="form-control" id="vagas" rows="3" required></textarea>
+                            <textarea class="form-control" id="vagas" name="vagas" rows="3" required></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="statusServico" class="form-label">Status:</label>
-                            <select class="form-select" id="statusServico" required>
-                                <option value="Concluído">Disponivel</option>
-                                <option value="Pendente">Esgotado</option>
+                            <select class="form-select" id="statusServico" name="status" required>
+                                <option value="Disponivel">Disponivel</option>
+                                <option value="Esgotado">Esgotado</option>
                             </select>
                         </div>
                         <div class="modal-footer">
@@ -155,6 +157,21 @@
             </div>
         </div>
     </div>
+
+        <?php foreach($eventos as $evento): ?>
+            <div><div>Nome: <?php echo $evento['nome']?></div>
+                <div>Descrição: <?php echo $evento['descricao']?></div>
+                <div>Endereço: <?php echo $evento['endereco']?></div>
+                <div>Cidade: <?php echo $evento['cidade']?></div>
+                <div>Data: <?php echo $evento['data']?></div>
+                <div>Vagas: <?php echo $evento['vagas']?></div>
+                <div>Status: <?php echo $evento['status']?></div>
+            </div><br>
+            
+
+        <?php endforeach ?>    
+        
+    
 
     <footer class="footer">
         <div class="container">

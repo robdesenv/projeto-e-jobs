@@ -83,7 +83,12 @@ class FreelancerController extends BaseController
     }
 
     public function telabusca(){
-        return view('freelancer/telabusca');
+        $eventosModel = new \App\Models\eventosModel();
+        $data = [
+            'eventos' => $eventosModel->paginate(10),
+            'pager' => $eventosModel->pager
+        ];
+        return view('freelancer/telabusca', $data);
     }
 
     public function transrecebidas(){

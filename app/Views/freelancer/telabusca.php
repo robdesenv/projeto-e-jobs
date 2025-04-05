@@ -159,27 +159,20 @@
                 </button>
             </div>
 
-
+            <?php foreach ($eventos as $evento): ?>
             <div id="listaServicos">
                 <!-- Exemplo de serviços daqui pra baixo simulação pra mostrar -->
                 <div class="servico-card">
-                    <h3>Motorista</h3>
-                    <p><strong>Categoria:</strong> Motorista</p>
-                    <p><strong>Localização:</strong> Viçosa, MG</p>
+                    <h3><?php echo $evento['nome']?></h3>
+                    <p><strong>Vagas:</strong> <?php echo $evento['vagas']?></p>
+                    <p><strong>Endereço:</strong> <?php echo $evento['endereco']?></p>
+                    <p><strong>Cidade:</strong> <?php echo $evento['cidade']?></p>
                     <p><strong>Valor:</strong> R$ 200</p>
-                    <p><strong>Descrição:</strong> Levar pessoas ate o local da festa</p>
+                    <p><strong>Descrição:</strong> <?php echo $evento['descricao']?></p>
                     <button class="btn-candidatar" onclick="candidatarServico(1)">Candidatar-se</button>
                 </div>
-
-                <div class="servico-card">
-                    <h3>Garçom</h3>
-                    <p><strong>Categoria:</strong> Garçom</p>
-                    <p><strong>Localização:</strong> Viçosa, MG</p>
-                    <p><strong>Valor:</strong> R$ 150</p>
-                    <p><strong>Descrição:</strong> Servir as pessoas</p>
-                    <button class="btn-candidatar" onclick="candidatarServico(2)">Candidatar-se</button>
-                </div>
             </div>
+            <?php endforeach; ?>
         </div>
     </div>
 

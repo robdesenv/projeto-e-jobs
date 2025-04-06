@@ -25,6 +25,26 @@ class FreelancerController extends BaseController
 
             $freelancerModel = new \App\Models\freelancerModel();
             $data['freelancers'] = $freelancerModel->where('user_id',$user_id)->find();;
+
+            //exibir cargos
+            $cargoModel = new \App\Models\cargosModel();
+            $data['cargos'] = $cargoModel->findAll();
+
+            //iserir cargo ao freelancer
+            if($this->request->getMethod() === 'POST'){
+                $cargofreelancerModel = new \App\Models\cargofreelancerModel();
+                $cargos_id = intval($this->request->getPost('cargo_id'));
+                $cargofreelancerModel->set('user_id', user_id());
+                $cargofreelancerModel->set('cargo_id', $cargos_id);
+
+                $cargofreelancerModel->insert();
+
+                header("Refresh: 0");
+            }
+
+            //exibir os cargos cadastrados para o freelancer
+            $sql = 'SELECT cargo_freelancer.user_id, cargos.cargo FROM cargos JOIN cargo_freelancer ON cargos.id = cargo_freelancer.cargo_id WHERE cargo_freelancer.user_id = '.$user_id;
+            $data['cargosfreelancer'] = $db->connID->query($sql);
         
             return view('freelancer/exibircurriculo', $data);
         }else{

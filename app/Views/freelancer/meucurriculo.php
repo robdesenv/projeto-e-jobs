@@ -126,14 +126,7 @@
                     <div class="col-md-12">
                         <label for="formacoes">Formações:</label>
                         <textarea id="formacoes" name="formacoes" rows="4" placeholder="Descreva suas formações"
-                        required><?php echo (isset($freelancer) ? $freelancer['formacoes'] : '')?></textarea>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <label for="cargos">Cargos:</label>
-                        <textarea id="cargos" name="cargos" rows="4" value="<?php echo (isset($freelancer) ? $freelancer['cidade'] : '')?>" placeholder="Descreva seus cargos"
-                            required><?php echo (isset($freelancer) ? $freelancer['cargos'] : '')?></textarea>
+                        ><?php echo (isset($freelancer) ? $freelancer['formacoes'] : '')?></textarea>
                     </div>
                 </div>
                 <div class="row">

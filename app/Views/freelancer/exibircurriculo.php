@@ -103,7 +103,7 @@
 
                 <div class="info-label">Cargos: <?php echo $freelancer['cargos'] ?> </div>
                 <?php foreach($cargosfreelancer as $cargofreelancer): ?>
-                    <p><?php echo $cargofreelancer['cargo'] ?></p>
+                    <p><?php echo $cargofreelancer['cargo'] ?>   <a href="<?php echo base_url('freelancer/excluircargo/'.$cargofreelancer['id'])?>">Excluir cargo</a></p>
                 <?php endforeach ?>
 
                 <div class="container">

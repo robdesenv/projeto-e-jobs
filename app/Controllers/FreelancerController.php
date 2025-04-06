@@ -43,7 +43,7 @@ class FreelancerController extends BaseController
             }
 
             //exibir os cargos cadastrados para o freelancer
-            $sql = 'SELECT cargo_freelancer.user_id, cargos.cargo FROM cargos JOIN cargo_freelancer ON cargos.id = cargo_freelancer.cargo_id WHERE cargo_freelancer.user_id = '.$user_id;
+            $sql = 'SELECT cargo_freelancer.id, cargos.cargo FROM cargos JOIN cargo_freelancer ON cargos.id = cargo_freelancer.cargo_id WHERE cargo_freelancer.user_id = '.$user_id;
             $data['cargosfreelancer'] = $db->connID->query($sql);
         
             return view('freelancer/exibircurriculo', $data);
@@ -94,8 +94,14 @@ class FreelancerController extends BaseController
         $data['freelancer'] = $freelancer;
 
         echo view('freelancer/meucurriculo', $data);
+    }
 
-}
+    public function excluirCargo($id){
+        $cargofreelancerModel = new \App\Models\cargofreelancerModel();
+        if($cargofreelancerModel->delete($id)){
+        }
+        return redirect()->to(base_url('freelancer/meucurriculo'));
+    }
 
 
     public function servicosprestados(){

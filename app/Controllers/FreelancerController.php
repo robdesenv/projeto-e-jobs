@@ -22,25 +22,43 @@ class FreelancerController extends BaseController
         $num_rows = mysqli_num_rows($resultado);
        
         if ($num_rows >= 1){
-
+            //página para exibir o cúrrico caso tenha já cadastrado
             $freelancerModel = new \App\Models\freelancerModel();
-            $data['freelancers'] = $freelancerModel->where('user_id',$user_id)->find();;
+            $data['freelancers'] = $freelancerModel->where('user_id',$user_id)->find();
+
+            //criar novo cargo
+
+            if($this->request->getMethod() == 'POST'){
+                $btncargo = $this->request->getPost('btn-cargo');
+
+                if($btncargo == "novocargo"){
+                    //criar novo cargo
+                    $cargosModel = new \App\Models\cargosModel();
+                    $cargosModel->set('cargo', $this->request->getPost('novocargo'));
+                    $cargosModel->insert();
+
+                    header("Refresh: 0");
+                    
+                }elseif($btncargo == "adicionarcargo"){
+                    //iserir cargo ao freelancer
+                    $cargofreelancerModel = new \App\Models\cargofreelancerModel();
+                    $cargos_id = intval($this->request->getPost('cargo_id'));
+                    $cargofreelancerModel->set('user_id', user_id());
+                    $cargofreelancerModel->set('cargo_id', $cargos_id);
+
+                    $cargofreelancerModel->insert();
+
+                header("Refresh: 0");
+                }
+            }
+            
 
             //exibir cargos
             $cargoModel = new \App\Models\cargosModel();
             $data['cargos'] = $cargoModel->findAll();
 
-            //iserir cargo ao freelancer
-            if($this->request->getMethod() === 'POST'){
-                $cargofreelancerModel = new \App\Models\cargofreelancerModel();
-                $cargos_id = intval($this->request->getPost('cargo_id'));
-                $cargofreelancerModel->set('user_id', user_id());
-                $cargofreelancerModel->set('cargo_id', $cargos_id);
-
-                $cargofreelancerModel->insert();
-
-                header("Refresh: 0");
-            }
+            
+            
 
             //exibir os cargos cadastrados para o freelancer
             $sql = 'SELECT cargo_freelancer.id, cargos.cargo FROM cargos JOIN cargo_freelancer ON cargos.id = cargo_freelancer.cargo_id WHERE cargo_freelancer.user_id = '.$user_id;
@@ -48,6 +66,7 @@ class FreelancerController extends BaseController
         
             return view('freelancer/exibircurriculo', $data);
         }else{
+            //página para cadastrar o curriculo caso  não tenha
             if($this->request->getMethod() === 'POST'){
                 $freelancerModel = new \App\Models\freelancerModel();
                 $freelancerModel->set('nome', $this->request->getPost('nome'));
@@ -95,6 +114,7 @@ class FreelancerController extends BaseController
 
         echo view('freelancer/meucurriculo', $data);
     }
+
 
     public function excluirCargo($id){
         $cargofreelancerModel = new \App\Models\cargofreelancerModel();

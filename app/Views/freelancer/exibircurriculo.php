@@ -111,7 +111,7 @@
                         <button class="btn-adicionar" onclick="abrirModalAdicionar()">
                             <i class="fas fa-plus"></i> Adicionar Cargo
                         </button>
-
+                        
                         <div class="modal fade" id="modalAdicionarServico" tabindex="-1" aria-labelledby="modalAdicionarServicoLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -126,10 +126,17 @@
                                                     <?php foreach($cargos as $cargo): ?>
                                                     <option value="<?php echo $cargo['id']?>"><?php echo $cargo['cargo']?></option>
                                                     <?php endforeach;?>
-                                                </select>
+                                                </select><br>
+                                                
+                                                <div class="servicos-section">
+                                                    <button type="button" class="btn-adicionar" onclick="abrirModalNovoCargo()">
+                                                    <i class="fas fa-plus"></i> Novo cargo
+                                                    </button>
+                                                </div>
+
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                                                <button type="submit" class="btn btn-primary">Salvar</button>
+                                                <button type="submit" name="btn-cargo" value="adicionarcargo" class="btn btn-primary" >Salvar</button>
                                             </div>
                                         </form>
                                     </div>
@@ -138,6 +145,31 @@
                             </div>               
                         </div>
                     </div>
+                </div>
+                
+
+                <!-- Inserir novo cargo -->
+                <div class="modal fade" id="modalNovoCargo" tabindex="-1" aria-labelledby="modalAdicionarServicoLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalAdicionarServicoLabel">Novo cargo</h5>
+                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="formAdicionarServico" method="post">
+                                        <label for="statusServico" class="form-label">Cargo:</label>
+                                        <input type="text" name="novocargo">
+                                                                            
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                            <button type="submit" name="btn-cargo" value="novocargo" class="btn btn-primary">Salvar</button>
+                                        </div>
+                                    </form>
+                            </div>
+                                                                
+                        </div>
+                    </div>               
                 </div>
 
                 <?php endforeach; ?>
@@ -160,6 +192,10 @@
     <script>
         function abrirModalAdicionar() {
             const modal = new bootstrap.Modal(document.getElementById('modalAdicionarServico'));
+            modal.show();
+        }
+        function abrirModalNovoCargo() {
+            const modal = new bootstrap.Modal(document.getElementById('modalNovoCargo'));
             modal.show();
         }
     </script>

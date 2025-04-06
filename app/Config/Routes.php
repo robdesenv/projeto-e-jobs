@@ -12,6 +12,7 @@ $routes->get('/freelancer/index', 'FreelancerController::index', ['filter' => 'g
 $routes->get('/freelancer/meucurriculo', 'FreelancerController::meucurriculo', ['filter' => 'group:freelancer']);
 $routes->post('/freelancer/meucurriculo', 'FreelancerController::meucurriculo', ['filter' => 'group:freelancer']);
 $routes->get('/freelancer/excluircargo/(:num)', 'FreelancerController::excluirCargo/$1', ['filter' => 'group:freelancer']);
+$routes->get('/freelancer/novocargo', 'FreelancerController::criarCargo', ['filter' => 'group:freelancer']);
 $routes->get('/freelancer/editarcurriculo/(:num)', 'FreelancerController::editCurriculo/$1', ['filter' => 'group:freelancer']);
 $routes->post('/freelancer/editarcurriculo/(:num)', 'FreelancerController::editCurriculo/$1', ['filter' => 'group:freelancer']);
 $routes->get('/freelancer/servicosprestados', 'FreelancerController::servicosprestados', ['filter' => 'group:freelancer']);

@@ -51,6 +51,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                        <a class="nav-link" href="<?php echo base_url('freelancer/iniciofreelancer')?>"><i class="fas fa-file-alt"></i> Inicio </a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo base_url('freelancer/meucurriculo')?>"><i class="fas fa-file-alt"></i> Meu
                             currículo</a>

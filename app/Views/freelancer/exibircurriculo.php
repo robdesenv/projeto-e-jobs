@@ -10,110 +10,260 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
     <style>
+        :root {
+            --primary: #004182;
+            --primary-light: #e6f0fa;
+            --secondary: #0a66c2;
+            --accent: #25D366;
+            --light: #f8f9fa;
+            --dark: #212529;
+        }
+
         body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #f8f9fa;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: #f5f7fa;
+            color: var(--dark);
         }
 
-        .curriculo-section {
-            padding: 50px 0;
-            background-color: #ffffff;
-            border-radius: 10px;
-            margin: 20px;
+        .profile-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid white;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            padding: 20px;
+            margin-right: 1.5rem;
         }
 
-        .curriculo-section h1 {
-            color: #004182;
+        .profile-title {
+            color: var(--primary);
+            margin: 0;
             font-weight: 700;
-            margin-bottom: 20px;
         }
 
-        .info-label {
-            font-weight: bold;
-            color: #333;
-            margin-top: 10px;
+        .profile-subtitle {
+            color: #6c757d;
+            margin: 0.25rem 0 0;
+            font-weight: 400;
         }
 
-        .info-value {
-            margin-bottom: 15px;
-            padding: 8px;
-            background-color: #f8f9fa;
-            border-radius: 5px;
-            border-left: 4px solid #004182;
+        .card-profile {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+            border: none;
+            overflow: hidden;
         }
 
-        .edit-btn {
-            background-color: #004182;
-            color: #ffffff;
+        .card-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1.25rem 1.5rem;
+            border-bottom: none;
+        }
+
+        .card-header h3 {
+            margin: 0;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+
+        .card-header h3 i {
+            margin-right: 0.75rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            padding: 1.5rem;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .info-icon {
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-right: 1rem;
+            margin-top: 0.2rem;
+            min-width: 20px;
+        }
+
+        .info-content h4 {
+            color: var(--primary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-content p {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .skills-section {
+            padding: 1.5rem;
+            background-color: var(--primary-light);
+            border-radius: 8px;
+            margin: 1rem 1.5rem 1.5rem;
+            line-height: 1.6;
+        }
+
+        /* Estilo do botão igual ao da tela de busca */
+        .btn-edit {
+            background-color: var(--primary);
+            color: white;
             border: none;
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            margin-top: 20px;
+            margin: 20px auto;
+            display: block;
+            width: fit-content;
             text-decoration: none;
-            display: inline-block;
+            font-weight: 600;
         }
 
-        .edit-btn:hover {
-            background-color: #0a66c2;
-            color: #ffffff;
+        .btn-edit:hover {
+            background-color: var(--secondary);
+            color: white;
         }
 
-        .footer {
+        .btn-edit i {
+            margin-right: 8px;
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 0;
             text-align: center;
-            padding: 20px;
-            background-color: #004182;
-            color: #ffffff;
-            margin-top: 40px;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .profile-avatar {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 
 <body>
-    <!-- chamando o Menu no arquivo menuFreelancer -->
     <?php include 'menuFreelancer.php'; ?>
 
+    <div class="profile-container">
+        <div class="profile-header">
+            <img src="https://ui-avatars.com/api/?name=<?= urlencode($freelancer['nome'] ?? 'Freelancer') ?>&background=004182&color=fff"
+                alt="Avatar" class="profile-avatar">
+            <div>
+                <h1 class="profile-title"><?= htmlspecialchars($freelancer['nome'] ?? 'Meu Currículo') ?></h1>
+                <p class="profile-subtitle">Freelancer e-Jobs</p>
+            </div>
+        </div>
 
-    <div class="container">
-        <div class="curriculo-section">
-            <h1>Meu Currículo</h1>
+        <?php foreach ($freelancers as $freelancer): ?>
+            <div class="card card-profile">
+                <div class="card-header">
+                    <h3><i class="fas fa-user-tie"></i> Informações Pessoais</h3>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fas fa-user"></i></div>
+                        <div class="info-content">
+                            <h4>Nome Completo</h4>
+                            <p><?= htmlspecialchars($freelancer['nome']) ?></p>
+                        </div>
+                    </div>
 
-            <?php foreach ($freelancers as $freelancer): ?>
-                <div class="info-label">Nome: <?php echo $freelancer['nome'] ?></div>
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fas fa-phone"></i></div>
+                        <div class="info-content">
+                            <h4>Telefone</h4>
+                            <p><?= htmlspecialchars($freelancer['telefone']) ?></p>
+                        </div>
+                    </div>
 
-                <div class="info-label">Telefone: <?php echo $freelancer['telefone'] ?></div>
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="info-content">
+                            <h4>E-mail</h4>
+                            <p><?= htmlspecialchars($freelancer['email']) ?></p>
+                        </div>
+                    </div>
 
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fas fa-birthday-cake"></i></div>
+                        <div class="info-content">
+                            <h4>Data de Nascimento</h4>
+                            <p><?= htmlspecialchars($freelancer['dataNasc']) ?></p>
+                        </div>
+                    </div>
 
-                <div class="info-label">E-mail: <?php echo $freelancer['email'] ?></div>
-
-
-                <div class="info-label">Data de Nascimento: <?php echo $freelancer['dataNasc'] ?></div>
-
-
-                <div class="info-label">Estado: <?php echo $freelancer['estado'] ?> </div>
-
-
-                <div class="info-label">Cidade: <?php echo $freelancer['cidade'] ?> </div>
-
-
-                <div class="info-label">Formações: <?php echo $freelancer['formacoes'] ?> </div>
-
-                <div class="info-label">Cargos: <?php echo $freelancer['cargos'] ?> </div>
-
-            <?php endforeach; ?>
-
-            <div class="text-center">
-                <a href="<?php echo base_url('freelancer/editarcurriculo/' . $freelancer['id']) ?>" class="edit-btn"><i
-                        class="fas fa-edit"></i> Alterar Informações</a>
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="info-content">
+                            <h4>Localização</h4>
+                            <p><?= htmlspecialchars($freelancer['cidade']) ?>, <?= htmlspecialchars($freelancer['estado']) ?></p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-        </div>
+            <div class="card card-profile">
+                <div class="card-header">
+                    <h3><i class="fas fa-graduation-cap"></i> Formações</h3>
+                </div>
+                <div class="skills-section">
+                    <?= nl2br(htmlspecialchars($freelancer['formacoes'])) ?>
+                </div>
+            </div>
+
+            <div class="card card-profile">
+                <div class="card-header">
+                    <h3><i class="fas fa-briefcase"></i> Cargos e Habilidades</h3>
+                </div>
+                <div class="skills-section">
+                    <?= nl2br(htmlspecialchars($freelancer['cargos'])) ?>
+                </div>
+                <a href="<?= base_url('freelancer/editarcurriculo/' . $freelancer['id']) ?>" class="btn btn-edit">
+                    <i class="fas fa-edit"></i> Editar Currículo
+                </a>
+            </div>
+        <?php endforeach; ?>
     </div>
 
-    <footer class="footer">
+    <footer>
         <div class="container">
             <p>&copy; 2025 e-Jobs. Todos os direitos reservados.</p>
         </div>
@@ -121,5 +271,4 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>

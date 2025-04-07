@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Início - Contratante</title>
 
@@ -35,12 +36,13 @@
         .navbar-nav .nav-link:hover {
             color: #0a66c2;
         }
-    </style>     
+    </style>
 </head>
+
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="<?php echo base_url('contratante')?>">e-Jobs</a>
+            <a class="navbar-brand" href="<?php echo base_url('contratante') ?>">e-Jobs</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -48,19 +50,28 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url('contratante/minhaempresa')?>"><i class="fas fa-building"></i> Ver minha empresa</a>
+                        <a class="nav-link" href="<?php echo base_url('contratante/iniciocontratante') ?>"><i
+                                class="fas fa-home"></i> Inicio </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url('contratante/vagaspub')?>"><i class="fas fa-briefcase"></i> Ver vagas publicadas</a>
+                        <a class="nav-link" href="<?php echo base_url('contratante/minhaempresa') ?>"><i
+                                class="fas fa-building"></i> Ver minha empresa</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url('contratante/busca')?>"><i class="fas fa-search"></i> Buscar freelancer</a>
+                        <a class="nav-link" href="<?php echo base_url('contratante/vagaspub') ?>"><i
+                                class="fas fa-briefcase"></i> Ver vagas publicadas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url('contratante/pagamentos')?>"><i class="fas fa-dollar-sign"></i> Ver pagamentos efetuados</a>
+                        <a class="nav-link" href="<?php echo base_url('contratante/busca') ?>"><i
+                                class="fas fa-search"></i> Buscar freelancer</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link btn-logout" href="<?php echo base_url('logout')?>"><i class="fas fa-sign-out-alt"></i> Sair</a>
+                        <a class="nav-link" href="<?php echo base_url('contratante/pagamentos') ?>"><i
+                                class="fas fa-dollar-sign"></i> Ver pagamentos efetuados</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn-logout" href="<?php echo base_url('logout') ?>"><i
+                                class="fas fa-sign-out-alt"></i> Sair</a>
                     </li>
                 </ul>
             </div>
@@ -68,4 +79,5 @@
     </nav>
 
 </body>
+
 </html>

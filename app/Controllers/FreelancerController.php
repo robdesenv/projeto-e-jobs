@@ -33,11 +33,29 @@ class FreelancerController extends BaseController
 
                 if($btncargo == "novocargo"){
                     //criar novo cargo
-                    $cargosModel = new \App\Models\cargosModel();
-                    $cargosModel->set('cargo', $this->request->getPost('novocargo'));
-                    $cargosModel->insert();
+                    $sql = "SELECT cargos.cargo FROM cargos";
+                    $resultados = $db->connID->query($sql);
+                    $novocargo = ucfirst(strtolower($this->request->getPost("novocargo")));
+                    $contador = 0;
+                    //conferirndo se o cargo que está sendo inserido não está cadastrado no banco
+                    foreach($resultados as $resultado){
+                        $palavrainserida = strtolower(str_replace(" ","",$novocargo));
+                        $palavrabanco = strtolower(str_replace(" ","",$resultado['cargo']));
+                        $caracteres = array_diff(str_split($palavrainserida), str_split($palavrabanco));
+                        if(empty($caracteres)){
+                            $contador++;
+                        }
+                    }
+                    //insindo cargo caso não esteja no banco
+                    if($contador == 0){
+                        $cargosModel = new \App\Models\cargosModel();
+                        $cargosModel->set('cargo',$novocargo);
+                        $cargosModel->insert();
 
-                    header("Refresh: 0");
+                        header("Refresh: 0");
+                    }else{
+                        echo "O cargo que você tentou incluir já existe";
+                    }
                     
                 }elseif($btncargo == "adicionarcargo"){
                     //iserir cargo ao freelancer
@@ -48,7 +66,7 @@ class FreelancerController extends BaseController
 
                     $cargofreelancerModel->insert();
 
-                header("Refresh: 0");
+                    header("Refresh: 0");
                 }
             }
             
@@ -133,6 +151,11 @@ class FreelancerController extends BaseController
             'eventos' => $eventosModel->paginate(10),
             'pager' => $eventosModel->pager
         ];
+
+        //exibir cargos
+        $cargoModel = new \App\Models\cargosModel();
+        $data['cargos'] = $cargoModel->findAll();
+        
         return view('freelancer/telabusca', $data);
     }
 

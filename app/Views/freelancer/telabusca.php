@@ -148,12 +148,12 @@
                         <div class="form-group">
                             <label for="categoria">Categoria:</label>
                             <select id="categoria" class="form-control">
-                                <option value="">Todas</option>
-                                <option value="design">     </option>
-                                <option value="desenvolvimento">        </option>
-                                <option value="marketing">      </option>
-                                <option value="consultoria">        </option>
+                                <option value=""></option>
+                                <?php foreach($cargos as $cargo): ?>
+                                <option value="<?php echo $cargo['id']?>"><?php echo $cargo['cargo']?></option>
+                                <?php endforeach;?>
                             </select>
+
                         </div>
                     </div>
                     <div class="col-md-4">

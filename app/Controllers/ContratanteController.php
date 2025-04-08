@@ -107,6 +107,11 @@ class ContratanteController extends BaseController
             'freelacers' => $freelancerModel->paginate(10),
             'pager' => $freelancerModel->pager
         ];
+
+        //exibir cargos
+        $cargoModel = new \App\Models\cargosModel();
+        $data['cargos'] = $cargoModel->findAll();
+        
         return view(name: 'contratante/busca',data: $data);
     }
     public function pagamentos()

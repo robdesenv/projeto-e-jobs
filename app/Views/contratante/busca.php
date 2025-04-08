@@ -220,11 +220,10 @@
                     <div class="filtro-item">
                         <label for="categoria" class="form-label">Categoria:</label>
                         <select id="categoria" class="form-select">
-                            <option value="">Todas as categorias</option>
-                            <option value="Garçom">Garçom</option>
-                            <option value="Motorista">Motorista</option>
-                            <option value="Copeiro">Copeiro</option>
-                            <option value="Segurança">Segurança</option>
+                        <option value=""></option>
+                                <?php foreach($cargos as $cargo): ?>
+                                <option value="<?php echo $cargo['id']?>"><?php echo $cargo['cargo']?></option>
+                                <?php endforeach;?>
                         </select>
                     </div>
                     

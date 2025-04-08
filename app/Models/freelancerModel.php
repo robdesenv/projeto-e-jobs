@@ -14,7 +14,7 @@ class freelancerModel extends Model
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['user_id', 'nome', 'telefone','email','dataNasc','estado','cidade','formacoes','cargos'];
+    protected $allowedFields = ['user_id', 'nome', 'telefone','email','dataNasc','estado','cidade','formacoes'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;

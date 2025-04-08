@@ -249,3 +249,94 @@ DEBUG - 2025-04-08 00:24:08 --> Session: Class initialized using 'CodeIgniter\Se
 DEBUG - 2025-04-08 00:24:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2025-04-08 00:24:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2025-04-08 00:24:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-08 00:27:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-08 00:27:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-08 00:27:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-08 00:27:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-08 00:27:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-08 00:27:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-08 00:27:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-08 00:27:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-08 00:27:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-08 00:27:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-08 00:27:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-08 00:27:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-08 00:28:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-08 00:28:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-08 00:28:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-08 00:28:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-04-08 00:28:56 --> mysqli_sql_exception: Column 'cargos' cannot be null in C:\xampp\htdocs\projeto-e-jobs\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\projeto-e-jobs\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `fr...', 0)
+#1 C:\xampp\htdocs\projeto-e-jobs\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `fr...')
+#2 C:\xampp\htdocs\projeto-e-jobs\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `fr...')
+#3 C:\xampp\htdocs\projeto-e-jobs\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `fr...', Array, false)
+#4 C:\xampp\htdocs\projeto-e-jobs\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\projeto-e-jobs\system\BaseModel.php(839): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\projeto-e-jobs\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\projeto-e-jobs\app\Controllers\FreelancerController.php(82): CodeIgniter\Model->insert()
+#8 C:\xampp\htdocs\projeto-e-jobs\system\CodeIgniter.php(933): App\Controllers\FreelancerController->meucurriculo()
+#9 C:\xampp\htdocs\projeto-e-jobs\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FreelancerController))
+#10 C:\xampp\htdocs\projeto-e-jobs\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\xampp\htdocs\projeto-e-jobs\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#12 C:\xampp\htdocs\projeto-e-jobs\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\xampp\htdocs\projeto-e-jobs\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+CRITICAL - 2025-04-08 00:28:56 --> CodeIgniter\Database\Exceptions\DatabaseException: Column 'cargos' cannot be null
+[Method: POST, Route: freelancer/meucurriculo]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `freelancer` (`nome`, `telefone`, `email`, `dataNasc`, `estado`, `cidade`, `formacoes`, `cargos`, `user_id`) VALUES (:nome:, :telefone:, :email:, :dataNasc:, :estado:, :cidade:, :formacoes:, :cargos:, :user_id:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\FreelancerController.php(82): CodeIgniter\Model->insert()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\FreelancerController->meucurriculo()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FreelancerController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-04-08 00:28:56 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Column 'cargos' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `freelancer` (`nome`, `telefone`, `email`, `dataNasc`, `estado`, `cidade`, `formacoes`, `cargos`, `user_id`) VALUES (\'david\', \'3333\', \'freelancer@gmail.com\', \'2025-03-31\', \'Minas\', \'Viçosa\', \'TI\', NULL, 14)')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `freelancer` (`nome`, `telefone`, `email`, `dataNasc`, `estado`, `cidade`, `formacoes`, `cargos`, `user_id`) VALUES (\'david\', \'3333\', \'freelancer@gmail.com\', \'2025-03-31\', \'Minas\', \'Viçosa\', \'TI\', NULL, 14)')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `freelancer` (`nome`, `telefone`, `email`, `dataNasc`, `estado`, `cidade`, `formacoes`, `cargos`, `user_id`) VALUES (:nome:, :telefone:, :email:, :dataNasc:, :estado:, :cidade:, :formacoes:, :cargos:, :user_id:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\FreelancerController.php(82): CodeIgniter\Model->insert()
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\FreelancerController->meucurriculo()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FreelancerController))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-04-08 00:28:56 --> [Caused by] mysqli_sql_exception: Column 'cargos' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `freelancer` (`nome`, `telefone`, `email`, `dataNasc`, `estado`, `cidade`, `formacoes`, `cargos`, `user_id`) VALUES (\'david\', \'3333\', \'freelancer@gmail.com\', \'2025-03-31\', \'Minas\', \'Viçosa\', \'TI\', NULL, 14)', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `freelancer` (`nome`, `telefone`, `email`, `dataNasc`, `estado`, `cidade`, `formacoes`, `cargos`, `user_id`) VALUES (\'david\', \'3333\', \'freelancer@gmail.com\', \'2025-03-31\', \'Minas\', \'Viçosa\', \'TI\', NULL, 14)')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `freelancer` (`nome`, `telefone`, `email`, `dataNasc`, `estado`, `cidade`, `formacoes`, `cargos`, `user_id`) VALUES (\'david\', \'3333\', \'freelancer@gmail.com\', \'2025-03-31\', \'Minas\', \'Viçosa\', \'TI\', NULL, 14)')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `freelancer` (`nome`, `telefone`, `email`, `dataNasc`, `estado`, `cidade`, `formacoes`, `cargos`, `user_id`) VALUES (:nome:, :telefone:, :email:, :dataNasc:, :estado:, :cidade:, :formacoes:, :cargos:, :user_id:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\FreelancerController.php(82): CodeIgniter\Model->insert()
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\FreelancerController->meucurriculo()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FreelancerController))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-08 00:30:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-08 00:30:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-08 00:30:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-08 00:30:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-08 00:30:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-08 00:30:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-08 00:30:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-08 00:30:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-08 00:30:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-08 00:30:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-08 00:30:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-08 00:30:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-08 00:30:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

@@ -76,7 +76,6 @@ class FreelancerController extends BaseController
                 $freelancerModel->set('estado', $this->request->getPost('estado'));
                 $freelancerModel->set('cidade', $this->request->getPost('cidade'));
                 $freelancerModel->set('formacoes', $this->request->getPost('formacoes'));
-                $freelancerModel->set('cargos', $this->request->getPost('cargos'));
                 $freelancerModel->set('user_id', user_id());
     
                 if($freelancerModel->insert()){

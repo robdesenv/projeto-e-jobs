@@ -4,9 +4,9 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class freelancerModel extends Model
+class cargosModel extends Model
 {
-    protected $table      = 'freelancer';
+    protected $table      = 'cargos';
     protected $primaryKey = 'id';
 
     protected $useAutoIncrement = true;
@@ -14,7 +14,7 @@ class freelancerModel extends Model
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['user_id', 'nome', 'telefone','email','dataNasc','estado','cidade','formacoes'];
+    protected $allowedFields = ['cargo'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;

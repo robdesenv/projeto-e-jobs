@@ -11,6 +11,8 @@ $routes->get('/', 'Home::index');
 $routes->get('/freelancer/index', 'FreelancerController::index', ['filter' => 'group:freelancer']);
 $routes->get('/freelancer/meucurriculo', 'FreelancerController::meucurriculo', ['filter' => 'group:freelancer']);
 $routes->post('/freelancer/meucurriculo', 'FreelancerController::meucurriculo', ['filter' => 'group:freelancer']);
+$routes->get('/freelancer/excluircargo/(:num)', 'FreelancerController::excluirCargo/$1', ['filter' => 'group:freelancer']);
+$routes->get('/freelancer/novocargo', 'FreelancerController::criarCargo', ['filter' => 'group:freelancer']);
 $routes->get('/freelancer/editarcurriculo/(:num)', 'FreelancerController::editCurriculo/$1', ['filter' => 'group:freelancer']);
 $routes->post('/freelancer/editarcurriculo/(:num)', 'FreelancerController::editCurriculo/$1', ['filter' => 'group:freelancer']);
 $routes->get('/freelancer/servicosprestados', 'FreelancerController::servicosprestados', ['filter' => 'group:freelancer']);
@@ -25,6 +27,7 @@ $routes->get('/contratante/editarinformacoes/(:num)', 'ContratanteController::ed
 $routes->post('/contratante/editarinformacoes/(:num)', 'ContratanteController::editInformacoes/$1', ['filter' => 'group:contratante']);
 $routes->get('/contratante/vagaspub', 'ContratanteController::vagaspub', ['filter' => 'group:contratante']);
 $routes->post('/contratante/vagaspub', 'ContratanteController::vagaspub', ['filter' => 'group:contratante']);
+$routes->get('/contratante/excluirevento/(:num)', 'ContratanteController::deleteEventos/$1', ['filter' => 'group:contratante']);
 $routes->get('/contratante/busca', 'ContratanteController::busca', ['filter' => 'group:contratante']);
 $routes->get('/contratante/pagamentos', 'ContratanteController::pagamentos', ['filter' => 'group:contratante']);
 

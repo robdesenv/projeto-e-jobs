@@ -238,21 +238,23 @@
                         </div>
                     </div>
                 </div>
-                <div class="info-label">E-mail: <?php echo $freelancer['email'] ?></div>
 
+            <div class="card card-profile">
+                <div class="card-header">
+                    <h3><i class="fas fa-graduation-cap"></i> Formações</h3>
+                </div>
+                <div class="skills-section">
+                    <?= nl2br(htmlspecialchars($freelancer['formacoes'])) ?>
+                </div>
+                <a href="<?= base_url('freelancer/editarcurriculo/' . $freelancer['id']) ?>" class="btn btn-edit">
+                    <i class="fas fa-edit"></i> Editar Currículo
+                </a>
+            </div>
 
-                <div class="info-label">Data de Nascimento: <?php echo $freelancer['dataNasc'] ?></div>
-
-
-                <div class="info-label">Estado: <?php echo $freelancer['estado'] ?> </div>
-
-
-                <div class="info-label">Cidade: <?php echo $freelancer['cidade'] ?> </div>
-
-
-                <div class="info-label">Formações: <?php echo $freelancer['formacoes'] ?> </div>
-
-                <div class="info-label">Cargos: <?php echo $freelancer['cargos'] ?> </div>
+            <div class="card card-profile">
+                <div class="card-header">
+                    <h3><i class="fas fa-briefcase"></i> Cargos e Habilidades</h3>
+                </div>
                 <?php foreach($cargosfreelancer as $cargofreelancer): ?>
                     <p><?php echo $cargofreelancer['cargo'] ?>   <a href="<?php echo base_url('freelancer/excluircargo/'.$cargofreelancer['id'])?>">Excluir cargo</a></p>
                 <?php endforeach ?>
@@ -323,32 +325,6 @@
                     </div>               
                 </div>
 
-                <?php endforeach; ?>
-
-            <div class="text-center">
-                <a href="<?php echo base_url('freelancer/editarcurriculo/' . $freelancer['id']) ?>" class="edit-btn"><i
-                        class="fas fa-edit"></i> Alterar Informações</a>
-            </div>
-
-            <div class="card card-profile">
-                <div class="card-header">
-                    <h3><i class="fas fa-graduation-cap"></i> Formações</h3>
-                </div>
-                <div class="skills-section">
-                    <?= nl2br(htmlspecialchars($freelancer['formacoes'])) ?>
-                </div>
-            </div>
-
-            <div class="card card-profile">
-                <div class="card-header">
-                    <h3><i class="fas fa-briefcase"></i> Cargos e Habilidades</h3>
-                </div>
-                <div class="skills-section">
-                    <?= nl2br(htmlspecialchars($freelancer['cargos'])) ?>
-                </div>
-                <a href="<?= base_url('freelancer/editarcurriculo/' . $freelancer['id']) ?>" class="btn btn-edit">
-                    <i class="fas fa-edit"></i> Editar Currículo
-                </a>
             </div>
         <?php endforeach; ?>
     </div>

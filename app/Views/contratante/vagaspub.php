@@ -236,6 +236,7 @@
                         </div>
                         <div class="modal-body">
                             <form id="formAdicionarServico" method="post">
+                                <input type="hidden" id="eventoId" name="id">
                                 <div class="mb-3">
                                     <label for="nomeServico" class="form-label">Nome do Evento:</label>
                                     <input type="text" class="form-control" id="nomeServico" name="nome" required>
@@ -277,11 +278,30 @@
                 </div>
             </div>
 
+            <!-- Exclusão -->
+            <div class="modal fade" id="modalConfirmacaoExclusao" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Confirmar Exclusão</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Tem certeza que deseja excluir este evento? Esta ação não pode ser desfeita.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-danger" id="btnConfirmarExclusao">Excluir</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="eventos-container">
                 <?php foreach($eventos as $evento): 
                     $dataEvento = new DateTime($evento['data']);
                     ?>
-                    <div class="evento-card">
+                    <div class="evento-card" id="evento-<?php echo $evento['id']; ?>">
                         <div class="evento-header">
                             <h3 class="evento-title"><?php echo htmlspecialchars($evento['nome']); ?></h3>
                             <span class="evento-status <?php echo $evento['status'] == 'Disponivel' ? 'status-disponivel' : 'status-esgotado'; ?>">
@@ -322,10 +342,10 @@
                         </div>
                         
                         <div class="evento-actions">
-                            <button class="btn btn-sm btn-primary btn-acao" title="Editar">
+                            <button class="btn btn-sm btn-primary btn-acao" title="Editar" onclick="editarEvento(<?php echo $evento['id']; ?>)">
                                 <i class="fas fa-edit"></i> Editar
                             </button>
-                            <button class="btn btn-sm btn-danger btn-acao" title="Excluir">
+                            <button class="btn btn-sm btn-danger btn-acao" title="Excluir" onclick="confirmarExclusao(<?php echo $evento['id']; ?>)">
                                 <i class="fas fa-trash-alt"></i> Excluir
                             </button>
                         </div>
@@ -344,12 +364,33 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        
+        let eventoIdParaExcluir = null;
+        
         function abrirModalAdicionar() {
+            
+            document.getElementById('formAdicionarServico').reset();
+            document.getElementById('eventoId').value = '';
+            
             const modal = new bootstrap.Modal(document.getElementById('modalAdicionarServico'));
             modal.show();
         }
-
-        // Adicione aqui funções para editar e excluir eventos
+        
+        
+        
+        function confirmarExclusao(id) {
+            eventoIdParaExcluir = id;
+            const modal = new bootstrap.Modal(document.getElementById('modalConfirmacaoExclusao'));
+            modal.show();
+        }
+        
+        // Configurar o botão de confirmar exclusão
+        document.getElementById('btnConfirmarExclusao').addEventListener('click', function() {
+            if (eventoIdParaExcluir) {
+                excluirEvento(eventoIdParaExcluir);
+            }
+        });
+        
     </script>
 </body>
-</html>
+</html> 

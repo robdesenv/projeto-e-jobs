@@ -27,25 +27,17 @@
         .busca-section h1 {
             color: #004182;
             font-weight: 700;
-            margin-bottom: 20px;
-        }
-
-        .filtros {
             margin-bottom: 30px;
+            text-align: center;
         }
 
-        .filtros .form-group {
-            margin-bottom: 15px;
-        }
-
-        .filtros label {
+        .filtros .form-group label {
             font-weight: bold;
             color: #333;
         }
 
         .filtros input,
         .filtros select {
-            width: 100%;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
@@ -59,47 +51,66 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            display: block;
+            margin-top: 10px;
         }
 
         .filtros button:hover {
             background-color: #0a66c2;
         }
 
+        .servicos-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
         .servico-card {
-            border: 1px solid #ddd;
-            border-radius: 10px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e0e0e0;
             padding: 20px;
-            margin-bottom: 20px;
-            background-color: #f9f9f9;
+        }
+
+        .servico-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
         }
 
         .servico-card h3 {
             color: #004182;
-            margin-bottom: 10px;
+            font-weight: 600;
+            margin-bottom: 15px;
         }
 
         .servico-card p {
             color: #333;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
         }
 
-        .servico-card .btn-candidatar {
+        .btn-candidatar {
             background-color: #004182;
             color: #ffffff;
             border: none;
-            padding: 10px 20px;
+            padding: 8px 16px;
             border-radius: 5px;
+            font-size: 0.9rem;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
 
-        .servico-card .btn-candidatar:hover {
+        .btn-candidatar:hover {
             background-color: #0a66c2;
         }
 
         .footer {
             text-align: center;
-            padding: 20px;
+            padding: 25px;
             background-color: #004182;
             color: #ffffff;
             margin-top: 40px;
@@ -114,19 +125,23 @@
         .footer a:hover {
             color: #cce4ff;
         }
+
+        @media (max-width: 768px) {
+            .servicos-container {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 
 <body>
 
-    <!-- chamando o Menu no arquivo menuFreelancer -->
     <?php include 'menuFreelancer.php'; ?>
 
     <div class="container">
         <div class="busca-section">
             <h1>Buscar Serviços</h1>
 
-            <!-- Filtros de Busca -->
             <div class="filtros">
                 <div class="row">
                     <div class="col-md-4">
@@ -134,10 +149,10 @@
                             <label for="categoria">Categoria:</label>
                             <select id="categoria" class="form-control">
                                 <option value="">Todas</option>
-                                <option value="design">Design</option>
-                                <option value="desenvolvimento">Desenvolvimento</option>
-                                <option value="marketing">Marketing</option>
-                                <option value="consultoria">Consultoria</option>
+                                <option value="design">     </option>
+                                <option value="desenvolvimento">        </option>
+                                <option value="marketing">      </option>
+                                <option value="consultoria">        </option>
                             </select>
                         </div>
                     </div>
@@ -147,32 +162,27 @@
                             <input type="text" id="localizacao" class="form-control" placeholder="Digite a localização">
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="valor">Media de valor:</label>
-                            <input type="number" id="valor" class="form-control" placeholder="Digite o valor máximo">
-                        </div>
-                    </div>
+
                 </div>
-                <button class="btn btn-primary" onclick="filtrarServicos()">
+                <button onclick="filtrarServicos()">
                     <i class="fas fa-search"></i> Buscar
                 </button>
             </div>
 
-            <?php foreach ($eventos as $evento): ?>
-            <div id="listaServicos">
-                <!-- Exemplo de serviços daqui pra baixo simulação pra mostrar -->
+     
+            <div class="servicos-container" id="listaServicos">
+                <?php foreach ($eventos as $evento): ?>
                 <div class="servico-card">
-                    <h3><?php echo $evento['nome']?></h3>
-                    <p><strong>Vagas:</strong> <?php echo $evento['vagas']?></p>
-                    <p><strong>Endereço:</strong> <?php echo $evento['endereco']?></p>
-                    <p><strong>Cidade:</strong> <?php echo $evento['cidade']?></p>
-                    <p><strong>Valor:</strong> R$ 200</p>
-                    <p><strong>Descrição:</strong> <?php echo $evento['descricao']?></p>
-                    <button class="btn-candidatar" onclick="candidatarServico(1)">Candidatar-se</button>
+                    <h3><?php echo htmlspecialchars($evento['nome']); ?></h3>
+                    <p><strong>Vagas:</strong> <?php echo htmlspecialchars($evento['vagas']); ?></p>
+                    <p><strong>Endereço:</strong> <?php echo htmlspecialchars($evento['endereco']); ?></p>
+                    <p><strong>Cidade:</strong> <?php echo htmlspecialchars($evento['cidade']); ?></p>
+                    <p><strong>Valor:</strong> R$ 200</p> 
+                    <p><strong>Descrição:</strong> <?php echo htmlspecialchars($evento['descricao']); ?></p>
+                    <button class="btn-candidatar" onclick="candidatarServico(<?php echo $evento['id']; ?>)">Candidatar-se</button>
                 </div>
+                <?php endforeach; ?>
             </div>
-            <?php endforeach; ?>
         </div>
     </div>
 
@@ -185,14 +195,12 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-
         function filtrarServicos() {
             const categoria = document.getElementById('categoria').value;
             const localizacao = document.getElementById('localizacao').value;
             const valor = document.getElementById('valor').value;
 
             alert(`Filtrando por: Categoria - ${categoria}, Localização - ${localizacao}, Valor Máximo - ${valor}`);
-
         }
 
         function candidatarServico(idServico) {

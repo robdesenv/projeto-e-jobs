@@ -213,7 +213,7 @@
         <div class="busca-section">
             <h1>Encontre Freelancers</h1>
             
-            <!-- Filtros de Busca -->
+            
             <div class="filtros-container">
                 <h5><i class="fas fa-filter"></i> Filtros de Busca</h5>
                 <div class="filtros-group">

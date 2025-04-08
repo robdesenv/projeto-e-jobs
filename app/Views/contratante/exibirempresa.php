@@ -128,7 +128,7 @@
             line-height: 1.6;
         }
 
-        /* Estilo do botão igual ao da tela de busca */
+       
         .btn-edit {
             background-color: var(--primary);
             color: white;

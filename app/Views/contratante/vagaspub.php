@@ -278,24 +278,7 @@
                 </div>
             </div>
 
-            <!-- Exclusão -->
-            <div class="modal fade" id="modalConfirmacaoExclusao" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Confirmar Exclusão</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Tem certeza que deseja excluir este evento? Esta ação não pode ser desfeita.</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn btn-danger" id="btnConfirmarExclusao">Excluir</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
 
             <div class="eventos-container">
                 <?php foreach($eventos as $evento): 
@@ -345,16 +328,31 @@
                             <button class="btn btn-sm btn-primary btn-acao" title="Editar" onclick="editarEvento(<?php echo $evento['id']; ?>)">
                                 <i class="fas fa-edit"></i> Editar
                             </button>
-<<<<<<< HEAD
                             <button class="btn btn-sm btn-danger btn-acao" title="Excluir" onclick="confirmarExclusao(<?php echo $evento['id']; ?>)">
                                 <i class="fas fa-trash-alt"></i> Excluir
-=======
-                            <button class="btn btn-sm btn-danger btn-acao" title="Excluir">
-                                <i class="fas fa-trash-alt"></i> <a href="<?php echo base_url('contratante/excluirevento/'.$evento['id'])?>">Excluir</a>
->>>>>>> 14fa51b8c0ef8e1bc0edb8dba1ee5de0d94efca8
                             </button>
                         </div>
                     </div>
+                    <!-- Exclusão -->
+                            <div class="modal fade" id="modalConfirmacaoExclusao" tabindex="-1" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Confirmar Exclusão</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Tem certeza que deseja excluir este evento? Esta ação não pode ser desfeita.</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                            <button class="btn btn-sm btn-danger btn-acao" title="Excluir">
+                                                <i class="fas fa-trash-alt"></i> <a href="<?php echo base_url('contratante/excluirevento/'.$evento['id'])?>">Excluir</a>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                 <?php endforeach; ?>
             </div>
         </div>

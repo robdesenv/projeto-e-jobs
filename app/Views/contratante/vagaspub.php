@@ -326,7 +326,7 @@
                                 <i class="fas fa-edit"></i> Editar
                             </button>
                             <button class="btn btn-sm btn-danger btn-acao" title="Excluir">
-                                <i class="fas fa-trash-alt"></i> Excluir
+                                <i class="fas fa-trash-alt"></i> <a href="<?php echo base_url('contratante/excluirevento/'.$evento['id'])?>">Excluir</a>
                             </button>
                         </div>
                     </div>

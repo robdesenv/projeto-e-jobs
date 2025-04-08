@@ -245,13 +245,13 @@
                     $whatsappLink = "https://wa.me/55{$telefone}";
                     
                 
-                    $categorias = explode(',', $freelancer['cargos']);
-                    $categoriaPrincipal = trim($categorias[0]);
+                    // $categorias = explode(',', $freelancer['cargos']);
+                    // $categoriaPrincipal = trim($categorias[0]);
                 ?>
                 <div class="freelancer-card">
                     <div class="freelancer-header">
                         <h3 class="freelancer-title"><?php echo htmlspecialchars($freelancer['nome']); ?></h3>
-                        <span class="freelancer-categoria"><?php echo htmlspecialchars($categoriaPrincipal); ?></span>
+                        <span class="freelancer-categoria"><?php // echo htmlspecialchars($categoriaPrincipal); ?></span> 
                     </div>
                     
                     <div class="freelancer-body">
@@ -259,7 +259,7 @@
                             <i class="fas fa-briefcase"></i>
                             <div>
                                 <div class="freelancer-label">Habilidades</div>
-                                <div class="freelancer-value"><?php echo htmlspecialchars($freelancer['cargos']); ?></div>
+                                <div class="freelancer-value"><?php // echo htmlspecialchars($freelancer['cargos']); ?></div>
                             </div>
                         </div>
                         

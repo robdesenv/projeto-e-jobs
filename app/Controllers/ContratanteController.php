@@ -72,9 +72,11 @@ class ContratanteController extends BaseController
 
                 if($eventosModel->insert()){
                     $data['msg'] = '<p style="color:green;">Evento Criado<p>';
+                    header("Refresh: 0");
                 }else{
                     $data['msg'] = '<p style="color:red;">Erro ao criar evento</p>';
                 }
+                
             }
         }else{
             $data['msg'] = '<p style="color:red;">ERRO: É necessário cadastrar os dados Pessoais e os dados da Empresa na aba "Ver minha empresa"</p>';
@@ -89,6 +91,13 @@ class ContratanteController extends BaseController
 
         return view(name: 'contratante/vagaspub',data: $data);
 
+    }
+
+    public function deleteEventos($id){
+        $eventosModel = new \App\Models\eventosModel();
+        if($eventosModel->delete($id)){
+        }
+        return redirect()->to(base_url('contratante/vagaspub'));
     }
 
     public function busca()

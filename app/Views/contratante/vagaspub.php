@@ -320,7 +320,9 @@
                             
                             <div class="vagas-info">
                                 <span>Vagas disponíveis:</span>
-                                <span class="vagas-count"><?php echo htmlspecialchars($evento['vagas']); ?></span>
+                                    <button class="btn-adicionar" onclick="abrirModalNovaVaga()">
+                                        <i class="fas fa-plus"></i> Adicionar Vaga
+                                    </button>
                             </div>
                         </div>
                         
@@ -353,6 +355,42 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- Modal para adicionar vagas-->
+                            <div class="modal fade" id="modalAdicionarNovaVaga" tabindex="-1" aria-labelledby="modalAdicionarServicoLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="modalAdicionarServicoLabel">Adicionar Vaga</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="formAdicionarServico" method="post">
+                                                    <label for="statusServico" class="form-label">Cargo:</label>
+                                                    <select class="form-select" id="statusServico" name="cargo_id" required>
+                                                        <?php foreach($cargos as $cargo): ?>
+                                                        <option value="<?php echo $cargo['id']?>"><?php echo $cargo['cargo']?></option>
+                                                        <?php endforeach;?>
+                                                    </select><br>
+                                                    <label for="numeroVagas" class="form-label">Quantidade de vagas:</label>
+                                                    <input type="number" class="form-control" id="numeroVagas" >
+                                                    <br>
+
+                                                    <button type="button" class="btn-adicionar" onclick="abrirModalNovoCargo()">
+                                                        <i class="fas fa-plus"></i> Novo cargo
+                                                    </button>
+                                                    
+
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                                    <button type="submit" name="btn-cargo" value="adicionarcargo" class="btn btn-primary" >Salvar</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        
+                                    </div>
+                                </div>               
+                            </div>
                 <?php endforeach; ?>
             </div>
         </div>
@@ -379,6 +417,10 @@
             modal.show();
         }
         
+        function abrirModalNovaVaga() {
+            const modal = new bootstrap.Modal(document.getElementById('modalAdicionarNovaVaga'));
+            modal.show();
+        }
         
         
         function confirmarExclusao(id) {

@@ -88,7 +88,10 @@ class ContratanteController extends BaseController
         $eventosModel = new \App\Models\eventosModel();
         $data['eventos'] = $eventosModel->where('user_id',$user_id)->find();
 
-
+        //exibir cargos
+        $cargoModel = new \App\Models\cargosModel();
+        $data['cargos'] = $cargoModel->findAll();
+        
         return view(name: 'contratante/vagaspub',data: $data);
 
     }
@@ -111,7 +114,7 @@ class ContratanteController extends BaseController
         //exibir cargos
         $cargoModel = new \App\Models\cargosModel();
         $data['cargos'] = $cargoModel->findAll();
-        
+
         return view(name: 'contratante/busca',data: $data);
     }
     public function pagamentos()

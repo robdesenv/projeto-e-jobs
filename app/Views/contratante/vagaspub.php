@@ -315,15 +315,14 @@
                             
                             <div>
                                 <span>Vagas disponíveis:</span>
-                                    <button class="btn btn-sm btn-success" onclick="abrirModalNovaVaga()">
+                                    <button class="btn btn-sm btn-success" onclick="abrirModalNovaVaga(<?php echo $evento['id']?>)">
                                         <i class="fas fa-plus"></i> Adicionar Vaga
                                     </button><br>
-                                        <?php foreach($vagas as $vaga): 
-                                            if($evento['id'] == $vaga['evento_id']){?>
-                                                <?php echo htmlspecialchars($vaga['cargo']) ; ?>:
-                                                <?php echo htmlspecialchars($vaga['quantidade']); ?><br>
-                                        <?php } endforeach; ?>
-                                    
+                                    <?php foreach($vagas as $vaga): 
+                                        if($evento['id'] == $vaga['evento_id']){
+                                            echo htmlspecialchars($vaga['cargo']);
+                                            echo htmlspecialchars($vaga['quantidade']);
+                                    } endforeach; ?><br>
                             </div>
                         </div>
                         
@@ -368,9 +367,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <form id="formAdicionarServico" method="post">
-                                                    <?php foreach($eventos as $evento): ?>
-                                                        <input type="hidden" name="evento_id" value="<?php echo $evento['id']?>">
-                                                    <?php endforeach;?>
+                                                    <input type="hidden" name="evento_id" id="evento_id">
                                                     <label for="statusServico" class="form-label">Cargo:</label>
                                                     <select class="form-select" id="statusServico" name="cargo_id" required>
                                                         <?php foreach($cargos as $cargo): ?>
@@ -466,7 +463,8 @@
             modal.show();
         }
         
-        function abrirModalNovaVaga() {
+        function abrirModalNovaVaga(id) {
+            document.getElementById("evento_id").value = id;
             const modal = new bootstrap.Modal(document.getElementById('modalAdicionarNovaVaga'));
             modal.show();
         }

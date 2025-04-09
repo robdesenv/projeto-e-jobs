@@ -202,6 +202,84 @@
             margin-top: 40px;
         }
 
+        /* Estilos para as vagas */
+        .vagas-container {
+            margin-top: 15px;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+
+        .vaga-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            background-color: #f8f9fa;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            border-left: 4px solid #004182;
+            transition: all 0.2s ease;
+        }
+
+        .vaga-item:hover {
+            background-color: #e9ecef;
+            transform: translateX(3px);
+        }
+
+        .vaga-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .vaga-cargo {
+            font-weight: 600;
+            color: #004182;
+        }
+
+        .vaga-quantidade {
+            font-size: 0.85rem;
+            color: #6c757d;
+        }
+
+        .vaga-actions {
+            display: flex;
+            gap: 5px;
+        }
+
+        .btn-vaga {
+            padding: 3px 8px;
+            font-size: 0.75rem;
+        }
+
+        /* Estilo para o modal de vagas */
+        #modalAdicionarNovaVaga .modal-content {
+            border-radius: 12px;
+        }
+
+        #modalAdicionarNovaVaga .modal-header {
+            background-color: #004182;
+            color: white;
+            border-bottom: none;
+            border-radius: 10px 10px 0 0;
+        }
+
+        #modalAdicionarNovaVaga .btn-close {
+            filter: invert(1);
+        }
+
+        #modalAdicionarNovaVaga .form-select, 
+        #modalAdicionarNovaVaga .form-control {
+            border-radius: 6px;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        #modalAdicionarNovaVaga .form-select:focus, 
+        #modalAdicionarNovaVaga .form-control:focus {
+            border-color: #004182;
+            box-shadow: 0 0 0 0.25rem rgba(0, 65, 130, 0.25);
+        }
+
         @media (max-width: 768px) {
             .eventos-container {
                 grid-template-columns: 1fr;
@@ -225,7 +303,9 @@
                 <i class="fas fa-plus"></i> Criar Novo Evento
             </button>
 
-            <p><?php echo $msg?></p>   
+            <?php if(isset($msg) && !empty($msg)): ?>
+                <p class="alert alert-info"><?php echo $msg; ?></p>
+            <?php endif; ?>
 
             <!-- Modal Adicionar e Editar Evento -->
             <div class="modal fade" id="modalAdicionarServico" tabindex="-1" aria-labelledby="modalAdicionarServicoLabel" aria-hidden="true">
@@ -313,16 +393,30 @@
                                 </div>
                             </div>
                             
-                            <div>
-                                <span>Vagas disponíveis:</span>
-                                    <button class="btn btn-sm btn-success" onclick="abrirModalNovaVaga(<?php echo $evento['id']?>)">
-                                        <i class="fas fa-plus"></i> Adicionar Vaga
-                                    </button><br>
-                                    <?php foreach($vagas as $vaga): 
-                                        if($evento['id'] == $vaga['evento_id']){
-                                            echo htmlspecialchars($vaga['cargo']);
-                                            echo htmlspecialchars($vaga['quantidade']);
-                                    } endforeach; ?><br>
+                            <div class="vagas-container">
+                                <h6>Vagas disponíveis:</h6>
+                                <button class="btn btn-sm btn-success mb-2" onclick="abrirModalNovaVaga(<?php echo $evento['id']?>)">
+                                    <i class="fas fa-plus"></i> Adicionar Vaga
+                                </button>
+                                
+                                <?php foreach($vagas as $vaga): 
+                                    if($evento['id'] == $vaga['evento_id']): ?>
+                                        <div class="vaga-item">
+                                            <div class="vaga-info">
+                                                <span class="vaga-cargo"><?php echo htmlspecialchars($vaga['cargo']); ?></span>
+                                                <span class="vaga-quantidade"><?php echo htmlspecialchars($vaga['quantidade']); ?> vaga(s)</span>
+                                            </div>
+                                            <div class="vaga-actions">
+                                                <button class="btn btn-sm btn-outline-primary btn-vaga" title="Editar">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-danger btn-vaga" title="Excluir">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    <?php endif; 
+                                endforeach; ?>
                             </div>
                         </div>
                         
@@ -335,67 +429,61 @@
                             </button>
                         </div>
                     </div>
-
-                    <!-- Exclusão -->
-                            <div class="modal fade" id="modalConfirmacaoExclusao" tabindex="-1" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Confirmar Exclusão</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p>Tem certeza que deseja excluir este evento? Esta ação não pode ser desfeita.</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                            <button class="btn btn-sm btn-danger btn-acao" title="Excluir">
-                                                <i class="fas fa-trash-alt"></i> <a href="<?php echo base_url('contratante/excluirevento/'.$evento['id'])?>">Excluir</a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Modal para adicionar vagas-->
-                            <div class="modal fade" id="modalAdicionarNovaVaga" tabindex="-1" aria-labelledby="modalAdicionarServicoLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="modalAdicionarServicoLabel">Adicionar Vaga</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form id="formAdicionarServico" method="post">
-                                                    <input type="hidden" name="evento_id" id="evento_id">
-                                                    <label for="statusServico" class="form-label">Cargo:</label>
-                                                    <select class="form-select" id="statusServico" name="cargo_id" required>
-                                                        <?php foreach($cargos as $cargo): ?>
-                                                        <option value="<?php echo $cargo['id']?>"><?php echo $cargo['cargo']?></option>
-                                                        <?php endforeach;?>
-                                                    </select><br>
-                                                    <label for="numeroVagas" class="form-label">Quantidade de vagas:</label>
-                                                    <input type="number" name="quantidade" class="form-control" id="numeroVagas" >
-                                                    <br>
-
-                                                    <button type="button" class="btn-adicionar" onclick="abrirModalNovoCargo()">
-                                                        <i class="fas fa-plus"></i> Novo cargo
-                                                    </button>
-                                                    
-
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                                                    <button type="submit" name="btn-eventos" value="adicionarvaga" class="btn btn-primary" >Salvar</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        
-                                    </div>
-                                </div>               
-                            </div>
                 <?php endforeach; ?>
             </div>
         </div>
+    </div>
+
+    <!-- Modal de Confirmação de Exclusão -->
+    <div class="modal fade" id="modalConfirmacaoExclusao" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmar Exclusão</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Tem certeza que deseja excluir este evento? Esta ação não pode ser desfeita.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" id="btnConfirmarExclusao" class="btn btn-danger">Excluir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para adicionar vagas-->
+    <div class="modal fade" id="modalAdicionarNovaVaga" tabindex="-1" aria-labelledby="modalAdicionarServicoLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalAdicionarServicoLabel">Adicionar Vaga</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formAdicionarVaga" method="post">
+                        <input type="hidden" name="evento_id" id="evento_id">
+                        <div class="mb-3">
+                            <label for="cargoVaga" class="form-label">Cargo:</label>
+                            <select class="form-select" id="cargoVaga" name="cargo_id" required>
+                                <?php foreach($cargos as $cargo): ?>
+                                <option value="<?php echo $cargo['id']?>"><?php echo $cargo['cargo']?></option>
+                                <?php endforeach;?>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="numeroVagas" class="form-label">Quantidade de vagas:</label>
+                            <input type="number" name="quantidade" class="form-control" id="numeroVagas" required>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                            <button type="submit" name="btn-eventos" value="adicionarvaga" class="btn btn-primary">Salvar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>               
     </div>
 
     <footer class="footer">
@@ -408,54 +496,58 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         let eventoIdParaExcluir = null;
-        let eventoIdParaEditar = null;
         
         function abrirModalAdicionar() {
-
+         
             document.getElementById('formAdicionarServico').reset();
             document.getElementById('eventoId').value = '';
-            
- 
+           
             document.getElementById('modalAdicionarServicoLabel').textContent = 'Criar Evento';
             
-
+            
             const modal = new bootstrap.Modal(document.getElementById('modalAdicionarServico'));
             modal.show();
         }
         
         function editarEvento(id) {
-            eventoIdParaEditar = id;
+           
+            const eventoElement = document.getElementById(`evento-${id}`);
+            
+            if (!eventoElement) return;
+            
         
-   
             document.getElementById('eventoId').value = id;
             document.getElementById('nomeServico').value = eventoElement.querySelector('.evento-title').textContent;
-            document.getElementById('descricaoServico').value = eventoElement.querySelector('.evento-value').textContent;
             
-
+        
+            const descricao = eventoElement.querySelectorAll('.evento-value')[0].textContent;
+            document.getElementById('descricaoServico').value = descricao.trim();
+            
+   
+            const localInfo = eventoElement.querySelectorAll('.evento-value')[1].textContent.trim().split('\n');
+            document.getElementById('endereco').value = localInfo[0].trim();
+            document.getElementById('cidade').value = localInfo[1].trim();
+            
+      
             const dataDia = eventoElement.querySelector('.data-dia').textContent;
             const dataMes = eventoElement.querySelector('.data-mes').textContent;
             const dataAno = eventoElement.querySelector('.data-ano').textContent;
             
-
             const meses = {
                 'Jan': '01', 'Fev': '02', 'Mar': '03', 'Abr': '04', 'Mai': '05', 'Jun': '06',
                 'Jul': '07', 'Ago': '08', 'Set': '09', 'Out': '10', 'Nov': '11', 'Dez': '12'
             };
             const mesNumero = meses[dataMes] || '01';
             
-
             const dataFormatada = `${dataAno}-${mesNumero}-${dataDia.padStart(2, '0')}`;
             document.getElementById('dataServico').value = dataFormatada;
             
-            document.getElementById('endereco').value = 'Endereço do evento'; 
-            document.getElementById('cidade').value = 'Cidade do evento'; 
-            document.getElementById('vagas').value = eventoElement.querySelector('.vagas-count').textContent;
+
+            const statusElement = eventoElement.querySelector('.evento-status');
+            const status = statusElement.classList.contains('status-disponivel') ? 'Disponivel' : 'Esgotado';
+            document.getElementById('statusServico').value = status;
             
-    
-            const status = eventoElement.querySelector('.evento-status').textContent.trim();
-            document.getElementById('statusServico').value = status === 'Disponível' ? 'Disponivel' : 'Esgotado';
-            
-            
+       
             document.getElementById('modalAdicionarServicoLabel').textContent = 'Editar Evento';
             
             
@@ -475,12 +567,12 @@
             modal.show();
         }
         
-      
+       
         document.getElementById('btnConfirmarExclusao').addEventListener('click', function() {
             if (eventoIdParaExcluir) {
                 window.location.href = '<?php echo base_url("contratante/excluirevento/"); ?>' + eventoIdParaExcluir;
             }
         });
     </script>
-</body>
-</html>
+</body> 
+</html> 

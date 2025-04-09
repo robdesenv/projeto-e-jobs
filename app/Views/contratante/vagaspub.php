@@ -227,6 +227,7 @@
 
             <p><?php echo $msg?></p>   
 
+            <!-- Modal Adicionar e Editar Evento -->
             <div class="modal fade" id="modalAdicionarServico" tabindex="-1" aria-labelledby="modalAdicionarServicoLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -278,7 +279,59 @@
                 </div>
             </div>
 
-            
+            <!--Confirmação de Exclusão -->
+            <div class="modal fade" id="modalConfirmacaoExclusao" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Confirmar Exclusão</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Tem certeza que deseja excluir este evento? Esta ação não pode ser desfeita.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-danger" id="btnConfirmarExclusao">Excluir</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--adicionar vagas-->
+            <div class="modal fade" id="modalAdicionarNovaVaga" tabindex="-1" aria-labelledby="modalAdicionarServicoLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalAdicionarServicoLabel">Adicionar Vaga</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="formAdicionarServico" method="post">
+                                <label for="statusServico" class="form-label">Cargo:</label>
+                                <select class="form-select" id="statusServico" name="cargo_id" required>
+                                    <?php foreach($cargos as $cargo): ?>
+                                    <option value="<?php echo $cargo['id']?>"><?php echo $cargo['cargo']?></option>
+                                    <?php endforeach;?>
+                                </select><br>
+                                <label for="numeroVagas" class="form-label">Quantidade de vagas:</label>
+                                <input type="number" class="form-control" id="numeroVagas" >
+                                <br>
+
+                                <button type="button" class="btn-adicionar" onclick="abrirModalNovoCargo()">
+                                    <i class="fas fa-plus"></i> Novo cargo
+                                </button>
+                                
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                    <button type="submit" name="btn-cargo" value="adicionarcargo" class="btn btn-primary" >Salvar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>               
+            </div>
 
             <div class="eventos-container">
                 <?php foreach($eventos as $evento): 
@@ -320,9 +373,10 @@
                             
                             <div class="vagas-info">
                                 <span>Vagas disponíveis:</span>
-                                    <button class="btn-adicionar" onclick="abrirModalNovaVaga()">
-                                        <i class="fas fa-plus"></i> Adicionar Vaga
-                                    </button>
+                                <span class="vagas-count"><?php echo htmlspecialchars($evento['vagas']); ?></span>
+                                <button class="btn btn-sm btn-success" onclick="abrirModalNovaVaga()">
+                                    <i class="fas fa-plus"></i> Adicionar Vaga
+                                </button>
                             </div>
                         </div>
                         
@@ -335,62 +389,6 @@
                             </button>
                         </div>
                     </div>
-                    <!-- Exclusão -->
-                            <div class="modal fade" id="modalConfirmacaoExclusao" tabindex="-1" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Confirmar Exclusão</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p>Tem certeza que deseja excluir este evento? Esta ação não pode ser desfeita.</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                            <button class="btn btn-sm btn-danger btn-acao" title="Excluir">
-                                                <i class="fas fa-trash-alt"></i> <a href="<?php echo base_url('contratante/excluirevento/'.$evento['id'])?>">Excluir</a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Modal para adicionar vagas-->
-                            <div class="modal fade" id="modalAdicionarNovaVaga" tabindex="-1" aria-labelledby="modalAdicionarServicoLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="modalAdicionarServicoLabel">Adicionar Vaga</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form id="formAdicionarServico" method="post">
-                                                    <label for="statusServico" class="form-label">Cargo:</label>
-                                                    <select class="form-select" id="statusServico" name="cargo_id" required>
-                                                        <?php foreach($cargos as $cargo): ?>
-                                                        <option value="<?php echo $cargo['id']?>"><?php echo $cargo['cargo']?></option>
-                                                        <?php endforeach;?>
-                                                    </select><br>
-                                                    <label for="numeroVagas" class="form-label">Quantidade de vagas:</label>
-                                                    <input type="number" class="form-control" id="numeroVagas" >
-                                                    <br>
-
-                                                    <button type="button" class="btn-adicionar" onclick="abrirModalNovoCargo()">
-                                                        <i class="fas fa-plus"></i> Novo cargo
-                                                    </button>
-                                                    
-
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                                                    <button type="submit" name="btn-cargo" value="adicionarcargo" class="btn btn-primary" >Salvar</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        
-                                    </div>
-                                </div>               
-                            </div>
                 <?php endforeach; ?>
             </div>
         </div>
@@ -405,13 +403,57 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        
         let eventoIdParaExcluir = null;
+        let eventoIdParaEditar = null;
         
         function abrirModalAdicionar() {
-            
+
             document.getElementById('formAdicionarServico').reset();
             document.getElementById('eventoId').value = '';
+            
+ 
+            document.getElementById('modalAdicionarServicoLabel').textContent = 'Criar Evento';
+            
+
+            const modal = new bootstrap.Modal(document.getElementById('modalAdicionarServico'));
+            modal.show();
+        }
+        
+        function editarEvento(id) {
+            eventoIdParaEditar = id;
+        
+   
+            document.getElementById('eventoId').value = id;
+            document.getElementById('nomeServico').value = eventoElement.querySelector('.evento-title').textContent;
+            document.getElementById('descricaoServico').value = eventoElement.querySelector('.evento-value').textContent;
+            
+
+            const dataDia = eventoElement.querySelector('.data-dia').textContent;
+            const dataMes = eventoElement.querySelector('.data-mes').textContent;
+            const dataAno = eventoElement.querySelector('.data-ano').textContent;
+            
+
+            const meses = {
+                'Jan': '01', 'Fev': '02', 'Mar': '03', 'Abr': '04', 'Mai': '05', 'Jun': '06',
+                'Jul': '07', 'Ago': '08', 'Set': '09', 'Out': '10', 'Nov': '11', 'Dez': '12'
+            };
+            const mesNumero = meses[dataMes] || '01';
+            
+
+            const dataFormatada = `${dataAno}-${mesNumero}-${dataDia.padStart(2, '0')}`;
+            document.getElementById('dataServico').value = dataFormatada;
+            
+            document.getElementById('endereco').value = 'Endereço do evento'; 
+            document.getElementById('cidade').value = 'Cidade do evento'; 
+            document.getElementById('vagas').value = eventoElement.querySelector('.vagas-count').textContent;
+            
+    
+            const status = eventoElement.querySelector('.evento-status').textContent.trim();
+            document.getElementById('statusServico').value = status === 'Disponível' ? 'Disponivel' : 'Esgotado';
+            
+            
+            document.getElementById('modalAdicionarServicoLabel').textContent = 'Editar Evento';
+            
             
             const modal = new bootstrap.Modal(document.getElementById('modalAdicionarServico'));
             modal.show();
@@ -422,20 +464,18 @@
             modal.show();
         }
         
-        
         function confirmarExclusao(id) {
             eventoIdParaExcluir = id;
             const modal = new bootstrap.Modal(document.getElementById('modalConfirmacaoExclusao'));
             modal.show();
         }
         
-        // Configurar o botão de confirmar exclusão
+      
         document.getElementById('btnConfirmarExclusao').addEventListener('click', function() {
             if (eventoIdParaExcluir) {
-                excluirEvento(eventoIdParaExcluir);
+                window.location.href = '<?php echo base_url("contratante/excluirevento/"); ?>' + eventoIdParaExcluir;
             }
         });
-        
     </script>
 </body>
-</html> 
+</html>

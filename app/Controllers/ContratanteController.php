@@ -57,24 +57,37 @@ class ContratanteController extends BaseController
     public function vagaspub()
     {
         $data['msg'] = '';
+        $db = db_connect();
         
         if($this->VerificaCadastroInformacoes() >= 1){
             if($this->request->getMethod() == 'POST'){
-                $eventosModel = new \App\Models\eventosModel();
-                $eventosModel->set('nome', $this->request->getPost('nome'));
-                $eventosModel->set('descricao',  $this->request->getPost('descricao'));
-                $eventosModel->set('data',$this->request->getPost('data'));
-                $eventosModel->set('endereco', $this->request->getPost('endereco'));
-                $eventosModel->set('cidade', $this->request->getPost('cidade'));
-                $eventosModel->set('vagas', $this->request->getPost('vagas'));
-                $eventosModel->set('status',  $this->request->getPost('status'));
-                $eventosModel->set('user_id', user_id());
+                $btneventos = $this->request->getPost('btn-eventos');
+                if($btneventos == 'adicionarevento'){
+                    $eventosModel = new \App\Models\eventosModel();
+                    $eventosModel->set('nome', $this->request->getPost('nome'));
+                    $eventosModel->set('descricao',  $this->request->getPost('descricao'));
+                    $eventosModel->set('data',$this->request->getPost('data'));
+                    $eventosModel->set('endereco', $this->request->getPost('endereco'));
+                    $eventosModel->set('cidade', $this->request->getPost('cidade'));
+                    $eventosModel->set('status',  $this->request->getPost('status'));
+                    $eventosModel->set('user_id', user_id());
 
-                if($eventosModel->insert()){
-                    $data['msg'] = '<p style="color:green;">Evento Criado<p>';
+                    if($eventosModel->insert()){
+                        $data['msg'] = '<p style="color:green;">Evento Criado<p>';
+                        header("Refresh: 0");
+                    }else{
+                        $data['msg'] = '<p style="color:red;">Erro ao criar evento</p>';
+                    }
+                }elseif($btneventos == 'adicionarvaga'){
+                    $vagasModel = new \App\Models\vagasModel();
+                    $cargos_id = intval($this->request->getPost('cargo_id'));
+                    $vagasModel->set('evento_id', $this->request->getPost('evento_id'));
+                    $vagasModel->set('cargo_id', $cargos_id);
+                    $vagasModel->set('quantidade', $this->request->getPost('quantidade'));
+
+                    $vagasModel->insert();
+
                     header("Refresh: 0");
-                }else{
-                    $data['msg'] = '<p style="color:red;">Erro ao criar evento</p>';
                 }
                 
             }
@@ -91,7 +104,13 @@ class ContratanteController extends BaseController
         //exibir cargos
         $cargoModel = new \App\Models\cargosModel();
         $data['cargos'] = $cargoModel->findAll();
-        
+
+        //exibir vagas
+        $vagasModel = new \App\Models\vagasModel();
+
+        $sql = 'SELECT cargos.cargo, vagas.quantidade,vagas.evento_id FROM cargos JOIN vagas ON vagas.cargo_id = cargos.id';
+        $data['vagas'] = $db->connID->query($sql);
+
         return view(name: 'contratante/vagaspub',data: $data);
 
     }

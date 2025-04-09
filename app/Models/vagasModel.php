@@ -4,9 +4,9 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class eventosModel extends Model
+class vagasModel extends Model
 {
-    protected $table      = 'eventos';
+    protected $table      = 'vagas';
     protected $primaryKey = 'id';
 
     protected $useAutoIncrement = true;
@@ -14,7 +14,7 @@ class eventosModel extends Model
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['nome','endereco', 'cidade', 'data','user_id', 'descricao', 'status'];
+    protected $allowedFields = ['evento_id', 'cargo_id', 'quantidade'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;

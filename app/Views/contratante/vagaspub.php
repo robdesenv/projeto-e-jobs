@@ -258,10 +258,6 @@
                                     <input type="text" class="form-control" id="cidade" name="cidade" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="vagas" class="form-label">Vagas:</label>
-                                    <input type="number" class="form-control" id="vagas" name="vagas" required>
-                                </div>
-                                <div class="mb-3">
                                     <label for="statusServico" class="form-label">Status:</label>
                                     <select class="form-select" id="statusServico" name="status" required>
                                         <option value="Disponivel">Disponível</option>
@@ -270,7 +266,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                                    <button type="submit" class="btn btn-primary">Salvar</button>
+                                    <button type="submit" name="btn-eventos" value="adicionarevento" class="btn btn-primary">Salvar</button>
                                 </div>
                             </form>
                         </div>
@@ -318,11 +314,17 @@
                                 </div>
                             </div>
                             
-                            <div class="vagas-info">
+                            <div>
                                 <span>Vagas disponíveis:</span>
                                     <button class="btn-adicionar" onclick="abrirModalNovaVaga()">
                                         <i class="fas fa-plus"></i> Adicionar Vaga
                                     </button>
+                                        <?php foreach($vagas as $vaga): 
+                                            if($evento['id'] == $vaga['evento_id']){?>
+                                                <?php echo htmlspecialchars($vaga['cargo']) ; ?>:
+                                                <?php echo htmlspecialchars($vaga['quantidade']); ?><br>
+                                        <?php } endforeach; ?>
+                                    
                             </div>
                         </div>
                         
@@ -366,6 +368,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <form id="formAdicionarServico" method="post">
+                                                    <input type="hidden" name="evento_id" value="<?php echo $evento['id']?>">
                                                     <label for="statusServico" class="form-label">Cargo:</label>
                                                     <select class="form-select" id="statusServico" name="cargo_id" required>
                                                         <?php foreach($cargos as $cargo): ?>
@@ -373,7 +376,7 @@
                                                         <?php endforeach;?>
                                                     </select><br>
                                                     <label for="numeroVagas" class="form-label">Quantidade de vagas:</label>
-                                                    <input type="number" class="form-control" id="numeroVagas" >
+                                                    <input type="number" name="quantidade" class="form-control" id="numeroVagas" >
                                                     <br>
 
                                                     <button type="button" class="btn-adicionar" onclick="abrirModalNovoCargo()">
@@ -383,7 +386,7 @@
 
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                                                    <button type="submit" name="btn-cargo" value="adicionarcargo" class="btn btn-primary" >Salvar</button>
+                                                    <button type="submit" name="btn-eventos" value="adicionarvaga" class="btn btn-primary" >Salvar</button>
                                                 </div>
                                             </form>
                                         </div>

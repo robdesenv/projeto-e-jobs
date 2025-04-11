@@ -63,21 +63,28 @@ class ContratanteController extends BaseController
             if($this->request->getMethod() == 'POST'){
                 $btneventos = $this->request->getPost('btn-eventos');
                 if($btneventos == 'adicionarevento'){
-                    $eventosModel = new \App\Models\eventosModel();
-                    $eventosModel->set('nome', $this->request->getPost('nome'));
-                    $eventosModel->set('descricao',  $this->request->getPost('descricao'));
-                    $eventosModel->set('data',$this->request->getPost('data'));
-                    $eventosModel->set('endereco', $this->request->getPost('endereco'));
-                    $eventosModel->set('cidade', $this->request->getPost('cidade'));
-                    $eventosModel->set('status',  $this->request->getPost('status'));
-                    $eventosModel->set('user_id', user_id());
+                    $btnEventoId = $this->request->getPost('eventoId');
+                    if($btnEventoId == ''){ //cadastrar evento
+                        $eventosModel = new \App\Models\eventosModel();
+                        $eventosModel->set('nome', $this->request->getPost('nome'));
+                        $eventosModel->set('descricao',  $this->request->getPost('descricao'));
+                        $eventosModel->set('data',$this->request->getPost('data'));
+                        $eventosModel->set('endereco', $this->request->getPost('endereco'));
+                        $eventosModel->set('cidade', $this->request->getPost('cidade'));
+                        $eventosModel->set('status',  $this->request->getPost('status'));
+                        $eventosModel->set('user_id', user_id());
 
-                    if($eventosModel->insert()){
-                        $data['msg'] = '<p style="color:green;">Evento Criado<p>';
+                        if($eventosModel->insert()){
+                            $data['msg'] = '<p style="color:green;">Evento Criado<p>';
+                            header("Refresh: 0");
+                        }else{
+                            $data['msg'] = '<p style="color:red;">Erro ao criar evento</p>';
+                        }
+                    }elseif($btnEventoId != ''){ // Editar evento
+                        $this->editEventos($btnEventoId);
                         header("Refresh: 0");
-                    }else{
-                        $data['msg'] = '<p style="color:red;">Erro ao criar evento</p>';
                     }
+                    
                 }elseif($btneventos == 'adicionarvaga'){
                     $vagasModel = new \App\Models\vagasModel();
                     $cargos_id = intval($this->request->getPost('cargo_id'));
@@ -108,16 +115,42 @@ class ContratanteController extends BaseController
         //exibir vagas
         $vagasModel = new \App\Models\vagasModel();
 
-        $sql = 'SELECT cargos.cargo, vagas.quantidade,vagas.evento_id FROM cargos JOIN vagas ON vagas.cargo_id = cargos.id';
+        $sql = 'SELECT vagas.id, cargos.cargo, vagas.quantidade,vagas.evento_id FROM cargos JOIN vagas ON vagas.cargo_id = cargos.id';
         $data['vagas'] = $db->connID->query($sql);
 
         return view(name: 'contratante/vagaspub',data: $data);
 
     }
 
+    public function editEventos($id){
+
+        $eventosModel = new \App\Models\eventosModel();
+
+        if($this->request->getMethod() == 'POST'){
+            $eventos['nome'] = $this->request->getPost('nome');
+            $eventos['endereco'] = $this->request->getPost('endereco');
+            $eventos['cidade'] = $this->request->getPost('cidade');
+            $eventos['data'] = $this->request->getPost('data');
+            $eventos['descricao'] = $this->request->getPost('descricao');
+            $eventos['status'] = $this->request->getPost('status');
+
+            if ($eventosModel->update($id, $eventos)) {
+                return redirect('contratante/vagaspub');
+            }
+        }
+        echo view('contratante/vagaspub');
+    }
+
     public function deleteEventos($id){
         $eventosModel = new \App\Models\eventosModel();
         if($eventosModel->delete($id)){
+        }
+        return redirect()->to(base_url('contratante/vagaspub'));
+    }
+
+    public function deleteVagas($id){
+        $vagasModel = new \App\Models\vagasModel();
+        if($vagasModel->delete($id)){
         }
         return redirect()->to(base_url('contratante/vagaspub'));
     }

@@ -317,7 +317,7 @@
                         </div>
                         <div class="modal-body">
                             <form id="formAdicionarServico" method="post">
-                                <input type="hidden" id="eventoId" name="id">
+                                <input type="hidden" id="eventoId" name="eventoId" name="id">
                                 <div class="mb-3">
                                     <label for="nomeServico" class="form-label">Nome do Evento:</label>
                                     <input type="text" class="form-control" id="nomeServico" name="nome" required>
@@ -347,7 +347,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                                    <button type="submit" name="btn-eventos" value="adicionarevento" class="btn btn-primary">Salvar</button>
+                                    <button type="submit" id="btneditEventos" name="btn-eventos" value="adicionarevento" class="btn btn-primary">Salvar</button>
                                 </div>
                             </form>
                         </div>
@@ -410,7 +410,7 @@
                                                 <button class="btn btn-sm btn-outline-primary btn-vaga" title="Editar">
                                                     <i class="fas fa-edit"></i>
                                                 </button>
-                                                <button class="btn btn-sm btn-outline-danger btn-vaga" title="Excluir">
+                                                <button class="btn btn-sm btn-outline-danger btn-vaga" id="btnExcluirVaga" onclick="excluirVaga( <?php echo $vaga['id']; ?>)" title="Excluir">
                                                     <i class="fas fa-trash-alt"></i>
                                                 </button>
                                             </div>
@@ -443,7 +443,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Tem certeza que deseja excluir este evento? Esta ação não pode ser desfeita.</p>
+                    <p id="msg-exluir">Tem certeza que deseja excluir este evento? Esta ação não pode ser desfeita.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -496,6 +496,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         let eventoIdParaExcluir = null;
+        let vagaIdExcluir = null;
         
         function abrirModalAdicionar() {
          
@@ -514,7 +515,6 @@
             const eventoElement = document.getElementById(`evento-${id}`);
             
             if (!eventoElement) return;
-            
         
             document.getElementById('eventoId').value = id;
             document.getElementById('nomeServico').value = eventoElement.querySelector('.evento-title').textContent;
@@ -536,6 +536,8 @@
             const meses = {
                 'Jan': '01', 'Fev': '02', 'Mar': '03', 'Abr': '04', 'Mai': '05', 'Jun': '06',
                 'Jul': '07', 'Ago': '08', 'Set': '09', 'Out': '10', 'Nov': '11', 'Dez': '12'
+
+            
             };
             const mesNumero = meses[dataMes] || '01';
             
@@ -553,6 +555,9 @@
             
             const modal = new bootstrap.Modal(document.getElementById('modalAdicionarServico'));
             modal.show();
+
+            
+            
         }
         
         function abrirModalNovaVaga(id) {
@@ -566,6 +571,14 @@
             const modal = new bootstrap.Modal(document.getElementById('modalConfirmacaoExclusao'));
             modal.show();
         }
+
+        function excluirVaga(id) {
+            vagaIdExcluir = id;
+            document.getElementById("msg-exluir").innerHTML = "Tem certeza que deseja excluir esta vaga?";
+            const modal = new bootstrap.Modal(document.getElementById('modalConfirmacaoExclusao'));
+            modal.show();
+        }
+        
         
        
         document.getElementById('btnConfirmarExclusao').addEventListener('click', function() {
@@ -573,6 +586,13 @@
                 window.location.href = '<?php echo base_url("contratante/excluirevento/"); ?>' + eventoIdParaExcluir;
             }
         });
+
+        document.getElementById('btnConfirmarExclusao').addEventListener('click', function() {
+            if (vagaIdExcluir) {
+                window.location.href = '<?php echo base_url("contratante/excluirvaga/"); ?>' + vagaIdExcluir;
+            }
+        });
+        
     </script>
 </body> 
 </html> 

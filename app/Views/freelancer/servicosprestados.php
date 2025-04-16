@@ -104,43 +104,7 @@
                 <i class="fas fa-plus"></i> Adicionar Serviço
             </button>
 
-    <div class="modal fade" id="modalAdicionarServico" tabindex="-1" aria-labelledby="modalAdicionarServicoLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalAdicionarServicoLabel">Adicionar Serviço</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="formAdicionarServico">
-                        <div class="mb-3">
-                            <label for="nomeServico" class="form-label">Nome do Serviço:</label>
-                            <input type="text" class="form-control" id="nomeServico" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="descricaoServico" class="form-label">Descrição:</label>
-                            <textarea class="form-control" id="descricaoServico" rows="3" required></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="dataServico" class="form-label">Data:</label>
-                            <input type="date" class="form-control" id="dataServico" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="statusServico" class="form-label">Status:</label>
-                            <select class="form-select" id="statusServico" required>
-                                <option value="Concluído">Concluído</option>
-                                <option value="Pendente">Pendente</option>
-                            </select>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary" onclick="adicionarServico()">Salvar</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 
     <footer class="footer">
         <div class="container">

@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\vagasModel;
 use CodeIgniter\HTTP\ResponseInterface;
 
 class FreelancerController extends BaseController
@@ -146,15 +147,20 @@ class FreelancerController extends BaseController
     }
 
     public function telabusca(){
-        $eventosModel = new \App\Models\eventosModel();
-        $data = [
-            'eventos' => $eventosModel->paginate(10),
-            'pager' => $eventosModel->pager
-        ];
+
+        $db = db_connect();
+        //exibir vagas
+        $sql = 'SELECT V.id, E.nome,E.endereco,E.cidade,E.data,E.descricao, C.cargo, V.cargo_id
+                                           FROM eventos as E JOIN vagas as V ON V.evento_id = E.id
+				                            JOIN cargos as C ON V.cargo_id = C.id';
+        $data['vagas'] = $db->connID->query($sql);
+
+
 
         //exibir cargos
         $cargoModel = new \App\Models\cargosModel();
         $data['cargos'] = $cargoModel->findAll();
+
         
         return view('freelancer/telabusca', $data);
     }
@@ -162,4 +168,6 @@ class FreelancerController extends BaseController
     public function transrecebidas(){
         return view('freelancer/transrecebidas');
     }
+
+    
 }

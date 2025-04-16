@@ -171,14 +171,16 @@
 
      
             <div class="servicos-container" id="listaServicos">
-                <?php foreach ($eventos as $evento): ?>
+                <?php foreach ($vagas as $vaga): ?>
+                    
                 <div class="servico-card">
-                    <h3><?php echo htmlspecialchars($evento['nome']); ?></h3>
-                    <p><strong>Endereço:</strong> <?php echo htmlspecialchars($evento['endereco']); ?></p>
-                    <p><strong>Cidade:</strong> <?php echo htmlspecialchars($evento['cidade']); ?></p>
+                    <h3><?php echo htmlspecialchars($vaga['cargo']); ?></h3>
+                    <p><strong>Evento:</strong> <?php echo htmlspecialchars($vaga['nome']); ?></p>
+                    <p><strong>Endereço:</strong> <?php echo htmlspecialchars($vaga['endereco']); ?></p>
+                    <p><strong>Cidade:</strong> <?php echo htmlspecialchars($vaga['cidade']); ?></p>
                     <p><strong>Valor:</strong> R$ 200</p> 
-                    <p><strong>Descrição:</strong> <?php echo htmlspecialchars($evento['descricao']); ?></p>
-                    <button class="btn-candidatar" onclick="candidatarServico(<?php echo $evento['id']; ?>)">Candidatar-se</button>
+                    <p><strong>Descrição:</strong> <?php echo htmlspecialchars($vaga['descricao']); ?></p>
+                    <button class="btn-candidatar" onclick="candidatarServico(<?php echo $vaga['id']; ?>)">Candidatar-se</button>
                 </div>
                 <?php endforeach; ?>
             </div>
@@ -203,7 +205,7 @@
         }
 
         function candidatarServico(idServico) {
-            alert(`Candidatando-se ao serviço ID: ${idServico}`);
+            
         }
     </script>
 </body>

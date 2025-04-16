@@ -100,9 +100,8 @@
     <div class="container">
         <div class="servicos-section">
             <h1>Serviços Prestados</h1>
-            <button class="btn-adicionar" onclick="abrirModalAdicionar()">
-                <i class="fas fa-plus"></i> Adicionar Serviço
-            </button>
+        </div>
+    </div>
 
     
 

@@ -150,7 +150,7 @@ class FreelancerController extends BaseController
 
         $db = db_connect();
         //exibir vagas
-        $sql = 'SELECT V.id, E.nome,E.endereco,E.cidade,E.data,E.descricao, C.cargo, V.cargo_id
+        $sql = 'SELECT V.id,V.evento_id, E.nome,E.endereco,E.cidade,E.data,E.descricao, C.cargo, V.cargo_id
                                            FROM eventos as E JOIN vagas as V ON V.evento_id = E.id
 				                            JOIN cargos as C ON V.cargo_id = C.id';
         $data['vagas'] = $db->connID->query($sql);
@@ -169,5 +169,14 @@ class FreelancerController extends BaseController
         return view('freelancer/transrecebidas');
     }
 
-    
+    public function candidatarvaga($idVaga,$idEvento){
+        $contratadosModel = new \App\Models\contratadosModel();
+        $contratadosModel->set('evento_id',$idEvento);
+        $contratadosModel->set('user_id', user_id());
+        $contratadosModel->set('vagas_id', $idVaga);
+        $contratadosModel->set('status', 'false');
+        $contratadosModel->insert();
+        
+        return redirect()->to(base_url('freelancer/telabusca'));
+}
 }

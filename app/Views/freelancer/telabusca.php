@@ -180,7 +180,7 @@
                     <p><strong>Cidade:</strong> <?php echo htmlspecialchars($vaga['cidade']); ?></p>
                     <p><strong>Valor:</strong> R$ 200</p> 
                     <p><strong>Descrição:</strong> <?php echo htmlspecialchars($vaga['descricao']); ?></p>
-                    <button class="btn-candidatar" onclick="candidatarServico(<?php echo $vaga['id']; ?>)">Candidatar-se</button>
+                    <button class="btn-candidatar" onclick="candidatarServico(<?php echo $vaga['id']; ?>,<?php echo $vaga['evento_id']; ?>)">Candidatar-se</button>
                 </div>
                 <?php endforeach; ?>
             </div>
@@ -204,8 +204,8 @@
             alert(`Filtrando por: Categoria - ${categoria}, Localização - ${localizacao}, Valor Máximo - ${valor}`);
         }
 
-        function candidatarServico(idServico) {
-            
+        function candidatarServico(idVaga,idEvento) {
+            window.location.href = '<?php echo base_url("freelancer/candidatarvaga/"); ?>' + idVaga + "/" + idEvento;
         }
     </script>
 </body>

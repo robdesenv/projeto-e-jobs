@@ -407,8 +407,8 @@
                                                 <span class="vaga-quantidade"><?php echo htmlspecialchars($vaga['quantidade']); ?> vaga(s)</span>
                                             </div>
                                             <div class="vaga-actions">
-                                                <button class="btn btn-sm btn-outline-primary btn-vaga" title="Editar">
-                                                    <i class="fas fa-edit"></i>
+                                                <button class="btn btn-sm btn-outline-primary btn-vaga" onclick="abrirModalSolicitações()">
+                                                    Solicitações
                                                 </button>
                                                 <button class="btn btn-sm btn-outline-danger btn-vaga" id="btnExcluirVaga" onclick="excluirVaga( <?php echo $vaga['id']; ?>)" title="Excluir">
                                                     <i class="fas fa-trash-alt"></i>
@@ -480,6 +480,43 @@
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                             <button type="submit" name="btn-eventos" value="adicionarvaga" class="btn btn-primary">Salvar</button>
                         </div>
+                    </form>
+                </div>
+            </div>
+        </div>               
+    </div>
+
+    <!-- Modal para solicitações-->
+    <div class="modal fade" id="modalSolicitacoes" tabindex="-1" aria-labelledby="modalAdicionarServicoLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalAdicionarServicoLabel">Solicitações</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formAdicionarVaga" method="post">
+                    <?php foreach ($solicitacoes as $solicitacao): ?>
+                        <div class="vaga-item">
+                                            <div class="vaga-info">
+                                                <span class="vaga-cargo"><?php echo htmlspecialchars($solicitacao['nome']); ?></span>
+                                                <?php if($solicitacao['status'] == NULL){
+                                                    echo '<span class="vaga-quantidade  alert alert-warning"><strong >Status: </strong>Agradando confirmação...</span>';
+                                                }elseif($solicitacao['status'] == true){
+                                                    echo '<span class="vaga-quantidade alert alert-success"><strong >Status: </strong>Contratado</span>';
+                                                }elseif($solicitacao['status'] == false){
+                                                     echo '<span class="vaga-quantidade alert alert-danger"><strong >Status: </strong>Recusado</span>';
+                                                }
+                                                ?>
+                                            </div>
+                                            <div class="vaga-actions">
+                                                <button class="btn btn-sm btn-outline-primary btn-vaga" onclick="">
+                                                    Ver informações
+                                                </button>
+                                            </div>
+                                        </div>
+                            
+                    <?php endforeach; ?>    
                     </form>
                 </div>
             </div>
@@ -565,6 +602,13 @@
             const modal = new bootstrap.Modal(document.getElementById('modalAdicionarNovaVaga'));
             modal.show();
         }
+
+        function abrirModalSolicitações() {
+            const modal = new bootstrap.Modal(document.getElementById('modalSolicitacoes'));
+            modal.show();
+        }
+
+        
         
         function confirmarExclusao(id) {
             eventoIdParaExcluir = id;

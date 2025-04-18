@@ -157,3 +157,88 @@ DEBUG - 2025-04-18 02:34:50 --> Session: Class initialized using 'CodeIgniter\Se
 DEBUG - 2025-04-18 02:34:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2025-04-18 02:34:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2025-04-18 02:34:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-18 02:38:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-18 02:38:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-18 02:42:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-18 02:42:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-18 02:43:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-18 02:43:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-18 02:53:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-18 02:53:16 --> ParseError: syntax error, unexpected end of file
+[Method: GET, Route: contratante/vagaspub]
+in APPPATH\Views\contratante\vagaspub.php on line 636.
+ 1 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 2 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('contratante/vagaspub', [], true)
+ 3 APPPATH\Controllers\ContratanteController.php(129): view('contratante/vagaspub', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\ContratanteController->vagaspub()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ContratanteController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-18 02:54:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-18 02:54:02 --> ParseError: syntax error, unexpected end of file
+[Method: GET, Route: contratante/vagaspub]
+in APPPATH\Views\contratante\vagaspub.php on line 633.
+ 1 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 2 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('contratante/vagaspub', [], true)
+ 3 APPPATH\Controllers\ContratanteController.php(129): view('contratante/vagaspub', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\ContratanteController->vagaspub()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ContratanteController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-18 02:54:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-18 02:54:37 --> ErrorException: Undefined variable $solicitacao
+[Method: GET, Route: contratante/vagaspub]
+in APPPATH\Views\contratante\vagaspub.php on line 502.
+ 1 APPPATH\Views\contratante\vagaspub.php(502): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $solicitacao', 'C:\\xampp\\htdocs\\projeto-e-jobs\\app\\Views\\contratante\\vagaspub.php', 502)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\projeto-e-jobs\\app\\Views\\contratante\\vagaspub.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('contratante/vagaspub', [], true)
+ 5 APPPATH\Controllers\ContratanteController.php(129): view('contratante/vagaspub', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\ContratanteController->vagaspub()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ContratanteController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-18 02:54:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-18 02:54:57 --> ErrorException: Undefined variable $solicitacao
+[Method: GET, Route: contratante/vagaspub]
+in APPPATH\Views\contratante\vagaspub.php on line 502.
+ 1 APPPATH\Views\contratante\vagaspub.php(502): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $solicitacao', 'C:\\xampp\\htdocs\\projeto-e-jobs\\app\\Views\\contratante\\vagaspub.php', 502)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\projeto-e-jobs\\app\\Views\\contratante\\vagaspub.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('contratante/vagaspub', [], true)
+ 5 APPPATH\Controllers\ContratanteController.php(129): view('contratante/vagaspub', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\ContratanteController->vagaspub()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ContratanteController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-18 02:55:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-18 02:55:03 --> ErrorException: Undefined variable $solicitacao
+[Method: GET, Route: contratante/vagaspub]
+in APPPATH\Views\contratante\vagaspub.php on line 502.
+ 1 APPPATH\Views\contratante\vagaspub.php(502): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $solicitacao', 'C:\\xampp\\htdocs\\projeto-e-jobs\\app\\Views\\contratante\\vagaspub.php', 502)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\projeto-e-jobs\\app\\Views\\contratante\\vagaspub.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('contratante/vagaspub', [], true)
+ 5 APPPATH\Controllers\ContratanteController.php(129): view('contratante/vagaspub', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\ContratanteController->vagaspub()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ContratanteController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-04-18 02:55:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-18 02:55:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-18 03:02:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-18 03:02:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-18 03:03:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-18 03:03:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-18 03:03:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-18 03:04:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

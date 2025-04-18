@@ -118,6 +118,19 @@ class ContratanteController extends BaseController
         $sql = 'SELECT vagas.id, cargos.cargo, vagas.quantidade,vagas.evento_id FROM cargos JOIN vagas ON vagas.cargo_id = cargos.id';
         $data['vagas'] = $db->connID->query($sql);
 
+        //exibir solicitações
+        $sql = 'SELECT contratados.id, freelancer.nome, contratados.status, vagas.id as vaga_id 
+        FROM contratados 
+        JOIN freelancer on contratados.user_id = freelancer.user_id 
+        JOIN vagas ON contratados.vagas_id=vagas.id
+        ORDER BY CASE 
+            WHEN contratados.status = 1 THEN 1
+            WHEN contratados.status IS NULL THEN 2
+            WHEN contratados.status = 0 THEN 3
+        END;';
+
+        $data['solicitacoes'] = $db->connID->query($sql);
+
         return view(name: 'contratante/vagaspub',data: $data);
 
     }

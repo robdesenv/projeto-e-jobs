@@ -4,10 +4,12 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\vagasModel;
+use App\Models\contratadosModel;
 use CodeIgniter\HTTP\ResponseInterface;
 
 class FreelancerController extends BaseController
 {
+    
     public function index()
     {
         return view(name: 'freelancer/iniciofreelancer');
@@ -143,7 +145,21 @@ class FreelancerController extends BaseController
 
 
     public function servicosprestados(){
-        return view('freelancer/servicosprestados');
+
+        $db = db_connect();
+        $sql = 'SELECT contratados.id, eventos.nome,eventos.endereco,eventos.cidade,eventos.data,eventos.descricao,cargos.cargo,contratados.status
+        FROM contratados JOIN eventos on contratados.evento_id = eventos.id 
+        JOIN vagas on contratados.vagas_id = vagas.id 
+        JOIN cargos on vagas.cargo_id = cargos.id
+        ORDER BY CASE 
+            WHEN contratados.status = 1 THEN 1
+            WHEN contratados.status IS NULL THEN 2
+            WHEN contratados.status = 0 THEN 3
+        END;';
+
+        $data['contratados'] = $db->connID->query($sql);
+
+        return view('freelancer/servicosprestados',$data);
     }
 
     public function telabusca(){
@@ -174,7 +190,7 @@ class FreelancerController extends BaseController
         $contratadosModel->set('evento_id',$idEvento);
         $contratadosModel->set('user_id', user_id());
         $contratadosModel->set('vagas_id', $idVaga);
-        $contratadosModel->set('status', 'false');
+        $contratadosModel->set('status', NULL);
         $contratadosModel->insert();
         
         return redirect()->to(base_url('freelancer/telabusca'));

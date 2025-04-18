@@ -15,6 +15,23 @@
             background-color: #f8f9fa;
         }
 
+        .servicos-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .servico-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+        }
+
         .servicos-section {
             padding: 50px 0;
             background-color: #ffffff;
@@ -100,8 +117,34 @@
     <div class="container">
         <div class="servicos-section">
             <h1>Serviços Prestados</h1>
+
+            <div class="servicos-container" id="listaServicos">
+                <?php foreach ($contratados as $contratado): ?>
+                        
+                    <div class="servico-card">
+                        <h3><?php echo htmlspecialchars($contratado['cargo']); ?></h3>
+                        <p><strong>Evento:</strong> <?php echo htmlspecialchars($contratado['nome']); ?></p>
+                        <p><strong>Endereço:</strong> <?php echo htmlspecialchars($contratado['endereco']); ?></p>
+                        <p><strong>Cidade:</strong> <?php echo htmlspecialchars($contratado['cidade']); ?></p>
+                        <p><strong>Valor:</strong> R$ 200</p> 
+                        <p><strong>Descrição:</strong> <?php echo htmlspecialchars($contratado['descricao']); ?></p>
+                        <?php if($contratado['status'] == NULL){
+                            echo '<p class="alert alert-warning"><strong >Status: </strong>Agradando confirmação...</p>';
+                        }elseif($contratado['status'] == true){
+                            echo '<p class="alert alert-success"><strong >Status: </strong>Contratado</p>';
+                        }elseif($contratado['status'] == false){
+                            echo '<p class="alert alert-danger"><strong >Status: </strong>Recusado</p>';
+                        }
+                        ?>
+                    </div>
+                <?php endforeach; ?>
+            </div>
         </div>
+
+        
     </div>
+        
+    
 
     
 
@@ -120,29 +163,7 @@
             modal.show();
         }
 
-        function adicionarServico() {
-            const nomeServico = document.getElementById('nomeServico').value;
-            const descricaoServico = document.getElementById('descricaoServico').value;
-            const dataServico = document.getElementById('dataServico').value;
-            const statusServico = document.getElementById('statusServico').value;
 
-            if (nomeServico && descricaoServico && dataServico && statusServico) {
-                const novoServico = `
-                    <div class="servico-card">
-                        <h3>${nomeServico}</h3>
-                        <p><strong>Descrição:</strong> ${descricaoServico}</p>
-                        <p><strong>Data:</strong> ${dataServico}</p>
-                        <p class="status ${statusServico === 'Pendente' ? 'pendente' : ''}">${statusServico}</p>
-                    </div>
-                `;
-
-                document.getElementById('listaServicos').insertAdjacentHTML('beforeend', novoServico);
-                const modal = bootstrap.Modal.getInstance(document.getElementById('modalAdicionarServico'));
-                modal.hide();
-            } else {
-                alert('Por favor, preencha todos os campos.');
-            }
-        }
     </script>
 </body>
 

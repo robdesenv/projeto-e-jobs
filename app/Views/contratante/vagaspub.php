@@ -407,7 +407,7 @@
                                                 <span class="vaga-quantidade"><?php echo htmlspecialchars($vaga['quantidade']); ?> vaga(s)</span>
                                             </div>
                                             <div class="vaga-actions">
-                                                <button class="btn btn-sm btn-outline-primary btn-vaga" onclick="abrirModalSolicitações()">
+                                                <button class="btn btn-sm btn-outline-primary btn-vaga" onclick="abrirModalSolicitações(<?php echo htmlspecialchars($vaga['id']); ?>)">
                                                     Solicitações
                                                 </button>
                                                 <button class="btn btn-sm btn-outline-danger btn-vaga" id="btnExcluirVaga" onclick="excluirVaga( <?php echo $vaga['id']; ?>)" title="Excluir">
@@ -495,29 +495,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="formAdicionarVaga" method="post">
-                    <?php foreach ($solicitacoes as $solicitacao): ?>
-                        <div class="vaga-item">
-                                            <div class="vaga-info">
-                                                <span class="vaga-cargo"><?php echo htmlspecialchars($solicitacao['nome']); ?></span>
-                                                <?php if($solicitacao['status'] == NULL){
-                                                    echo '<span class="vaga-quantidade  alert alert-warning"><strong >Status: </strong>Agradando confirmação...</span>';
-                                                }elseif($solicitacao['status'] == true){
-                                                    echo '<span class="vaga-quantidade alert alert-success"><strong >Status: </strong>Contratado</span>';
-                                                }elseif($solicitacao['status'] == false){
-                                                     echo '<span class="vaga-quantidade alert alert-danger"><strong >Status: </strong>Recusado</span>';
-                                                }
-                                                ?>
-                                            </div>
-                                            <div class="vaga-actions">
-                                                <button class="btn btn-sm btn-outline-primary btn-vaga" onclick="">
-                                                    Ver informações
-                                                </button>
-                                            </div>
-                                        </div>
-                            
-                    <?php endforeach; ?>    
-                    </form>
+                        <div class="modal-body" id="conteudoSolicitacoes">
+                            <!-- Conteúdo gerado via JS entra aqui -->
+                        </div>
                 </div>
             </div>
         </div>               
@@ -596,17 +576,65 @@
             
             
         }
-        
+
         function abrirModalNovaVaga(id) {
             document.getElementById("evento_id").value = id;
             const modal = new bootstrap.Modal(document.getElementById('modalAdicionarNovaVaga'));
             modal.show();
         }
+        
+        function abrirModalSolicitações(idVaga) {
+        const listarSolicitacoes = async (idVaga) => {
+        try {
+            const response = await fetch('http://localhost/projeto-e-jobs/public/contratante/vagaspub?idVaga=' + idVaga);
+            const data = await response.json();
+            console.log(data);
 
-        function abrirModalSolicitações() {
-            const modal = new bootstrap.Modal(document.getElementById('modalSolicitacoes'));
-            modal.show();
+            if (data.solicitacoes && data.solicitacoes.length > 0) {
+                let html = '';
+
+                data.solicitacoes.forEach(solicitacao => {
+                    let statusLabel = '';
+                    if (solicitacao.status === null) {
+                        statusLabel = '<span class="vaga-quantidade alert alert-warning"><strong>Status: </strong>Aguardando confirmação...</span>';
+                    } else if (solicitacao.status == 1) {
+                        statusLabel = '<span class="vaga-quantidade alert alert-success"><strong>Status: </strong>Contratado</span>';
+                    } else if (solicitacao.status == 0) {
+                        statusLabel = '<span class="vaga-quantidade alert alert-danger"><strong>Status: </strong>Recusado</span>';
+                    }
+
+                    html += `
+                        <div class="vaga-item">
+                            <div class="vaga-info">
+                                <span class="vaga-cargo">${solicitacao.nome}</span>
+                                ${statusLabel}
+                            </div>
+                            <div class="vaga-actions">
+                                <button class="btn btn-sm btn-outline-primary btn-vaga" onclick="">
+                                    Ver informações
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                document.getElementById("conteudoSolicitacoes").innerHTML = html;
+
+            } else {
+                document.getElementById("conteudoSolicitacoes").innerHTML = "<p class='text-muted'>Nenhuma solicitação encontrada.</p>";
+            }
+
+        } catch (error) {
+            console.error("Erro ao buscar solicitações:", error);
+            document.getElementById("conteudoSolicitacoes").innerHTML = "<p class='text-danger'>Erro ao carregar as solicitações.</p>";
         }
+    };
+
+    listarSolicitacoes(idVaga);
+
+    const modal = new bootstrap.Modal(document.getElementById('modalSolicitacoes'));
+    modal.show();
+}
 
         
         

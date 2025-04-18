@@ -32,6 +32,8 @@ $routes->post('/contratante/editarinformacoes/(:num)', 'ContratanteController::e
 $routes->get('/contratante/vagaspub', 'ContratanteController::vagaspub', ['filter' => 'group:contratante']);
 $routes->post('/contratante/vagaspub', 'ContratanteController::vagaspub', ['filter' => 'group:contratante']);
 
+$routes->get('/contratante/solicitacoes', 'ContratanteController::exibirSolicitacoes', ['filter' => 'group:contratante']);
+
 $routes->get('/contratante/editarevento/(:num)', 'ContratanteController::editEvento/$1', ['filter' => 'group:contratante']);
 $routes->post('/contratante/editarevento/(:num)', 'ContratanteController::editEvento/$1', ['filter' => 'group:contratante']);
 

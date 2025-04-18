@@ -119,21 +119,41 @@ class ContratanteController extends BaseController
         $data['vagas'] = $db->connID->query($sql);
 
         //exibir solicitações
-        $sql = 'SELECT contratados.id, freelancer.nome, contratados.status, vagas.id as vaga_id 
-        FROM contratados 
-        JOIN freelancer on contratados.user_id = freelancer.user_id 
-        JOIN vagas ON contratados.vagas_id=vagas.id
-        ORDER BY CASE 
-            WHEN contratados.status = 1 THEN 1
-            WHEN contratados.status IS NULL THEN 2
-            WHEN contratados.status = 0 THEN 3
-        END;';
 
-        $data['solicitacoes'] = $db->connID->query($sql);
+        $idVaga = $this->request->getGet('idVaga');
 
-        return view(name: 'contratante/vagaspub',data: $data);
+        
+        if($idVaga){
+            if(!empty($idVaga)){
+                $sql = 'SELECT contratados.id, freelancer.nome, contratados.status, vagas.id as vaga_id 
+                FROM contratados 
+                JOIN freelancer on contratados.user_id = freelancer.user_id 
+                JOIN vagas ON contratados.vagas_id=vagas.id
+                WHERE vagas.id = '. $idVaga .'
+                ORDER BY CASE 
+                    WHEN contratados.status = 1 THEN 1
+                    WHEN contratados.status IS NULL THEN 2
+                    WHEN contratados.status = 0 THEN 3
+                END;';
+
+                $query = $db->query($sql, [$idVaga]);
+                $resultados = $query->getResultArray();
+                $data['solicitacoes'] = $resultados;
+
+                $retorna = ['msg' => $idVaga, 'solicitacoes' => $resultados];
+                }
+
+            return $this->response->setJSON($retorna);
+        }
+    
+
+        
+        
+
+    return view(name: 'contratante/vagaspub',data: $data);
 
     }
+
 
     public function editEventos($id){
 

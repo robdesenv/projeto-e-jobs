@@ -142,6 +142,8 @@
         <div class="busca-section">
             <h1>Buscar Serviços</h1>
 
+            <span id="msg"></span>
+
             <div class="filtros">
                 <div class="row">
                     <div class="col-md-4">
@@ -204,8 +206,11 @@
             alert(`Filtrando por: Categoria - ${categoria}, Localização - ${localizacao}, Valor Máximo - ${valor}`);
         }
 
-        function candidatarServico(idVaga,idEvento) {
-            window.location.href = '<?php echo base_url("freelancer/candidatarvaga/"); ?>' + idVaga + "/" + idEvento;
+        async function candidatarServico(idVaga,idEvento) {
+            const response = await fetch('<?php echo base_url("freelancer/candidatarvaga?idVaga="); ?>' + idVaga + "&idEvento=" + idEvento);
+            const data = await response.json();
+            
+            document.getElementById('msg').innerHTML = data.msg;
         }
     </script>
 </body>

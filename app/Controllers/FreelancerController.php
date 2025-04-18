@@ -27,7 +27,8 @@ class FreelancerController extends BaseController
     public function meucurriculo(){
 
         $data['acao'] = 'Salvar';
-        
+        $user_id = user_id();
+        $db = db_connect();
        
         if ($this->VerificaCadastroCurriculo() >= 1){
             //página para exibir o cúrrico caso tenha já cadastrado
@@ -190,7 +191,8 @@ class FreelancerController extends BaseController
         return view('freelancer/transrecebidas');
     }
 
-    public function candidatarvaga($idVaga,$idEvento){
+    /*public function candidatarvaga($idVaga,$idEvento){
+
         if($this->VerificaCadastroCurriculo() >= 1){
             $contratadosModel = new \App\Models\contratadosModel();
             $contratadosModel->set('evento_id',$idEvento);
@@ -205,6 +207,34 @@ class FreelancerController extends BaseController
                             É necessário cadastrar o currículo antes de se candidatar a vaga!!
                             </div>";
             return redirect()->to(base_url('freelancer/telabusca'));
+        }
+        }*/
+
+        public function candidatarvaga(){
+
+        $idVaga = $this->request->getGet('idVaga');
+        $idEvento = $this->request->getGet('idEvento');
+
+        if($this->VerificaCadastroCurriculo() >= 1){
+            $contratadosModel = new \App\Models\contratadosModel();
+            $contratadosModel->set('evento_id',$idEvento);
+            $contratadosModel->set('user_id', user_id());
+            $contratadosModel->set('vagas_id', $idVaga);
+            $contratadosModel->set('status', NULL);
+            $contratadosModel->insert();
+
+            $resposta = ['msg' => "<div class='alert alert-success' role='alert'>
+                            Cadastrado com sucesso a vaga
+                            </div>"];
+
+            return $this->response->setJSON($resposta);
+
+        }else{
+            $resposta = ['msg' => "<div class='alert alert-danger' role='alert'>
+                            É necessário cadastrar o currículo antes de se candidatar a vaga!!
+                            </div>"];
+
+            return $this->response->setJSON($resposta);
         }
         }
 

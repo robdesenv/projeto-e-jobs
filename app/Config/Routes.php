@@ -17,7 +17,8 @@ $routes->get('/freelancer/editarcurriculo/(:num)', 'FreelancerController::editCu
 $routes->post('/freelancer/editarcurriculo/(:num)', 'FreelancerController::editCurriculo/$1', ['filter' => 'group:freelancer']);
 $routes->get('/freelancer/servicosprestados', 'FreelancerController::servicosprestados', ['filter' => 'group:freelancer']);
 $routes->get('/freelancer/telabusca', 'FreelancerController::telabusca', ['filter' => 'group:freelancer']);
-$routes->get('/freelancer/candidatarvaga/(:num)/(:num)', 'FreelancerController::candidatarvaga/$1/$2', ['filter' => 'group:freelancer'] );
+//$routes->get('/freelancer/candidatarvaga/(:num)/(:num)', 'FreelancerController::candidatarvaga/$1/$2', ['filter' => 'group:freelancer'] );
+$routes->get('/freelancer/candidatarvaga', 'FreelancerController::candidatarvaga', ['filter' => 'group:freelancer'] );
 $routes->get('/freelancer/transrecebidas', 'FreelancerController::transrecebidas', ['filter' => 'group:freelancer']);
 
 //contratante

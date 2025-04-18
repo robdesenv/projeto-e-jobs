@@ -16,6 +16,7 @@ class ContratanteController extends BaseController
         $num_rows = mysqli_num_rows($resultado);
         return $num_rows;
     }
+    
     public function index()
     {
         return view(name: 'contratante/iniciocontratante');
@@ -125,7 +126,7 @@ class ContratanteController extends BaseController
         
         if($idVaga){
             if(!empty($idVaga)){
-                $sql = 'SELECT contratados.id, freelancer.nome, contratados.status, vagas.id as vaga_id 
+                $sql = 'SELECT contratados.id, freelancer.id as freelancer_id, freelancer.nome, contratados.status, vagas.id as vaga_id 
                 FROM contratados 
                 JOIN freelancer on contratados.user_id = freelancer.user_id 
                 JOIN vagas ON contratados.vagas_id=vagas.id
@@ -138,7 +139,6 @@ class ContratanteController extends BaseController
 
                 $query = $db->query($sql, [$idVaga]);
                 $resultados = $query->getResultArray();
-                $data['solicitacoes'] = $resultados;
 
                 $retorna = ['msg' => $idVaga, 'solicitacoes' => $resultados];
                 }
@@ -147,7 +147,21 @@ class ContratanteController extends BaseController
         }
     
 
-        
+        //exibir informações
+        $idFreelancer = $this->request->getGet('idFreelancer');
+
+        if($idFreelancer){
+            if(!empty($idFreelancer)){
+            $sql = 'SELECT * FROM freelancer WHERE id ='. $idFreelancer;
+
+            $query = $db->query($sql);
+            $resultados = $query->getResultArray();
+            $data2['informacoes'] = $resultados;
+
+            $retorna = ['informacoes' => $resultados];
+            }
+            return $this->response->setJSON($retorna);
+        }
         
 
     return view(name: 'contratante/vagaspub',data: $data);
@@ -186,6 +200,36 @@ class ContratanteController extends BaseController
         if($vagasModel->delete($id)){
         }
         return redirect()->to(base_url('contratante/vagaspub'));
+    }
+
+    public function solicitacoes(){
+        $idSolicitacao = $this->request->getGet('IdSolicitacao');
+        $btn = $this->request->getGet('btn');
+
+        if($idSolicitacao){
+
+            if($btn == 'contratar'){
+                $contratadosModel = new \App\Models\contratadosModel();
+            
+                $contratados['status'] = true;
+
+                if($contratadosModel->update($idSolicitacao, $contratados)){
+                    $resposta = ['msg'=> 'atualizado','btn'=> $btn];
+                }
+
+            }elseif($btn == 'recusar'){
+
+                $contratadosModel = new \App\Models\contratadosModel();
+
+                $contratados['status'] = false;
+
+                if($contratadosModel->update($idSolicitacao, $contratados)){
+                    $resposta = ['msg'=> 'recusado','btn'=> $btn];
+                }
+            }
+
+            return $this->response->setJSON( $resposta );
+        }
     }
 
     public function busca()

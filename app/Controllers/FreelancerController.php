@@ -9,7 +9,16 @@ use CodeIgniter\HTTP\ResponseInterface;
 
 class FreelancerController extends BaseController
 {
-    
+    public function VerificaCadastroCurriculo():int {
+        $user_id = user_id();
+        $db = db_connect();
+        $sql = 'SELECT user_id FROM `freelancer` WHERE user_id = ' .$user_id ;
+        $resultado = $db->connID->query($sql);
+        $num_rows = mysqli_num_rows($resultado);
+        return $num_rows;
+    }
+
+
     public function index()
     {
         return view(name: 'freelancer/iniciofreelancer');
@@ -18,13 +27,9 @@ class FreelancerController extends BaseController
     public function meucurriculo(){
 
         $data['acao'] = 'Salvar';
-        $user_id = user_id();
-        $db = db_connect();
-        $sql = 'SELECT user_id FROM `freelancer` WHERE user_id = ' .$user_id ;
-        $resultado = $db->connID->query($sql);
-        $num_rows = mysqli_num_rows($resultado);
+        
        
-        if ($num_rows >= 1){
+        if ($this->VerificaCadastroCurriculo() >= 1){
             //página para exibir o cúrrico caso tenha já cadastrado
             $freelancerModel = new \App\Models\freelancerModel();
             $data['freelancers'] = $freelancerModel->where('user_id',$user_id)->find();
@@ -186,13 +191,21 @@ class FreelancerController extends BaseController
     }
 
     public function candidatarvaga($idVaga,$idEvento){
-        $contratadosModel = new \App\Models\contratadosModel();
-        $contratadosModel->set('evento_id',$idEvento);
-        $contratadosModel->set('user_id', user_id());
-        $contratadosModel->set('vagas_id', $idVaga);
-        $contratadosModel->set('status', NULL);
-        $contratadosModel->insert();
-        
-        return redirect()->to(base_url('freelancer/telabusca'));
-}
-}
+        if($this->VerificaCadastroCurriculo() >= 1){
+            $contratadosModel = new \App\Models\contratadosModel();
+            $contratadosModel->set('evento_id',$idEvento);
+            $contratadosModel->set('user_id', user_id());
+            $contratadosModel->set('vagas_id', $idVaga);
+            $contratadosModel->set('status', NULL);
+            $contratadosModel->insert();
+
+            return redirect()->to(base_url('freelancer/telabusca'));
+        }else{
+            $data['msg'] = "<div class='alert alert-danger' role='alert'>
+                            É necessário cadastrar o currículo antes de se candidatar a vaga!!
+                            </div>";
+            return redirect()->to(base_url('freelancer/telabusca'));
+        }
+        }
+
+    }

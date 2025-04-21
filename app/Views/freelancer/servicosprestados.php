@@ -116,10 +116,13 @@
 
     <div class="container">
         <div class="servicos-section">
-            <h1>Serviços</h1>
+            <h1>Serviços candidatados por você</h1>
 
             <div class="servicos-container" id="listaServicos">
-                <?php foreach ($contratados as $contratado): ?>
+                <?php foreach ($contratados as $contratado): 
+                    if ($contratado['solicitante_id'] == user_id()):
+                    ?>
+                    
                         
                     <div class="servico-card">
                         <h3><?php echo htmlspecialchars($contratado['cargo']); ?></h3>
@@ -138,7 +141,39 @@
                         }
                         ?>
                     </div>
-                <?php endforeach; ?>
+                <?php endif;
+                    endforeach; ?>
+            </div>
+        </div>
+
+        <div class="servicos-section">
+            <h1>Solicitações dos contratantes</h1>
+
+            <div class="servicos-container" id="listaServicos">
+                <?php foreach ($contratados as $contratado): 
+                    if ($contratado['solicitante_id'] != user_id()):
+                    ?>
+                    
+                        
+                    <div class="servico-card">
+                        <h3><?php echo htmlspecialchars($contratado['cargo']); ?></h3>
+                        <p><strong>Evento:</strong> <?php echo htmlspecialchars($contratado['nome']); ?></p>
+                        <p><strong>Endereço:</strong> <?php echo htmlspecialchars($contratado['endereco']); ?></p>
+                        <p><strong>Cidade:</strong> <?php echo htmlspecialchars($contratado['cidade']); ?></p>
+                        <p><strong>Data do evento:</strong> <?php echo htmlspecialchars($contratado['data']); ?></p>
+                        <p><strong>Valor:</strong> R$ <?php echo htmlspecialchars($contratado['valor']); ?></p> 
+                        <p><strong>Descrição:</strong> <?php echo htmlspecialchars($contratado['descricao']); ?></p>
+                        <?php if($contratado['status'] == NULL){
+                            echo '<p class="alert alert-warning"><strong >Status: </strong>Agradando confirmação...</p>';
+                        }elseif($contratado['status'] == true){
+                            echo '<p class="alert alert-success"><strong >Status: </strong>Contratado</p>';
+                        }elseif($contratado['status'] == false){
+                            echo '<p class="alert alert-danger"><strong >Status: </strong>Recusado</p>';
+                        }
+                        ?>
+                    </div>
+                <?php endif;
+                    endforeach; ?>
             </div>
         </div>
 

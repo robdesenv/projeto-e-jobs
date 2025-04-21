@@ -498,6 +498,13 @@
                     <h5 class="modal-title" id="modalAdicionarServicoLabel">Solicitações</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <h6 class="modal-title" id="modalAdicionarServicoLabel">Solicitações dos Freelancers</h6>
+                <div class="modal-body">
+                        <div class="modal-body" id="conteudoSolicitacoesFreelancer">
+                            <!-- Conteúdo gerado via JS entra aqui -->
+                        </div>
+                </div>
+                <h6 class="modal-title" id="modalAdicionarServicoLabel">Suas Solicitações</h6>
                 <div class="modal-body">
                         <div class="modal-body" id="conteudoSolicitacoes">
                             <!-- Conteúdo gerado via JS entra aqui -->
@@ -512,7 +519,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalAdicionarServicoLabel">Solicitações</h5>
+                    <h5 class="modal-title" id="modalAdicionarServicoLabel">Informações do Freelancer</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -623,9 +630,10 @@
 
             if (data.solicitacoes && data.solicitacoes.length > 0) {
                 let html = '';
+                let html2 = '';
 
                 data.solicitacoes.forEach(solicitacao => {
-                    let statusLabel = '';
+                        let statusLabel = '';
                     if (solicitacao.status === null) {
                         statusLabel = '<span class="vaga-quantidade alert alert-warning"><strong>Status: </strong>Aguardando confirmação...</span>';
                     } else if (solicitacao.status == 1) {
@@ -634,22 +642,48 @@
                         statusLabel = '<span class="vaga-quantidade alert alert-danger"><strong>Status: </strong>Recusado</span>';
                     }
 
+                    if(solicitacao.solicitante_id != <?php echo user_id(); ?>){ 
                     html += `
+                        <div>
+                            <div class="vaga-item">
+                                <div class="vaga-info">
+                                    <span class="vaga-cargo">${solicitacao.nome}</span>
+                                    ${statusLabel}
+                                </div>
+                                <div class="vaga-actions">
+                                    <button class="btn btn-sm btn-outline-primary btn-vaga" data-bs-dismiss="modal" onclick="verInformacoes(${solicitacao.freelancer_id},${solicitacao.id})">
+                                        Ver informações
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;}else if(solicitacao.solicitante_id == <?php echo user_id(); ?>) {
+                        html2 += `
                         <div class="vaga-item">
                             <div class="vaga-info">
                                 <span class="vaga-cargo">${solicitacao.nome}</span>
                                 ${statusLabel}
                             </div>
-                            <div class="vaga-actions">
-                                <button class="btn btn-sm btn-outline-primary btn-vaga" data-bs-dismiss="modal" onclick="verInformacoes(${solicitacao.freelancer_id},${solicitacao.id})">
-                                    Ver informações
-                                </button>
-                            </div>
                         </div>
                     `;
+                    }
+                    
+                   
                 });
 
-                document.getElementById("conteudoSolicitacoes").innerHTML = html;
+                if(html == ''){
+                    document.getElementById("conteudoSolicitacoesFreelancer").innerHTML = "<p class='text-muted'>Nenhuma solicitação encontrada.</p>";
+                }else{
+                    document.getElementById("conteudoSolicitacoesFreelancer").innerHTML = html;
+                }
+
+                if(html2 == ''){
+                    document.getElementById("conteudoSolicitacoes").innerHTML = "<p class='text-muted'>Nenhuma solicitação encontrada.</p>";
+                }else{
+                    document.getElementById("conteudoSolicitacoes").innerHTML = html2;
+                }
+                
+                
 
             } else {
                 document.getElementById("conteudoSolicitacoes").innerHTML = "<p class='text-muted'>Nenhuma solicitação encontrada.</p>";

@@ -156,17 +156,22 @@ class FreelancerController extends BaseController
     public function servicosprestados(){
 
         $db = db_connect();
-        $sql = 'SELECT contratados.id, eventos.nome,eventos.endereco,eventos.cidade,eventos.data,eventos.descricao,cargos.cargo,contratados.status, vagas.valor
+        $user_id = user_id();
+        $sql = 'SELECT contratados.id,contratados.solicitante_id, contratados.freelancer_id, eventos.nome,eventos.endereco,eventos.cidade,eventos.data,eventos.descricao,cargos.cargo,contratados.status, vagas.valor
         FROM contratados JOIN eventos on contratados.evento_id = eventos.id 
         JOIN vagas on contratados.vagas_id = vagas.id 
         JOIN cargos on vagas.cargo_id = cargos.id
+        WHERE contratados.freelancer_id = ?
         ORDER BY CASE 
             WHEN contratados.status = 1 THEN 1
             WHEN contratados.status IS NULL THEN 2
             WHEN contratados.status = 0 THEN 3
         END;';
 
-        $data['contratados'] = $db->connID->query($sql);
+        $stmt = $db->connID->prepare($sql);
+        $stmt->bind_param('i', $user_id); // 'ii' indica que ambos são inteiros
+        $stmt->execute();
+        $data['contratados'] = $stmt->get_result();
 
         return view('freelancer/servicosprestados',$data);
     }
@@ -201,7 +206,7 @@ class FreelancerController extends BaseController
         $user_id = user_id();
 
         $db = db_connect();
-        $sql = 'SELECT vagas_id, user_id FROM contratados WHERE vagas_id = ? AND user_id = ?';
+        $sql = 'SELECT vagas_id, freelancer_id FROM contratados WHERE vagas_id = ? AND freelancer_id = ?';
         $stmt = $db->connID->prepare($sql);
         $stmt->bind_param('ii', $idVaga, $user_id); // 'ii' indica que ambos são inteiros
         $stmt->execute();
@@ -218,7 +223,8 @@ class FreelancerController extends BaseController
            if($num_rows == 0){
                 $contratadosModel = new contratadosModel();
                 $contratadosModel->set('evento_id',$idEvento);
-                $contratadosModel->set('user_id', user_id());
+                $contratadosModel->set('freelancer_id', user_id());
+                $contratadosModel->set('solicitante_id', user_id());
                 $contratadosModel->set('vagas_id', $idVaga);
                 $contratadosModel->set('status', NULL);
                 $contratadosModel->insert();

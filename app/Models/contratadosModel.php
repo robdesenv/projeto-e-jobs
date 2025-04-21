@@ -12,7 +12,7 @@ class contratadosModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['evento_id','user_id','vagas_id','status'];
+    protected $allowedFields    = ['evento_id','solicitante_id','freelancer_id','vagas_id','status'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;

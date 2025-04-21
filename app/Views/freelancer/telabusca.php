@@ -212,8 +212,8 @@
             
             document.getElementById('msg').innerHTML = data.msg;
             setTimeout(() => {
-                document.getElementById('msg').innerHTML = ""; // Remove a mensagem após 3 segundos
-            }, 3000);
+                document.getElementById('msg').innerHTML = "";
+            }, 1500);
             
         }
     </script>

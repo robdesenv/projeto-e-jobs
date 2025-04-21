@@ -130,9 +130,9 @@ class ContratanteController extends BaseController
         
         if($idVaga){
             if(!empty($idVaga)){
-                $sql = 'SELECT contratados.id, freelancer.id as freelancer_id, freelancer.nome, contratados.status, vagas.id as vaga_id 
+                $sql = 'SELECT contratados.id, freelancer.id as freelancer_id, freelancer.nome, contratados.status, vagas.id as vaga_id, contratados.solicitante_id 
                 FROM contratados 
-                JOIN freelancer on contratados.user_id = freelancer.user_id 
+                JOIN freelancer on contratados.freelancer_id = freelancer.user_id 
                 JOIN vagas ON contratados.vagas_id=vagas.id
                 WHERE vagas.id = ?
                 ORDER BY CASE 
@@ -279,5 +279,6 @@ class ContratanteController extends BaseController
 
         echo view('contratante/minhaempresa', $data);
 
-}
+    }
+
 }

@@ -307,6 +307,12 @@
                 <p class="alert alert-info"><?php echo $msg; ?></p>
             <?php endif; ?>
 
+            <?php if(session()->getFlashdata('msg')): ?>
+                <div class="alert alert-danger">
+                    <?= session()->getFlashdata('msg'); ?>
+                </div>
+            <?php endif; ?>
+
             <!-- Modal Adicionar e Editar Evento -->
             <div class="modal fade" id="modalAdicionarServico" tabindex="-1" aria-labelledby="modalAdicionarServicoLabel" aria-hidden="true">
                 <div class="modal-dialog">

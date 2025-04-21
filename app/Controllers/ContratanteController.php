@@ -193,10 +193,16 @@ class ContratanteController extends BaseController
     }
 
     public function deleteEventos($id){
-        $eventosModel = new \App\Models\eventosModel();
-        if($eventosModel->delete($id)){
+        try {
+            $eventosModel = new \App\Models\eventosModel();
+            if($eventosModel->delete($id)){
+            }
+            return redirect()->to(base_url('contratante/vagaspub'));}
+        catch(\Exception $e){
+            session()->setFlashdata('msg', "Não foi possível excluir o evento pois possui vagas cadastradas. É necessário excluir as vagas primeiro.");
+            return redirect()->to(base_url('contratante/vagaspub'));
         }
-        return redirect()->to(base_url('contratante/vagaspub'));
+        
     }
 
     public function deleteVagas($id){

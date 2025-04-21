@@ -11,9 +11,12 @@ class ContratanteController extends BaseController
     public function VerificaCadastroInformacoes():int {
         $user_id = user_id();
         $db = db_connect();
-        $sql = 'SELECT user_id FROM `contratante` WHERE user_id = ' .$user_id;
-        $resultado = $db->connID->query($sql);
-        $num_rows = mysqli_num_rows($resultado);
+        $sql = 'SELECT user_id FROM `contratante` WHERE user_id = ?';
+        $stmt = $db->connID->prepare($sql);
+        $stmt->bind_param('i', $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $num_rows = $result->num_rows;
         return $num_rows;
     }
     
@@ -90,6 +93,7 @@ class ContratanteController extends BaseController
                     $vagasModel = new \App\Models\vagasModel();
                     $cargos_id = intval($this->request->getPost('cargo_id'));
                     $vagasModel->set('evento_id', $this->request->getPost('evento_id'));
+                    $vagasModel->set('valor', $this->request->getPost('valor'));
                     $vagasModel->set('cargo_id', $cargos_id);
                     $vagasModel->set('quantidade', $this->request->getPost('quantidade'));
 
@@ -130,7 +134,7 @@ class ContratanteController extends BaseController
                 FROM contratados 
                 JOIN freelancer on contratados.user_id = freelancer.user_id 
                 JOIN vagas ON contratados.vagas_id=vagas.id
-                WHERE vagas.id = '. $idVaga .'
+                WHERE vagas.id = ?
                 ORDER BY CASE 
                     WHEN contratados.status = 1 THEN 1
                     WHEN contratados.status IS NULL THEN 2

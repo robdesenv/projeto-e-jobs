@@ -12,9 +12,12 @@ class FreelancerController extends BaseController
     public function VerificaCadastroCurriculo():int {
         $user_id = user_id();
         $db = db_connect();
-        $sql = 'SELECT user_id FROM `freelancer` WHERE user_id = ' .$user_id ;
-        $resultado = $db->connID->query($sql);
-        $num_rows = mysqli_num_rows($resultado);
+        $sql = 'SELECT user_id FROM `freelancer` WHERE user_id = ? ';
+        $stmt = $db->connID->prepare($sql);
+        $stmt->bind_param('i', $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $num_rows = $result->num_rows;
         return $num_rows;
     }
 
@@ -153,7 +156,7 @@ class FreelancerController extends BaseController
     public function servicosprestados(){
 
         $db = db_connect();
-        $sql = 'SELECT contratados.id, eventos.nome,eventos.endereco,eventos.cidade,eventos.data,eventos.descricao,cargos.cargo,contratados.status
+        $sql = 'SELECT contratados.id, eventos.nome,eventos.endereco,eventos.cidade,eventos.data,eventos.descricao,cargos.cargo,contratados.status, vagas.valor
         FROM contratados JOIN eventos on contratados.evento_id = eventos.id 
         JOIN vagas on contratados.vagas_id = vagas.id 
         JOIN cargos on vagas.cargo_id = cargos.id
@@ -172,7 +175,7 @@ class FreelancerController extends BaseController
 
         $db = db_connect();
         //exibir vagas
-        $sql = 'SELECT V.id,V.evento_id, E.nome,E.endereco,E.cidade,E.data,E.descricao, C.cargo, V.cargo_id
+        $sql = 'SELECT V.id,V.evento_id, E.nome,E.endereco,E.cidade,E.data,E.descricao, C.cargo, V.cargo_id,V.valor
                                            FROM eventos as E JOIN vagas as V ON V.evento_id = E.id
 				                            JOIN cargos as C ON V.cargo_id = C.id';
         $data['vagas'] = $db->connID->query($sql);
@@ -191,44 +194,50 @@ class FreelancerController extends BaseController
         return view('freelancer/transrecebidas');
     }
 
-    /*public function candidatarvaga($idVaga,$idEvento){
-
-        if($this->VerificaCadastroCurriculo() >= 1){
-            $contratadosModel = new \App\Models\contratadosModel();
-            $contratadosModel->set('evento_id',$idEvento);
-            $contratadosModel->set('user_id', user_id());
-            $contratadosModel->set('vagas_id', $idVaga);
-            $contratadosModel->set('status', NULL);
-            $contratadosModel->insert();
-
-            return redirect()->to(base_url('freelancer/telabusca'));
-        }else{
-            $data['msg'] = "<div class='alert alert-danger' role='alert'>
-                            É necessário cadastrar o currículo antes de se candidatar a vaga!!
-                            </div>";
-            return redirect()->to(base_url('freelancer/telabusca'));
-        }
-        }*/
-
         public function candidatarvaga(){
 
         $idVaga = $this->request->getGet('idVaga');
         $idEvento = $this->request->getGet('idEvento');
+        $user_id = user_id();
+
+        $db = db_connect();
+        $sql = 'SELECT vagas_id, user_id FROM contratados WHERE vagas_id = ? AND user_id = ?';
+        $stmt = $db->connID->prepare($sql);
+        $stmt->bind_param('ii', $idVaga, $user_id); // 'ii' indica que ambos são inteiros
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $num_rows = $result->num_rows;
+
+
+        
 
         if($this->VerificaCadastroCurriculo() >= 1){
-            $contratadosModel = new \App\Models\contratadosModel();
-            $contratadosModel->set('evento_id',$idEvento);
-            $contratadosModel->set('user_id', user_id());
-            $contratadosModel->set('vagas_id', $idVaga);
-            $contratadosModel->set('status', NULL);
-            $contratadosModel->insert();
 
-            $resposta = ['msg' => "<div class='alert alert-success' role='alert'>
-                            Cadastrado com sucesso a vaga
+            
+
+           if($num_rows == 0){
+                $contratadosModel = new contratadosModel();
+                $contratadosModel->set('evento_id',$idEvento);
+                $contratadosModel->set('user_id', user_id());
+                $contratadosModel->set('vagas_id', $idVaga);
+                $contratadosModel->set('status', NULL);
+                $contratadosModel->insert();
+    
+                $resposta = ['msg' => "<div class='alert alert-success' role='alert'>
+                                Candidatou-se a vaga com sucesso.
+                                </div>"];
+    
+                return $this->response->setJSON($resposta);
+
+            }else{
+
+                $resposta = ['msg' => "<div class='alert alert-warning' role='alert'>
+                            Já se candidatou a essa vaga.
                             </div>"];
 
-            return $this->response->setJSON($resposta);
-
+                return $this->response->setJSON($resposta);
+            }
+            
         }else{
             $resposta = ['msg' => "<div class='alert alert-danger' role='alert'>
                             É necessário cadastrar o currículo antes de se candidatar a vaga!!

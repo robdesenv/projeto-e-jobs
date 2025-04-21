@@ -14,7 +14,7 @@ class vagasModel extends Model
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['evento_id', 'cargo_id', 'quantidade'];
+    protected $allowedFields = ['evento_id', 'cargo_id', 'quantidade','valor'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;

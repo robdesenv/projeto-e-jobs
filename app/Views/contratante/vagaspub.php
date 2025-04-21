@@ -476,6 +476,10 @@
                             <label for="numeroVagas" class="form-label">Quantidade de vagas:</label>
                             <input type="number" name="quantidade" class="form-control" id="numeroVagas" required>
                         </div>
+                        <div class="mb-3">
+                            <label for="numeroVagas" class="form-label">Valor:</label>
+                            <input type="number" name="valor" class="form-control" id="valor" step="0.01" required>
+                        </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                             <button type="submit" name="btn-eventos" value="adicionarvaga" class="btn btn-primary">Salvar</button>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Serviços Prestados - Freelancer</title>
+    <title>Serviços - Freelancer</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
@@ -116,7 +116,7 @@
 
     <div class="container">
         <div class="servicos-section">
-            <h1>Serviços Prestados</h1>
+            <h1>Serviços</h1>
 
             <div class="servicos-container" id="listaServicos">
                 <?php foreach ($contratados as $contratado): ?>
@@ -126,7 +126,8 @@
                         <p><strong>Evento:</strong> <?php echo htmlspecialchars($contratado['nome']); ?></p>
                         <p><strong>Endereço:</strong> <?php echo htmlspecialchars($contratado['endereco']); ?></p>
                         <p><strong>Cidade:</strong> <?php echo htmlspecialchars($contratado['cidade']); ?></p>
-                        <p><strong>Valor:</strong> R$ 200</p> 
+                        <p><strong>Data do evento:</strong> <?php echo htmlspecialchars($contratado['data']); ?></p>
+                        <p><strong>Valor:</strong> R$ <?php echo htmlspecialchars($contratado['valor']); ?></p> 
                         <p><strong>Descrição:</strong> <?php echo htmlspecialchars($contratado['descricao']); ?></p>
                         <?php if($contratado['status'] == NULL){
                             echo '<p class="alert alert-warning"><strong >Status: </strong>Agradando confirmação...</p>';

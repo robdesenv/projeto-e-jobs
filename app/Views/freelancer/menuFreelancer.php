@@ -59,8 +59,8 @@
                             currículo</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url('freelancer/servicosprestados')?>"><i class="fas fa-tasks"></i> Serviços
-                            prestados</a>
+                        <a class="nav-link" href="<?php echo base_url('freelancer/servicosprestados')?>"><i class="fas fa-tasks"></i> 
+                        Serviços</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo base_url('freelancer/transrecebidas')?>"><i class="fa-dollar-sign"></i>

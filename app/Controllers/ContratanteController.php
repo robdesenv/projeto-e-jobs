@@ -206,10 +206,15 @@ class ContratanteController extends BaseController
     }
 
     public function deleteVagas($id){
-        $vagasModel = new \App\Models\vagasModel();
-        if($vagasModel->delete($id)){
+        try {
+            $vagasModel = new \App\Models\vagasModel();
+            if($vagasModel->delete($id)){
+            }
+            return redirect()->to(base_url('contratante/vagaspub'));
+        }catch(\Exception $e){
+            session()->setFlashdata('msg', "Não foi possível excluir. Possui solicitações de Freelancers para essa vaga.");
+            return redirect()->to(base_url('contratante/vagaspub'));
         }
-        return redirect()->to(base_url('contratante/vagaspub'));
     }
 
     public function solicitacoes(){

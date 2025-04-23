@@ -258,7 +258,10 @@
                             <i class="fas fa-briefcase"></i>
                             <div>
                                 <div class="freelancer-label">Habilidades</div>
-                                <div class="freelancer-value"><?php // echo htmlspecialchars($freelancer['cargos']); ?></div>
+                                <div class="freelancer-value"><?php $cargosfreelancer = $CargosFreelancerController->ExibirCargosFreelancer($freelancer['user_id']);?>
+                                <?php foreach($cargosfreelancer as $cargofreelancer): ?>
+                                    <p><?php echo $cargofreelancer['cargo'] ?> </p>
+                                <?php endforeach ?></div>
                             </div>
                         </div>
                         
@@ -308,7 +311,7 @@
                             <!-- Conteúdo gerado via JS entra aqui -->
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" name="btn-cargo" id="btn-contratar" class="btn btn-success" data-bs-dismiss="modal" >Contratar</button>
+                            <button type="submit" name="btn-cargo" id="btn-contratar" class="btn btn-success" data-bs-dismiss="modal" onclick="contratarFreelancer()">Contratar</button>
                         </div>
                 </div>
             </div>
@@ -341,6 +344,7 @@
                         data2.informacoes.forEach(informacoes => {
                             html += `
                             <div class="card card-profile">
+                                <input type="hidden" value="${informacoes.id}">
                                 <div class="card-header">
                                     <h3><i class="fas fa-user-tie"></i> Informações do Freelancer</h3>
                                 </div>
@@ -384,19 +388,40 @@
                                             <p>${informacoes.cidade}, ${informacoes.estado}</p>
                                         </div>
                                     </div>
+<<<<<<< HEAD
                                                                         <div class="info-item">
                                         <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
                                         <div class="info-content">
                                             <h4>Habilidades</h4>
                                             <p>${informacoes.cidade}, ${informacoes.estado}</p>
                                         </div>
+=======
+                                    <div class="info-item">
+                                        <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                                        <div class="info-content">
+                                            <h4>Habilidades</h4>
+                                            <div id="habilidades"></div>
+                                        </div>
+                                    </div>
+>>>>>>> 2530e641988ed225c89e5adb525ab8075bdbe908
                                 </div>
                             </div>
                         `;
                     });
-                    
+  
                     document.getElementById("conteudoInformacoes").innerHTML = html;
+                    }
 
+                    if(data2.cargosFreelancer && data2.cargosFreelancer.length > 0){
+                        let html = '';
+                        data2.cargosFreelancer.forEach(cargosFreelancer => {
+                            html += `
+                            <p>${cargosFreelancer.cargo}</p>
+                                 
+                        `;
+                    });
+  
+                    document.getElementById("habilidades").innerHTML = html;
                     }
                 } catch (error) {
                     console.log("erro");
@@ -408,6 +433,9 @@
             const modal = new bootstrap.Modal(document.getElementById('modalInformacoes'));
             modal.show();
         }
+
+
+
     </script>
 
 </body>

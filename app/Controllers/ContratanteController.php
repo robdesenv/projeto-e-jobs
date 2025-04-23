@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 use \App\Models\contratanteModel;
+use \App\Controllers\CargosFreelancerController;
 
 class ContratanteController extends BaseController
 {
@@ -160,9 +161,14 @@ class ContratanteController extends BaseController
 
             $query = $db->query($sql);
             $resultados = $query->getResultArray();
-            $data2['informacoes'] = $resultados;
 
-            $retorna = ['informacoes' => $resultados];
+            $CargosFreelancerController = new  CargosFreelancerController();
+            foreach($resultados as $resultado){
+                $cargosfreelancer = $CargosFreelancerController->ExibirCargosFreelancer($resultado['user_id']);
+            }
+            
+
+            $retorna = ['informacoes' => $resultados, 'cargosFreelancer'=> $cargosfreelancer];
             }
             return $this->response->setJSON($retorna);
         }
@@ -206,10 +212,15 @@ class ContratanteController extends BaseController
     }
 
     public function deleteVagas($id){
-        $vagasModel = new \App\Models\vagasModel();
-        if($vagasModel->delete($id)){
+        try {
+            $vagasModel = new \App\Models\vagasModel();
+            if($vagasModel->delete($id)){
+            }
+            return redirect()->to(base_url('contratante/vagaspub'));
+        }catch(\Exception $e){
+            session()->setFlashdata('msg', "Não foi possível excluir. Possui solicitações de Freelancers para essa vaga.");
+            return redirect()->to(base_url('contratante/vagaspub'));
         }
-        return redirect()->to(base_url('contratante/vagaspub'));
     }
 
     public function solicitacoes(){
@@ -254,6 +265,10 @@ class ContratanteController extends BaseController
         $cargoModel = new \App\Models\cargosModel();
         $data['cargos'] = $cargoModel->findAll();
 
+        //exibir os cargos cadastrados para o freelancer
+        $data['CargosFreelancerController'] = new  CargosFreelancerController();
+        
+
         return view(name: 'contratante/busca',data: $data);
     }
     public function pagamentos()
@@ -265,7 +280,7 @@ class ContratanteController extends BaseController
     public function editInformacoes($id){
 
         $data['acao'] = 'Editar';
-        $contratanteModel = new \App\Models\contratanteModel();
+        $contratanteModel = new contratanteModel();
         $contratante = $contratanteModel->find($id);
 
         if($this->request->getMethod() == 'POST'){

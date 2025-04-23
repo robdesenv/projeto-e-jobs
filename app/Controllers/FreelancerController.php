@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\vagasModel;
 use App\Models\contratadosModel;
 use CodeIgniter\HTTP\ResponseInterface;
+use App\Controllers\CargosFreelancerController;
 
 class FreelancerController extends BaseController
 {
@@ -91,8 +92,9 @@ class FreelancerController extends BaseController
             
 
             //exibir os cargos cadastrados para o freelancer
-            $sql = 'SELECT cargo_freelancer.id, cargos.cargo FROM cargos JOIN cargo_freelancer ON cargos.id = cargo_freelancer.cargo_id WHERE cargo_freelancer.user_id = '.$user_id;
-            $data['cargosfreelancer'] = $db->connID->query($sql);
+            $cargofreelancerController = new  CargosFreelancerController();
+            $data['cargosfreelancer'] = $cargofreelancerController->ExibirCargosFreelancer($user_id);
+            
         
             return view('freelancer/exibircurriculo', $data);
         }else{
@@ -180,7 +182,7 @@ class FreelancerController extends BaseController
 
         $db = db_connect();
         //exibir vagas
-        $sql = 'SELECT V.id,V.evento_id, E.nome,E.endereco,E.cidade,E.data,E.descricao, C.cargo, V.cargo_id,V.valor
+        $sql = 'SELECT V.id,V.evento_id, E.nome,E.endereco,E.cidade,E.estado ,E.data,E.descricao, C.cargo, V.cargo_id,V.valor
                                            FROM eventos as E JOIN vagas as V ON V.evento_id = E.id
 				                            JOIN cargos as C ON V.cargo_id = C.id';
         $data['vagas'] = $db->connID->query($sql);

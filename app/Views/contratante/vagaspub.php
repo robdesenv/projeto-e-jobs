@@ -394,7 +394,8 @@
                                     <div class="evento-label">Local</div>
                                     <div class="evento-value">
                                         <?php echo htmlspecialchars($evento['endereco']); ?><br>
-                                        <?php echo htmlspecialchars($evento['cidade']); ?>
+                                        <?php echo htmlspecialchars($evento['cidade']); ?><br>
+                                        <?php echo htmlspecialchars($evento['estado']); ?>
                                     </div>
                                 </div>
                             </div>

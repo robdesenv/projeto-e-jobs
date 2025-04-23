@@ -180,6 +180,7 @@
                     <p><strong>Evento:</strong> <?php echo htmlspecialchars($vaga['nome']); ?></p>
                     <p><strong>Endereço:</strong> <?php echo htmlspecialchars($vaga['endereco']); ?></p>
                     <p><strong>Cidade:</strong> <?php echo htmlspecialchars($vaga['cidade']); ?></p>
+                    <p><strong>Estado:</strong> <?php echo htmlspecialchars($vaga['estado']); ?></p>
                     <p><strong>Valor:</strong> R$ <?php echo htmlspecialchars($vaga['valor']); ?></p> 
                     <p><strong>Descrição:</strong> <?php echo htmlspecialchars($vaga['descricao']); ?></p>
                     <button class="btn-candidatar" onclick="candidatarServico(<?php echo $vaga['id']; ?>,<?php echo $vaga['evento_id']; ?>)">Candidatar-se</button>

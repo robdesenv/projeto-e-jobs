@@ -201,7 +201,7 @@ class FreelancerController extends BaseController
         return view('freelancer/transrecebidas');
     }
 
-        public function candidatarvaga(){
+    public function candidatarvaga(){
 
         $idVaga = $this->request->getGet('idVaga');
         $idEvento = $this->request->getGet('idEvento');
@@ -215,14 +215,9 @@ class FreelancerController extends BaseController
         $result = $stmt->get_result();
         $num_rows = $result->num_rows;
 
-
-        
-
         if($this->VerificaCadastroCurriculo() >= 1){
 
-            
-
-           if($num_rows == 0){
+            if($num_rows == 0){
                 $contratadosModel = new contratadosModel();
                 $contratadosModel->set('evento_id',$idEvento);
                 $contratadosModel->set('freelancer_id', user_id());
@@ -230,9 +225,9 @@ class FreelancerController extends BaseController
                 $contratadosModel->set('vagas_id', $idVaga);
                 $contratadosModel->set('status', NULL);
                 $contratadosModel->insert();
-    
+        
                 $resposta = ['msg' => "Candidatou-se a vaga com sucesso.", 'success' => true];
-    
+        
                 return $this->response->setJSON($resposta);
 
             }else{
@@ -241,7 +236,7 @@ class FreelancerController extends BaseController
 
                 return $this->response->setJSON($resposta);
             }
-            
+                
         }else{
             $resposta = ['msg' => "<div class='alert alert-danger' role='alert'>
                             É necessário cadastrar o currículo antes de se candidatar a vaga!!
@@ -249,6 +244,6 @@ class FreelancerController extends BaseController
 
             return $this->response->setJSON($resposta);
         }
-        }
-
     }
+
+}

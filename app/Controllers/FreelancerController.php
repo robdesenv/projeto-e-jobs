@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\vagasModel;
 use App\Models\contratadosModel;
 use CodeIgniter\HTTP\ResponseInterface;
+use App\Controllers\CargosFreelancerController;
 
 class FreelancerController extends BaseController
 {
@@ -91,8 +92,9 @@ class FreelancerController extends BaseController
             
 
             //exibir os cargos cadastrados para o freelancer
-            $sql = 'SELECT cargo_freelancer.id, cargos.cargo FROM cargos JOIN cargo_freelancer ON cargos.id = cargo_freelancer.cargo_id WHERE cargo_freelancer.user_id = '.$user_id;
-            $data['cargosfreelancer'] = $db->connID->query($sql);
+            $cargofreelancerController = new  CargosFreelancerController();
+            $data['cargosfreelancer'] = $cargofreelancerController->ExibirCargosFreelancer($user_id);
+            
         
             return view('freelancer/exibircurriculo', $data);
         }else{

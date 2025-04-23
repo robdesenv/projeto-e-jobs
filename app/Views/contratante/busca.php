@@ -384,6 +384,12 @@
                                             <p>${informacoes.cidade}, ${informacoes.estado}</p>
                                         </div>
                                     </div>
+                                                                        <div class="info-item">
+                                        <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                                        <div class="info-content">
+                                            <h4>Habilidades</h4>
+                                            <p>${informacoes.cidade}, ${informacoes.estado}</p>
+                                        </div>
                                 </div>
                             </div>
                         `;

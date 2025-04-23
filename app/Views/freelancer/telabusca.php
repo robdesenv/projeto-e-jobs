@@ -10,9 +10,19 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
     <style>
+        :root {
+            --primary: #004182;
+            --primary-light: #e6f0fa;
+            --secondary: #0a66c2;
+            --accent: #25D366;
+            --light: #f8f9fa;
+            --dark: #212529;
+        }
+
         body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #f8f9fa;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: #f5f7fa;
+            color: var(--dark);
         }
 
         .busca-section {
@@ -25,7 +35,7 @@
         }
 
         .busca-section h1 {
-            color: #004182;
+            color: var(--primary);
             font-weight: 700;
             margin-bottom: 30px;
             text-align: center;
@@ -41,10 +51,11 @@
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            width: 100%;
         }
 
         .filtros button {
-            background-color: #004182;
+            background-color: var(--primary);
             color: #ffffff;
             border: none;
             padding: 10px 20px;
@@ -56,7 +67,7 @@
         }
 
         .filtros button:hover {
-            background-color: #0a66c2;
+            background-color: var(--secondary);
         }
 
         .servicos-container {
@@ -82,7 +93,7 @@
         }
 
         .servico-card h3 {
-            color: #004182;
+            color: var(--primary);
             font-weight: 600;
             margin-bottom: 15px;
         }
@@ -94,7 +105,7 @@
         }
 
         .btn-candidatar {
-            background-color: #004182;
+            background-color: var(--primary);
             color: #ffffff;
             border: none;
             padding: 8px 16px;
@@ -105,25 +116,58 @@
         }
 
         .btn-candidatar:hover {
-            background-color: #0a66c2;
+            background-color: var(--secondary);
         }
 
         .footer {
             text-align: center;
             padding: 25px;
-            background-color: #004182;
+            background-color: var(--primary);
             color: #ffffff;
             margin-top: 40px;
         }
 
-        .footer a {
-            color: #ffffff;
-            text-decoration: none;
-            transition: color 0.3s ease;
+        .alert-message {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            text-align: center;
         }
 
-        .footer a:hover {
-            color: #cce4ff;
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .data-destaque {
+            background-color: var(--primary-light);
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .data-dia {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+            line-height: 1;
+        }
+
+        .data-mes {
+            font-size: 1rem;
+            color: #666;
+            text-transform: uppercase;
+        }
+
+        .data-ano {
+            font-size: 0.9rem;
+            color: #888;
         }
 
         @media (max-width: 768px) {
@@ -142,7 +186,7 @@
         <div class="busca-section">
             <h1>Buscar Serviços</h1>
 
-            <span id="msg"></span>
+            <div id="msg" class="alert-message" style="display: none;"></div>
 
             <div class="filtros">
                 <div class="row">
@@ -150,40 +194,54 @@
                         <div class="form-group">
                             <label for="categoria">Categoria:</label>
                             <select id="categoria" class="form-control">
-                                <option value=""></option>
+                                <option value="">Todas categorias</option>
                                 <?php foreach($cargos as $cargo): ?>
                                 <option value="<?php echo $cargo['id']?>"><?php echo $cargo['cargo']?></option>
                                 <?php endforeach;?>
                             </select>
-
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="localizacao">Localização:</label>
-                            <input type="text" id="localizacao" class="form-control" placeholder="Digite a localização">
+                            <input type="text" id="localizacao" class="form-control" placeholder="Digite a cidade ou estado">
                         </div>
                     </div>
-
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>&nbsp;</label>
+                            <button onclick="filtrarServicos()" class="btn btn-primary">
+                                <i class="fas fa-search"></i> Buscar
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <button onclick="filtrarServicos()">
-                    <i class="fas fa-search"></i> Buscar
-                </button>
             </div>
 
-     
             <div class="servicos-container" id="listaServicos">
-                <?php foreach ($vagas as $vaga): ?>
-                    
-                <div class="servico-card">
-                    <h3><?php echo htmlspecialchars($vaga['cargo']); ?></h3>
-                    <p><strong>Evento:</strong> <?php echo htmlspecialchars($vaga['nome']); ?></p>
-                    <p><strong>Endereço:</strong> <?php echo htmlspecialchars($vaga['endereco']); ?></p>
-                    <p><strong>Cidade:</strong> <?php echo htmlspecialchars($vaga['cidade']); ?></p>
-                    <p><strong>Valor:</strong> R$ <?php echo htmlspecialchars($vaga['valor']); ?></p> 
-                    <p><strong>Descrição:</strong> <?php echo htmlspecialchars($vaga['descricao']); ?></p>
-                    <button class="btn-candidatar" onclick="candidatarServico(<?php echo $vaga['id']; ?>,<?php echo $vaga['evento_id']; ?>)">Candidatar-se</button>
-                </div>
+                <?php foreach ($vagas as $vaga): 
+                    $dataEvento = new DateTime($vaga['data']);
+                    ?>
+                    <div class="servico-card" 
+                         data-categoria="<?php echo $vaga['cargo_id']; ?>" 
+                         data-localizacao="<?php echo strtolower($vaga['cidade'] ); ?>">
+                        
+                        <div class="data-destaque">
+                            <div class="data-dia"><?php echo $dataEvento->format('d'); ?></div>
+                            <div class="data-mes"><?php echo $dataEvento->format('M'); ?></div>
+                            <div class="data-ano"><?php echo $dataEvento->format('Y'); ?></div>
+                        </div>
+                        
+                        <h3><?php echo htmlspecialchars($vaga['cargo']); ?></h3>
+                        <p><strong>Evento:</strong> <?php echo htmlspecialchars($vaga['nome']); ?></p>
+                        <p><strong>Endereço:</strong> <?php echo htmlspecialchars($vaga['endereco']); ?></p>
+                        <p><strong>Cidade:</strong> <?php echo htmlspecialchars($vaga['cidade']); ?></p>
+                        <p><strong>Valor:</strong> R$ <?php echo number_format($vaga['valor'], 2, ',', '.'); ?></p> 
+                        <p><strong>Descrição:</strong> <?php echo htmlspecialchars($vaga['descricao']); ?></p>
+                        <button class="btn-candidatar" onclick="candidatarServico(<?php echo $vaga['id']; ?>,<?php echo $vaga['evento_id']; ?>)">
+                            <i class="fas fa-paper-plane"></i> Candidatar-se
+                        </button>
+                    </div>
                 <?php endforeach; ?>
             </div>
         </div>
@@ -200,23 +258,98 @@
     <script>
         function filtrarServicos() {
             const categoria = document.getElementById('categoria').value;
-            const localizacao = document.getElementById('localizacao').value;
-            const valor = document.getElementById('valor').value;
+            const localizacao = document.getElementById('localizacao').value.toLowerCase();
+            const cards = document.querySelectorAll('.servico-card');
+            
+            let cardsVisiveis = 0;
+            
+            cards.forEach(card => {
+                const cardCategoria = card.getAttribute('data-categoria');
+                const cardLocalizacao = card.getAttribute('data-localizacao');
+                
+                const categoriaMatch = categoria === '' || cardCategoria === categoria;
+                const localizacaoMatch = localizacao === '' || 
+                    cardLocalizacao.includes(localizacao);
+                
+                if (categoriaMatch && localizacaoMatch) {
+                    card.style.display = 'block';
+                    cardsVisiveis++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            // Mostrar mensagem se nenhum resultado for encontrado
+            const msgDiv = document.getElementById('msg');
+            if (cardsVisiveis === 0) {
+                msgDiv.textContent = 'Nenhum serviço encontrado com os filtros selecionados.';
+                msgDiv.style.display = 'block';
+                msgDiv.className = 'alert-message alert-error';
+            } else {
+                msgDiv.style.display = 'none';
+            }
+        }
+        
+        // Filtrar automaticamente quando o usuário digitar na localização
+        document.getElementById('localizacao').addEventListener('input', filtrarServicos);
+        
+        // Filtrar quando a categoria for alterada
+        document.getElementById('categoria').addEventListener('change', filtrarServicos);
 
-            alert(`Filtrando por: Categoria - ${categoria}, Localização - ${localizacao}, Valor Máximo - ${valor}`);
+        async function candidatarServico(idVaga, idEvento) {
+    const btn = event.target.closest('button');
+    try {
+        const response = await fetch('<?php echo base_url("freelancer/candidatarvaga?idVaga="); ?>' + idVaga + "&idEvento=" + idEvento);
+        const data = await response.json();
+
+        const msgDiv = document.getElementById('msg');
+        msgDiv.textContent = data.msg;
+        msgDiv.style.display = 'block';
+        msgDiv.className = data.success ? 'alert-message alert-success' : 'alert-message alert-error';
+
+        if (data.success) {
+            btn.disabled = true;
+            btn.textContent = "Candidatado com sucesso!";
+            btn.classList.add('btn-success');
+            btn.classList.remove('btn-candidatar');
         }
 
-        async function candidatarServico(idVaga,idEvento) {
-            const response = await fetch('<?php echo base_url("freelancer/candidatarvaga?idVaga="); ?>' + idVaga + "&idEvento=" + idEvento);
-            const data = await response.json();
+        setTimeout(() => {
+            msgDiv.style.display = 'none';
+        }, 3000);
+
+    } catch (error) {
+        console.error('Erro ao candidatar:', error);
+        const msgDiv = document.getElementById('msg');
+        msgDiv.textContent = 'Erro ao processar sua candidatura.';
+        msgDiv.style.display = 'block';
+        msgDiv.className = 'alert-message alert-error';
+
+        setTimeout(() => {
+            msgDiv.style.display = 'none';
+        }, 3000);
+    }
+}
+
+        
+        // Aplicar filtros ao carregar a página (caso haja parâmetros na URL)
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const categoriaParam = urlParams.get('categoria');
+            const localizacaoParam = urlParams.get('localizacao');
             
-            document.getElementById('msg').innerHTML = data.msg;
-            setTimeout(() => {
-                document.getElementById('msg').innerHTML = "";
-            }, 1500);
+            if (categoriaParam) {
+                document.getElementById('categoria').value = categoriaParam;
+            }
             
-        }
+            if (localizacaoParam) {
+                document.getElementById('localizacao').value = localizacaoParam;
+            }
+            
+            if (categoriaParam || localizacaoParam) {
+                filtrarServicos();
+            }
+        });
     </script>
 </body>
-
 </html>

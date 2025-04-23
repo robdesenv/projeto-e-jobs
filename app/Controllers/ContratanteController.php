@@ -76,6 +76,7 @@ class ContratanteController extends BaseController
                         $eventosModel->set('data',$this->request->getPost('data'));
                         $eventosModel->set('endereco', $this->request->getPost('endereco'));
                         $eventosModel->set('cidade', $this->request->getPost('cidade'));
+                        $eventosModel->set('estado', $this->request->getPost('estado'));
                         $eventosModel->set('status',  $this->request->getPost('status'));
                         $eventosModel->set('user_id', user_id());
 
@@ -187,6 +188,7 @@ class ContratanteController extends BaseController
             $eventos['nome'] = $this->request->getPost('nome');
             $eventos['endereco'] = $this->request->getPost('endereco');
             $eventos['cidade'] = $this->request->getPost('cidade');
+            $eventos['estado'] = $this->request->getPost('estado');
             $eventos['data'] = $this->request->getPost('data');
             $eventos['descricao'] = $this->request->getPost('descricao');
             $eventos['status'] = $this->request->getPost('status');

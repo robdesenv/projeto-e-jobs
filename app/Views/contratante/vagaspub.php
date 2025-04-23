@@ -345,6 +345,10 @@
                                     <input type="text" class="form-control" id="cidade" name="cidade" required>
                                 </div>
                                 <div class="mb-3">
+                                    <label for="estado" class="form-label">Estado:</label>
+                                    <input type="text" class="form-control" id="estado" name="estado" required>
+                                </div>
+                                <div class="mb-3">
                                     <label for="statusServico" class="form-label">Status:</label>
                                     <select class="form-select" id="statusServico" name="status" required>
                                         <option value="Disponivel">Disponível</option>
@@ -766,15 +770,32 @@
                                         <h4>Localização</h4>
                                         <p>${informacoes.cidade}, ${informacoes.estado}</p>
                                     </div>
+                                <div class="info-item">
+                                    <div class="freelancer-info"><i class="fas fa-briefcase"></i></div>
+                                        <div class="info-content">
+                                            <h4>Habilidades</h4>
+                                            <div id="habilidades"></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    `;
-                });
-                
-                document.getElementById("conteudoInformacoes").innerHTML = html;
+                        `;
+                    });
+  
+                    document.getElementById("conteudoInformacoes").innerHTML = html;
+                    }
 
-                }
+                    if(data2.cargosFreelancer && data2.cargosFreelancer.length > 0){
+                        let html = '';
+                        data2.cargosFreelancer.forEach(cargosFreelancer => {
+                            html += `
+                            <p>${cargosFreelancer.cargo}</p>
+                                 
+                        `;
+                    });
+  
+                    document.getElementById("habilidades").innerHTML = html;
+                    }
             } catch (error) {
                 console.log("erro");
             }

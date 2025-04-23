@@ -388,22 +388,14 @@
                                             <p>${informacoes.cidade}, ${informacoes.estado}</p>
                                         </div>
                                     </div>
-<<<<<<< HEAD
-                                                                        <div class="info-item">
-                                        <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
-                                        <div class="info-content">
-                                            <h4>Habilidades</h4>
-                                            <p>${informacoes.cidade}, ${informacoes.estado}</p>
-                                        </div>
-=======
+                                    
                                     <div class="info-item">
-                                        <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                                    <div class="freelancer-info"><i class="fas fa-briefcase"></i></div>
                                         <div class="info-content">
                                             <h4>Habilidades</h4>
                                             <div id="habilidades"></div>
                                         </div>
                                     </div>
->>>>>>> 2530e641988ed225c89e5adb525ab8075bdbe908
                                 </div>
                             </div>
                         `;

@@ -297,39 +297,40 @@
         document.getElementById('categoria').addEventListener('change', filtrarServicos);
 
         async function candidatarServico(idVaga, idEvento) {
-    const btn = event.target.closest('button');
-    try {
-        const response = await fetch('<?php echo base_url("freelancer/candidatarvaga?idVaga="); ?>' + idVaga + "&idEvento=" + idEvento);
-        const data = await response.json();
+            const btn = event.target.closest('button');
+            try {
+                const response = await fetch('<?php echo base_url("freelancer/candidatarvaga?idVaga="); ?>' + idVaga + "&idEvento=" + idEvento);
+                const data = await response.json();
+                console.log(data);
 
-        const msgDiv = document.getElementById('msg');
-        msgDiv.textContent = data.msg;
-        msgDiv.style.display = 'block';
-        msgDiv.className = data.success ? 'alert-message alert-success' : 'alert-message alert-error';
+                const msgDiv = document.getElementById('msg');
+                msgDiv.textContent = data.msg;
+                msgDiv.style.display = 'block';
+                msgDiv.className = data.success ? 'alert-message alert-success' : 'alert-message alert-error';
 
-        if (data.success) {
-            btn.disabled = true;
-            btn.textContent = "Candidatado com sucesso!";
-            btn.classList.add('btn-success');
-            btn.classList.remove('btn-candidatar');
+                if (data.success) {
+                    btn.disabled = true;
+                    btn.textContent = "Candidatado com sucesso!";
+                    btn.classList.add('btn-success');
+                    btn.classList.remove('btn-candidatar');
+                }
+
+                setTimeout(() => {
+                    msgDiv.style.display = 'none';
+                }, 3000);
+
+            } catch (error) {
+                console.error('Erro ao candidatar:', error);
+                const msgDiv = document.getElementById('msg');
+                msgDiv.textContent = 'Erro ao processar sua candidatura.';
+                msgDiv.style.display = 'block';
+                msgDiv.className = 'alert-message alert-error';
+
+                setTimeout(() => {
+                    msgDiv.style.display = 'none';
+                }, 3000);
+            }
         }
-
-        setTimeout(() => {
-            msgDiv.style.display = 'none';
-        }, 3000);
-
-    } catch (error) {
-        console.error('Erro ao candidatar:', error);
-        const msgDiv = document.getElementById('msg');
-        msgDiv.textContent = 'Erro ao processar sua candidatura.';
-        msgDiv.style.display = 'block';
-        msgDiv.className = 'alert-message alert-error';
-
-        setTimeout(() => {
-            msgDiv.style.display = 'none';
-        }, 3000);
-    }
-}
 
         
         // Aplicar filtros ao carregar a página (caso haja parâmetros na URL)

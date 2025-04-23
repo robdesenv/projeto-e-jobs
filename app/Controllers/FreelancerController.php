@@ -231,17 +231,13 @@ class FreelancerController extends BaseController
                 $contratadosModel->set('status', NULL);
                 $contratadosModel->insert();
     
-                $resposta = ['msg' => "<div class='alert alert-success' role='alert'>
-                                Candidatou-se a vaga com sucesso.
-                                </div>"];
+                $resposta = ['msg' => "Candidatou-se a vaga com sucesso.", 'success' => true];
     
                 return $this->response->setJSON($resposta);
 
             }else{
 
-                $resposta = ['msg' => "<div class='alert alert-warning' role='alert'>
-                            Já se candidatou a essa vaga.
-                            </div>"];
+                $resposta = ['msg' => "Já se candidatou a essa vaga.", "success"=> false];
 
                 return $this->response->setJSON($resposta);
             }

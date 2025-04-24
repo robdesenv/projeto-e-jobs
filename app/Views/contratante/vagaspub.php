@@ -501,7 +501,7 @@
         </div>               
     </div>
 
-    <!-- Modal para solicitações-->
+    
     <div class="modal fade" id="modalSolicitacoes" tabindex="-1" aria-labelledby="modalAdicionarServicoLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -512,13 +512,13 @@
                 <h6 class="modal-title" id="modalAdicionarServicoLabel">Solicitações dos Freelancers</h6>
                 <div class="modal-body">
                         <div class="modal-body" id="conteudoSolicitacoesFreelancer">
-                            <!-- Conteúdo gerado via JS entra aqui -->
+                     
                         </div>
                 </div>
                 <h6 class="modal-title" id="modalAdicionarServicoLabel">Suas Solicitações</h6>
                 <div class="modal-body">
                         <div class="modal-body" id="conteudoSolicitacoes">
-                            <!-- Conteúdo gerado via JS entra aqui -->
+                           
                         </div>
                 </div>
             </div>
@@ -535,7 +535,7 @@
                 </div>
                 <div class="modal-body">
                         <div class="modal-body" id="conteudoInformacoes">
-                            <!-- Conteúdo gerado via JS entra aqui -->
+                            
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" id="btn-recusar" data-bs-dismiss="modal">Recusar</button>
@@ -590,6 +590,8 @@
             const localInfo = eventoElement.querySelectorAll('.evento-value')[1].textContent.trim().split('\n');
             document.getElementById('endereco').value = localInfo[0].trim();
             document.getElementById('cidade').value = localInfo[1].trim();
+            document.getElementById('estado').value = localInfo[2].trim();
+            
             
       
             const dataDia = eventoElement.querySelector('.data-dia').textContent;

@@ -17,6 +17,7 @@
             --accent: #25D366;
             --light: #f8f9fa;
             --dark: #212529;
+            --disabled: #6c757d;
         }
 
         body {
@@ -112,11 +113,18 @@
             border-radius: 5px;
             font-size: 0.9rem;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
+            width: 100%;
         }
 
         .btn-candidatar:hover {
             background-color: var(--secondary);
+        }
+
+        .btn-candidatar.disabled {
+            background-color: var(--disabled);
+            cursor: not-allowed;
+            opacity: 1;
         }
 
         .footer {
@@ -180,178 +188,215 @@
 
 <body>
 
-    <?php include 'menuFreelancer.php'; ?>
+<?php include 'menuFreelancer.php'; ?>
 
-    <div class="container">
-        <div class="busca-section">
-            <h1>Buscar Serviços</h1>
+<div class="container">
+    <div class="busca-section">
+        <h1>Buscar Serviços</h1>
 
-            <div id="msg" class="alert-message" style="display: none;"></div>
+        <div id="msg" class="alert-message" style="display: none;"></div>
 
-            <div class="filtros">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="categoria">Categoria:</label>
-                            <select id="categoria" class="form-control">
-                                <option value="">Todas categorias</option>
-                                <?php foreach($cargos as $cargo): ?>
-                                <option value="<?php echo $cargo['id']?>"><?php echo $cargo['cargo']?></option>
-                                <?php endforeach;?>
-                            </select>
-                        </div>
+        <div class="filtros">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="categoria">Categoria:</label>
+                        <select id="categoria" class="form-control">
+                            <option value="">Todas categorias</option>
+                            <?php foreach($cargos as $cargo): ?>
+                            <option value="<?php echo $cargo['id']?>"><?php echo $cargo['cargo']?></option>
+                            <?php endforeach;?>
+                        </select>
                     </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="localizacao">Localização:</label>
-                            <input type="text" id="localizacao" class="form-control" placeholder="Digite a cidade ou estado">
-                        </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="localizacao">Localização:</label>
+                        <input type="text" id="localizacao" class="form-control" placeholder="Digite a cidade ou estado">
                     </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>&nbsp;</label>
-                            <button onclick="filtrarServicos()" class="btn btn-primary">
-                                <i class="fas fa-search"></i> Buscar
-                            </button>
-                        </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>&nbsp;</label>
+                        <button onclick="filtrarServicos()" class="btn btn-primary">
+                            <i class="fas fa-search"></i> Buscar
+                        </button>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="servicos-container" id="listaServicos">
-                <?php foreach ($vagas as $vaga): 
-                    $dataEvento = new DateTime($vaga['data']);
-                    ?>
-                    <div class="servico-card" 
-                         data-categoria="<?php echo $vaga['cargo_id']; ?>" 
-                         data-localizacao="<?php echo strtolower($vaga['cidade'] ); ?>">
-                        
-                        <div class="data-destaque">
-                            <div class="data-dia"><?php echo $dataEvento->format('d'); ?></div>
-                            <div class="data-mes"><?php echo $dataEvento->format('M'); ?></div>
-                            <div class="data-ano"><?php echo $dataEvento->format('Y'); ?></div>
-                        </div>
-                        
-                        <h3><?php echo htmlspecialchars($vaga['cargo']); ?></h3>
-                        <p><strong>Evento:</strong> <?php echo htmlspecialchars($vaga['nome']); ?></p>
-                        <p><strong>Endereço:</strong> <?php echo htmlspecialchars($vaga['endereco']); ?></p>
-                        <p><strong>Cidade:</strong> <?php echo htmlspecialchars($vaga['cidade']); ?></p>
-                        <p><strong>Estado:</strong> <?php echo htmlspecialchars($vaga['estado']); ?></p>
-                        <p><strong>Valor:</strong> R$ <?php echo number_format($vaga['valor'], 2, ',', '.'); ?></p> 
-                        <p><strong>Descrição:</strong> <?php echo htmlspecialchars($vaga['descricao']); ?></p>
-                        <button class="btn-candidatar" onclick="candidatarServico(<?php echo $vaga['id']; ?>,<?php echo $vaga['evento_id']; ?>)">
-                            <i class="fas fa-paper-plane"></i> Candidatar-se
-                        </button>
-                    </div>
-                <?php endforeach; ?>
+        <div class="servicos-container" id="listaServicos">
+            <?php foreach ($vagas as $vaga): 
+                $dataEvento = new DateTime($vaga['data']);
+                $jaCandidatou = isset($candidaturas) ? in_array($vaga['id'], array_column($candidaturas, 'vaga_id')) : false;
+            ?>
+            <div class="servico-card" 
+                 data-categoria="<?php echo $vaga['cargo_id']; ?>" 
+                 data-localizacao="<?php echo strtolower($vaga['cidade']); ?>"
+                 data-vaga-id="<?php echo $vaga['id']; ?>">
+                
+                <div class="data-destaque">
+                    <div class="data-dia"><?php echo $dataEvento->format('d'); ?></div>
+                    <div class="data-mes"><?php echo $dataEvento->format('M'); ?></div>
+                    <div class="data-ano"><?php echo $dataEvento->format('Y'); ?></div>
+                </div>
+                
+                <h3><?php echo htmlspecialchars($vaga['cargo']); ?></h3>
+                <p><strong>Evento:</strong> <?php echo htmlspecialchars($vaga['nome']); ?></p>
+                <p><strong>Endereço:</strong> <?php echo htmlspecialchars($vaga['endereco']); ?></p>
+                <p><strong>Cidade:</strong> <?php echo htmlspecialchars($vaga['cidade']); ?></p>
+                <p><strong>Estado:</strong> <?php echo htmlspecialchars($vaga['estado']); ?></p>
+                <p><strong>Valor:</strong> R$ <?php echo number_format($vaga['valor'], 2, ',', '.'); ?></p> 
+                <p><strong>Descrição:</strong> <?php echo htmlspecialchars($vaga['descricao']); ?></p>
+                <button class="btn-candidatar <?php echo $jaCandidatou ? 'disabled' : ''; ?>" 
+                        onclick="<?php echo $jaCandidatou ? '' : 'candidatarServico('.$vaga['id'].','.$vaga['evento_id'].', this)'; ?>" 
+                        <?php echo $jaCandidatou ? 'disabled' : ''; ?>>
+                    <i class="fas <?php echo $jaCandidatou ? 'fa-check' : 'fa-paper-plane'; ?>"></i> 
+                    <?php echo $jaCandidatou ? 'Candidatura enviada' : 'Candidatar-se'; ?>
+                </button>
             </div>
+            <?php endforeach; ?>
         </div>
     </div>
+</div>
 
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 e-Jobs. Todos os direitos reservados.</p>
-            <p><a href="#">Política de Privacidade</a> | <a href="#">Termos de Uso</a></p>
-        </div>
-    </footer>
+<footer class="footer">
+    <div class="container">
+        <p>&copy; 2025 e-Jobs. Todos os direitos reservados.</p>
+        <p><a href="#">Política de Privacidade</a> | <a href="#">Termos de Uso</a></p>
+    </div>
+</footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        function filtrarServicos() {
-            const categoria = document.getElementById('categoria').value;
-            const localizacao = document.getElementById('localizacao').value.toLowerCase();
-            const cards = document.querySelectorAll('.servico-card');
-            
-            let cardsVisiveis = 0;
-            
-            cards.forEach(card => {
-                const cardCategoria = card.getAttribute('data-categoria');
-                const cardLocalizacao = card.getAttribute('data-localizacao');
-                
-                const categoriaMatch = categoria === '' || cardCategoria === categoria;
-                const localizacaoMatch = localizacao === '' || 
-                    cardLocalizacao.includes(localizacao);
-                
-                if (categoriaMatch && localizacaoMatch) {
-                    card.style.display = 'block';
-                    cardsVisiveis++;
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-            
-            // Mostrar mensagem se nenhum resultado for encontrado
-            const msgDiv = document.getElementById('msg');
-            if (cardsVisiveis === 0) {
-                msgDiv.textContent = 'Nenhum serviço encontrado com os filtros selecionados.';
-                msgDiv.style.display = 'block';
-                msgDiv.className = 'alert-message alert-error';
-            } else {
-                msgDiv.style.display = 'none';
-            }
-        }
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Função para inicializar as candidaturas do localStorage 
+    function inicializarCandidaturas() {
+        const candidaturasLocalStorage = JSON.parse(localStorage.getItem('candidaturas')) || [];
         
-        // Filtrar automaticamente quando o usuário digitar na localização
-        document.getElementById('localizacao').addEventListener('input', filtrarServicos);
-        
-        // Filtrar quando a categoria for alterada
-        document.getElementById('categoria').addEventListener('change', filtrarServicos);
-
-        async function candidatarServico(idVaga, idEvento) {
-            const btn = event.target.closest('button');
-            try {
-                const response = await fetch('<?php echo base_url("freelancer/candidatarvaga?idVaga="); ?>' + idVaga + "&idEvento=" + idEvento);
-                const data = await response.json();
-                console.log(data);
-
-                const msgDiv = document.getElementById('msg');
-                msgDiv.textContent = data.msg;
-                msgDiv.style.display = 'block';
-                msgDiv.className = data.success ? 'alert-message alert-success' : 'alert-message alert-error';
-
-                if (data.success) {
-                    btn.disabled = true;
-                    btn.textContent = "Candidatado com sucesso!";
-                    btn.classList.add('btn-success');
-                    btn.classList.remove('btn-candidatar');
-                }
-
-                setTimeout(() => {
-                    msgDiv.style.display = 'none';
-                }, 3000);
-
-            } catch (error) {
-                console.error('Erro ao candidatar:', error);
-                const msgDiv = document.getElementById('msg');
-                msgDiv.textContent = 'Erro ao processar sua candidatura.';
-                msgDiv.style.display = 'block';
-                msgDiv.className = 'alert-message alert-error';
-
-                setTimeout(() => {
-                    msgDiv.style.display = 'none';
-                }, 3000);
-            }
-        }
-
-        
-        // Aplicar filtros ao carregar a página (caso haja parâmetros na URL)
-        document.addEventListener('DOMContentLoaded', function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const categoriaParam = urlParams.get('categoria');
-            const localizacaoParam = urlParams.get('localizacao');
+        document.querySelectorAll('.servico-card').forEach(card => {
+            const vagaId = parseInt(card.getAttribute('data-vaga-id'));
+            const btn = card.querySelector('.btn-candidatar');
             
-            if (categoriaParam) {
-                document.getElementById('categoria').value = categoriaParam;
-            }
+           
+            const jaCandidatouServidor = btn.classList.contains('disabled');
             
-            if (localizacaoParam) {
-                document.getElementById('localizacao').value = localizacaoParam;
-            }
-            
-            if (categoriaParam || localizacaoParam) {
-                filtrarServicos();
+           
+            if (!jaCandidatouServidor && candidaturasLocalStorage.includes(vagaId)) {
+                btn.innerHTML = '<i class="fas fa-check"></i> Candidatura enviada';
+                btn.classList.add('disabled');
+                btn.disabled = true;
             }
         });
-    </script>
+    }
+
+    async function candidatarServico(idVaga, idEvento, btnElement) {
+        const btn = btnElement;
+        
+        if (btn.classList.contains('disabled')) return;
+
+        try {
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+            btn.disabled = true;
+
+            const response = await fetch('<?php echo base_url("freelancer/candidatarvaga?idVaga="); ?>' + idVaga + "&idEvento=" + idEvento);
+            const data = await response.json();
+
+            const msgDiv = document.getElementById('msg');
+            msgDiv.textContent = data.msg;
+            msgDiv.style.display = 'block';
+            msgDiv.className = data.success ? 'alert-message alert-success' : 'alert-message alert-error';
+
+            if (data.success) {
+                // Atualiza o botão e armazena no localStorage
+                btn.innerHTML = '<i class="fas fa-check"></i> Candidatura enviada';
+                btn.classList.add('disabled');
+                btn.disabled = true;
+                
+                // Armazena a candidatura no localStorage
+                const candidaturas = JSON.parse(localStorage.getItem('candidaturas')) || [];
+                if (!candidaturas.includes(idVaga)) {
+                    candidaturas.push(idVaga);
+                    localStorage.setItem('candidaturas', JSON.stringify(candidaturas));
+                }
+            } else {
+                btn.innerHTML = '<i class="fas fa-paper-plane"></i> Candidatar-se';
+                btn.disabled = false;
+            }
+
+            setTimeout(() => msgDiv.style.display = 'none', 3000);
+
+        } catch (error) {
+            console.error('Erro:', error);
+            const msgDiv = document.getElementById('msg');
+            msgDiv.textContent = 'Erro ao processar candidatura';
+            msgDiv.style.display = 'block';
+            msgDiv.className = 'alert-message alert-error';
+            
+            btn.innerHTML = '<i class="fas fa-paper-plane"></i> Candidatar-se';
+            btn.disabled = false;
+            
+            setTimeout(() => msgDiv.style.display = 'none', 3000);
+        }
+    }
+
+    function filtrarServicos() {
+        const categoria = document.getElementById('categoria').value;
+        const localizacao = document.getElementById('localizacao').value.toLowerCase();
+        const cards = document.querySelectorAll('.servico-card');
+        
+        let cardsVisiveis = 0;
+        
+        cards.forEach(card => {
+            const cardCategoria = card.getAttribute('data-categoria');
+            const cardLocalizacao = card.getAttribute('data-localizacao');
+            
+            const categoriaMatch = categoria === '' || cardCategoria === categoria;
+            const localizacaoMatch = localizacao === '' || cardLocalizacao.includes(localizacao);
+            
+            if (categoriaMatch && localizacaoMatch) {
+                card.style.display = 'block';
+                cardsVisiveis++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        const msgDiv = document.getElementById('msg');
+        if (cardsVisiveis === 0) {
+            msgDiv.textContent = 'Nenhum serviço encontrado com os filtros selecionados.';
+            msgDiv.style.display = 'block';
+            msgDiv.className = 'alert-message alert-error';
+        } else {
+            msgDiv.style.display = 'none';
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        inicializarCandidaturas();
+        
+      
+        const urlParams = new URLSearchParams(window.location.search);
+        const categoriaParam = urlParams.get('categoria');
+        const localizacaoParam = urlParams.get('localizacao');
+        
+        if (categoriaParam) {
+            document.getElementById('categoria').value = categoriaParam;
+        }
+        
+        if (localizacaoParam) {
+            document.getElementById('localizacao').value = localizacaoParam;
+        }
+        
+        if (categoriaParam || localizacaoParam) {
+            filtrarServicos();
+        }
+
+        
+        document.getElementById('localizacao').addEventListener('input', filtrarServicos);
+        document.getElementById('categoria').addEventListener('change', filtrarServicos);
+    });
+</script>
 </body>
 </html>

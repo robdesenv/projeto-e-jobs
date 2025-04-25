@@ -21,10 +21,15 @@ class ContratanteController extends BaseController
         return $num_rows;
     }
     
+
+
     public function index()
     {
         return view(name: 'contratante/iniciocontratante');
     }
+
+
+
     public function minhaempresa()
     {
         $data['acao'] = 'Salvar';
@@ -33,13 +38,13 @@ class ContratanteController extends BaseController
         
         if ($this->VerificaCadastroInformacoes() >= 1){ 
 
-            $contratanteModel = new \App\Models\contratanteModel();
+            $contratanteModel = new contratanteModel();
             $data['contratantes'] = $contratanteModel->where('user_id',$user_id)->find();
         
             return view('contratante/exibirempresa', $data);
         }else{
             if($this->request->getMethod() === 'POST'){
-                $contratanteModel = new \App\Models\contratanteModel();
+                $contratanteModel = new contratanteModel();
                 $contratanteModel->set('nome', $this->request->getPost('nome'));
                 $contratanteModel->set('telefone', $this->request->getPost('telefone'));
                 $contratanteModel->set('email', $this->request->getPost('email'));
@@ -59,17 +64,25 @@ class ContratanteController extends BaseController
             return view('contratante/minhaempresa', $data);
         }
     }
+
+
+
+
     public function vagaspub()
     {
         $data['msg'] = '';
         $db = db_connect();
         
         if($this->VerificaCadastroInformacoes() >= 1){
-            if($this->request->getMethod() == 'POST'){
+            if($this->request->getMethod() == 'POST')
+            {
                 $btneventos = $this->request->getPost('btn-eventos');
-                if($btneventos == 'adicionarevento'){
+
+                if($btneventos == 'adicionarevento')
+                {
                     $btnEventoId = $this->request->getPost('eventoId');
-                    if($btnEventoId == ''){ //cadastrar evento
+                    if($btnEventoId == '')
+                    { //cadastrar evento
                         $eventosModel = new \App\Models\eventosModel();
                         $eventosModel->set('nome', $this->request->getPost('nome'));
                         $eventosModel->set('descricao',  $this->request->getPost('descricao'));
@@ -80,18 +93,24 @@ class ContratanteController extends BaseController
                         $eventosModel->set('status',  $this->request->getPost('status'));
                         $eventosModel->set('user_id', user_id());
 
-                        if($eventosModel->insert()){
+                        if($eventosModel->insert())
+                        {
                             $data['msg'] = '<p style="color:green;">Evento Criado<p>';
                             header("Refresh: 0");
-                        }else{
+                        }
+                        else
+                        {
                             $data['msg'] = '<p style="color:red;">Erro ao criar evento</p>';
                         }
-                    }elseif($btnEventoId != ''){ // Editar evento
+                    }
+                    elseif($btnEventoId != '')
+                    { // Editar evento
                         $this->editEventos($btnEventoId);
                         header("Refresh: 0");
                     }
                     
-                }elseif($btneventos == 'adicionarvaga'){
+                }elseif($btneventos == 'adicionarvaga')
+                {
                     $vagasModel = new \App\Models\vagasModel();
                     $cargos_id = intval($this->request->getPost('cargo_id'));
                     $vagasModel->set('evento_id', $this->request->getPost('evento_id'));
@@ -120,18 +139,16 @@ class ContratanteController extends BaseController
         $data['cargos'] = $cargoModel->findAll();
 
         //exibir vagas
-        $vagasModel = new \App\Models\vagasModel();
-
         $sql = 'SELECT vagas.id, cargos.cargo, vagas.quantidade,vagas.evento_id FROM cargos JOIN vagas ON vagas.cargo_id = cargos.id';
         $data['vagas'] = $db->connID->query($sql);
 
         //exibir solicitações
-
         $idVaga = $this->request->getGet('idVaga');
 
-        
-        if($idVaga){
-            if(!empty($idVaga)){
+        if($idVaga)
+        {
+            if(!empty($idVaga))
+            {
                 $sql = 'SELECT contratados.id, freelancer.id as freelancer_id, freelancer.nome, contratados.status, vagas.id as vaga_id, contratados.solicitante_id 
                 FROM contratados 
                 JOIN freelancer on contratados.freelancer_id = freelancer.user_id 
@@ -156,20 +173,24 @@ class ContratanteController extends BaseController
         //exibir informações
         $idFreelancer = $this->request->getGet('idFreelancer');
 
-        if($idFreelancer){
-            if(!empty($idFreelancer)){
-            $sql = 'SELECT * FROM freelancer WHERE id ='. $idFreelancer;
+        if($idFreelancer)
+        {
+            if(!empty($idFreelancer))
+            {
+                $sql = 'SELECT * FROM freelancer WHERE id ='. $idFreelancer;
 
-            $query = $db->query($sql);
-            $resultados = $query->getResultArray();
+                $query = $db->query($sql);
+                $resultados = $query->getResultArray();
 
-            $CargosFreelancerController = new  CargosFreelancerController();
-            foreach($resultados as $resultado){
-                $cargosfreelancer = $CargosFreelancerController->ExibirCargosFreelancer($resultado['user_id']);
-            }
-            
+                //exibe os cargos do freelancer
+                $CargosFreelancerController = new  CargosFreelancerController();
+                foreach($resultados as $resultado)
+                {
+                    $cargosfreelancer = $CargosFreelancerController->ExibirCargosFreelancer($resultado['user_id']);
+                }
+                
 
-            $retorna = ['informacoes' => $resultados, 'cargosFreelancer'=> $cargosfreelancer];
+                $retorna = ['informacoes' => $resultados, 'cargosFreelancer'=> $cargosfreelancer];
             }
             return $this->response->setJSON($retorna);
         }
@@ -180,11 +201,14 @@ class ContratanteController extends BaseController
     }
 
 
-    public function editEventos($id){
+
+    public function editEventos($id)
+    {
 
         $eventosModel = new \App\Models\eventosModel();
 
-        if($this->request->getMethod() == 'POST'){
+        if($this->request->getMethod() == 'POST')
+        {
             $eventos['nome'] = $this->request->getPost('nome');
             $eventos['endereco'] = $this->request->getPost('endereco');
             $eventos['cidade'] = $this->request->getPost('cidade');
@@ -193,60 +217,82 @@ class ContratanteController extends BaseController
             $eventos['descricao'] = $this->request->getPost('descricao');
             $eventos['status'] = $this->request->getPost('status');
 
-            if ($eventosModel->update($id, $eventos)) {
+            if ($eventosModel->update($id, $eventos)) 
+            {
                 return redirect('contratante/vagaspub');
             }
         }
-        echo view('contratante/vagaspub');
+
+        return view('contratante/vagaspub');
     }
 
-    public function deleteEventos($id){
-        try {
+    public function deleteEventos($id)
+    {
+        try 
+        {
             $eventosModel = new \App\Models\eventosModel();
-            if($eventosModel->delete($id)){
+            if($eventosModel->delete($id))
+            {
+                //evento excluido
             }
             return redirect()->to(base_url('contratante/vagaspub'));}
-        catch(\Exception $e){
+        catch(\Exception $e)
+        {
             session()->setFlashdata('msg', "Não foi possível excluir o evento pois possui vagas cadastradas. É necessário excluir as vagas primeiro.");
             return redirect()->to(base_url('contratante/vagaspub'));
         }
         
     }
 
-    public function deleteVagas($id){
-        try {
+
+
+    public function deleteVagas($id)
+    {
+        try 
+        {
             $vagasModel = new \App\Models\vagasModel();
-            if($vagasModel->delete($id)){
+            if($vagasModel->delete($id))
+            {
+                //vaga excluida
             }
             return redirect()->to(base_url('contratante/vagaspub'));
-        }catch(\Exception $e){
+        }catch(\Exception $e)
+        {
             session()->setFlashdata('msg', "Não foi possível excluir. Possui solicitações de Freelancers para essa vaga.");
             return redirect()->to(base_url('contratante/vagaspub'));
         }
     }
 
-    public function solicitacoes(){
+
+
+    public function solicitacoes()
+    {
         $idSolicitacao = $this->request->getGet('IdSolicitacao');
         $btn = $this->request->getGet('btn');
 
-        if($idSolicitacao){
+        if($idSolicitacao)
+        {
 
-            if($btn == 'contratar'){
+            if($btn == 'contratar')
+            {
                 $contratadosModel = new \App\Models\contratadosModel();
             
                 $contratados['status'] = true;
 
-                if($contratadosModel->update($idSolicitacao, $contratados)){
+                if($contratadosModel->update($idSolicitacao, $contratados))
+                {
                     $resposta = ['msg'=> 'atualizado','btn'=> $btn];
                 }
 
-            }elseif($btn == 'recusar'){
+            }elseif($btn == 'recusar')
+            {
 
                 $contratadosModel = new \App\Models\contratadosModel();
 
                 $contratados['status'] = false;
 
-                if($contratadosModel->update($idSolicitacao, $contratados)){
+                if($contratadosModel->update($idSolicitacao, $contratados))
+                {
                     $resposta = ['msg'=> 'recusado','btn'=> $btn];
                 }
             }
@@ -254,6 +300,8 @@ class ContratanteController extends BaseController
             return $this->response->setJSON( $resposta );
         }
     }
+
+
 
     public function busca()
     {
@@ -273,19 +321,18 @@ class ContratanteController extends BaseController
 
         return view(name: 'contratante/busca',data: $data);
     }
-    public function pagamentos()
+
+
+
+    public function editInformacoes($id)
     {
-        return view(name: 'contratante/pagamentos');
-    }
-
-
-    public function editInformacoes($id){
 
         $data['acao'] = 'Editar';
         $contratanteModel = new contratanteModel();
         $contratante = $contratanteModel->find($id);
 
-        if($this->request->getMethod() == 'POST'){
+        if($this->request->getMethod() == 'POST')
+        {
             $contratante['nome'] = $this->request->getPost('nome');
             $contratante['telefone'] = $this->request->getPost('telefone');
             $contratante['email'] = $this->request->getPost('email');
@@ -294,14 +341,26 @@ class ContratanteController extends BaseController
             $contratante['cidade'] = $this->request->getPost('cidade');
             $contratante['empresa'] = $this->request->getPost('empresa');
 
-            if ($contratanteModel->update($id, $contratante)) {
+            if ($contratanteModel->update($id, $contratante)) 
+            {
                 return redirect('contratante/minhaempresa');
             }
         }
+
         $data['contratante'] = $contratante;
 
         echo view('contratante/minhaempresa', $data);
 
     }
+
+
+
+    public function pagamentos()
+    {
+        return view(name: 'contratante/pagamentos');
+    }
+
+
+    
 
 }

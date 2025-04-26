@@ -194,6 +194,37 @@ class FreelancerController extends BaseController
         $stmt->execute();
         $data['contratados'] = $stmt->get_result();
 
+        $idVaga = $this->request->getGet('idVaga');
+        $btn = $this->request->getGet('btn');
+
+        if($idVaga){
+            if($btn == 'aceitar'){
+
+                $contratadosModel = new contratadosModel();
+            
+                $contratados['status'] = true;
+
+                if($contratadosModel->update($idVaga, $contratados))
+                {
+                    $resposta = ['msg'=> 'atualizado','btn'=> $btn];
+                    header("Refresh: 0");
+                }
+                
+            }elseif($btn == 'recusar'){
+                $contratadosModel = new contratadosModel();
+
+                $contratados['status'] = false;
+
+                if($contratadosModel->update($idVaga, $contratados))
+                {
+                    $resposta = ['msg'=> 'recusado','btn'=> $btn];
+                }
+            }
+
+            return $this->response->setJSON($resposta);
+            
+        }
+
         return view('freelancer/servicosprestados',$data);
     }
 
@@ -276,5 +307,7 @@ class FreelancerController extends BaseController
             return $this->response->setJSON($resposta);
         }
     }
+
+
 
 }

@@ -163,7 +163,7 @@
                         <p><strong>Data do evento:</strong> <?php echo htmlspecialchars($contratado['data']); ?></p>
                         <p><strong>Valor:</strong> R$ <?php echo htmlspecialchars($contratado['valor']); ?></p> 
                         <p><strong>Descrição:</strong> <?php echo htmlspecialchars($contratado['descricao']); ?></p>
-                        <?php if($contratado['status'] == NULL){
+                        <?php if($contratado['status'] === NULL){
                             echo '<p class="alert alert-warning"><strong >Status: </strong>Agradando confirmação...</p>';
                         }elseif($contratado['status'] == true){
                             echo '<p class="alert alert-success"><strong >Status: </strong>Contratado</p>';
@@ -171,9 +171,13 @@
                             echo '<p class="alert alert-danger"><strong >Status: </strong>Recusado</p>';
                         }
                         ?>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" id="btn-recusar" data-bs-dismiss="modal" onclick="recusarServico(<?php echo htmlspecialchars($contratado['id']); ?>)">Recusar</button>
+                            <button type="button" name="btn-cargo" id="btn-contratar" class="btn btn-success" data-bs-dismiss="modal" onclick="aceitarServico(<?php echo htmlspecialchars($contratado['id']); ?>)">Aceitar</button>
+                        </div>
                     </div>
-                <?php endif;
-                    endforeach; ?>
+                <?php endif;?>
+                <?php endforeach; ?>
             </div>
         </div>
 
@@ -193,11 +197,37 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        let idVaga = null;
 
         function abrirModalAdicionar() {
             const modal = new bootstrap.Modal(document.getElementById('modalAdicionarServico'));
             modal.show();
         }
+
+        async function aceitarServico(idServico){
+            const response = await fetch('<?php echo base_url("/freelancer/servicosprestados?idVaga=") ?>' + idServico + "&btn=aceitar");
+            const data = await response.json();
+            window.location.reload();
+
+        }
+
+        async function recusarServico(idServico){
+            const response = await fetch('<?php echo base_url("/freelancer/servicosprestados?idVaga=") ?>' + idServico + "&btn=recusar");
+            const data = await response.json();
+            window.location.reload();
+
+        }
+
+        /* document.getElementById('btn-contratar').addEventListener('click', async function() {
+        if (idVaga) {
+            try {
+                
+            } catch (error) {
+                console.error('Erro na requisição:', error);
+            }
+        }
+
+        });*/
 
 
     </script>

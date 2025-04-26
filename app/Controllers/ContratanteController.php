@@ -280,7 +280,7 @@ class ContratanteController extends BaseController
 
             if($btn == 'contratar')
             {
-                $contratadosModel = new \App\Models\contratadosModel();
+                $contratadosModel = new contratadosModel();
             
                 $contratados['status'] = true;
 
@@ -292,7 +292,7 @@ class ContratanteController extends BaseController
             }elseif($btn == 'recusar')
             {
 
-                $contratadosModel = new \App\Models\contratadosModel();
+                $contratadosModel = new contratadosModel();
 
                 $contratados['status'] = false;
 

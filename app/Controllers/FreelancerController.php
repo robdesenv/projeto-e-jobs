@@ -261,7 +261,7 @@ class FreelancerController extends BaseController
             else
             {
 
-                $resposta = ['msg' => "Já se candidatou a essa vaga.", "success"=> false];
+                $resposta = ['msg' => "Já se candidatou a essa vaga ou o contratante já solicitou seu serviço. Verifique a tela de serviços", "success"=> false];
 
                 return $this->response->setJSON($resposta);
             }

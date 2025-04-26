@@ -307,6 +307,7 @@
             msgDiv.style.display = 'block';
             msgDiv.className = data.success ? 'alert-message alert-success' : 'alert-message alert-error';
 
+
             if (data.success) {
                 // Atualiza o botão e armazena no localStorage
                 btn.innerHTML = '<i class="fas fa-check"></i> Candidatura enviada';

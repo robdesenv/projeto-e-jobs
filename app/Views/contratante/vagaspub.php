@@ -722,7 +722,7 @@
 
         const listarInformacoes = async (idFreelancer) => {
             try {
-                const response2 = await fetch('<?php echo base_url("/contratante/vagaspub?idFreelancer=") ?>' + idFreelancer);
+                const response2 = await fetch('<?php echo base_url("/contratante/exibirInformacoesFreelancer?idFreelancer=") ?>' + idFreelancer);
                 const data2 = await response2.json();
 
                 if(data2.informacoes && data2.informacoes.length > 0){

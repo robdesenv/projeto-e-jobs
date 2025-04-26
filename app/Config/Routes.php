@@ -33,6 +33,8 @@ $routes->post('/contratante/editarinformacoes/(:num)', 'ContratanteController::e
 $routes->get('/contratante/vagaspub', 'ContratanteController::vagaspub', ['filter' => 'group:contratante']);
 $routes->post('/contratante/vagaspub', 'ContratanteController::vagaspub', ['filter' => 'group:contratante']);
 
+$routes->get('/contratante/exibirInformacoesFreelancer', 'ContratanteController::exibirInformacoesFreelancer', ['filter' => 'group:contratante']);
+
 $routes->get('/contratante/solicitacoes', 'ContratanteController::solicitacoes', ['filter' => 'group:contratante']);
 
 $routes->get('/contratante/solicitacoes', 'ContratanteController::exibirSolicitacoes', ['filter' => 'group:contratante']);
@@ -45,6 +47,7 @@ $routes->get('/contratante/excluirevento/(:num)', 'ContratanteController::delete
 $routes->get('/contratante/excluirvaga/(:num)', 'ContratanteController::deleteVagas/$1', ['filter' => 'group:contratante']);
 
 $routes->get('/contratante/busca', 'ContratanteController::busca', ['filter' => 'group:contratante']);
+$routes->post('/contratante/busca', 'ContratanteController::busca', ['filter' => 'group:contratante']);
 
 $routes->get('/contratante/pagamentos', 'ContratanteController::pagamentos', ['filter' => 'group:contratante']);
 

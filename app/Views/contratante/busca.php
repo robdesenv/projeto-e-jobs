@@ -213,7 +213,6 @@
         <div class="busca-section">
             <h1>Encontre Freelancers</h1>
             
-            
             <div class="filtros-container">
                 <h5><i class="fas fa-filter"></i> Filtros de Busca</h5>
                 <div class="filtros-group">
@@ -237,6 +236,10 @@
             <button class="btn-buscar" onclick="filtrarServicos()">
                 <i class="fas fa-search"></i> Buscar Freelancers
             </button>
+
+           <?php if(session()->getFlashdata('msg')): ?>
+                    <?= session()->getFlashdata('msg'); ?>
+            <?php endif; ?>
 
             <div class="freelancers-container">
                 <?php foreach ($freelacers as $freelancer):
@@ -286,7 +289,7 @@
                     
                     <div class="freelancer-actions">
                         <a href="<?php echo $whatsappLink; ?>" target="_blank" class="btn-contato">
-                            <i class="fab fa-whatsapp"></i> Contatar
+                            <i class="fab fa-whatsapp"></i> WhatsApp
                         </a>
 
                         <button class="btn btn-sm btn-outline-primary btn-vaga" data-bs-dismiss="modal" onclick="verInformacoes(<?php echo htmlspecialchars($freelancer['id']); ?>)">
@@ -306,16 +309,43 @@
                     <h5 class="modal-title" id="modalAdicionarServicoLabel">Solicitações</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                
                         <div class="modal-body" id="conteudoInformacoes">
                             <!-- Conteúdo gerado via JS entra aqui -->
                         </div>
-                        <div class="modal-footer">
-                            <button type="submit" name="btn-cargo" id="btn-contratar" class="btn btn-success" data-bs-dismiss="modal" onclick="contratarFreelancer()">Contratar</button>
-                        </div>
-                </div>
+                        
+                
             </div>
         </div>               
+    </div>
+    <!-- Modal vagas disponivéis-->
+    <div class="modal fade" id="vagasModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Vagas disponíveis</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                
+                <div class="modal-body">
+                        <?php foreach($vagas as $index => $vaga):?>
+                            <form action="" method="post">
+                            <input type="hidden" id="idFreelancer" class="idFreelancer" name="idFreelancer">
+                                <div>
+                                    <input type="hidden" name="idVaga" value="<?php echo htmlspecialchars($vaga['id']);?>">
+                                    <input type="hidden" name="idEvento" value="<?php echo htmlspecialchars($vaga['evento_id']);?>">
+                                    <p>Vaga: <?php echo htmlspecialchars($vaga['cargo']); ?>  Evento: <?php echo htmlspecialchars($vaga['nome']); ?>
+                                    <button type="submit" id="btnContratarFreelancer">Contratar</button></p>
+                                </div>
+                            </form>    
+                        <?php endforeach?>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <?= $pager->links() ?>
@@ -329,6 +359,11 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+
+        if (window.history.replaceState ) {
+            window.history.replaceState( null, null, window.location.href );
+        }
+
         function verInformacoes(idFreelancer, idSolicitacao){
 
             solicitacaoId = idSolicitacao;
@@ -336,68 +371,74 @@
 
             const listarInformacoes = async (idFreelancer) => {
                 try {
-                    const response2 = await fetch('<?php echo base_url("/contratante/vagaspub?idFreelancer=") ?>' + idFreelancer);
+                    const response2 = await fetch('<?php echo base_url("/contratante/exibirInformacoesFreelancer?idFreelancer=") ?>' + idFreelancer);
                     const data2 = await response2.json();
 
                     if(data2.informacoes && data2.informacoes.length > 0){
                         let html = '';
                         data2.informacoes.forEach(informacoes => {
                             html += `
-                            <div class="card card-profile">
-                                <input type="hidden" value="${informacoes.id}">
-                                <div class="card-header">
-                                    <h3><i class="fas fa-user-tie"></i> Informações do Freelancer</h3>
+                            <div class="modal-body">
+                                <div class="card card-profile">
+                                    <input type="hidden" value="${informacoes.id}">
+                                    <div class="card-header">
+                                        <h3><i class="fas fa-user-tie"></i> Informações do Freelancer</h3>
+                                    </div>
+                                    <div class="info-grid">
+                                        <div class="info-item">
+                                            <div class="info-icon"><i class="fas fa-user"></i></div>
+                                            <div class="info-content">
+                                                <h4>Nome Completo</h4>
+                                                <p>${informacoes.nome}</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="info-item">
+                                            <div class="info-icon"><i class="fas fa-phone"></i></div>
+                                            <div class="info-content">
+                                                <h4>Telefone</h4>
+                                                <p>${informacoes.telefone}</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="info-item">
+                                            <div class="info-icon"><i class="fas fa-envelope"></i></div>
+                                            <div class="info-content">
+                                                <h4>E-mail</h4>
+                                                <p>${informacoes.email}</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="info-item">
+                                            <div class="info-icon"><i class="fas fa-birthday-cake"></i></div>
+                                            <div class="info-content">
+                                                <h4>Data de Nascimento</h4>
+                                                <p>${informacoes.dataNasc}</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="info-item">
+                                            <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                                            <div class="info-content">
+                                                <h4>Localização</h4>
+                                                <p>${informacoes.cidade}, ${informacoes.estado}</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="info-item">
+                                        <div class="freelancer-info"><i class="fas fa-briefcase"></i></div>
+                                            <div class="info-content">
+                                                <h4>Habilidades</h4>
+                                                <div id="habilidades"></div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="info-grid">
-                                    <div class="info-item">
-                                        <div class="info-icon"><i class="fas fa-user"></i></div>
-                                        <div class="info-content">
-                                            <h4>Nome Completo</h4>
-                                            <p>${informacoes.nome}</p>
-                                        </div>
-                                    </div>
 
-                                    <div class="info-item">
-                                        <div class="info-icon"><i class="fas fa-phone"></i></div>
-                                        <div class="info-content">
-                                            <h4>Telefone</h4>
-                                            <p>${informacoes.telefone}</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="info-item">
-                                        <div class="info-icon"><i class="fas fa-envelope"></i></div>
-                                        <div class="info-content">
-                                            <h4>E-mail</h4>
-                                            <p>${informacoes.email}</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="info-item">
-                                        <div class="info-icon"><i class="fas fa-birthday-cake"></i></div>
-                                        <div class="info-content">
-                                            <h4>Data de Nascimento</h4>
-                                            <p>${informacoes.dataNasc}</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="info-item">
-                                        <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
-                                        <div class="info-content">
-                                            <h4>Localização</h4>
-                                            <p>${informacoes.cidade}, ${informacoes.estado}</p>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="info-item">
-                                    <div class="freelancer-info"><i class="fas fa-briefcase"></i></div>
-                                        <div class="info-content">
-                                            <h4>Habilidades</h4>
-                                            <div id="habilidades"></div>
-                                        </div>
-                                    </div>
+                                <div class="modal-footer">
+                                    <button type="button" name="btn-cargo" id="btn-contratar" class="btn btn-success" data-bs-dismiss="modal" onclick="contratarFreelancer(${informacoes.user_id})">Contratar</button>
                                 </div>
-                            </div>
+                            </div>    
                         `;
                     });
   
@@ -426,6 +467,16 @@
             modal.show();
         }
 
+        function contratarFreelancer(idFreelancer)
+        {
+            var idFreelancerClass = document.querySelectorAll('.idFreelancer');
+            idFreelancerClass.forEach(function(input) {
+                input.value = idFreelancer;
+            });
+
+            const modal = new bootstrap.Modal(document.getElementById('vagasModal'));
+            modal.show();
+        }
 
 
     </script>

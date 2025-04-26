@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\contratadosModel;
 use CodeIgniter\HTTP\ResponseInterface;
 use \App\Models\contratanteModel;
 use \App\Controllers\CargosFreelancerController;
@@ -168,18 +169,26 @@ class ContratanteController extends BaseController
 
             return $this->response->setJSON($retorna);
         }
-    
+        
 
-        //exibir informações
+    return view(name: 'contratante/vagaspub',data: $data);
+
+    }
+
+    public function exibirInformacoesFreelancer()
+    {
+
         $idFreelancer = $this->request->getGet('idFreelancer');
 
         if($idFreelancer)
         {
             if(!empty($idFreelancer))
             {
-                $sql = 'SELECT * FROM freelancer WHERE id ='. $idFreelancer;
+                $db = db_connect();
 
-                $query = $db->query($sql);
+                $sql = 'SELECT * FROM freelancer WHERE id = ?';
+
+                $query = $db->query($sql,[$idFreelancer]);
                 $resultados = $query->getResultArray();
 
                 //exibe os cargos do freelancer
@@ -194,10 +203,6 @@ class ContratanteController extends BaseController
             }
             return $this->response->setJSON($retorna);
         }
-        
-
-    return view(name: 'contratante/vagaspub',data: $data);
-
     }
 
 
@@ -305,6 +310,7 @@ class ContratanteController extends BaseController
 
     public function busca()
     {
+        
         $freelancerModel = new \App\Models\freelancerModel();
         $data = [
             'freelacers' => $freelancerModel->paginate(10),
@@ -315,11 +321,59 @@ class ContratanteController extends BaseController
         $cargoModel = new \App\Models\cargosModel();
         $data['cargos'] = $cargoModel->findAll();
 
+        //exibir vagas
+        $id = user_id();
+        $sql = 'SELECT cargos.cargo, eventos.nome, eventos.user_id, vagas.id, vagas.evento_id
+        FROM vagas JOIN cargos ON vagas.cargo_id = cargos.id
+        JOIN eventos ON vagas.evento_id = eventos.id
+        WHERE eventos.user_id = ?';
+        $db = db_connect();
+        $query = $db->query($sql, [$id]);
+        $data['vagas'] = $query->getResultArray();
+
         //exibir os cargos cadastrados para o freelancer
         $data['CargosFreelancerController'] = new  CargosFreelancerController();
         
 
-        return view(name: 'contratante/busca',data: $data);
+        $data['msg'] = '';
+        
+        if($this->request->getMethod() === 'POST'){
+
+            $idVaga = $this->request->getPost('idVaga');
+            $idFreelancer = $this->request->getPost('idFreelancer');
+
+            $db = db_connect();
+            $sql = 'SELECT vagas_id, freelancer_id FROM contratados WHERE vagas_id = ? AND freelancer_id = ?';
+            $stmt = $db->connID->prepare($sql);
+            $stmt->bind_param('ii', $idVaga, $idFreelancer);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $num_rows = $result->num_rows;
+
+            if($num_rows >= 1)
+            {
+                session()->setFlashdata('msg', '<div class="alert alert-warning" role="alert">
+                                            Já foi criada uma solicitação desse Freelancer para esta vaga.
+                                        </div>');
+            }else
+            {
+                $contratadosModel = new contratadosModel();
+
+                $contratadosModel->set('evento_id', $this->request->getPost('idEvento'));
+                $contratadosModel->set('solicitante_id', user_id());
+                $contratadosModel->set('freelancer_id', $this->request->getPost('idFreelancer'));
+                $contratadosModel->set('vagas_id', $this->request->getPost('idVaga'));
+                $contratadosModel->set('status', null);
+
+                if($contratadosModel->insert())
+                {
+                    session()->setFlashdata('msg', '<div class="alert alert-success" role="alert">Solicitação enviada com sucesso.</div>');
+                    
+                } 
+            }
+        }
+
+        return view('contratante/busca',$data);
     }
 
 
@@ -349,7 +403,7 @@ class ContratanteController extends BaseController
 
         $data['contratante'] = $contratante;
 
-        echo view('contratante/minhaempresa', $data);
+        return view('contratante/minhaempresa', $data);
 
     }
 

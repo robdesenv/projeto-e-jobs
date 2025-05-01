@@ -382,7 +382,7 @@
                             <i class="fab fa-whatsapp"></i> WhatsApp
                         </a>
 
-                        <button class="btn-contato" onclick="verInformacoes(<?php echo htmlspecialchars($freelancer['id']); ?>)">
+                        <button class="btn-contato" onclick="verInformacoes(<?php echo htmlspecialchars($freelancer['id']); ?>, <?php echo htmlspecialchars($freelancer['user_id']); ?>)">
                             <i class="fas fa-info-circle"></i> Informações
                         </button>
                     </div>
@@ -463,14 +463,14 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        let freelancerIdGlobal = null;
+        let UserIdGlobal = null;
 
         if (window.history.replaceState) {
             window.history.replaceState(null, null, window.location.href);
         }
 
-        function verInformacoes(idFreelancer) {
-            freelancerIdGlobal = idFreelancer;
+        function verInformacoes(idFreelancer, UserId) {
+            UserIdGlobal = UserId;
             
             const listarInformacoes = async (idFreelancer) => {
                 try {
@@ -569,12 +569,12 @@
         }
 
         function contratarFreelancer() {
-            if (!freelancerIdGlobal) return;
+            if (!UserIdGlobal) return;
             
             // Preenche o campo hidden com o ID do freelancer
             var idFreelancerInputs = document.querySelectorAll('.idFreelancer');
             idFreelancerInputs.forEach(function(input) {
-                input.value = freelancerIdGlobal;
+                input.value = UserIdGlobal;
             });
 
             // Fecha o modal de informações

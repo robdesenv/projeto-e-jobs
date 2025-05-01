@@ -593,7 +593,6 @@
     </script>
 
     <style>
-        /* Estilos adicionais para os modais */
         .vaga-item {
             display: flex;
             justify-content: space-between;

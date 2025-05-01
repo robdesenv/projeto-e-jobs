@@ -229,7 +229,6 @@
         <div class="servicos-container" id="listaServicos">
             <?php foreach ($vagas as $vaga): 
                 $dataEvento = new DateTime($vaga['data']);
-                $jaCandidatou = isset($candidaturas) ? in_array($vaga['id'], array_column($candidaturas, 'vaga_id')) : false;
             ?>
             <div class="servico-card" 
                  data-categoria="<?php echo $vaga['cargo_id']; ?>" 
@@ -249,11 +248,9 @@
                 <p><strong>Estado:</strong> <?php echo htmlspecialchars($vaga['estado']); ?></p>
                 <p><strong>Valor:</strong> R$ <?php echo number_format($vaga['valor'], 2, ',', '.'); ?></p> 
                 <p><strong>Descrição:</strong> <?php echo htmlspecialchars($vaga['descricao']); ?></p>
-                <button class="btn-candidatar <?php echo $jaCandidatou ? 'disabled' : ''; ?>" 
-                        onclick="<?php echo $jaCandidatou ? '' : 'candidatarServico('.$vaga['id'].','.$vaga['evento_id'].', this)'; ?>" 
-                        <?php echo $jaCandidatou ? 'disabled' : ''; ?>>
-                    <i class="fas <?php echo $jaCandidatou ? 'fa-check' : 'fa-paper-plane'; ?>"></i> 
-                    <?php echo $jaCandidatou ? 'Candidatura enviada' : 'Candidatar-se'; ?>
+                <button class="btn-candidatar" 
+                        onclick="candidatarServico(<?php echo $vaga['id']; ?>, <?php echo $vaga['evento_id']; ?>, this)">
+                    <i class="fas fa-paper-plane"></i> Candidatar-se
                 </button>
             </div>
             <?php endforeach; ?>
@@ -270,19 +267,11 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    // Função para inicializar as candidaturas do localStorage 
-    function inicializarCandidaturas() {
-        const candidaturasLocalStorage = JSON.parse(localStorage.getItem('candidaturas')) || [];
-        
-        document.querySelectorAll('.servico-card').forEach(card => {
-            const vagaId = parseInt(card.getAttribute('data-vaga-id'));
-            const btn = card.querySelector('.btn-candidatar');
-            
-           
-            const jaCandidatouServidor = btn.classList.contains('disabled');
-            
-           
-            if (!jaCandidatouServidor && candidaturasLocalStorage.includes(vagaId)) {
+    function desativarBotoesJaCandidatados() {
+        const candidaturas = JSON.parse(localStorage.getItem('candidaturas')) || [];
+        candidaturas.forEach(idVaga => {
+            const btn = document.querySelector(`.servico-card[data-vaga-id="${idVaga}"] .btn-candidatar`);
+            if (btn) {
                 btn.innerHTML = '<i class="fas fa-check"></i> Candidatura enviada';
                 btn.classList.add('disabled');
                 btn.disabled = true;
@@ -292,7 +281,6 @@
 
     async function candidatarServico(idVaga, idEvento, btnElement) {
         const btn = btnElement;
-        
         if (btn.classList.contains('disabled')) return;
 
         try {
@@ -307,14 +295,11 @@
             msgDiv.style.display = 'block';
             msgDiv.className = data.success ? 'alert-message alert-success' : 'alert-message alert-error';
 
-
             if (data.success) {
-                // Atualiza o botão e armazena no localStorage
                 btn.innerHTML = '<i class="fas fa-check"></i> Candidatura enviada';
                 btn.classList.add('disabled');
                 btn.disabled = true;
-                
-                // Armazena a candidatura no localStorage
+
                 const candidaturas = JSON.parse(localStorage.getItem('candidaturas')) || [];
                 if (!candidaturas.includes(idVaga)) {
                     candidaturas.push(idVaga);
@@ -333,10 +318,10 @@
             msgDiv.textContent = 'Erro ao processar candidatura';
             msgDiv.style.display = 'block';
             msgDiv.className = 'alert-message alert-error';
-            
+
             btn.innerHTML = '<i class="fas fa-paper-plane"></i> Candidatar-se';
             btn.disabled = false;
-            
+
             setTimeout(() => msgDiv.style.display = 'none', 3000);
         }
     }
@@ -345,16 +330,16 @@
         const categoria = document.getElementById('categoria').value;
         const localizacao = document.getElementById('localizacao').value.toLowerCase();
         const cards = document.querySelectorAll('.servico-card');
-        
+
         let cardsVisiveis = 0;
-        
+
         cards.forEach(card => {
             const cardCategoria = card.getAttribute('data-categoria');
             const cardLocalizacao = card.getAttribute('data-localizacao');
-            
+
             const categoriaMatch = categoria === '' || cardCategoria === categoria;
             const localizacaoMatch = localizacao === '' || cardLocalizacao.includes(localizacao);
-            
+
             if (categoriaMatch && localizacaoMatch) {
                 card.style.display = 'block';
                 cardsVisiveis++;
@@ -373,31 +358,24 @@
         }
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
-        
-        inicializarCandidaturas();
-        
-      
+    document.addEventListener('DOMContentLoaded', function () {
+        // Aplicar desativação aos já candidatados
+        desativarBotoesJaCandidatados();
+
+        // Filtro automático via URL
         const urlParams = new URLSearchParams(window.location.search);
         const categoriaParam = urlParams.get('categoria');
         const localizacaoParam = urlParams.get('localizacao');
-        
-        if (categoriaParam) {
-            document.getElementById('categoria').value = categoriaParam;
-        }
-        
-        if (localizacaoParam) {
-            document.getElementById('localizacao').value = localizacaoParam;
-        }
-        
-        if (categoriaParam || localizacaoParam) {
-            filtrarServicos();
-        }
 
-        
+        if (categoriaParam) document.getElementById('categoria').value = categoriaParam;
+        if (localizacaoParam) document.getElementById('localizacao').value = localizacaoParam;
+        if (categoriaParam || localizacaoParam) filtrarServicos();
+
+        // Listeners
         document.getElementById('localizacao').addEventListener('input', filtrarServicos);
         document.getElementById('categoria').addEventListener('change', filtrarServicos);
     });
 </script>
+
 </body>
 </html>

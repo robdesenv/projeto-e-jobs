@@ -202,6 +202,113 @@
             margin-top: 40px;
         }
 
+        .modal-info-header {
+            background-color: #004182;
+            color: white;
+            padding: 15px 20px;
+        }
+
+        .modal-info-title {
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .modal-info-header {
+            background-color: #004182;
+            color: white;
+            padding: 15px 20px;
+        }
+
+        .modal-info-title {
+            font-weight: 600;
+            margin: 0;
+        }
+
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .info-item {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+
+        .info-item:hover {
+            background-color: #f0f7ff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-icon {
+            color: #004182;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .info-content h4 {
+            color: #004182;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .info-content p {
+            color: #333;
+            margin: 0;
+        }
+
+        .modal-info-footer {
+            border-top: 1px solid #eee;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .btn-contratar {
+            background-color: #28a745;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 5px;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-contratar:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+
+        .habilidades-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 5px;
+        }
+
+        .habilidade-badge {
+            background-color: #e9f0f8;
+            color: #004182;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+
+        .info-item:hover {
+            background-color: #f0f7ff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
         /* Estilos para as vagas */
         .vagas-container {
             margin-top: 15px;
@@ -267,28 +374,43 @@
             filter: invert(1);
         }
 
-        #modalAdicionarNovaVaga .form-select, 
+        #modalAdicionarNovaVaga .form-select,
         #modalAdicionarNovaVaga .form-control {
             border-radius: 6px;
             padding: 10px;
             border: 1px solid #ddd;
         }
 
-        #modalAdicionarNovaVaga .form-select:focus, 
+        #modalAdicionarNovaVaga .form-select:focus,
         #modalAdicionarNovaVaga .form-control:focus {
             border-color: #004182;
             box-shadow: 0 0 0 0.25rem rgba(0, 65, 130, 0.25);
         }
 
         @media (max-width: 768px) {
-            .eventos-container {
+            .freelancers-container {
                 grid-template-columns: 1fr;
             }
             
-            .btn-adicionar {
+            .btn-buscar {
                 width: 100%;
             }
+            
+            .filtros-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .filtro-item {
+                min-width: 100%;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
         }
+
+        
     </style>
 </head>
 
@@ -303,18 +425,19 @@
                 <i class="fas fa-plus"></i> Criar Novo Evento
             </button>
 
-            <?php if(isset($msg) && !empty($msg)): ?>
+            <?php if (isset($msg) && !empty($msg)): ?>
                 <p class="alert alert-info"><?php echo $msg; ?></p>
             <?php endif; ?>
 
-            <?php if(session()->getFlashdata('msg')): ?>
+            <?php if (session()->getFlashdata('msg')): ?>
                 <div class="alert alert-danger">
                     <?= session()->getFlashdata('msg'); ?>
                 </div>
             <?php endif; ?>
 
             <!-- Modal Adicionar e Editar Evento -->
-            <div class="modal fade" id="modalAdicionarServico" tabindex="-1" aria-labelledby="modalAdicionarServicoLabel" aria-hidden="true">
+            <div class="modal fade" id="modalAdicionarServico" tabindex="-1"
+                aria-labelledby="modalAdicionarServicoLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -330,7 +453,8 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="descricaoServico" class="form-label">Descrição:</label>
-                                    <textarea class="form-control" id="descricaoServico" name="descricao" rows="3" required></textarea>
+                                    <textarea class="form-control" id="descricaoServico" name="descricao" rows="3"
+                                        required></textarea>
                                 </div>
                                 <div class="mb-3">
                                     <label for="dataServico" class="form-label">Data:</label>
@@ -356,8 +480,10 @@
                                     </select>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                                    <button type="submit" id="btneditEventos" name="btn-eventos" value="adicionarevento" class="btn btn-primary">Salvar</button>
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Fechar</button>
+                                    <button type="submit" id="btneditEventos" name="btn-eventos" value="adicionarevento"
+                                        class="btn btn-primary">Salvar</button>
                                 </div>
                             </form>
                         </div>
@@ -366,24 +492,25 @@
             </div>
 
             <div class="eventos-container">
-                <?php foreach($eventos as $evento): 
+                <?php foreach ($eventos as $evento):
                     $dataEvento = new DateTime($evento['data']);
                     ?>
                     <div class="evento-card" id="evento-<?php echo $evento['id']; ?>">
                         <div class="evento-header">
                             <h3 class="evento-title"><?php echo htmlspecialchars($evento['nome']); ?></h3>
-                            <span class="evento-status <?php echo $evento['status'] == 'Disponivel' ? 'status-disponivel' : 'status-esgotado'; ?>">
+                            <span
+                                class="evento-status <?php echo $evento['status'] == 'Disponivel' ? 'status-disponivel' : 'status-esgotado'; ?>">
                                 <?php echo htmlspecialchars($evento['status'] == 'Disponivel' ? 'Disponível' : 'Esgotado'); ?>
                             </span>
                         </div>
-                        
+
                         <div class="evento-body">
                             <div class="data-destaque">
                                 <div class="data-dia"><?php echo $dataEvento->format('d'); ?></div>
                                 <div class="data-mes"><?php echo $dataEvento->format('M'); ?></div>
                                 <div class="data-ano"><?php echo $dataEvento->format('Y'); ?></div>
                             </div>
-                            
+
                             <div class="evento-info">
                                 <i class="fas fa-align-left"></i>
                                 <div>
@@ -391,7 +518,7 @@
                                     <div class="evento-value"><?php echo htmlspecialchars($evento['descricao']); ?></div>
                                 </div>
                             </div>
-                            
+
                             <div class="evento-info">
                                 <i class="fas fa-map-marker-alt"></i>
                                 <div>
@@ -403,39 +530,45 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="vagas-container">
                                 <h6>Vagas disponíveis:</h6>
-                                <button class="btn btn-sm btn-success mb-2" onclick="abrirModalNovaVaga(<?php echo $evento['id']?>)">
+                                <button class="btn btn-sm btn-success mb-2"
+                                    onclick="abrirModalNovaVaga(<?php echo $evento['id'] ?>)">
                                     <i class="fas fa-plus"></i> Adicionar Vaga
                                 </button>
-                                
-                                <?php foreach($vagas as $vaga): 
-                                    if($evento['id'] == $vaga['evento_id']): ?>
+
+                                <?php foreach ($vagas as $vaga):
+                                    if ($evento['id'] == $vaga['evento_id']): ?>
                                         <div class="vaga-item">
                                             <div class="vaga-info">
                                                 <span class="vaga-cargo"><?php echo htmlspecialchars($vaga['cargo']); ?></span>
-                                                <span class="vaga-quantidade"><?php echo htmlspecialchars($vaga['quantidade']); ?> vaga(s)</span>
+                                                <span class="vaga-quantidade"><?php echo htmlspecialchars($vaga['quantidade']); ?>
+                                                    vaga(s)</span>
                                             </div>
                                             <div class="vaga-actions">
-                                                <button class="btn btn-sm btn-outline-primary btn-vaga" onclick="abrirModalSolicitações(<?php echo htmlspecialchars($vaga['id']); ?>)">
+                                                <button class="btn btn-sm btn-outline-primary btn-vaga"
+                                                    onclick="abrirModalSolicitações(<?php echo htmlspecialchars($vaga['id']); ?>)">
                                                     Solicitações
                                                 </button>
-                                                <button class="btn btn-sm btn-outline-danger btn-vaga" id="btnExcluirVaga" onclick="excluirVaga(<?php echo $vaga['id']; ?>)" title="Excluir">
+                                                <button class="btn btn-sm btn-outline-danger btn-vaga" id="btnExcluirVaga"
+                                                    onclick="excluirVaga(<?php echo $vaga['id']; ?>)" title="Excluir">
                                                     <i class="fas fa-trash-alt"></i>
                                                 </button>
                                             </div>
                                         </div>
-                                    <?php endif; 
+                                    <?php endif;
                                 endforeach; ?>
                             </div>
                         </div>
-                        
+
                         <div class="evento-actions">
-                            <button class="btn btn-sm btn-primary btn-acao" title="Editar" onclick="editarEvento(<?php echo $evento['id']; ?>)">
+                            <button class="btn btn-sm btn-primary btn-acao" title="Editar"
+                                onclick="editarEvento(<?php echo $evento['id']; ?>)">
                                 <i class="fas fa-edit"></i> Editar
                             </button>
-                            <button class="btn btn-sm btn-danger btn-acao" title="Excluir" onclick="confirmarExclusao(<?php echo $evento['id']; ?>)">
+                            <button class="btn btn-sm btn-danger btn-acao" title="Excluir"
+                                onclick="confirmarExclusao(<?php echo $evento['id']; ?>)">
                                 <i class="fas fa-trash-alt"></i> Excluir
                             </button>
                         </div>
@@ -465,7 +598,8 @@
     </div>
 
     <!-- Modal para adicionar vagas-->
-    <div class="modal fade" id="modalAdicionarNovaVaga" tabindex="-1" aria-labelledby="modalAdicionarServicoLabel" aria-hidden="true">
+    <div class="modal fade" id="modalAdicionarNovaVaga" tabindex="-1" aria-labelledby="modalAdicionarServicoLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -478,9 +612,9 @@
                         <div class="mb-3">
                             <label for="cargoVaga" class="form-label">Cargo:</label>
                             <select class="form-select" id="cargoVaga" name="cargo_id" required>
-                                <?php foreach($cargos as $cargo): ?>
-                                <option value="<?php echo $cargo['id']?>"><?php echo $cargo['cargo']?></option>
-                                <?php endforeach;?>
+                                <?php foreach ($cargos as $cargo): ?>
+                                    <option value="<?php echo $cargo['id'] ?>"><?php echo $cargo['cargo'] ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
                         <div class="mb-3">
@@ -493,16 +627,18 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                            <button type="submit" name="btn-eventos" value="adicionarvaga" class="btn btn-primary">Salvar</button>
+                            <button type="submit" name="btn-eventos" value="adicionarvaga"
+                                class="btn btn-primary">Salvar</button>
                         </div>
                     </form>
                 </div>
             </div>
-        </div>               
+        </div>
     </div>
 
-    
-    <div class="modal fade" id="modalSolicitacoes" tabindex="-1" aria-labelledby="modalAdicionarServicoLabel" aria-hidden="true">
+
+    <div class="modal fade" id="modalSolicitacoes" tabindex="-1" aria-labelledby="modalAdicionarServicoLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -511,22 +647,23 @@
                 </div>
                 <h6 class="modal-title" id="modalAdicionarServicoLabel">Solicitações dos Freelancers</h6>
                 <div class="modal-body">
-                        <div class="modal-body" id="conteudoSolicitacoesFreelancer">
-                     
-                        </div>
+                    <div class="modal-body" id="conteudoSolicitacoesFreelancer">
+
+                    </div>
                 </div>
                 <h6 class="modal-title" id="modalAdicionarServicoLabel">Suas Solicitações</h6>
                 <div class="modal-body">
-                        <div class="modal-body" id="conteudoSolicitacoes">
-                           
-                        </div>
+                    <div class="modal-body" id="conteudoSolicitacoes">
+
+                    </div>
                 </div>
             </div>
-        </div>               
+        </div>
     </div>
 
     <!-- Modal para informações do freelancer-->
-    <div class="modal fade" id="modalInformacoes" tabindex="-1" aria-labelledby="modalAdicionarServicoLabel" aria-hidden="true">
+    <div class="modal fade" id="modalInformacoes" tabindex="-1" aria-labelledby="modalAdicionarServicoLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -534,16 +671,18 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                        <div class="modal-body" id="conteudoInformacoes">
-                            
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" id="btn-recusar" data-bs-dismiss="modal">Recusar</button>
-                            <button type="submit" name="btn-cargo" id="btn-contratar" class="btn btn-success" data-bs-dismiss="modal" >Contratar</button>
-                        </div>
+                    <div class="modal-body" id="conteudoInformacoes">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" id="btn-recusar"
+                            data-bs-dismiss="modal">Recusar</button>
+                        <button type="submit" name="btn-cargo" id="btn-contratar" class="btn btn-success"
+                            data-bs-dismiss="modal">Contratar</button>
+                    </div>
                 </div>
             </div>
-        </div>               
+        </div>
     </div>
 
     <footer class="footer">
@@ -560,69 +699,69 @@
         let solicitacaoId = null;
         let freelancerId = null;
         let vagaId = null;
-        
+
         function abrirModalAdicionar() {
-         
+
             document.getElementById('formAdicionarServico').reset();
             document.getElementById('eventoId').value = '';
-           
+
             document.getElementById('modalAdicionarServicoLabel').textContent = 'Criar Evento';
-            
-            
+
+
             const modal = new bootstrap.Modal(document.getElementById('modalAdicionarServico'));
             modal.show();
         }
-        
+
         function editarEvento(id) {
-           
+
             const eventoElement = document.getElementById(`evento-${id}`);
-            
+
             if (!eventoElement) return;
-        
+
             document.getElementById('eventoId').value = id;
             document.getElementById('nomeServico').value = eventoElement.querySelector('.evento-title').textContent;
-            
-        
+
+
             const descricao = eventoElement.querySelectorAll('.evento-value')[0].textContent;
             document.getElementById('descricaoServico').value = descricao.trim();
-            
-   
+
+
             const localInfo = eventoElement.querySelectorAll('.evento-value')[1].textContent.trim().split('\n');
             document.getElementById('endereco').value = localInfo[0].trim();
             document.getElementById('cidade').value = localInfo[1].trim();
             document.getElementById('estado').value = localInfo[2].trim();
-            
-            
-      
+
+
+
             const dataDia = eventoElement.querySelector('.data-dia').textContent;
             const dataMes = eventoElement.querySelector('.data-mes').textContent;
             const dataAno = eventoElement.querySelector('.data-ano').textContent;
-            
+
             const meses = {
                 'Jan': '01', 'Fev': '02', 'Mar': '03', 'Abr': '04', 'Mai': '05', 'Jun': '06',
                 'Jul': '07', 'Ago': '08', 'Set': '09', 'Out': '10', 'Nov': '11', 'Dez': '12'
 
-            
+
             };
             const mesNumero = meses[dataMes] || '01';
-            
+
             const dataFormatada = `${dataAno}-${mesNumero}-${dataDia.padStart(2, '0')}`;
             document.getElementById('dataServico').value = dataFormatada;
-            
+
 
             const statusElement = eventoElement.querySelector('.evento-status');
             const status = statusElement.classList.contains('status-disponivel') ? 'Disponivel' : 'Esgotado';
             document.getElementById('statusServico').value = status;
-            
-       
+
+
             document.getElementById('modalAdicionarServicoLabel').textContent = 'Editar Evento';
-            
-            
+
+
             const modal = new bootstrap.Modal(document.getElementById('modalAdicionarServico'));
             modal.show();
 
-            
-            
+
+
         }
 
         function abrirModalNovaVaga(id) {
@@ -630,33 +769,33 @@
             const modal = new bootstrap.Modal(document.getElementById('modalAdicionarNovaVaga'));
             modal.show();
         }
-        
+
 
         function abrirModalSolicitações(idVaga) {
 
-        vagaId = idVaga;
+            vagaId = idVaga;
 
-        const listarSolicitacoes = async (idVaga) => {
-        try {
-            const response = await fetch('<?php echo base_url("/contratante/vagaspub?idVaga=") ?>' + idVaga);
-            const data = await response.json();
+            const listarSolicitacoes = async (idVaga) => {
+                try {
+                    const response = await fetch('<?php echo base_url("/contratante/vagaspub?idVaga=") ?>' + idVaga);
+                    const data = await response.json();
 
-            if (data.solicitacoes && data.solicitacoes.length > 0) {
-                let html = '';
-                let html2 = '';
+                    if (data.solicitacoes && data.solicitacoes.length > 0) {
+                        let html = '';
+                        let html2 = '';
 
-                data.solicitacoes.forEach(solicitacao => {
-                        let statusLabel = '';
-                    if (solicitacao.status === null) {
-                        statusLabel = '<span class="vaga-quantidade alert alert-warning"><strong>Status: </strong>Aguardando confirmação...</span>';
-                    } else if (solicitacao.status == 1) {
-                        statusLabel = '<span class="vaga-quantidade alert alert-success"><strong>Status: </strong>Contratado</span>';
-                    } else if (solicitacao.status == 0) {
-                        statusLabel = '<span class="vaga-quantidade alert alert-danger"><strong>Status: </strong>Recusado</span>';
-                    }
+                        data.solicitacoes.forEach(solicitacao => {
+                            let statusLabel = '';
+                            if (solicitacao.status === null) {
+                                statusLabel = '<span class="vaga-quantidade alert alert-warning"><strong>Status: </strong>Aguardando confirmação...</span>';
+                            } else if (solicitacao.status == 1) {
+                                statusLabel = '<span class="vaga-quantidade alert alert-success"><strong>Status: </strong>Contratado</span>';
+                            } else if (solicitacao.status == 0) {
+                                statusLabel = '<span class="vaga-quantidade alert alert-danger"><strong>Status: </strong>Recusado</span>';
+                            }
 
-                    if(solicitacao.solicitante_id != <?php echo user_id(); ?>){ 
-                    html += `
+                            if (solicitacao.solicitante_id != <?php echo user_id(); ?>) {
+                                html += `
                         <div>
                             <div class="vaga-item">
                                 <div class="vaga-info">
@@ -670,8 +809,9 @@
                                 </div>
                             </div>
                         </div>
-                    `;}else if(solicitacao.solicitante_id == <?php echo user_id(); ?>) {
-                        html2 += `
+                    `;
+                            } else if (solicitacao.solicitante_id == <?php echo user_id(); ?>) {
+                                html2 += `
                         <div class="vaga-item">
                             <div class="vaga-info">
                                 <span class="vaga-cargo">${solicitacao.nome}</span>
@@ -679,60 +819,56 @@
                             </div>
                         </div>
                     `;
+                            }
+
+
+                        });
+
+                        if (html == '') {
+                            document.getElementById("conteudoSolicitacoesFreelancer").innerHTML = "<p class='text-muted'>Nenhuma solicitação encontrada.</p>";
+                        } else {
+                            document.getElementById("conteudoSolicitacoesFreelancer").innerHTML = html;
+                        }
+
+                        if (html2 == '') {
+                            document.getElementById("conteudoSolicitacoes").innerHTML = "<p class='text-muted'>Nenhuma solicitação encontrada.</p>";
+                        } else {
+                            document.getElementById("conteudoSolicitacoes").innerHTML = html2;
+                        }
+
+
+
+                    } else {
+                        document.getElementById("conteudoSolicitacoes").innerHTML = "<p class='text-muted'>Nenhuma solicitação encontrada.</p>";
                     }
-                    
-                   
-                });
 
-                if(html == ''){
-                    document.getElementById("conteudoSolicitacoesFreelancer").innerHTML = "<p class='text-muted'>Nenhuma solicitação encontrada.</p>";
-                }else{
-                    document.getElementById("conteudoSolicitacoesFreelancer").innerHTML = html;
+                } catch (error) {
+                    console.error("Erro ao buscar solicitações:", error);
+                    document.getElementById("conteudoSolicitacoes").innerHTML = "<p class='text-danger'>Erro ao carregar as solicitações.</p>";
                 }
+            };
 
-                if(html2 == ''){
-                    document.getElementById("conteudoSolicitacoes").innerHTML = "<p class='text-muted'>Nenhuma solicitação encontrada.</p>";
-                }else{
-                    document.getElementById("conteudoSolicitacoes").innerHTML = html2;
-                }
-                
-                
+            listarSolicitacoes(idVaga);
 
-            } else {
-                document.getElementById("conteudoSolicitacoes").innerHTML = "<p class='text-muted'>Nenhuma solicitação encontrada.</p>";
-            }
-
-        } catch (error) {
-            console.error("Erro ao buscar solicitações:", error);
-            document.getElementById("conteudoSolicitacoes").innerHTML = "<p class='text-danger'>Erro ao carregar as solicitações.</p>";
+            const modal = new bootstrap.Modal(document.getElementById('modalSolicitacoes'));
+            modal.show();
         }
-    };
-
-    listarSolicitacoes(idVaga);
-
-    const modal = new bootstrap.Modal(document.getElementById('modalSolicitacoes'));
-    modal.show();
-}
 
 
-    function verInformacoes(idFreelancer, idSolicitacao){
+        function verInformacoes(idFreelancer, idSolicitacao) {
 
-        solicitacaoId = idSolicitacao;
-        freelancerId = idFreelancer;
+            solicitacaoId = idSolicitacao;
+            freelancerId = idFreelancer;
 
-        const listarInformacoes = async (idFreelancer) => {
-            try {
-                const response2 = await fetch('<?php echo base_url("/contratante/exibirInformacoesFreelancer?idFreelancer=") ?>' + idFreelancer);
-                const data2 = await response2.json();
+            const listarInformacoes = async (idFreelancer) => {
+                try {
+                    const response2 = await fetch('<?php echo base_url("/contratante/exibirInformacoesFreelancer?idFreelancer=") ?>' + idFreelancer);
+                    const data2 = await response2.json();
 
-                if(data2.informacoes && data2.informacoes.length > 0){
-                    let html = '';
-                    data2.informacoes.forEach(informacoes => {
-                        html += `
-                        <div class="card card-profile">
-                            <div class="card-header">
-                                <h3><i class="fas fa-user-tie"></i> Informações do Freelancer</h3>
-                            </div>
+                    if (data2.informacoes && data2.informacoes.length > 0) {
+                        let html = '';
+                        data2.informacoes.forEach(informacoes => {
+                            html += `
                             <div class="info-grid">
                                 <div class="info-item">
                                     <div class="info-icon"><i class="fas fa-user"></i></div>
@@ -772,42 +908,34 @@
                                         <h4>Localização</h4>
                                         <p>${informacoes.cidade}, ${informacoes.estado}</p>
                                     </div>
-                                <div class="info-item">
-                                    <div class="freelancer-info"><i class="fas fa-briefcase"></i></div>
-                                        <div class="info-content">
-                                            <h4>Habilidades</h4>
-                                            <div id="habilidades"></div>
-                                        </div>
-                                    </div>
                                 </div>
-                            </div>
                         `;
-                    });
-  
-                    document.getElementById("conteudoInformacoes").innerHTML = html;
+                        });
+
+                        document.getElementById("conteudoInformacoes").innerHTML = html;
                     }
 
-                    if(data2.cargosFreelancer && data2.cargosFreelancer.length > 0){
+                    if (data2.cargosFreelancer && data2.cargosFreelancer.length > 0) {
                         let html = '';
                         data2.cargosFreelancer.forEach(cargosFreelancer => {
                             html += `
                             <p>${cargosFreelancer.cargo}</p>
                                  
                         `;
-                    });
-  
-                    document.getElementById("habilidades").innerHTML = html;
+                        });
+
+                        document.getElementById("habilidades").innerHTML = html;
                     }
-            } catch (error) {
-                console.log("erro");
+                } catch (error) {
+                    console.log("erro");
+                }
             }
+
+            listarInformacoes(idFreelancer);
+
+            const modal = new bootstrap.Modal(document.getElementById('modalInformacoes'));
+            modal.show();
         }
-
-        listarInformacoes(idFreelancer);
-
-        const modal = new bootstrap.Modal(document.getElementById('modalInformacoes'));
-        modal.show();
-    }
 
         function confirmarExclusao(id) {
             eventoIdParaExcluir = id;
@@ -821,48 +949,49 @@
             const modal = new bootstrap.Modal(document.getElementById('modalConfirmacaoExclusao'));
             modal.show();
         }
-        
-        
-       
-        document.getElementById('btnConfirmarExclusao').addEventListener('click', function() {
+
+
+
+        document.getElementById('btnConfirmarExclusao').addEventListener('click', function () {
             if (eventoIdParaExcluir) {
                 window.location.href = '<?php echo base_url("contratante/excluirevento/"); ?>' + eventoIdParaExcluir;
             }
         });
 
-        document.getElementById('btnConfirmarExclusao').addEventListener('click', function() {
+        document.getElementById('btnConfirmarExclusao').addEventListener('click', function () {
             if (vagaIdExcluir) {
                 window.location.href = '<?php echo base_url("contratante/excluirvaga/"); ?>' + vagaIdExcluir;
             }
         });
 
-        document.getElementById('btn-contratar').addEventListener('click', async function() {
-        if (solicitacaoId) {
-            try {
-                const response = await fetch('<?php echo base_url("/contratante/solicitacoes?IdSolicitacao=") ?>' + solicitacaoId + "&btn=contratar");
-                const data = await response.json();
-                abrirModalSolicitações(vagaId);
-            } catch (error) {
-                console.error('Erro na requisição:', error);
+        document.getElementById('btn-contratar').addEventListener('click', async function () {
+            if (solicitacaoId) {
+                try {
+                    const response = await fetch('<?php echo base_url("/contratante/solicitacoes?IdSolicitacao=") ?>' + solicitacaoId + "&btn=contratar");
+                    const data = await response.json();
+                    abrirModalSolicitações(vagaId);
+                } catch (error) {
+                    console.error('Erro na requisição:', error);
+                }
             }
-        }
 
         });
 
-        document.getElementById('btn-recusar').addEventListener('click', async function() {
-        if (solicitacaoId) {
-            try {
-                const response = await fetch('<?php echo base_url("/contratante/solicitacoes?IdSolicitacao=") ?>' + solicitacaoId + "&btn=recusar");
-                const data = await response.json();
-                abrirModalSolicitações(vagaId);
-            } catch (error) {
-                console.error('Erro na requisição:', error);
+        document.getElementById('btn-recusar').addEventListener('click', async function () {
+            if (solicitacaoId) {
+                try {
+                    const response = await fetch('<?php echo base_url("/contratante/solicitacoes?IdSolicitacao=") ?>' + solicitacaoId + "&btn=recusar");
+                    const data = await response.json();
+                    abrirModalSolicitações(vagaId);
+                } catch (error) {
+                    console.error('Erro na requisição:', error);
+                }
             }
-        }
 
         });
 
-        
+
     </script>
-</body> 
-</html> 
+</body>
+
+</html>

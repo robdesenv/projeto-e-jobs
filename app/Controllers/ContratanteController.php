@@ -310,12 +310,7 @@ class ContratanteController extends BaseController
 
     public function busca()
     {
-        
-        $freelancerModel = new \App\Models\freelancerModel();
-        $data = [
-            'freelacers' => $freelancerModel->paginate(10),
-            'pager' => $freelancerModel->pager
-        ];
+
 
         //exibir cargos
         $cargoModel = new \App\Models\cargosModel();
@@ -374,6 +369,44 @@ class ContratanteController extends BaseController
         }
 
         return view('contratante/busca',$data);
+    }
+
+
+    public function filtrarFreelancers(){
+
+        $cargoId = $this->request->getGet('cargoId');
+
+        if(!empty($cargoId))
+        {
+            $db = db_connect();
+            $sql = 'SELECT * from freelancer join cargo_freelancer ON cargo_freelancer.user_id = freelancer.user_id WHERE cargo_freelancer.cargo_id = ?';
+            $query = $db->query($sql, [$cargoId]);
+            $freelancers = $query->getResultArray();
+
+            /*$data = [
+                'freelacers' => $freelancer->paginate(10),
+                'pager' => $freelancer->pager
+            ];*/
+
+            $reponse = ['msg' => 'ok', 'id' => $cargoId, 'freelancers' => $freelancers];
+
+            return  $this->response->setJSON($reponse);
+
+        }else
+        {
+            $freelancerModel = new \App\Models\freelancerModel();
+
+            /*$data = [
+                'freelacers' => $freelancerModel->paginate(10),
+                'pager' => $freelancerModel->pager
+            ];*/
+
+            $freelancer = $freelancerModel->findAll();
+
+            $response = ['freelancers' => $freelancer];
+
+            return  $this->response->setJSON($response);
+        }
     }
 
 

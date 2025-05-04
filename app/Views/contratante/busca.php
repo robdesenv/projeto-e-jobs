@@ -312,8 +312,8 @@
                 <h5><i class="fas fa-filter"></i> Filtros de Busca</h5>
                 <div class="filtros-group">
                     <div class="filtro-item">
-                        <label for="categoria" class="form-label">Categoria:</label>
-                        <select id="categoria" class="form-select">
+                        <label for="cargo" class="form-label">Cargo:</label>
+                        <select id="cargo" class="form-select" onchange="filtrarFreelancer()">
                         <option value=""></option>
                                 <?php foreach($cargos as $cargo): ?>
                                 <option value="<?php echo $cargo['id']?>"><?php echo $cargo['cargo']?></option>
@@ -328,7 +328,7 @@
                 </div>
             </div>
             
-            <button class="btn-buscar" onclick="filtrarServicos()">
+            <button class="btn-buscar" onclick="filtrarFreelancer()">
                 <i class="fas fa-search"></i> Buscar Freelancers
             </button>
 
@@ -336,58 +336,8 @@
                     <?= session()->getFlashdata('msg'); ?>
             <?php endif; ?>
 
-            <div class="freelancers-container">
-                <?php foreach ($freelacers as $freelancer):
-                    $telefone = preg_replace('/[^0-9]/', '', $freelancer['telefone']);
-                    $whatsappLink = "https://wa.me/55{$telefone}";
-                ?>
-                <div class="freelancer-card">
-                    <div class="freelancer-header">
-                        <h3 class="freelancer-title"><?php echo htmlspecialchars($freelancer['nome']); ?></h3>
-                    </div>
-                    
-                    <div class="freelancer-body">
-                        <div class="freelancer-info">
-                            <i class="fas fa-briefcase"></i>
-                            <div>
-                                <div class="freelancer-label">Habilidades</div>
-                                <div class="freelancer-value"><?php $cargosfreelancer = $CargosFreelancerController->ExibirCargosFreelancer($freelancer['user_id']);?>
-                                <?php foreach($cargosfreelancer as $cargofreelancer): ?>
-                                    <p><?php echo $cargofreelancer['cargo'] ?> </p>
-                                <?php endforeach ?></div>
-                            </div>
-                        </div>
-                        
-                        <div class="freelancer-info">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div>
-                                <div class="freelancer-label">Localização</div>
-                                <div class="freelancer-value">
-                                    <?php echo htmlspecialchars($freelancer['cidade']); ?>, <?php echo htmlspecialchars($freelancer['estado']); ?>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="freelancer-info">
-                            <i class="fas fa-phone"></i>
-                            <div>
-                                <div class="freelancer-label">Contato</div>
-                                <div class="freelancer-value"><?php echo htmlspecialchars($freelancer['telefone']); ?></div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="freelancer-actions">
-                        <a href="<?php echo $whatsappLink; ?>" target="_blank" class="btn-contato">
-                            <i class="fab fa-whatsapp"></i> WhatsApp
-                        </a>
-
-                        <button class="btn-contato" onclick="verInformacoes(<?php echo htmlspecialchars($freelancer['id']); ?>, <?php echo htmlspecialchars($freelancer['user_id']); ?>)">
-                            <i class="fas fa-info-circle"></i> Informações
-                        </button>
-                    </div>
-                </div>
-                <?php endforeach; ?>
+            <div class="freelancers-container" id="listarFreelancers">
+                    <!-- Aqui será exibida as informações dos freelancers retornadas da função filtrarFreelancers-->
             </div>
         </div>
     </div>
@@ -452,7 +402,6 @@
         </div>
     </div>
 
-    <?= $pager->links() ?>
 
     <footer class="footer">
         <div class="container">
@@ -468,6 +417,11 @@
         if (window.history.replaceState) {
             window.history.replaceState(null, null, window.location.href);
         }
+
+        document.addEventListener("DOMContentLoaded", async function() {
+            filtrarFreelancer();
+        });
+
 
         function verInformacoes(idFreelancer, UserId) {
             UserIdGlobal = UserId;
@@ -586,9 +540,78 @@
             vagasModal.show();
         }
 
-        function filtrarServicos() {
+        async function filtrarFreelancer() {
+
+            let html = '';
+
             // Implemente a lógica de filtragem aqui
-            console.log("Filtrar serviços...");
+            var cargoId = document.getElementById('cargo').value;
+            console.log("Filtrar freelancer...");
+            console.log(cargoId);
+            const response = await fetch('<?php echo base_url('/contratante/filtrarFreelancers?cargoId=') ?>' + cargoId);
+            const data = await response.json();
+            console.log(data);
+
+            if(data.freelancers && data.freelancers.length > 0){
+                
+
+                data.freelancers.forEach(freelancers=>{
+
+                    html += `
+                        <div class="freelancer-card">
+                            <div class="freelancer-header">
+                                <h3 class="freelancer-title">${freelancers.nome}</h3>
+                            </div>
+                            
+                            <div class="freelancer-body">
+                                <div class="freelancer-info">
+                                    <i class="fas fa-briefcase"></i>
+                                    <div>
+                                        <div class="freelancer-label">Habilidades</div>
+                                        
+                                    </div>
+                                </div>
+                                
+                                <div class="freelancer-info">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <div>
+                                        <div class="freelancer-label">Localização</div>
+                                        <div class="freelancer-value">
+                                            ${freelancers.cidade}, ${freelancers.estado}
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="freelancer-info">
+                                    <i class="fas fa-phone"></i>
+                                    <div>
+                                        <div class="freelancer-label">Contato</div>
+                                        <div class="freelancer-value">${freelancers.telefone}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="freelancer-actions">
+                                <a href="" target="_blank" class="btn-contato">
+                                    <i class="fab fa-whatsapp"></i> WhatsApp
+                                </a>
+
+                                <button class="btn-contato" onclick="verInformacoes(${freelancers.id}, ${freelancers.user_id})">
+                                    <i class="fas fa-info-circle"></i> Informações
+                                </button>
+                            </div>
+                        </div>
+                        `;
+
+                });
+
+                console.log("foi");
+
+                document.getElementById('listarFreelancers').innerHTML = html;
+            }else if(data.freelancers.length == 0){
+                document.getElementById('listarFreelancers').innerHTML = '';
+            }
+
         }
     </script>
 

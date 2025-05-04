@@ -49,6 +49,8 @@ $routes->get('/contratante/excluirvaga/(:num)', 'ContratanteController::deleteVa
 $routes->get('/contratante/busca', 'ContratanteController::busca', ['filter' => 'group:contratante']);
 $routes->post('/contratante/busca', 'ContratanteController::busca', ['filter' => 'group:contratante']);
 
+$routes->get('/contratante/filtrarFreelancers', 'ContratanteController::filtrarFreelancers', ['filter' => 'group:contratante']);
+
 $routes->get('/contratante/pagamentos', 'ContratanteController::pagamentos', ['filter' => 'group:contratante']);
 
 

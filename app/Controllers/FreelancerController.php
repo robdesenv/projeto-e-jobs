@@ -23,6 +23,19 @@ class FreelancerController extends BaseController
         return $num_rows;
     }
 
+    public function VerificaCadastroCargos($cargo_id):int 
+    {
+        $user_id = user_id();
+        $db = db_connect();
+        $sql = 'SELECT user_id, cargo_id FROM `cargo_freelancer` WHERE user_id = ? and cargo_id = ? ';
+        $stmt = $db->connID->prepare($sql);
+        $stmt->bind_param('ii', $user_id, $cargo_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $num_rows = $result->num_rows;
+        return $num_rows;
+    }
+
 
     public function index()
     {
@@ -83,12 +96,22 @@ class FreelancerController extends BaseController
                     //iserir cargo ao freelancer
                     $cargofreelancerModel = new \App\Models\cargofreelancerModel();
                     $cargos_id = intval($this->request->getPost('cargo_id'));
-                    $cargofreelancerModel->set('user_id', user_id());
-                    $cargofreelancerModel->set('cargo_id', $cargos_id);
 
-                    $cargofreelancerModel->insert();
+                    if($this->VerificaCadastroCargos($cargos_id) >= 1){
+                        session()->setFlashdata('msg-error', "Cargo já cadastrado.");
+                        return redirect()->to(base_url('freelancer/meucurriculo'));
+                    }else{
+                        $cargofreelancerModel->set('user_id', user_id());
+                        $cargofreelancerModel->set('cargo_id', $cargos_id);
 
-                    header("Refresh: 0");
+                        $cargofreelancerModel->insert();
+
+                        session()->setFlashdata('msg', "Cargo adicionado com sucesso.");
+                        return redirect()->to(base_url('freelancer/meucurriculo'));
+                    }
+                    
+
+                    
                 }
             }
             

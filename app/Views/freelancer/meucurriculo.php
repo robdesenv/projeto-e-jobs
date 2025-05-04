@@ -88,6 +88,7 @@
     <div class="container">
         <div class="curriculo-section">
             <h1>Meu Currículo</h1>
+            
             <form method="post" id="curriculoForm">
                 <div class="row">
 

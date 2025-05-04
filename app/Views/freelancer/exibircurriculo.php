@@ -290,6 +290,18 @@
             </div>
         </div>
 
+        <?php if (session()->getFlashdata('msg')): ?>
+            <div class="alert alert-success">
+                <?= session()->getFlashdata('msg') ?>
+            </div>
+        <?php endif; ?>
+
+        <?php if (session()->getFlashdata('msg-error')): ?>
+            <div class="alert alert-danger">
+                <?= session()->getFlashdata('msg-error') ?>
+            </div>
+        <?php endif; ?>
+
         <?php foreach ($freelancers as $freelancer): ?>
             <div class="card card-profile">
                 <div class="card-header">

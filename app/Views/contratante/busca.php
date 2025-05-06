@@ -314,7 +314,7 @@
                     <div class="filtro-item">
                         <label for="cargo" class="form-label">Cargo:</label>
                         <select id="cargo" class="form-select" onchange="filtrarFreelancer()">
-                        <option value=""></option>
+                        <option value="">Todos os Freelancers</option>
                                 <?php foreach($cargos as $cargo): ?>
                                 <option value="<?php echo $cargo['id']?>"><?php echo $cargo['cargo']?></option>
                                 <?php endforeach;?>

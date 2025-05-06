@@ -146,11 +146,11 @@
         }
 
         .status-disponivel {
-            color: #28a745;
+            color:rgb(91, 240, 125);
         }
 
         .status-esgotado {
-            color: #dc3545;
+            color:rgb(251, 255, 0);
         }
 
         .data-destaque {
@@ -492,8 +492,8 @@
                         <div class="evento-header">
                             <h3 class="evento-title"><?php echo htmlspecialchars($evento['nome']); ?></h3>
                             <span
-                                class="evento-status <?php echo $evento['status'] == 'Disponivel' ? 'status-disponivel' : 'status-esgotado'; ?>">
-                                <?php echo htmlspecialchars($evento['status'] == 'Disponivel' ? 'Disponível' : 'Esgotado'); ?>
+                                class="evento-status <?php echo $evento['status'] == true ? 'status-disponivel' : 'status-esgotado'; ?>">
+                                <?php echo htmlspecialchars($evento['status'] == true ? 'Concluido' : 'Em andamento'); ?>
                             </span>
                         </div>
 

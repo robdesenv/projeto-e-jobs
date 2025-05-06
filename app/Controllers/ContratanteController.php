@@ -92,7 +92,7 @@ class ContratanteController extends BaseController
                         $eventosModel->set('endereco', $this->request->getPost('endereco'));
                         $eventosModel->set('cidade', $this->request->getPost('cidade'));
                         $eventosModel->set('estado', $this->request->getPost('estado'));
-                        $eventosModel->set('status',  $this->request->getPost('status'));
+                        $eventosModel->set('status',  false);
                         $eventosModel->set('user_id', user_id());
 
                         if($eventosModel->insert())
@@ -385,15 +385,17 @@ class ContratanteController extends BaseController
             $freelancers = $query->getResultArray();
             $num_rows = count($freelancers);
 
-            if($num_rows > 0){$CargosFreelancerController = new  CargosFreelancerController();
+            if($num_rows > 0){
+                //procurar cargos caso exista freelancers
+                $CargosFreelancerController = new  CargosFreelancerController();
                 foreach($freelancers as $resultado)
                 {
                     $cargosfreelancer[] = $CargosFreelancerController->ExibirCargosFreelancer($resultado['user_id']);
                 }
 
-            $reponse = ['msg' => 'ok', 'id' => $cargoId, 'freelancers' => $freelancers, 'cargosFreelancer'=> $cargosfreelancer ];
+            $reponse = ['id' => $cargoId, 'freelancers' => $freelancers, 'cargosFreelancer'=> $cargosfreelancer ];
             }else{
-                $reponse = ['msg' => 'ok', 'id' => $cargoId, 'freelancers' => $freelancers ];
+                $reponse = ['id' => $cargoId, 'freelancers' => $freelancers ];
             }
             
             return  $this->response->setJSON($reponse);

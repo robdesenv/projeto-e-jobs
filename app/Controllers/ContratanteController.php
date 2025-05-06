@@ -7,6 +7,7 @@ use App\Models\contratadosModel;
 use CodeIgniter\HTTP\ResponseInterface;
 use \App\Models\contratanteModel;
 use \App\Controllers\CargosFreelancerController;
+use LengthException;
 
 class ContratanteController extends BaseController
 {
@@ -382,20 +383,19 @@ class ContratanteController extends BaseController
             $sql = 'SELECT * from freelancer join cargo_freelancer ON cargo_freelancer.user_id = freelancer.user_id WHERE cargo_freelancer.cargo_id = ?';
             $query = $db->query($sql, [$cargoId]);
             $freelancers = $query->getResultArray();
+            $num_rows = count($freelancers);
 
-            $CargosFreelancerController = new  CargosFreelancerController();
+            if($num_rows > 0){$CargosFreelancerController = new  CargosFreelancerController();
                 foreach($freelancers as $resultado)
                 {
                     $cargosfreelancer[] = $CargosFreelancerController->ExibirCargosFreelancer($resultado['user_id']);
                 }
 
-            /*$data = [
-                'freelacers' => $freelancer->paginate(10),
-                'pager' => $freelancer->pager
-            ];*/
-
             $reponse = ['msg' => 'ok', 'id' => $cargoId, 'freelancers' => $freelancers, 'cargosFreelancer'=> $cargosfreelancer ];
-
+            }else{
+                $reponse = ['msg' => 'ok', 'id' => $cargoId, 'freelancers' => $freelancers ];
+            }
+            
             return  $this->response->setJSON($reponse);
 
         }else

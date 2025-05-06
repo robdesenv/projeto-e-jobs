@@ -472,13 +472,6 @@
                                     <label for="estado" class="form-label">Estado:</label>
                                     <input type="text" class="form-control" id="estado" name="estado" required>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="statusServico" class="form-label">Status:</label>
-                                    <select class="form-select" id="statusServico" name="status" required>
-                                        <option value="Disponivel">Disponível</option>
-                                        <option value="Esgotado">Esgotado</option>
-                                    </select>
-                                </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Fechar</button>
@@ -747,12 +740,6 @@
 
             const dataFormatada = `${dataAno}-${mesNumero}-${dataDia.padStart(2, '0')}`;
             document.getElementById('dataServico').value = dataFormatada;
-
-
-            const statusElement = eventoElement.querySelector('.evento-status');
-            const status = statusElement.classList.contains('status-disponivel') ? 'Disponivel' : 'Esgotado';
-            document.getElementById('statusServico').value = status;
-
 
             document.getElementById('modalAdicionarServicoLabel').textContent = 'Editar Evento';
 

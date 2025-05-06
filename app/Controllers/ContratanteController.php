@@ -383,12 +383,18 @@ class ContratanteController extends BaseController
             $query = $db->query($sql, [$cargoId]);
             $freelancers = $query->getResultArray();
 
+            $CargosFreelancerController = new  CargosFreelancerController();
+                foreach($freelancers as $resultado)
+                {
+                    $cargosfreelancer[] = $CargosFreelancerController->ExibirCargosFreelancer($resultado['user_id']);
+                }
+
             /*$data = [
                 'freelacers' => $freelancer->paginate(10),
                 'pager' => $freelancer->pager
             ];*/
 
-            $reponse = ['msg' => 'ok', 'id' => $cargoId, 'freelancers' => $freelancers];
+            $reponse = ['msg' => 'ok', 'id' => $cargoId, 'freelancers' => $freelancers, 'cargosFreelancer'=> $cargosfreelancer ];
 
             return  $this->response->setJSON($reponse);
 
@@ -403,7 +409,13 @@ class ContratanteController extends BaseController
 
             $freelancer = $freelancerModel->findAll();
 
-            $response = ['freelancers' => $freelancer];
+            $CargosFreelancerController = new  CargosFreelancerController();
+                foreach($freelancer as $resultado)
+                {
+                    $cargosfreelancer[] = $CargosFreelancerController->ExibirCargosFreelancer($resultado['user_id']);
+                }
+
+            $response = ['freelancers' => $freelancer, 'cargosFreelancer'=> $cargosfreelancer ];
 
             return  $this->response->setJSON($response);
         }

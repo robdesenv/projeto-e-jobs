@@ -211,8 +211,8 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="localizacao">Localização:</label>
-                        <input type="text" id="localizacao" class="form-control" placeholder="Digite a cidade ou estado">
+                        <label for="localizacao">Localização(Cidade):</label>
+                        <input type="text" id="localizacao" class="form-control" placeholder="Digite a cidade">
                     </div>
                 </div>
                 <div class="col-md-4">

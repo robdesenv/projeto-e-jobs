@@ -85,10 +85,12 @@ class FreelancerController extends BaseController
                         $cargosModel->set('cargo',$novocargo);
                         $cargosModel->insert();
 
-                        header("Refresh: 0");
+                        session()->setFlashdata('msg', "Cargo criado com sucesso. Selecione o cargo para adicionar.");
+                        return redirect()->to(base_url('freelancer/meucurriculo'));
                     }else
                     {
-                        echo "O cargo que você tentou incluir já existe";
+                        session()->setFlashdata('msg-error', "O cargo que você tentou incluir já existe.");
+                        return redirect()->to(base_url('freelancer/meucurriculo'));
                     }
                     
                 }elseif($btncargo == "adicionarcargo")

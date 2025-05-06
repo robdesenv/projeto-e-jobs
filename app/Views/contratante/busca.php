@@ -543,19 +543,26 @@
         async function filtrarFreelancer() {
 
             let html = '';
+            let cargos = "";
 
             // Implemente a lógica de filtragem aqui
             var cargoId = document.getElementById('cargo').value;
-            console.log("Filtrar freelancer...");
-            console.log(cargoId);
             const response = await fetch('<?php echo base_url('/contratante/filtrarFreelancers?cargoId=') ?>' + cargoId);
             const data = await response.json();
-            console.log(data);
 
             if(data.freelancers && data.freelancers.length > 0){
                 
 
-                data.freelancers.forEach(freelancers=>{
+                data.freelancers.forEach((freelancers,indice)=>{
+                    let html2 = '';
+
+                    if(data.cargosFreelancer[indice] && data.cargosFreelancer[indice].length > 0){
+                            data.cargosFreelancer[indice].forEach(cargos => {
+
+                                html2 += `<span class="habilidade-badge">${cargos.cargo}</span>`;
+
+                            })
+                        }
 
                     html += `
                         <div class="freelancer-card">
@@ -567,8 +574,8 @@
                                 <div class="freelancer-info">
                                     <i class="fas fa-briefcase"></i>
                                     <div>
-                                        <div class="freelancer-label">Habilidades</div>
-                                        
+                                        <div class="freelancer-label" id="cargosFreelancer">Habilidades</div>
+                                        ${html2}
                                     </div>
                                 </div>
                                 
@@ -604,8 +611,6 @@
                         `;
 
                 });
-
-                console.log("foi");
 
                 document.getElementById('listarFreelancers').innerHTML = html;
             }else if(data.freelancers.length == 0){

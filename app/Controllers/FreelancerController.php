@@ -151,7 +151,7 @@ class FreelancerController extends BaseController
                 }else{
                     $data['msg'] = 'Erro ao cadastrar';
                 }
-                header("Refresh: 0");
+                return redirect()->to(base_url('freelancer/meucurriculo'));
             }
             return view('freelancer/meucurriculo', $data);
         }
@@ -325,9 +325,7 @@ class FreelancerController extends BaseController
         }
         else
         {
-            $resposta = ['msg' => "<div class='alert alert-danger' role='alert'>
-                            É necessário cadastrar o currículo antes de se candidatar a vaga!!
-                            </div>"];
+            $resposta = ['msg' => "É necessário cadastrar o currículo antes de se candidatar a vaga!!"];
 
             return $this->response->setJSON($resposta);
         }

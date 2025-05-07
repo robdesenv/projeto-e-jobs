@@ -75,41 +75,46 @@ class ContratanteController extends BaseController
         $data['msg'] = '';
         $db = db_connect();
         
-        if($this->VerificaCadastroInformacoes() >= 1){
+        
             if($this->request->getMethod() == 'POST')
             {
                 $btneventos = $this->request->getPost('btn-eventos');
 
                 if($btneventos == 'adicionarevento')
                 {
-                    $btnEventoId = $this->request->getPost('eventoId');
-                    if($btnEventoId == '')
-                    { //cadastrar evento
-                        $eventosModel = new \App\Models\eventosModel();
-                        $eventosModel->set('nome', $this->request->getPost('nome'));
-                        $eventosModel->set('descricao',  $this->request->getPost('descricao'));
-                        $eventosModel->set('data',$this->request->getPost('data'));
-                        $eventosModel->set('endereco', $this->request->getPost('endereco'));
-                        $eventosModel->set('cidade', $this->request->getPost('cidade'));
-                        $eventosModel->set('estado', $this->request->getPost('estado'));
-                        $eventosModel->set('status',  false);
-                        $eventosModel->set('user_id', user_id());
+                    if($this->VerificaCadastroInformacoes() >= 1){
+                        $btnEventoId = $this->request->getPost('eventoId');
+                        if($btnEventoId == '')
+                        { //cadastrar evento
+                            $eventosModel = new \App\Models\eventosModel();
+                            $eventosModel->set('nome', $this->request->getPost('nome'));
+                            $eventosModel->set('descricao',  $this->request->getPost('descricao'));
+                            $eventosModel->set('data',$this->request->getPost('data'));
+                            $eventosModel->set('endereco', $this->request->getPost('endereco'));
+                            $eventosModel->set('cidade', $this->request->getPost('cidade'));
+                            $eventosModel->set('estado', $this->request->getPost('estado'));
+                            $eventosModel->set('status',  false);
+                            $eventosModel->set('user_id', user_id());
 
-                        if($eventosModel->insert())
-                        {
-                            $data['msg'] = '<p style="color:green;">Evento Criado<p>';
-                            header("Refresh: 0");
+                            if($eventosModel->insert())
+                            {
+                                session()->setFlashdata('msg-success', "Evento Criado");
+                                return redirect()->to(base_url('contratante/vagaspub'));
+                            }
+                            else
+                            {
+                                $data['msg'] = '<p style="color:red;">Erro ao criar evento</p>';
+                            }
+                        }elseif($btnEventoId != '')
+                        { // Editar evento
+                            $this->editEventos($btnEventoId);
+                            return redirect()->to(base_url('contratante/vagaspub'));
                         }
-                        else
-                        {
-                            $data['msg'] = '<p style="color:red;">Erro ao criar evento</p>';
-                        }
+                    }else{
+                        session()->setFlashdata('msg', "ERRO: É necessário cadastrar os dados Pessoais e os dados da Empresa na aba 'Ver minha empresa'");
+                        return redirect()->to(base_url('contratante/vagaspub'));
                     }
-                    elseif($btnEventoId != '')
-                    { // Editar evento
-                        $this->editEventos($btnEventoId);
-                        header("Refresh: 0");
-                    }
+                    
                     
                 }elseif($btneventos == 'adicionarvaga')
                 {
@@ -122,13 +127,12 @@ class ContratanteController extends BaseController
 
                     $vagasModel->insert();
 
-                    header("Refresh: 0");
+                    session()->setFlashdata('msg-success', "Vaga adicionada.");
+                    return redirect()->to(base_url('contratante/vagaspub'));
                 }
                 
             }
-        }else{
-            $data['msg'] = '<p style="color:red;">ERRO: É necessário cadastrar os dados Pessoais e os dados da Empresa na aba "Ver minha empresa"</p>';
-        }
+        
 
 
         //exibir eventos
@@ -172,7 +176,7 @@ class ContratanteController extends BaseController
         }
         
 
-    return view(name: 'contratante/vagaspub',data: $data);
+        return view( 'contratante/vagaspub',$data);
 
     }
 

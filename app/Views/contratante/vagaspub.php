@@ -435,6 +435,12 @@
                 </div>
             <?php endif; ?>
 
+            <?php if (session()->getFlashdata('msg-success')): ?>
+                <div class="alert alert-success">
+                    <?= session()->getFlashdata('msg-success'); ?>
+                </div>
+            <?php endif; ?>
+
             <!-- Modal Adicionar e Editar Evento -->
             <div class="modal fade" id="modalAdicionarServico" tabindex="-1"
                 aria-labelledby="modalAdicionarServicoLabel" aria-hidden="true">

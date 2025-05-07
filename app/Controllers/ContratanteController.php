@@ -61,7 +61,7 @@ class ContratanteController extends BaseController
                 }else{
                     $data['msg'] = 'Erro ao cadastrar';
                 }
-                header("Refresh: 0");
+                return redirect()->to(base_url('contratante/minhaempresa'));
             }
             return view('contratante/minhaempresa', $data);
         }

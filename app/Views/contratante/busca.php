@@ -298,6 +298,37 @@
             color: #ffffff;
             margin-top: 40px;
         }
+
+        /* Estilos para as vagas */
+        .vaga-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.3s;
+        }
+        
+        .vaga-item:last-child {
+            border-bottom: none;
+        }
+        
+        .vaga-item:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .vaga-info h6 {
+            color: #004182;
+            margin-bottom: 5px;
+        }
+        
+        .btn-close-white {
+            filter: invert(1);
+        }
+        
+        .modal-header {
+            padding: 15px 20px;
+        }
     </style>
 </head>
 
@@ -402,7 +433,6 @@
         </div>
     </div>
 
-
     <footer class="footer">
         <div class="container">
             <p>&copy; 2025 e-Jobs. Todos os direitos reservados.</p>
@@ -421,7 +451,6 @@
         document.addEventListener("DOMContentLoaded", async function() {
             filtrarFreelancer();
         });
-
 
         function verInformacoes(idFreelancer, UserId) {
             UserIdGlobal = UserId;
@@ -541,7 +570,6 @@
         }
 
         async function filtrarFreelancer() {
-
             let html = '';
             let cargos = "";
 
@@ -551,18 +579,18 @@
             const data = await response.json();
 
             if(data.freelancers && data.freelancers.length > 0){
-                
-
                 data.freelancers.forEach((freelancers,indice)=>{
                     let html2 = '';
 
                     if(data.cargosFreelancer[indice] && data.cargosFreelancer[indice].length > 0){
-                            data.cargosFreelancer[indice].forEach(cargos => {
+                        data.cargosFreelancer[indice].forEach(cargos => {
+                            html2 += `<span class="habilidade-badge">${cargos.cargo}</span>`;
+                        })
+                    }
 
-                                html2 += `<span class="habilidade-badge">${cargos.cargo}</span>`;
-
-                            })
-                        }
+                    // Formatando o telefone para o link do WhatsApp
+                    const telefoneFormatado = freelancers.telefone.replace(/\D/g, '');
+                    const mensagemWhatsApp = encodeURIComponent(`Olá ${freelancers.nome.split(' ')[0]}, encontrei seu perfil no e-Jobs e gostaria de conversar sobre um serviço.`);
 
                     html += `
                         <div class="freelancer-card">
@@ -599,7 +627,7 @@
                             </div>
                             
                             <div class="freelancer-actions">
-                                <a href="" target="_blank" class="btn-contato">
+                                <a href="https://wa.me/55${telefoneFormatado}?text=${mensagemWhatsApp}" target="_blank" class="btn-contato">
                                     <i class="fab fa-whatsapp"></i> WhatsApp
                                 </a>
 
@@ -608,48 +636,14 @@
                                 </button>
                             </div>
                         </div>
-                        `;
-
+                    `;
                 });
 
                 document.getElementById('listarFreelancers').innerHTML = html;
-            }else if(data.freelancers.length == 0){
-                document.getElementById('listarFreelancers').innerHTML = '';
+            } else if(data.freelancers.length == 0) {
+                document.getElementById('listarFreelancers').innerHTML = '<p class="text-center py-4">Nenhum freelancer encontrado com os filtros selecionados.</p>';
             }
-
         }
     </script>
-
-    <style>
-        .vaga-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 15px;
-            border-bottom: 1px solid #eee;
-            transition: background-color 0.3s;
-        }
-        
-        .vaga-item:last-child {
-            border-bottom: none;
-        }
-        
-        .vaga-item:hover {
-            background-color: #f8f9fa;
-        }
-        
-        .vaga-info h6 {
-            color: #004182;
-            margin-bottom: 5px;
-        }
-        
-        .btn-close-white {
-            filter: invert(1);
-        }
-        
-        .modal-header {
-            padding: 15px 20px;
-        }
-    </style>
 </body>
 </html>

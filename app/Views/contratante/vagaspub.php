@@ -562,6 +562,14 @@
                         </div>
 
                         <div class="evento-actions">
+                            <?php if($evento['status'] == false): ?>
+                                <div id="finalizarEvento">
+                                    <button type="button" class="btn btn-outline-secondary" onclick="finalizarEvento(<?php echo $evento['id']; ?>)">
+                                        Finalizar evento
+                                    </button>
+                                </div>
+                            <?php endif; ?>
+                            
                             <button class="btn btn-sm btn-primary btn-acao" title="Editar"
                                 onclick="editarEvento(<?php echo $evento['id']; ?>)">
                                 <i class="fas fa-edit"></i> Editar
@@ -578,19 +586,19 @@
     </div>
 
     <!-- Modal de Confirmação de Exclusão -->
-    <div class="modal fade" id="modalConfirmacaoExclusao" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="modalConfirmacao" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Confirmar Exclusão</h5>
+                    <h5 id="titulo-confirmacao" class="modal-title">Confirmar Exclusão</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p id="msg-exluir">Tem certeza que deseja excluir este evento? Esta ação não pode ser desfeita.</p>
+                    <p id="msg-confirmacao">Tem certeza que deseja excluir este evento? Esta ação não pode ser desfeita.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" id="btnConfirmarExclusao" class="btn btn-danger">Excluir</button>
+                    <button type="button" id="btnConfirmar" class="btn btn-danger">Excluir</button>
                 </div>
             </div>
         </div>
@@ -698,6 +706,7 @@
         let solicitacaoId = null;
         let freelancerId = null;
         let vagaId = null;
+        let eventoIdFinalizar = null;
 
         function abrirModalAdicionar() {
 
@@ -932,30 +941,40 @@
 
         function confirmarExclusao(id) {
             eventoIdParaExcluir = id;
-            const modal = new bootstrap.Modal(document.getElementById('modalConfirmacaoExclusao'));
+            const modal = new bootstrap.Modal(document.getElementById('modalConfirmacao'));
             modal.show();
         }
 
         function excluirVaga(id) {
             vagaIdExcluir = id;
-            document.getElementById("msg-exluir").innerHTML = "Tem certeza que deseja excluir esta vaga?";
-            const modal = new bootstrap.Modal(document.getElementById('modalConfirmacaoExclusao'));
+            document.getElementById("msg-confirmacao").innerHTML = "Tem certeza que deseja excluir esta vaga?";
+            const modal = new bootstrap.Modal(document.getElementById('modalConfirmacao'));
+            modal.show();
+        }
+
+        function finalizarEvento(id){
+            eventoIdFinalizar = id;
+            document.getElementById("titulo-confirmacao").textContent  = "Finalizar Evento";
+            document.getElementById("msg-confirmacao").innerHTML = "Tem certeza que deseja Finalizar o evento?";
+            document.getElementById("btnConfirmar").textContent = "Finalizar";
+            
+            const modal = new bootstrap.Modal(document.getElementById('modalConfirmacao'));
             modal.show();
         }
 
 
 
-        document.getElementById('btnConfirmarExclusao').addEventListener('click', function () {
+        document.getElementById('btnConfirmar').addEventListener('click', function () {
             if (eventoIdParaExcluir) {
                 window.location.href = '<?php echo base_url("contratante/excluirevento/"); ?>' + eventoIdParaExcluir;
+            }else if (vagaIdExcluir) {
+                window.location.href = '<?php echo base_url("contratante/excluirvaga/"); ?>' + vagaIdExcluir;
+            }else if (eventoIdFinalizar){
+                window.location.href = '<?php echo base_url("contratante/finalizarevento/"); ?>' + eventoIdFinalizar;
             }
         });
 
-        document.getElementById('btnConfirmarExclusao').addEventListener('click', function () {
-            if (vagaIdExcluir) {
-                window.location.href = '<?php echo base_url("contratante/excluirvaga/"); ?>' + vagaIdExcluir;
-            }
-        });
+        
 
         document.getElementById('btn-contratar').addEventListener('click', async function () {
             if (solicitacaoId) {

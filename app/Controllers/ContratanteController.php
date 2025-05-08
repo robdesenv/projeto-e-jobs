@@ -236,6 +236,21 @@ class ContratanteController extends BaseController
         return view('contratante/vagaspub');
     }
 
+    public function finalizarEvento($id){
+        $eventosModel = new \App\Models\eventosModel();
+        $evento['status'] = true;
+
+        if($eventosModel->update($id,$evento)){
+            session()->setFlashdata('msg-success', "Evento Finalizado.");
+            return redirect()->to(base_url('contratante/vagaspub'));
+        }else{
+            session()->setFlashdata('msg', "Erro ao finalizar");
+            return redirect()->to(base_url('contratante/vagaspub'));
+        }
+
+        
+    }
+
     public function deleteEventos($id)
     {
         try 
@@ -245,6 +260,7 @@ class ContratanteController extends BaseController
             {
                 //evento excluido
             }
+            session()->setFlashdata('msg-success', "Evento excluido.");
             return redirect()->to(base_url('contratante/vagaspub'));}
         catch(\Exception $e)
         {
@@ -265,6 +281,7 @@ class ContratanteController extends BaseController
             {
                 //vaga excluida
             }
+            session()->setFlashdata('msg-success', "Vaga excluida.");
             return redirect()->to(base_url('contratante/vagaspub'));
         }catch(\Exception $e)
         {
@@ -353,7 +370,7 @@ class ContratanteController extends BaseController
             if($num_rows >= 1)
             {
                 session()->setFlashdata('msg', '<div class="alert alert-warning" role="alert">
-                                            Já foi criada uma solicitação desse Freelancer para esta vaga.
+                                            Já foi criada uma solicitação deste Freelancer para esta vaga.
                                         </div>');
             }else
             {

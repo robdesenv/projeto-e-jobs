@@ -45,6 +45,8 @@ $routes->get('/contratante/solicitacoes', 'ContratanteController::exibirSolicita
 $routes->get('/contratante/editarevento/(:num)', 'ContratanteController::editEvento/$1', ['filter' => 'group:contratante']);
 $routes->post('/contratante/editarevento/(:num)', 'ContratanteController::editEvento/$1', ['filter' => 'group:contratante']);
 
+$routes->get('/contratante/finalizarevento/(:num)', 'ContratanteController::finalizarEvento/$1', ['filter' => 'group:contratante']);
+
 $routes->get('/contratante/excluirevento/(:num)', 'ContratanteController::deleteEventos/$1', ['filter' => 'group:contratante']);
 
 $routes->get('/contratante/excluirvaga/(:num)', 'ContratanteController::deleteVagas/$1', ['filter' => 'group:contratante']);

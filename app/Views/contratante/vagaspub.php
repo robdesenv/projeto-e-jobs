@@ -499,7 +499,7 @@
                             <h3 class="evento-title"><?php echo htmlspecialchars($evento['nome']); ?></h3>
                             <span
                                 class="evento-status <?php echo $evento['status'] == true ? 'status-disponivel' : 'status-esgotado'; ?>">
-                                <?php echo htmlspecialchars($evento['status'] == true ? 'Concluido' : 'Em andamento'); ?>
+                                <?php echo htmlspecialchars($evento['status'] == true ? 'Concluído' : 'Em andamento'); ?>
                             </span>
                         </div>
 

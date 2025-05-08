@@ -7,6 +7,9 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 
+$routes->get('teste', 'Home::teste');
+$routes->post('teste', 'Home::teste');
+
 //freelancer
 $routes->get('/freelancer/index', 'FreelancerController::index', ['filter' => 'group:freelancer']);
 $routes->get('/freelancer/meucurriculo', 'FreelancerController::meucurriculo', ['filter' => 'group:freelancer']);

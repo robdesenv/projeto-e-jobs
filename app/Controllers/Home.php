@@ -8,4 +8,9 @@ class Home extends BaseController
     {
         return view(name: 'geral/telainicial');
     }
+
+    public function teste(): string
+    {
+        return view(name: 'geral/telainicial');
+    }
 }

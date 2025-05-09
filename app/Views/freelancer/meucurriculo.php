@@ -13,7 +13,7 @@
         body {
             font-family: 'Segoe UI', sans-serif;
             background-color: #f8f9fa;
-           
+
         }
 
         .curriculo-section {
@@ -84,50 +84,61 @@
 
     <!-- chamando o Menu no arquivo menuFreelancer -->
     <?php include 'menuFreelancer.php'; ?>
-    
+
     <div class="container">
         <div class="curriculo-section">
             <h1>Meu Currículo</h1>
-            
+
             <form method="post" id="curriculoForm">
                 <div class="row">
 
-                    <input type="hidden" name="id" value="<?php echo (isset($freelancer) ? $freelancer['id'] : '')?>">
+                    <input type="hidden" name="id" value="<?php echo (isset($freelancer) ? $freelancer['id'] : '') ?>">
 
                     <div class="col-md-6">
                         <label for="nome">Nome:</label>
-                        <input type="text" id="nome" name="nome" value="<?php echo (isset($freelancer) ? $freelancer['nome'] : '')?>" placeholder="Digite seu nome" required>
+                        <input type="text" id="nome" name="nome"
+                            value="<?php echo (isset($freelancer) ? $freelancer['nome'] : '') ?>"
+                            placeholder="Digite seu nome" required>
                     </div>
                     <div class="col-md-6">
                         <label for="telefone">Telefone:</label>
-                        <input type="tel" id="telefone" name="telefone" value="<?php echo (isset($freelancer) ? $freelancer['telefone'] : '')?>" placeholder="Digite seu telefone" required>
+                        <input type="tel" id="telefone" name="telefone"
+                            value="<?php echo (isset($freelancer) ? $freelancer['telefone'] : '') ?>"
+                            placeholder="Digite seu telefone" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <label for="email">E-mail:</label>
-                        <input type="email" id="email" name="email" value="<?php echo (isset($freelancer) ? $freelancer['email'] : '')?>" placeholder="Digite seu e-mail" required>
+                        <input type="email" id="email" name="email"
+                            value="<?php echo (isset($freelancer) ? $freelancer['email'] : '') ?>"
+                            placeholder="Digite seu e-mail" required>
                     </div>
                     <div class="col-md-6">
                         <label for="dataNascimento">Data de Nascimento:</label>
-                        <input type="date" id="dataNasc" name="dataNasc" value="<?php echo (isset($freelancer) ? $freelancer['dataNasc'] : '')?>" required>
+                        <input type="date" id="dataNasc" name="dataNasc"
+                            value="<?php echo (isset($freelancer) ? $freelancer['dataNasc'] : '') ?>" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <label for="estado">Estado:</label>
-                        <input type="text" id="estado" name="estado" value="<?php echo (isset($freelancer) ? $freelancer['estado'] : '')?>" placeholder="Digite seu estado" required>
+                        <input type="text" id="estado" name="estado"
+                            value="<?php echo (isset($freelancer) ? $freelancer['estado'] : '') ?>"
+                            placeholder="Digite seu estado" required>
                     </div>
                     <div class="col-md-6">
                         <label for="cidade">Cidade:</label>
-                        <input type="text" id="cidade" name="cidade" value="<?php echo (isset($freelancer) ? $freelancer['cidade'] : '')?>" placeholder="Digite sua cidade" required>
+                        <input type="text" id="cidade" name="cidade"
+                            value="<?php echo (isset($freelancer) ? $freelancer['cidade'] : '') ?>"
+                            placeholder="Digite sua cidade" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <label for="formacoes">Formações:</label>
-                        <textarea id="formacoes" name="formacoes" rows="4" placeholder="Descreva suas formações"
-                        ><?php echo (isset($freelancer) ? $freelancer['formacoes'] : '')?></textarea>
+                        <textarea id="formacoes" name="formacoes" rows="4"
+                            placeholder="Descreva suas formações"><?php echo (isset($freelancer) ? $freelancer['formacoes'] : '') ?></textarea>
                     </div>
                 </div>
                 <div class="row">

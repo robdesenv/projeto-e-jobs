@@ -129,7 +129,8 @@
         }
 
         /* Estilo unificado para botões */
-        .btn-adicionar, .btn-editar {
+        .btn-adicionar,
+        .btn-editar {
             background-color: var(--primary);
             color: white;
             border: none;
@@ -144,12 +145,14 @@
             font-weight: 600;
         }
 
-        .btn-adicionar:hover, .btn-editar:hover {
+        .btn-adicionar:hover,
+        .btn-editar:hover {
             background-color: var(--secondary);
             color: white;
         }
 
-        .btn-adicionar i, .btn-editar i {
+        .btn-adicionar i,
+        .btn-editar i {
             margin-right: 8px;
         }
 
@@ -161,7 +164,6 @@
             margin-top: 3rem;
         }
 
-        /* Estilos para a seção de cargos */
         .cargo-item {
             display: flex;
             align-items: center;
@@ -191,7 +193,7 @@
             display: inline-flex;
             align-items: center;
             font-size: 0.9rem;
-            
+
         }
 
         .btn-excluir:hover {
@@ -203,7 +205,6 @@
             margin-right: 5px;
         }
 
-        /* Estilos para os modais */
         .modal-header {
             background-color: var(--primary);
             color: white;
@@ -224,14 +225,16 @@
             margin-bottom: 0.5rem;
         }
 
-        .form-select, .form-control {
+        .form-select,
+        .form-control {
             border-radius: 8px;
             padding: 10px 15px;
             border: 1px solid #ddd;
             margin-bottom: 1rem;
         }
 
-        .form-select:focus, .form-control:focus {
+        .form-select:focus,
+        .form-control:focus {
             border-color: var(--primary);
             box-shadow: 0 0 0 0.25rem rgba(0, 65, 130, 0.25);
         }
@@ -257,21 +260,21 @@
             .info-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .buttons-container {
                 flex-direction: column;
                 align-items: center;
             }
-            
+
             .cargo-item {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 10px;
             }
-            
+
             .btn-excluir {
                 align-self: flex-end;
-                
+
             }
         }
     </style>
@@ -344,7 +347,8 @@
                         <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
                         <div class="info-content">
                             <h4>Localização</h4>
-                            <p><?= htmlspecialchars($freelancer['cidade']) ?>, <?= htmlspecialchars($freelancer['estado']) ?></p>
+                            <p><?= htmlspecialchars($freelancer['cidade']) ?>,
+                                <?= htmlspecialchars($freelancer['estado']) ?></p>
                         </div>
                     </div>
                 </div>
@@ -363,23 +367,24 @@
                 <div class="card-header">
                     <h3><i class="fas fa-briefcase"></i> Cargos e Habilidades</h3>
                 </div>
-                
+
                 <div class="cargos-list">
-                    <?php foreach($cargosfreelancer as $cargofreelancer): ?>
+                    <?php foreach ($cargosfreelancer as $cargofreelancer): ?>
                         <div class="cargo-item">
                             <span class="cargo-nome"><?php echo $cargofreelancer['cargo'] ?></span>
-                            <a href="<?php echo base_url('freelancer/excluircargo/'.$cargofreelancer['id'])?>" class="btn-excluir">
+                            <a href="<?php echo base_url('freelancer/excluircargo/' . $cargofreelancer['id']) ?>"
+                                class="btn-excluir">
                                 <i class="fas fa-trash-alt"></i> Excluir
                             </a>
                         </div>
                     <?php endforeach ?>
                 </div>
-                
+
                 <div class="buttons-container">
                     <button class="btn-adicionar" onclick="abrirModalAdicionar()">
                         <i class="fas fa-plus"></i> Adicionar Cargo
                     </button>
-                    
+
                     <a href="<?= base_url('freelancer/editarcurriculo/' . $freelancer['id']) ?>" class="btn-editar">
                         <i class="fas fa-edit"></i> Editar Currículo
                     </a>
@@ -389,24 +394,26 @@
     </div>
 
     <!-- Modal Adicionar Cargo -->
-    <div class="modal fade" id="modalAdicionarServico" tabindex="-1" aria-labelledby="modalAdicionarServicoLabel" aria-hidden="true">
+    <div class="modal fade" id="modalAdicionarServico" tabindex="-1" aria-labelledby="modalAdicionarServicoLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title"><i class="fas fa-briefcase me-2"></i>Adicionar Cargo</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="formAdicionarServico" method="post">
                         <div class="mb-3">
                             <label for="statusServico" class="form-label">Selecione um cargo:</label>
                             <select class="form-select" id="statusServico" name="cargo_id" required>
-                                <?php foreach($cargos as $cargo): ?>
-                                <option value="<?php echo $cargo['id']?>"><?php echo $cargo['cargo']?></option>
-                                <?php endforeach;?>
+                                <?php foreach ($cargos as $cargo): ?>
+                                    <option value="<?php echo $cargo['id'] ?>"><?php echo $cargo['cargo'] ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
-                        
+
                         <div class="d-grid gap-2">
                             <button type="button" class="btn btn-outline-primary" onclick="abrirModalNovoCargo()">
                                 <i class="fas fa-plus-circle me-2"></i>Adicionar Novo Cargo
@@ -423,7 +430,7 @@
                         </div>
                     </form>
                 </div>
-            </div>               
+            </div>
         </div>
     </div>
 
@@ -433,7 +440,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title"><i class="fas fa-plus-circle me-2"></i>Novo Cargo</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="formNovoCargo" method="post">
@@ -441,7 +449,7 @@
                             <label for="novoCargoInput" class="form-label">Nome do Cargo:</label>
                             <input type="text" class="form-control" id="novoCargoInput" name="novocargo" required>
                         </div>
-                        
+
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                                 <i class="fas fa-times me-2"></i>Cancelar
@@ -453,7 +461,7 @@
                     </form>
                 </div>
             </div>
-        </div>               
+        </div>
     </div>
 
     <footer>
@@ -471,10 +479,11 @@
         function abrirModalNovoCargo() {
             const modalAdicionar = bootstrap.Modal.getInstance(document.getElementById('modalAdicionarServico'));
             modalAdicionar.hide();
-            
+
             const modalNovo = new bootstrap.Modal(document.getElementById('modalNovoCargo'));
             modalNovo.show();
         }
     </script>
 </body>
+
 </html>

@@ -159,7 +159,7 @@
     </div>
 
     <div class="container">
-        <!-- Cartão de Boas-vindas -->
+        <!-- Boas-vindas -->
         <div class="welcome-card">
             <h2 class="welcome-title">Seu Dashboard</h2>
             <p class="welcome-subtitle">Gerencie seus serviços, currículo e finanças de forma fácil e eficiente.</p>

@@ -179,25 +179,25 @@
             min-width: 200px;
         }
 
-        /* Estilos para o modal de informações */
+        /* modal de informações */
         .modal-info-header {
             background-color: #004182;
             color: white;
             padding: 15px 20px;
         }
-        
+
         .modal-info-title {
             font-weight: 600;
             margin: 0;
         }
-        
+
         .info-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 20px;
             padding: 20px;
         }
-        
+
         .info-item {
             background-color: #f8f9fa;
             border-radius: 8px;
@@ -205,31 +205,31 @@
             border: 1px solid #e0e0e0;
             transition: all 0.3s ease;
         }
-        
+
         .info-item:hover {
             background-color: #f0f7ff;
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        
+
         .info-icon {
             color: #004182;
             font-size: 1.2rem;
             margin-bottom: 10px;
         }
-        
+
         .info-content h4 {
             color: #004182;
             font-size: 0.9rem;
             font-weight: 600;
             margin-bottom: 5px;
         }
-        
+
         .info-content p {
             color: #333;
             margin: 0;
         }
-        
+
         .modal-info-footer {
             border-top: 1px solid #eee;
             padding: 15px 20px;
@@ -237,7 +237,7 @@
             justify-content: flex-end;
             gap: 10px;
         }
-        
+
         .btn-contratar {
             background-color: #28a745;
             color: white;
@@ -246,19 +246,19 @@
             border: none;
             transition: all 0.3s ease;
         }
-        
+
         .btn-contratar:hover {
             background-color: #218838;
             transform: translateY(-2px);
         }
-        
+
         .habilidades-list {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
             margin-top: 5px;
         }
-        
+
         .habilidade-badge {
             background-color: #e9f0f8;
             color: #004182;
@@ -272,25 +272,25 @@
             .freelancers-container {
                 grid-template-columns: 1fr;
             }
-            
+
             .btn-buscar {
                 width: 100%;
             }
-            
+
             .filtros-group {
                 flex-direction: column;
                 gap: 10px;
             }
-            
+
             .filtro-item {
                 min-width: 100%;
             }
-            
+
             .info-grid {
                 grid-template-columns: 1fr;
             }
         }
-        
+
         .footer {
             text-align: center;
             padding: 20px;
@@ -299,7 +299,7 @@
             margin-top: 40px;
         }
 
-        /* Estilos para as vagas */
+        /* vagas */
         .vaga-item {
             display: flex;
             justify-content: space-between;
@@ -308,24 +308,24 @@
             border-bottom: 1px solid #eee;
             transition: background-color 0.3s;
         }
-        
+
         .vaga-item:last-child {
             border-bottom: none;
         }
-        
+
         .vaga-item:hover {
             background-color: #f8f9fa;
         }
-        
+
         .vaga-info h6 {
             color: #004182;
             margin-bottom: 5px;
         }
-        
+
         .btn-close-white {
             filter: invert(1);
         }
-        
+
         .modal-header {
             padding: 15px 20px;
         }
@@ -338,54 +338,56 @@
     <div class="container">
         <div class="busca-section">
             <h1>Encontre Freelancers</h1>
-            
+
             <div class="filtros-container">
                 <h5><i class="fas fa-filter"></i> Filtros de Busca</h5>
                 <div class="filtros-group">
                     <div class="filtro-item">
                         <label for="cargo" class="form-label">Cargo:</label>
                         <select id="cargo" class="form-select" onchange="filtrarFreelancer()">
-                        <option value="">Todos os Freelancers</option>
-                                <?php foreach($cargos as $cargo): ?>
-                                <option value="<?php echo $cargo['id']?>"><?php echo $cargo['cargo']?></option>
-                                <?php endforeach;?>
+                            <option value="">Todos os Freelancers</option>
+                            <?php foreach ($cargos as $cargo): ?>
+                                <option value="<?php echo $cargo['id'] ?>"><?php echo $cargo['cargo'] ?></option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
-                    
+
                     <div class="filtro-item">
                         <label for="localizacao" class="form-label">Localização:</label>
                         <input type="text" id="localizacao" class="form-control" placeholder="Cidade ou Estado">
                     </div>
                 </div>
             </div>
-            
+
             <button class="btn-buscar" onclick="filtrarFreelancer()">
                 <i class="fas fa-search"></i> Buscar Freelancers
             </button>
 
-           <?php if(session()->getFlashdata('msg')): ?>
-                    <?= session()->getFlashdata('msg'); ?>
+            <?php if (session()->getFlashdata('msg')): ?>
+                <?= session()->getFlashdata('msg'); ?>
             <?php endif; ?>
 
             <div class="freelancers-container" id="listarFreelancers">
-                    <!-- Aqui será exibida as informações dos freelancers retornadas da função filtrarFreelancers-->
+                <!-- informações dos freelancers retornadas da função filtrarFreelancers -->
             </div>
         </div>
     </div>
-    
-    <!-- Modal para informações do freelancer -->
-    <div class="modal fade" id="modalInformacoes" tabindex="-1" aria-labelledby="modalInformacoesLabel" aria-hidden="true">
+
+    <!--informações do freelancer -->
+    <div class="modal fade" id="modalInformacoes" tabindex="-1" aria-labelledby="modalInformacoesLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-info-header">
                     <h5 class="modal-info-title"><i class="fas fa-user-tie"></i> Informações do Freelancer</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
-                
+
                 <div class="modal-body" id="conteudoInformacoes">
-                    <!-- Conteúdo será inserido via JavaScript -->
+                    <!-- inserido via JavaScript -->
                 </div>
-                
+
                 <div class="modal-info-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                     <button type="button" class="btn-contratar" id="btn-contratar" onclick="contratarFreelancer()">
@@ -393,39 +395,41 @@
                     </button>
                 </div>
             </div>
-        </div>               
+        </div>
     </div>
-    
+
     <!-- Modal vagas disponíveis -->
     <div class="modal fade" id="vagasModal" tabindex="-1" aria-labelledby="vagasModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header" style="background-color: #004182; color: white;">
                     <h5 class="modal-title"><i class="fas fa-briefcase"></i> Vagas disponíveis</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
-                
+
                 <div class="modal-body">
                     <div class="vagas-container">
-                        <?php foreach($vagas as $index => $vaga):?>
+                        <?php foreach ($vagas as $index => $vaga): ?>
                             <form action="" method="post" class="vaga-item">
                                 <input type="hidden" id="idFreelancer" class="idFreelancer" name="idFreelancer">
-                                <input type="hidden" name="idVaga" value="<?php echo htmlspecialchars($vaga['id']);?>">
-                                <input type="hidden" name="idEvento" value="<?php echo htmlspecialchars($vaga['evento_id']);?>">
-                                
+                                <input type="hidden" name="idVaga" value="<?php echo htmlspecialchars($vaga['id']); ?>">
+                                <input type="hidden" name="idEvento"
+                                    value="<?php echo htmlspecialchars($vaga['evento_id']); ?>">
+
                                 <div class="vaga-info">
                                     <h6><?php echo htmlspecialchars($vaga['cargo']); ?></h6>
                                     <p class="text-muted">Evento: <?php echo htmlspecialchars($vaga['nome']); ?></p>
                                 </div>
-                                
+
                                 <button type="submit" class="btn btn-sm btn-success">
                                     <i class="fas fa-check"></i> Contratar
                                 </button>
-                            </form>    
-                        <?php endforeach?>
+                            </form>
+                        <?php endforeach ?>
                     </div>
                 </div>
-                
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                 </div>
@@ -436,7 +440,8 @@
     <footer class="footer">
         <div class="container">
             <p>&copy; 2025 e-Jobs. Todos os direitos reservados.</p>
-            <p><a href="#" style="color: #ffffff;">Política de Privacidade</a> | <a href="#" style="color: #ffffff;">Termos de Uso</a></p>
+            <p><a href="#" style="color: #ffffff;">Política de Privacidade</a> | <a href="#"
+                    style="color: #ffffff;">Termos de Uso</a></p>
         </div>
     </footer>
 
@@ -448,23 +453,23 @@
             window.history.replaceState(null, null, window.location.href);
         }
 
-        document.addEventListener("DOMContentLoaded", async function() {
+        document.addEventListener("DOMContentLoaded", async function () {
             filtrarFreelancer();
         });
 
         function verInformacoes(idFreelancer, UserId) {
             UserIdGlobal = UserId;
-            
+
             const listarInformacoes = async (idFreelancer) => {
                 try {
                     const response = await fetch('<?php echo base_url("/contratante/exibirInformacoesFreelancer?idFreelancer=") ?>' + idFreelancer);
                     const data = await response.json();
 
                     let html = '';
-                    
-                    if(data.informacoes && data.informacoes.length > 0) {
+
+                    if (data.informacoes && data.informacoes.length > 0) {
                         const info = data.informacoes[0];
-                        
+
                         html += `
                             <div class="info-grid">
                                 <div class="info-item">
@@ -507,8 +512,8 @@
                                     </div>
                                 </div>
                         `;
-                        
-                        if(data.cargosFreelancer && data.cargosFreelancer.length > 0) {
+
+                        if (data.cargosFreelancer && data.cargosFreelancer.length > 0) {
                             html += `
                                 <div class="info-item">
                                     <div class="info-icon"><i class="fas fa-briefcase"></i></div>
@@ -516,31 +521,31 @@
                                         <h4>Habilidades</h4>
                                         <div class="habilidades-list">
                             `;
-                            
+
                             data.cargosFreelancer.forEach(cargo => {
                                 html += `<span class="habilidade-badge">${cargo.cargo}</span>`;
                             });
-                            
+
                             html += `
                                         </div>
                                     </div>
                                 </div>
                             `;
                         }
-                        
-                        html += `</div>`; // Fecha info-grid
+
+                        html += `</div>`;
                     } else {
                         html = `<p class="text-center py-4">Nenhuma informação encontrada para este freelancer.</p>`;
                     }
-                    
+
                     document.getElementById("conteudoInformacoes").innerHTML = html;
-                    
+
                     // Mostra o botão de contratar apenas se houver informações
                     document.getElementById("btn-contratar").style.display = data.informacoes && data.informacoes.length > 0 ? "block" : "none";
-                    
+
                 } catch (error) {
                     console.error("Erro ao carregar informações:", error);
-                    document.getElementById("conteudoInformacoes").innerHTML = 
+                    document.getElementById("conteudoInformacoes").innerHTML =
                         `<p class="text-center py-4 text-danger">Ocorreu um erro ao carregar as informações.</p>`;
                 }
             };
@@ -553,17 +558,17 @@
 
         function contratarFreelancer() {
             if (!UserIdGlobal) return;
-            
+
             // Preenche o campo hidden com o ID do freelancer
             var idFreelancerInputs = document.querySelectorAll('.idFreelancer');
-            idFreelancerInputs.forEach(function(input) {
+            idFreelancerInputs.forEach(function (input) {
                 input.value = UserIdGlobal;
             });
 
             // Fecha o modal de informações
             const infoModal = bootstrap.Modal.getInstance(document.getElementById('modalInformacoes'));
             infoModal.hide();
-            
+
             // Abre o modal de vagas
             const vagasModal = new bootstrap.Modal(document.getElementById('vagasModal'));
             vagasModal.show();
@@ -578,17 +583,17 @@
             const response = await fetch('<?php echo base_url('/contratante/filtrarFreelancers?cargoId=') ?>' + cargoId);
             const data = await response.json();
 
-            if(data.freelancers && data.freelancers.length > 0){
-                data.freelancers.forEach((freelancers,indice)=>{
+            if (data.freelancers && data.freelancers.length > 0) {
+                data.freelancers.forEach((freelancers, indice) => {
                     let html2 = '';
 
-                    if(data.cargosFreelancer[indice] && data.cargosFreelancer[indice].length > 0){
+                    if (data.cargosFreelancer[indice] && data.cargosFreelancer[indice].length > 0) {
                         data.cargosFreelancer[indice].forEach(cargos => {
                             html2 += `<span class="habilidade-badge">${cargos.cargo}</span>`;
                         })
                     }
 
-                    // Formatando o telefone para o link do WhatsApp
+                    // link do WhatsApp
                     const telefoneFormatado = freelancers.telefone.replace(/\D/g, '');
                     const mensagemWhatsApp = encodeURIComponent(`Olá ${freelancers.nome.split(' ')[0]}, encontrei seu perfil no e-Jobs e gostaria de conversar sobre um serviço.`);
 
@@ -640,10 +645,11 @@
                 });
 
                 document.getElementById('listarFreelancers').innerHTML = html;
-            } else if(data.freelancers.length == 0) {
+            } else if (data.freelancers.length == 0) {
                 document.getElementById('listarFreelancers').innerHTML = '<p class="text-center py-4">Nenhum freelancer encontrado com os filtros selecionados.</p>';
             }
         }
     </script>
 </body>
+
 </html>

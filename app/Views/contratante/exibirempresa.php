@@ -128,7 +128,7 @@
             line-height: 1.6;
         }
 
-       
+
         .btn-edit {
             background-color: var(--primary);
             color: white;
@@ -235,7 +235,8 @@
                         <div class="info-content">
                             <h4>Localização</h4>
                             <p><?= htmlspecialchars($contratante['cidade']) ?>,
-                                <?= htmlspecialchars($contratante['estado']) ?></p>
+                                <?= htmlspecialchars($contratante['estado']) ?>
+                            </p>
                         </div>
                     </div>
                 </div>

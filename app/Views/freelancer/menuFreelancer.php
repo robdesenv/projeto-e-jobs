@@ -36,42 +36,45 @@
         .navbar-nav .nav-link:hover {
             color: #0a66c2;
         }
-
-        
     </style>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="<?php echo base_url(relativePath: 'freelancer/index')?>">e-Jobs</a>
+            <a class="navbar-brand" href="<?php echo base_url(relativePath: 'freelancer/index') ?>">e-Jobs</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url('freelancer/index')?>"><i class="fas fa-file-alt"></i> Inicio </a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo base_url('freelancer/index') ?>"><i
+                                class="fas fa-file-alt"></i> Inicio </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url('freelancer/meucurriculo')?>"><i class="fas fa-file-alt"></i> Meu
+                        <a class="nav-link" href="<?php echo base_url('freelancer/meucurriculo') ?>"><i
+                                class="fas fa-file-alt"></i> Meu
                             currículo</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url('freelancer/servicosprestados')?>"><i class="fas fa-tasks"></i> 
-                        Serviços</a>
+                        <a class="nav-link" href="<?php echo base_url('freelancer/servicosprestados') ?>"><i
+                                class="fas fa-tasks"></i>
+                            Serviços</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url('freelancer/transrecebidas')?>"><i class="fa-dollar-sign"></i>
+                        <a class="nav-link" href="<?php echo base_url('freelancer/transrecebidas') ?>"><i
+                                class="fa-dollar-sign"></i>
                             Transferências recebidas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url('freelancer/telabusca')?>"><i class="fas fa-search"></i> Buscar
+                        <a class="nav-link" href="<?php echo base_url('freelancer/telabusca') ?>"><i
+                                class="fas fa-search"></i> Buscar
                             serviços</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link btn-logout" href="<?php echo base_url('logout')?>"><i
+                        <a class="nav-link btn-logout" href="<?php echo base_url('logout') ?>"><i
                                 class="fas fa-sign-out-alt"></i> Sair</a>
                     </li>
                 </ul>
@@ -80,6 +83,6 @@
     </nav>
 </body>
 
-    
+
 
 </html>

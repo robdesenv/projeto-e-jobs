@@ -146,11 +146,11 @@
         }
 
         .status-disponivel {
-            color:rgb(91, 240, 125);
+            color: rgb(91, 240, 125);
         }
 
         .status-esgotado {
-            color:rgb(251, 255, 0);
+            color: rgb(251, 255, 0);
         }
 
         .data-destaque {
@@ -301,7 +301,7 @@
             font-size: 0.8rem;
             font-weight: 500;
         }
-        
+
 
         .info-item:hover {
             background-color: #f0f7ff;
@@ -391,26 +391,24 @@
             .freelancers-container {
                 grid-template-columns: 1fr;
             }
-            
+
             .btn-buscar {
                 width: 100%;
             }
-            
+
             .filtros-group {
                 flex-direction: column;
                 gap: 10px;
             }
-            
+
             .filtro-item {
                 min-width: 100%;
             }
-            
+
             .info-grid {
                 grid-template-columns: 1fr;
             }
         }
-
-        
     </style>
 </head>
 

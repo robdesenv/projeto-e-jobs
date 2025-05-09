@@ -75,7 +75,7 @@
         }
 
         .transferencias-section .status.recebido {
-            color: #28a745; 
+            color: #28a745;
         }
 
         .transferencias-section .status.pendente {

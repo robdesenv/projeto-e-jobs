@@ -129,21 +129,21 @@
                     <!-- Exemplo pra mostrar -->
                     <tr>
                         <td>Empresa A</td>
-                        <td>R$ 1.500,00</td>
+                        <td>R$ 100,00</td>
                         <td>10/10/2023</td>
                         <td>PIX</td>
                         <td class="status recebido">Recebido</td>
                     </tr>
                     <tr>
                         <td>Empresa B</td>
-                        <td>R$ 2.000,00</td>
+                        <td>R$ 200,00</td>
                         <td>15/10/2023</td>
                         <td>TED</td>
                         <td class="status pendente">Pendente</td>
                     </tr>
                     <tr>
                         <td>Empresa C</td>
-                        <td>R$ 3.000,00</td>
+                        <td>R$ 300,00</td>
                         <td>20/10/2023</td>
                         <td>Boleto</td>
                         <td class="status recebido">Recebido</td>

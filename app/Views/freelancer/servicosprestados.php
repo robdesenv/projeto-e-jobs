@@ -82,11 +82,11 @@
 
         .servicos-section .servico-card .status {
             font-weight: bold;
-            color: #28a745; 
+            color: #28a745;
         }
 
         .servicos-section .servico-card .status.pendente {
-            color: #dc3545; 
+            color: #dc3545;
         }
 
         .footer {
@@ -119,30 +119,30 @@
             <h1>Serviços candidatados por você</h1>
 
             <div class="servicos-container" id="listaServicos">
-                <?php foreach ($contratados as $contratado): 
+                <?php foreach ($contratados as $contratado):
                     if ($contratado['solicitante_id'] == user_id()):
-                    ?>
-                    
-                        
-                    <div class="servico-card">
-                        <h3><?php echo htmlspecialchars($contratado['cargo']); ?></h3>
-                        <p><strong>Evento:</strong> <?php echo htmlspecialchars($contratado['nome']); ?></p>
-                        <p><strong>Endereço:</strong> <?php echo htmlspecialchars($contratado['endereco']); ?></p>
-                        <p><strong>Cidade:</strong> <?php echo htmlspecialchars($contratado['cidade']); ?></p>
-                        <p><strong>Data do evento:</strong> <?php echo htmlspecialchars($contratado['data']); ?></p>
-                        <p><strong>Valor:</strong> R$ <?php echo htmlspecialchars($contratado['valor']); ?></p> 
-                        <p><strong>Descrição:</strong> <?php echo htmlspecialchars($contratado['descricao']); ?></p>
-                        <?php if($contratado['status'] == NULL){
-                            echo '<p class="alert alert-warning"><strong >Status: </strong>Agradando confirmação...</p>';
-                        }elseif($contratado['status'] == true){
-                            echo '<p class="alert alert-success"><strong >Status: </strong>Contratado</p>';
-                        }elseif($contratado['status'] == false){
-                            echo '<p class="alert alert-danger"><strong >Status: </strong>Recusado</p>';
-                        }
                         ?>
-                    </div>
-                <?php endif;
-                    endforeach; ?>
+
+
+                        <div class="servico-card">
+                            <h3><?php echo htmlspecialchars($contratado['cargo']); ?></h3>
+                            <p><strong>Evento:</strong> <?php echo htmlspecialchars($contratado['nome']); ?></p>
+                            <p><strong>Endereço:</strong> <?php echo htmlspecialchars($contratado['endereco']); ?></p>
+                            <p><strong>Cidade:</strong> <?php echo htmlspecialchars($contratado['cidade']); ?></p>
+                            <p><strong>Data do evento:</strong> <?php echo htmlspecialchars($contratado['data']); ?></p>
+                            <p><strong>Valor:</strong> R$ <?php echo htmlspecialchars($contratado['valor']); ?></p>
+                            <p><strong>Descrição:</strong> <?php echo htmlspecialchars($contratado['descricao']); ?></p>
+                            <?php if ($contratado['status'] == NULL) {
+                                echo '<p class="alert alert-warning"><strong >Status: </strong>Agradando confirmação...</p>';
+                            } elseif ($contratado['status'] == true) {
+                                echo '<p class="alert alert-success"><strong >Status: </strong>Contratado</p>';
+                            } elseif ($contratado['status'] == false) {
+                                echo '<p class="alert alert-danger"><strong >Status: </strong>Recusado</p>';
+                            }
+                            ?>
+                        </div>
+                    <?php endif;
+                endforeach; ?>
             </div>
         </div>
 
@@ -150,43 +150,46 @@
             <h1>Solicitações dos contratantes</h1>
 
             <div class="servicos-container" id="listaServicos">
-                <?php foreach ($contratados as $contratado): 
+                <?php foreach ($contratados as $contratado):
                     if ($contratado['solicitante_id'] != user_id()):
-                    ?>
-                    
-                        
-                    <div class="servico-card">
-                        <h3><?php echo htmlspecialchars($contratado['cargo']); ?></h3>
-                        <p><strong>Evento:</strong> <?php echo htmlspecialchars($contratado['nome']); ?></p>
-                        <p><strong>Endereço:</strong> <?php echo htmlspecialchars($contratado['endereco']); ?></p>
-                        <p><strong>Cidade:</strong> <?php echo htmlspecialchars($contratado['cidade']); ?></p>
-                        <p><strong>Data do evento:</strong> <?php echo htmlspecialchars($contratado['data']); ?></p>
-                        <p><strong>Valor:</strong> R$ <?php echo htmlspecialchars($contratado['valor']); ?></p> 
-                        <p><strong>Descrição:</strong> <?php echo htmlspecialchars($contratado['descricao']); ?></p>
-                        <?php if($contratado['status'] === NULL){
-                            echo '<p class="alert alert-warning"><strong >Status: </strong>Agradando confirmação...</p>';
-                        }elseif($contratado['status'] == true){
-                            echo '<p class="alert alert-success"><strong >Status: </strong>Contratado</p>';
-                        }elseif($contratado['status'] == false){
-                            echo '<p class="alert alert-danger"><strong >Status: </strong>Recusado</p>';
-                        }
                         ?>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" id="btn-recusar" data-bs-dismiss="modal" onclick="recusarServico(<?php echo htmlspecialchars($contratado['id']); ?>)">Recusar</button>
-                            <button type="button" name="btn-cargo" id="btn-contratar" class="btn btn-success" data-bs-dismiss="modal" onclick="aceitarServico(<?php echo htmlspecialchars($contratado['id']); ?>)">Aceitar</button>
+
+
+                        <div class="servico-card">
+                            <h3><?php echo htmlspecialchars($contratado['cargo']); ?></h3>
+                            <p><strong>Evento:</strong> <?php echo htmlspecialchars($contratado['nome']); ?></p>
+                            <p><strong>Endereço:</strong> <?php echo htmlspecialchars($contratado['endereco']); ?></p>
+                            <p><strong>Cidade:</strong> <?php echo htmlspecialchars($contratado['cidade']); ?></p>
+                            <p><strong>Data do evento:</strong> <?php echo htmlspecialchars($contratado['data']); ?></p>
+                            <p><strong>Valor:</strong> R$ <?php echo htmlspecialchars($contratado['valor']); ?></p>
+                            <p><strong>Descrição:</strong> <?php echo htmlspecialchars($contratado['descricao']); ?></p>
+                            <?php if ($contratado['status'] === NULL) {
+                                echo '<p class="alert alert-warning"><strong >Status: </strong>Agradando confirmação...</p>';
+                            } elseif ($contratado['status'] == true) {
+                                echo '<p class="alert alert-success"><strong >Status: </strong>Contratado</p>';
+                            } elseif ($contratado['status'] == false) {
+                                echo '<p class="alert alert-danger"><strong >Status: </strong>Recusado</p>';
+                            }
+                            ?>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" id="btn-recusar" data-bs-dismiss="modal"
+                                    onclick="recusarServico(<?php echo htmlspecialchars($contratado['id']); ?>)">Recusar</button>
+                                <button type="button" name="btn-cargo" id="btn-contratar" class="btn btn-success"
+                                    data-bs-dismiss="modal"
+                                    onclick="aceitarServico(<?php echo htmlspecialchars($contratado['id']); ?>)">Aceitar</button>
+                            </div>
                         </div>
-                    </div>
-                <?php endif;?>
+                    <?php endif; ?>
                 <?php endforeach; ?>
             </div>
         </div>
 
-        
-    </div>
-        
-    
 
-    
+    </div>
+
+
+
+
 
     <footer class="footer">
         <div class="container">
@@ -204,14 +207,14 @@
             modal.show();
         }
 
-        async function aceitarServico(idServico){
+        async function aceitarServico(idServico) {
             const response = await fetch('<?php echo base_url("/freelancer/servicosprestados?idVaga=") ?>' + idServico + "&btn=aceitar");
             const data = await response.json();
             window.location.reload();
 
         }
 
-        async function recusarServico(idServico){
+        async function recusarServico(idServico) {
             const response = await fetch('<?php echo base_url("/freelancer/servicosprestados?idVaga=") ?>' + idServico + "&btn=recusar");
             const data = await response.json();
             window.location.reload();

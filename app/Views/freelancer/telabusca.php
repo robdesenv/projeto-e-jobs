@@ -188,194 +188,194 @@
 
 <body>
 
-<?php include 'menuFreelancer.php'; ?>
+    <?php include 'menuFreelancer.php'; ?>
 
-<div class="container">
-    <div class="busca-section">
-        <h1>Buscar Serviços</h1>
+    <div class="container">
+        <div class="busca-section">
+            <h1>Buscar Serviços</h1>
 
-        <div id="msg" class="alert-message" style="display: none;"></div>
+            <div id="msg" class="alert-message" style="display: none;"></div>
 
-        <div class="filtros">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="categoria">Categoria:</label>
-                        <select id="categoria" class="form-control">
-                            <option value="">Todas categorias</option>
-                            <?php foreach($cargos as $cargo): ?>
-                            <option value="<?php echo $cargo['id']?>"><?php echo $cargo['cargo']?></option>
-                            <?php endforeach;?>
-                        </select>
+            <div class="filtros">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="categoria">Categoria:</label>
+                            <select id="categoria" class="form-control">
+                                <option value="">Todas categorias</option>
+                                <?php foreach ($cargos as $cargo): ?>
+                                    <option value="<?php echo $cargo['id'] ?>"><?php echo $cargo['cargo'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="localizacao">Localização(Cidade):</label>
+                            <input type="text" id="localizacao" class="form-control" placeholder="Digite a cidade">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>&nbsp;</label>
+                            <button onclick="filtrarServicos()" class="btn btn-primary">
+                                <i class="fas fa-search"></i> Buscar
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="localizacao">Localização(Cidade):</label>
-                        <input type="text" id="localizacao" class="form-control" placeholder="Digite a cidade">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>&nbsp;</label>
-                        <button onclick="filtrarServicos()" class="btn btn-primary">
-                            <i class="fas fa-search"></i> Buscar
+            </div>
+
+            <div class="servicos-container" id="listaServicos">
+                <?php foreach ($vagas as $vaga):
+                    $dataEvento = new DateTime($vaga['data']);
+                    ?>
+                    <div class="servico-card" data-categoria="<?php echo $vaga['cargo_id']; ?>"
+                        data-localizacao="<?php echo strtolower($vaga['cidade']); ?>"
+                        data-vaga-id="<?php echo $vaga['id']; ?>">
+
+                        <div class="data-destaque">
+                            <div class="data-dia"><?php echo $dataEvento->format('d'); ?></div>
+                            <div class="data-mes"><?php echo $dataEvento->format('M'); ?></div>
+                            <div class="data-ano"><?php echo $dataEvento->format('Y'); ?></div>
+                        </div>
+
+                        <h3><?php echo htmlspecialchars($vaga['cargo']); ?></h3>
+                        <p><strong>Evento:</strong> <?php echo htmlspecialchars($vaga['nome']); ?></p>
+                        <p><strong>Endereço:</strong> <?php echo htmlspecialchars($vaga['endereco']); ?></p>
+                        <p><strong>Cidade:</strong> <?php echo htmlspecialchars($vaga['cidade']); ?></p>
+                        <p><strong>Estado:</strong> <?php echo htmlspecialchars($vaga['estado']); ?></p>
+                        <p><strong>Valor:</strong> R$ <?php echo number_format($vaga['valor'], 2, ',', '.'); ?></p>
+                        <p><strong>Descrição:</strong> <?php echo htmlspecialchars($vaga['descricao']); ?></p>
+                        <button class="btn-candidatar"
+                            onclick="candidatarServico(<?php echo $vaga['id']; ?>, <?php echo $vaga['evento_id']; ?>, this)">
+                            <i class="fas fa-paper-plane"></i> Candidatar-se
                         </button>
                     </div>
-                </div>
+                <?php endforeach; ?>
             </div>
         </div>
+    </div>
 
-        <div class="servicos-container" id="listaServicos">
-            <?php foreach ($vagas as $vaga): 
-                $dataEvento = new DateTime($vaga['data']);
-            ?>
-            <div class="servico-card" 
-                 data-categoria="<?php echo $vaga['cargo_id']; ?>" 
-                 data-localizacao="<?php echo strtolower($vaga['cidade']); ?>"
-                 data-vaga-id="<?php echo $vaga['id']; ?>">
-                
-                <div class="data-destaque">
-                    <div class="data-dia"><?php echo $dataEvento->format('d'); ?></div>
-                    <div class="data-mes"><?php echo $dataEvento->format('M'); ?></div>
-                    <div class="data-ano"><?php echo $dataEvento->format('Y'); ?></div>
-                </div>
-                
-                <h3><?php echo htmlspecialchars($vaga['cargo']); ?></h3>
-                <p><strong>Evento:</strong> <?php echo htmlspecialchars($vaga['nome']); ?></p>
-                <p><strong>Endereço:</strong> <?php echo htmlspecialchars($vaga['endereco']); ?></p>
-                <p><strong>Cidade:</strong> <?php echo htmlspecialchars($vaga['cidade']); ?></p>
-                <p><strong>Estado:</strong> <?php echo htmlspecialchars($vaga['estado']); ?></p>
-                <p><strong>Valor:</strong> R$ <?php echo number_format($vaga['valor'], 2, ',', '.'); ?></p> 
-                <p><strong>Descrição:</strong> <?php echo htmlspecialchars($vaga['descricao']); ?></p>
-                <button class="btn-candidatar" 
-                        onclick="candidatarServico(<?php echo $vaga['id']; ?>, <?php echo $vaga['evento_id']; ?>, this)">
-                    <i class="fas fa-paper-plane"></i> Candidatar-se
-                </button>
-            </div>
-            <?php endforeach; ?>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 e-Jobs. Todos os direitos reservados.</p>
+            <p><a href="#">Política de Privacidade</a> | <a href="#">Termos de Uso</a></p>
         </div>
-    </div>
-</div>
+    </footer>
 
-<footer class="footer">
-    <div class="container">
-        <p>&copy; 2025 e-Jobs. Todos os direitos reservados.</p>
-        <p><a href="#">Política de Privacidade</a> | <a href="#">Termos de Uso</a></p>
-    </div>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    function desativarBotoesJaCandidatados() {
-        const candidaturas = JSON.parse(localStorage.getItem('candidaturas')) || [];
-        candidaturas.forEach(idVaga => {
-            const btn = document.querySelector(`.servico-card[data-vaga-id="${idVaga}"] .btn-candidatar`);
-            if (btn) {
-                btn.innerHTML = '<i class="fas fa-check"></i> Candidatura enviada';
-                btn.classList.add('disabled');
-                btn.disabled = true;
-            }
-        });
-    }
-
-    async function candidatarServico(idVaga, idEvento, btnElement) {
-        const btn = btnElement;
-        if (btn.classList.contains('disabled')) return;
-
-        try {
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
-            btn.disabled = true;
-
-            const response = await fetch('<?php echo base_url("freelancer/candidatarvaga?idVaga="); ?>' + idVaga + "&idEvento=" + idEvento);
-            const data = await response.json();
-
-            const msgDiv = document.getElementById('msg');
-            msgDiv.textContent = data.msg;
-            msgDiv.style.display = 'block';
-            msgDiv.className = data.success ? 'alert-message alert-success' : 'alert-message alert-error';
-
-            if (data.success) {
-                btn.innerHTML = '<i class="fas fa-check"></i> Candidatura enviada';
-                btn.classList.add('disabled');
-                btn.disabled = true;
-
-                const candidaturas = JSON.parse(localStorage.getItem('candidaturas')) || [];
-                if (!candidaturas.includes(idVaga)) {
-                    candidaturas.push(idVaga);
-                    localStorage.setItem('candidaturas', JSON.stringify(candidaturas));
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function desativarBotoesJaCandidatados() {
+            const candidaturas = JSON.parse(localStorage.getItem('candidaturas')) || [];
+            candidaturas.forEach(idVaga => {
+                const btn = document.querySelector(`.servico-card[data-vaga-id="${idVaga}"] .btn-candidatar`);
+                if (btn) {
+                    btn.innerHTML = '<i class="fas fa-check"></i> Candidatura enviada';
+                    btn.classList.add('disabled');
+                    btn.disabled = true;
                 }
-            } else {
+            });
+        }
+
+        async function candidatarServico(idVaga, idEvento, btnElement) {
+            const btn = btnElement;
+            if (btn.classList.contains('disabled')) return;
+
+            try {
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+                btn.disabled = true;
+
+                const response = await fetch('<?php echo base_url("freelancer/candidatarvaga?idVaga="); ?>' + idVaga + "&idEvento=" + idEvento);
+                const data = await response.json();
+
+                const msgDiv = document.getElementById('msg');
+                msgDiv.textContent = data.msg;
+                msgDiv.style.display = 'block';
+                msgDiv.className = data.success ? 'alert-message alert-success' : 'alert-message alert-error';
+
+                if (data.success) {
+                    btn.innerHTML = '<i class="fas fa-check"></i> Candidatura enviada';
+                    btn.classList.add('disabled');
+                    btn.disabled = true;
+
+                    const candidaturas = JSON.parse(localStorage.getItem('candidaturas')) || [];
+                    if (!candidaturas.includes(idVaga)) {
+                        candidaturas.push(idVaga);
+                        localStorage.setItem('candidaturas', JSON.stringify(candidaturas));
+                    }
+                } else {
+                    btn.innerHTML = '<i class="fas fa-paper-plane"></i> Candidatar-se';
+                    btn.disabled = false;
+                }
+
+                setTimeout(() => msgDiv.style.display = 'none', 3000);
+
+            } catch (error) {
+                console.error('Erro:', error);
+                const msgDiv = document.getElementById('msg');
+                msgDiv.textContent = 'Erro ao processar candidatura';
+                msgDiv.style.display = 'block';
+                msgDiv.className = 'alert-message alert-error';
+
                 btn.innerHTML = '<i class="fas fa-paper-plane"></i> Candidatar-se';
                 btn.disabled = false;
+
+                setTimeout(() => msgDiv.style.display = 'none', 3000);
             }
+        }
 
-            setTimeout(() => msgDiv.style.display = 'none', 3000);
+        function filtrarServicos() {
+            const categoria = document.getElementById('categoria').value;
+            const localizacao = document.getElementById('localizacao').value.toLowerCase();
+            const cards = document.querySelectorAll('.servico-card');
 
-        } catch (error) {
-            console.error('Erro:', error);
+            let cardsVisiveis = 0;
+
+            cards.forEach(card => {
+                const cardCategoria = card.getAttribute('data-categoria');
+                const cardLocalizacao = card.getAttribute('data-localizacao');
+
+                const categoriaMatch = categoria === '' || cardCategoria === categoria;
+                const localizacaoMatch = localizacao === '' || cardLocalizacao.includes(localizacao);
+
+                if (categoriaMatch && localizacaoMatch) {
+                    card.style.display = 'block';
+                    cardsVisiveis++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
             const msgDiv = document.getElementById('msg');
-            msgDiv.textContent = 'Erro ao processar candidatura';
-            msgDiv.style.display = 'block';
-            msgDiv.className = 'alert-message alert-error';
-
-            btn.innerHTML = '<i class="fas fa-paper-plane"></i> Candidatar-se';
-            btn.disabled = false;
-
-            setTimeout(() => msgDiv.style.display = 'none', 3000);
-        }
-    }
-
-    function filtrarServicos() {
-        const categoria = document.getElementById('categoria').value;
-        const localizacao = document.getElementById('localizacao').value.toLowerCase();
-        const cards = document.querySelectorAll('.servico-card');
-
-        let cardsVisiveis = 0;
-
-        cards.forEach(card => {
-            const cardCategoria = card.getAttribute('data-categoria');
-            const cardLocalizacao = card.getAttribute('data-localizacao');
-
-            const categoriaMatch = categoria === '' || cardCategoria === categoria;
-            const localizacaoMatch = localizacao === '' || cardLocalizacao.includes(localizacao);
-
-            if (categoriaMatch && localizacaoMatch) {
-                card.style.display = 'block';
-                cardsVisiveis++;
+            if (cardsVisiveis === 0) {
+                msgDiv.textContent = 'Nenhum serviço encontrado com os filtros selecionados.';
+                msgDiv.style.display = 'block';
+                msgDiv.className = 'alert-message alert-error';
             } else {
-                card.style.display = 'none';
+                msgDiv.style.display = 'none';
             }
-        });
-
-        const msgDiv = document.getElementById('msg');
-        if (cardsVisiveis === 0) {
-            msgDiv.textContent = 'Nenhum serviço encontrado com os filtros selecionados.';
-            msgDiv.style.display = 'block';
-            msgDiv.className = 'alert-message alert-error';
-        } else {
-            msgDiv.style.display = 'none';
         }
-    }
 
-    document.addEventListener('DOMContentLoaded', function () {
-        // Aplicar desativação aos já candidatados
-        desativarBotoesJaCandidatados();
+        document.addEventListener('DOMContentLoaded', function () {
+            // Aplicar desativação aos já candidatados
+            desativarBotoesJaCandidatados();
 
-        // Filtro automático via URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const categoriaParam = urlParams.get('categoria');
-        const localizacaoParam = urlParams.get('localizacao');
+            // Filtro automático via URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const categoriaParam = urlParams.get('categoria');
+            const localizacaoParam = urlParams.get('localizacao');
 
-        if (categoriaParam) document.getElementById('categoria').value = categoriaParam;
-        if (localizacaoParam) document.getElementById('localizacao').value = localizacaoParam;
-        if (categoriaParam || localizacaoParam) filtrarServicos();
+            if (categoriaParam) document.getElementById('categoria').value = categoriaParam;
+            if (localizacaoParam) document.getElementById('localizacao').value = localizacaoParam;
+            if (categoriaParam || localizacaoParam) filtrarServicos();
 
-        // Listeners
-        document.getElementById('localizacao').addEventListener('input', filtrarServicos);
-        document.getElementById('categoria').addEventListener('change', filtrarServicos);
-    });
-</script>
+
+            document.getElementById('localizacao').addEventListener('input', filtrarServicos);
+            document.getElementById('categoria').addEventListener('change', filtrarServicos);
+        });
+    </script>
 
 </body>
+
 </html>

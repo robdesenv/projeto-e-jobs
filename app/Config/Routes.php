@@ -7,6 +7,9 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 
+$routes->get('teste', 'Home::teste');
+$routes->post('teste', 'Home::teste');
+
 //freelancer
 $routes->get('/freelancer/index', 'FreelancerController::index', ['filter' => 'group:freelancer']);
 $routes->get('/freelancer/meucurriculo', 'FreelancerController::meucurriculo', ['filter' => 'group:freelancer']);
@@ -41,6 +44,8 @@ $routes->get('/contratante/solicitacoes', 'ContratanteController::exibirSolicita
 
 $routes->get('/contratante/editarevento/(:num)', 'ContratanteController::editEvento/$1', ['filter' => 'group:contratante']);
 $routes->post('/contratante/editarevento/(:num)', 'ContratanteController::editEvento/$1', ['filter' => 'group:contratante']);
+
+$routes->get('/contratante/finalizarevento/(:num)', 'ContratanteController::finalizarEvento/$1', ['filter' => 'group:contratante']);
 
 $routes->get('/contratante/excluirevento/(:num)', 'ContratanteController::deleteEventos/$1', ['filter' => 'group:contratante']);
 

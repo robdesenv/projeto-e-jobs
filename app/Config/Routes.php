@@ -58,6 +58,7 @@ $routes->get('/contratante/filtrarFreelancers', 'ContratanteController::filtrarF
 
 $routes->get('/contratante/pagamentos', 'ContratanteController::pagamentos', ['filter' => 'group:contratante']);
 
-$routes->get('contratante/avaliacao', 'ContratanteController::avaliacao', ['filter' => 'group:contratante'] );
+$routes->get('contratante/avaliacao', 'AvaliacaoFreelancerController::avaliacaoFreelancer', ['filter' => 'group:contratante'] );
+$routes->post('contratante/avaliacao', 'AvaliacaoFreelancerController::avaliacaoFreelancer', ['filter' => 'group:contratante'] );
 
 service('auth')->routes($routes);

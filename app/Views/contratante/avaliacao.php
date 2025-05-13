@@ -215,6 +215,10 @@
         <div class="avaliacoes-section">
             <h1>Avaliar Freelancers </h1>
 
+            <?php if (session()->getFlashdata('msg')): ?>
+                <?= session()->getFlashdata('msg'); ?>
+            <?php endif; ?>
+
             <div class="services-list" id="servicesList">
                 <?php foreach($avaliacao as $avaliacoes): ?>
                     <div class="service-card">
@@ -222,7 +226,7 @@
                     <div class="service-client">Freelancer: <?php echo $avaliacoes['freelancer'] ?></div>
                     <div class="service-client">Cargo: <?php echo $avaliacoes['cargo'] ?></div>
                     <div class="service-date">Finalizado em: <?php echo $avaliacoes['finalizado_em'] ?></div>
-                    <button class="rate-btn" onclick="openModal('1')">
+                    <button class="rate-btn" onclick="openModal(<?php echo $avaliacoes['evento_id'] ?>, <?php echo $avaliacoes['user_id'] ?>)">
                         <i class="fas fa-star"></i> Avaliar Serviço
                     </button>
                 </div>
@@ -237,8 +241,9 @@
             <span class="close" onclick="closeModal()">&times;</span>
             <h2 style="color: #004182;">Avaliar Serviço</h2>
 
-            <form id="ratingForm">
-                <input type="hidden" id="serviceId">
+            <form id="ratingForm" method="post">
+                <input type="hidden" id="eventoId" name= "eventoId">
+                <input type="hidden" id="freelancerId" name="freelancerId">
 
                 <div class="rating-section">
                     <div class="rating-title">Qualidade do Trabalho</div>
@@ -301,42 +306,12 @@
                 </div>
 
                 <div class="rating-section">
-                    <div class="rating-title">Cumprimento de Prazos</div>
-                    <div class="rating-scale">
-                        <span>0 (Péssimo)</span>
-                        <span>5 (Excelente)</span>
-                    </div>
-                    <div class="rating-options">
-                        <div class="rating-option">
-                            <input type="radio" id="deadline1" name="deadline" value="1">
-                            <label for="deadline1">1</label>
-                        </div>
-                        <div class="rating-option">
-                            <input type="radio" id="deadline2" name="deadline" value="2">
-                            <label for="deadline2">2</label>
-                        </div>
-                        <div class="rating-option">
-                            <input type="radio" id="deadline3" name="deadline" value="3">
-                            <label for="deadline3">3</label>
-                        </div>
-                        <div class="rating-option">
-                            <input type="radio" id="deadline4" name="deadline" value="4">
-                            <label for="deadline4">4</label>
-                        </div>
-                        <div class="rating-option">
-                            <input type="radio" id="deadline5" name="deadline" value="5">
-                            <label for="deadline5">5</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="rating-section">
                     <label for="comment" class="rating-title">Comentário (opcional)</label>
                     <textarea id="comment" name="comment"
                         placeholder="Deixe seu comentário sobre o serviço..."></textarea>
                 </div>
 
-                <button type="button" class="publish-btn" onclick="publishRating()">
+                <button type="submit" class="publish-btn" onclick="publishRating()">
                     <i class="fas fa-check"></i> Publicar Avaliação
                 </button>
             </form>
@@ -347,9 +322,14 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
         // Função para abrir o modal
-        function openModal(serviceId) {
-            document.getElementById('serviceId').value = serviceId;
+        function openModal(eventoId,freelancerId) {
+            document.getElementById('eventoId').value = eventoId;
+            document.getElementById('freelancerId').value = freelancerId;
             document.getElementById('ratingModal').style.display = 'block';
 
             document.getElementById('ratingForm').reset();

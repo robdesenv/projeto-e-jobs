@@ -487,26 +487,5 @@ class ContratanteController extends BaseController
     }
 
 
-    public function avaliacao(){
-
-        $db = db_connect();
-        $sql = 'SELECT 
-                    freelancer.nome AS freelancer, 
-                    eventos.nome AS evento,
-                    cargos.cargo,
-                    DATE_FORMAT(eventos.finalizado_em, "%d/%m/%Y") as finalizado_em
-                FROM freelancer
-                JOIN contratados ON contratados.freelancer_id = freelancer.user_id
-                JOIN eventos ON contratados.evento_id = eventos.id
-                JOIN vagas ON contratados.vagas_id = vagas.id
-                JOIN cargos ON cargos.id = vagas.cargo_id
-                WHERE contratados.status = TRUE AND eventos.status = TRUE;';
-        
-        $query = $db->query($sql);
-        $data['avaliacao'] = $query->getResultArray();
-
-
-        return view('contratante/avaliacao',$data);
-    }
 
 }

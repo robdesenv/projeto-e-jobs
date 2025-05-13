@@ -16,3 +16,667 @@ DEBUG - 2025-05-13 00:18:53 --> Session: Class initialized using 'CodeIgniter\Se
 DEBUG - 2025-05-13 00:18:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2025-05-13 00:19:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2025-05-13 00:19:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:37:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:37:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:37:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:37:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:37:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:37:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:37:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:37:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:37:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:37:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-05-13 18:37:33 --> mysqli_sql_exception: Unknown column 'eventos.finalizado_em' in 'field list' in C:\xampp\htdocs\projeto-e-jobs\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\projeto-e-jobs\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT \r\n      ...', 0)
+#1 C:\xampp\htdocs\projeto-e-jobs\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT \r\n      ...')
+#2 C:\xampp\htdocs\projeto-e-jobs\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT \r\n      ...')
+#3 C:\xampp\htdocs\projeto-e-jobs\app\Controllers\ContratanteController.php(505): CodeIgniter\Database\BaseConnection->query('SELECT \r\n      ...')
+#4 C:\xampp\htdocs\projeto-e-jobs\system\CodeIgniter.php(933): App\Controllers\ContratanteController->avaliacao()
+#5 C:\xampp\htdocs\projeto-e-jobs\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ContratanteController))
+#6 C:\xampp\htdocs\projeto-e-jobs\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\projeto-e-jobs\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#8 C:\xampp\htdocs\projeto-e-jobs\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#9 C:\xampp\htdocs\projeto-e-jobs\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#10 {main}
+CRITICAL - 2025-05-13 18:37:33 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'eventos.finalizado_em' in 'field list'
+[Method: GET, Route: contratante/avaliacao]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 APPPATH\Controllers\ContratanteController.php(505): CodeIgniter\Database\BaseConnection->query('SELECT 
+                    freelancer.nome AS freelancer, 
+                    eventos.nome AS evento,
+                    cargos.cargo,
+                    DATE_FORMAT(eventos.finalizado_em, "%d/%m/%Y") as finalizado_em
+                FROM freelancer
+                JOIN contratados ON contratados.freelancer_id = freelancer.user_id
+                JOIN eventos ON contratados.evento_id = eventos.id
+                JOIN vagas ON contratados.vagas_id = vagas.id
+                JOIN cargos ON cargos.id = vagas.cargo_id
+                WHERE contratados.status = TRUE AND eventos.status = TRUE;')
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\ContratanteController->avaliacao()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ContratanteController))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-13 18:37:33 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'eventos.finalizado_em' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT 
+                    freelancer.nome AS freelancer, 
+                    eventos.nome AS evento,
+                    cargos.cargo,
+                    DATE_FORMAT(eventos.finalizado_em, "%d/%m/%Y") as finalizado_em
+                FROM freelancer
+                JOIN contratados ON contratados.freelancer_id = freelancer.user_id
+                JOIN eventos ON contratados.evento_id = eventos.id
+                JOIN vagas ON contratados.vagas_id = vagas.id
+                JOIN cargos ON cargos.id = vagas.cargo_id
+                WHERE contratados.status = TRUE AND eventos.status = TRUE;')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT 
+                    freelancer.nome AS freelancer, 
+                    eventos.nome AS evento,
+                    cargos.cargo,
+                    DATE_FORMAT(eventos.finalizado_em, "%d/%m/%Y") as finalizado_em
+                FROM freelancer
+                JOIN contratados ON contratados.freelancer_id = freelancer.user_id
+                JOIN eventos ON contratados.evento_id = eventos.id
+                JOIN vagas ON contratados.vagas_id = vagas.id
+                JOIN cargos ON cargos.id = vagas.cargo_id
+                WHERE contratados.status = TRUE AND eventos.status = TRUE;')
+ 3 APPPATH\Controllers\ContratanteController.php(505): CodeIgniter\Database\BaseConnection->query('SELECT 
+                    freelancer.nome AS freelancer, 
+                    eventos.nome AS evento,
+                    cargos.cargo,
+                    DATE_FORMAT(eventos.finalizado_em, "%d/%m/%Y") as finalizado_em
+                FROM freelancer
+                JOIN contratados ON contratados.freelancer_id = freelancer.user_id
+                JOIN eventos ON contratados.evento_id = eventos.id
+                JOIN vagas ON contratados.vagas_id = vagas.id
+                JOIN cargos ON cargos.id = vagas.cargo_id
+                WHERE contratados.status = TRUE AND eventos.status = TRUE;')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\ContratanteController->avaliacao()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ContratanteController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-13 18:37:33 --> [Caused by] mysqli_sql_exception: Unknown column 'eventos.finalizado_em' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT 
+                    freelancer.nome AS freelancer, 
+                    eventos.nome AS evento,
+                    cargos.cargo,
+                    DATE_FORMAT(eventos.finalizado_em, "%d/%m/%Y") as finalizado_em
+                FROM freelancer
+                JOIN contratados ON contratados.freelancer_id = freelancer.user_id
+                JOIN eventos ON contratados.evento_id = eventos.id
+                JOIN vagas ON contratados.vagas_id = vagas.id
+                JOIN cargos ON cargos.id = vagas.cargo_id
+                WHERE contratados.status = TRUE AND eventos.status = TRUE;', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT 
+                    freelancer.nome AS freelancer, 
+                    eventos.nome AS evento,
+                    cargos.cargo,
+                    DATE_FORMAT(eventos.finalizado_em, "%d/%m/%Y") as finalizado_em
+                FROM freelancer
+                JOIN contratados ON contratados.freelancer_id = freelancer.user_id
+                JOIN eventos ON contratados.evento_id = eventos.id
+                JOIN vagas ON contratados.vagas_id = vagas.id
+                JOIN cargos ON cargos.id = vagas.cargo_id
+                WHERE contratados.status = TRUE AND eventos.status = TRUE;')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT 
+                    freelancer.nome AS freelancer, 
+                    eventos.nome AS evento,
+                    cargos.cargo,
+                    DATE_FORMAT(eventos.finalizado_em, "%d/%m/%Y") as finalizado_em
+                FROM freelancer
+                JOIN contratados ON contratados.freelancer_id = freelancer.user_id
+                JOIN eventos ON contratados.evento_id = eventos.id
+                JOIN vagas ON contratados.vagas_id = vagas.id
+                JOIN cargos ON cargos.id = vagas.cargo_id
+                WHERE contratados.status = TRUE AND eventos.status = TRUE;')
+ 4 APPPATH\Controllers\ContratanteController.php(505): CodeIgniter\Database\BaseConnection->query('SELECT 
+                    freelancer.nome AS freelancer, 
+                    eventos.nome AS evento,
+                    cargos.cargo,
+                    DATE_FORMAT(eventos.finalizado_em, "%d/%m/%Y") as finalizado_em
+                FROM freelancer
+                JOIN contratados ON contratados.freelancer_id = freelancer.user_id
+                JOIN eventos ON contratados.evento_id = eventos.id
+                JOIN vagas ON contratados.vagas_id = vagas.id
+                JOIN cargos ON cargos.id = vagas.cargo_id
+                WHERE contratados.status = TRUE AND eventos.status = TRUE;')
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\ContratanteController->avaliacao()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ContratanteController))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-13 18:39:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:39:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:39:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:39:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:39:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:39:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:39:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:39:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:39:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:40:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:40:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:40:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:40:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:40:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:40:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:40:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:40:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:40:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:40:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:40:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:40:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:40:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:40:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:40:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:40:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:40:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:40:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:40:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:40:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:40:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:40:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:40:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:40:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:40:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:40:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:40:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:40:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:40:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:41:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:41:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:41:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:41:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:41:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:41:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:41:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:41:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:41:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:41:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:41:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:41:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:42:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:42:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:52:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:53:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:53:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:56:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:56:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:56:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:56:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:59:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:59:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:59:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:59:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:59:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 18:59:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 19:09:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-05-13 19:09:01 --> mysqli_sql_exception: Unknown column 'evento.id' in 'field list' in C:\xampp\htdocs\projeto-e-jobs\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\projeto-e-jobs\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT \r\n      ...', 0)
+#1 C:\xampp\htdocs\projeto-e-jobs\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT \r\n      ...')
+#2 C:\xampp\htdocs\projeto-e-jobs\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT \r\n      ...')
+#3 C:\xampp\htdocs\projeto-e-jobs\app\Controllers\AvaliacaoFreelancerController.php(26): CodeIgniter\Database\BaseConnection->query('SELECT \r\n      ...')
+#4 C:\xampp\htdocs\projeto-e-jobs\system\CodeIgniter.php(933): App\Controllers\avaliacaoFreelancerController->avaliacaoFreelancer()
+#5 C:\xampp\htdocs\projeto-e-jobs\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\avaliacaoFreelancerController))
+#6 C:\xampp\htdocs\projeto-e-jobs\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\projeto-e-jobs\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#8 C:\xampp\htdocs\projeto-e-jobs\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#9 C:\xampp\htdocs\projeto-e-jobs\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#10 {main}
+CRITICAL - 2025-05-13 19:09:01 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'evento.id' in 'field list'
+[Method: GET, Route: contratante/avaliacao]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 APPPATH\Controllers\AvaliacaoFreelancerController.php(26): CodeIgniter\Database\BaseConnection->query('SELECT 
+                    evento.id,
+                    freelancer.user_id,
+                    freelancer.nome AS freelancer, 
+                    eventos.nome AS evento,
+                    cargos.cargo,
+                    DATE_FORMAT(eventos.finalizado_em, "%d/%m/%Y") as finalizado_em
+                FROM freelancer
+                JOIN contratados ON contratados.freelancer_id = freelancer.user_id
+                JOIN eventos ON contratados.evento_id = eventos.id
+                JOIN vagas ON contratados.vagas_id = vagas.id
+                JOIN cargos ON cargos.id = vagas.cargo_id
+                WHERE contratados.status = TRUE AND eventos.status = TRUE;')
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\avaliacaoFreelancerController->avaliacaoFreelancer()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\avaliacaoFreelancerController))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-13 19:09:01 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'evento.id' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT 
+                    evento.id,
+                    freelancer.user_id,
+                    freelancer.nome AS freelancer, 
+                    eventos.nome AS evento,
+                    cargos.cargo,
+                    DATE_FORMAT(eventos.finalizado_em, "%d/%m/%Y") as finalizado_em
+                FROM freelancer
+                JOIN contratados ON contratados.freelancer_id = freelancer.user_id
+                JOIN eventos ON contratados.evento_id = eventos.id
+                JOIN vagas ON contratados.vagas_id = vagas.id
+                JOIN cargos ON cargos.id = vagas.cargo_id
+                WHERE contratados.status = TRUE AND eventos.status = TRUE;')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT 
+                    evento.id,
+                    freelancer.user_id,
+                    freelancer.nome AS freelancer, 
+                    eventos.nome AS evento,
+                    cargos.cargo,
+                    DATE_FORMAT(eventos.finalizado_em, "%d/%m/%Y") as finalizado_em
+                FROM freelancer
+                JOIN contratados ON contratados.freelancer_id = freelancer.user_id
+                JOIN eventos ON contratados.evento_id = eventos.id
+                JOIN vagas ON contratados.vagas_id = vagas.id
+                JOIN cargos ON cargos.id = vagas.cargo_id
+                WHERE contratados.status = TRUE AND eventos.status = TRUE;')
+ 3 APPPATH\Controllers\AvaliacaoFreelancerController.php(26): CodeIgniter\Database\BaseConnection->query('SELECT 
+                    evento.id,
+                    freelancer.user_id,
+                    freelancer.nome AS freelancer, 
+                    eventos.nome AS evento,
+                    cargos.cargo,
+                    DATE_FORMAT(eventos.finalizado_em, "%d/%m/%Y") as finalizado_em
+                FROM freelancer
+                JOIN contratados ON contratados.freelancer_id = freelancer.user_id
+                JOIN eventos ON contratados.evento_id = eventos.id
+                JOIN vagas ON contratados.vagas_id = vagas.id
+                JOIN cargos ON cargos.id = vagas.cargo_id
+                WHERE contratados.status = TRUE AND eventos.status = TRUE;')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\avaliacaoFreelancerController->avaliacaoFreelancer()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\avaliacaoFreelancerController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-13 19:09:01 --> [Caused by] mysqli_sql_exception: Unknown column 'evento.id' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT 
+                    evento.id,
+                    freelancer.user_id,
+                    freelancer.nome AS freelancer, 
+                    eventos.nome AS evento,
+                    cargos.cargo,
+                    DATE_FORMAT(eventos.finalizado_em, "%d/%m/%Y") as finalizado_em
+                FROM freelancer
+                JOIN contratados ON contratados.freelancer_id = freelancer.user_id
+                JOIN eventos ON contratados.evento_id = eventos.id
+                JOIN vagas ON contratados.vagas_id = vagas.id
+                JOIN cargos ON cargos.id = vagas.cargo_id
+                WHERE contratados.status = TRUE AND eventos.status = TRUE;', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT 
+                    evento.id,
+                    freelancer.user_id,
+                    freelancer.nome AS freelancer, 
+                    eventos.nome AS evento,
+                    cargos.cargo,
+                    DATE_FORMAT(eventos.finalizado_em, "%d/%m/%Y") as finalizado_em
+                FROM freelancer
+                JOIN contratados ON contratados.freelancer_id = freelancer.user_id
+                JOIN eventos ON contratados.evento_id = eventos.id
+                JOIN vagas ON contratados.vagas_id = vagas.id
+                JOIN cargos ON cargos.id = vagas.cargo_id
+                WHERE contratados.status = TRUE AND eventos.status = TRUE;')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT 
+                    evento.id,
+                    freelancer.user_id,
+                    freelancer.nome AS freelancer, 
+                    eventos.nome AS evento,
+                    cargos.cargo,
+                    DATE_FORMAT(eventos.finalizado_em, "%d/%m/%Y") as finalizado_em
+                FROM freelancer
+                JOIN contratados ON contratados.freelancer_id = freelancer.user_id
+                JOIN eventos ON contratados.evento_id = eventos.id
+                JOIN vagas ON contratados.vagas_id = vagas.id
+                JOIN cargos ON cargos.id = vagas.cargo_id
+                WHERE contratados.status = TRUE AND eventos.status = TRUE;')
+ 4 APPPATH\Controllers\AvaliacaoFreelancerController.php(26): CodeIgniter\Database\BaseConnection->query('SELECT 
+                    evento.id,
+                    freelancer.user_id,
+                    freelancer.nome AS freelancer, 
+                    eventos.nome AS evento,
+                    cargos.cargo,
+                    DATE_FORMAT(eventos.finalizado_em, "%d/%m/%Y") as finalizado_em
+                FROM freelancer
+                JOIN contratados ON contratados.freelancer_id = freelancer.user_id
+                JOIN eventos ON contratados.evento_id = eventos.id
+                JOIN vagas ON contratados.vagas_id = vagas.id
+                JOIN cargos ON cargos.id = vagas.cargo_id
+                WHERE contratados.status = TRUE AND eventos.status = TRUE;')
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\avaliacaoFreelancerController->avaliacaoFreelancer()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\avaliacaoFreelancerController))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-13 19:09:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-05-13 19:09:33 --> mysqli_sql_exception: Unknown column 'evento.evento_id' in 'field list' in C:\xampp\htdocs\projeto-e-jobs\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\projeto-e-jobs\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT \r\n      ...', 0)
+#1 C:\xampp\htdocs\projeto-e-jobs\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT \r\n      ...')
+#2 C:\xampp\htdocs\projeto-e-jobs\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT \r\n      ...')
+#3 C:\xampp\htdocs\projeto-e-jobs\app\Controllers\AvaliacaoFreelancerController.php(26): CodeIgniter\Database\BaseConnection->query('SELECT \r\n      ...')
+#4 C:\xampp\htdocs\projeto-e-jobs\system\CodeIgniter.php(933): App\Controllers\avaliacaoFreelancerController->avaliacaoFreelancer()
+#5 C:\xampp\htdocs\projeto-e-jobs\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\avaliacaoFreelancerController))
+#6 C:\xampp\htdocs\projeto-e-jobs\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\projeto-e-jobs\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#8 C:\xampp\htdocs\projeto-e-jobs\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#9 C:\xampp\htdocs\projeto-e-jobs\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#10 {main}
+CRITICAL - 2025-05-13 19:09:33 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'evento.evento_id' in 'field list'
+[Method: GET, Route: contratante/avaliacao]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 APPPATH\Controllers\AvaliacaoFreelancerController.php(26): CodeIgniter\Database\BaseConnection->query('SELECT 
+                    evento.evento_id,
+                    freelancer.user_id,
+                    freelancer.nome AS freelancer, 
+                    eventos.nome AS evento,
+                    cargos.cargo,
+                    DATE_FORMAT(eventos.finalizado_em, "%d/%m/%Y") as finalizado_em
+                FROM freelancer
+                JOIN contratados ON contratados.freelancer_id = freelancer.user_id
+                JOIN eventos ON contratados.evento_id = eventos.id
+                JOIN vagas ON contratados.vagas_id = vagas.id
+                JOIN cargos ON cargos.id = vagas.cargo_id
+                WHERE contratados.status = TRUE AND eventos.status = TRUE;')
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\avaliacaoFreelancerController->avaliacaoFreelancer()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\avaliacaoFreelancerController))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-13 19:09:33 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'evento.evento_id' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT 
+                    evento.evento_id,
+                    freelancer.user_id,
+                    freelancer.nome AS freelancer, 
+                    eventos.nome AS evento,
+                    cargos.cargo,
+                    DATE_FORMAT(eventos.finalizado_em, "%d/%m/%Y") as finalizado_em
+                FROM freelancer
+                JOIN contratados ON contratados.freelancer_id = freelancer.user_id
+                JOIN eventos ON contratados.evento_id = eventos.id
+                JOIN vagas ON contratados.vagas_id = vagas.id
+                JOIN cargos ON cargos.id = vagas.cargo_id
+                WHERE contratados.status = TRUE AND eventos.status = TRUE;')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT 
+                    evento.evento_id,
+                    freelancer.user_id,
+                    freelancer.nome AS freelancer, 
+                    eventos.nome AS evento,
+                    cargos.cargo,
+                    DATE_FORMAT(eventos.finalizado_em, "%d/%m/%Y") as finalizado_em
+                FROM freelancer
+                JOIN contratados ON contratados.freelancer_id = freelancer.user_id
+                JOIN eventos ON contratados.evento_id = eventos.id
+                JOIN vagas ON contratados.vagas_id = vagas.id
+                JOIN cargos ON cargos.id = vagas.cargo_id
+                WHERE contratados.status = TRUE AND eventos.status = TRUE;')
+ 3 APPPATH\Controllers\AvaliacaoFreelancerController.php(26): CodeIgniter\Database\BaseConnection->query('SELECT 
+                    evento.evento_id,
+                    freelancer.user_id,
+                    freelancer.nome AS freelancer, 
+                    eventos.nome AS evento,
+                    cargos.cargo,
+                    DATE_FORMAT(eventos.finalizado_em, "%d/%m/%Y") as finalizado_em
+                FROM freelancer
+                JOIN contratados ON contratados.freelancer_id = freelancer.user_id
+                JOIN eventos ON contratados.evento_id = eventos.id
+                JOIN vagas ON contratados.vagas_id = vagas.id
+                JOIN cargos ON cargos.id = vagas.cargo_id
+                WHERE contratados.status = TRUE AND eventos.status = TRUE;')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\avaliacaoFreelancerController->avaliacaoFreelancer()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\avaliacaoFreelancerController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-13 19:09:33 --> [Caused by] mysqli_sql_exception: Unknown column 'evento.evento_id' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT 
+                    evento.evento_id,
+                    freelancer.user_id,
+                    freelancer.nome AS freelancer, 
+                    eventos.nome AS evento,
+                    cargos.cargo,
+                    DATE_FORMAT(eventos.finalizado_em, "%d/%m/%Y") as finalizado_em
+                FROM freelancer
+                JOIN contratados ON contratados.freelancer_id = freelancer.user_id
+                JOIN eventos ON contratados.evento_id = eventos.id
+                JOIN vagas ON contratados.vagas_id = vagas.id
+                JOIN cargos ON cargos.id = vagas.cargo_id
+                WHERE contratados.status = TRUE AND eventos.status = TRUE;', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT 
+                    evento.evento_id,
+                    freelancer.user_id,
+                    freelancer.nome AS freelancer, 
+                    eventos.nome AS evento,
+                    cargos.cargo,
+                    DATE_FORMAT(eventos.finalizado_em, "%d/%m/%Y") as finalizado_em
+                FROM freelancer
+                JOIN contratados ON contratados.freelancer_id = freelancer.user_id
+                JOIN eventos ON contratados.evento_id = eventos.id
+                JOIN vagas ON contratados.vagas_id = vagas.id
+                JOIN cargos ON cargos.id = vagas.cargo_id
+                WHERE contratados.status = TRUE AND eventos.status = TRUE;')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT 
+                    evento.evento_id,
+                    freelancer.user_id,
+                    freelancer.nome AS freelancer, 
+                    eventos.nome AS evento,
+                    cargos.cargo,
+                    DATE_FORMAT(eventos.finalizado_em, "%d/%m/%Y") as finalizado_em
+                FROM freelancer
+                JOIN contratados ON contratados.freelancer_id = freelancer.user_id
+                JOIN eventos ON contratados.evento_id = eventos.id
+                JOIN vagas ON contratados.vagas_id = vagas.id
+                JOIN cargos ON cargos.id = vagas.cargo_id
+                WHERE contratados.status = TRUE AND eventos.status = TRUE;')
+ 4 APPPATH\Controllers\AvaliacaoFreelancerController.php(26): CodeIgniter\Database\BaseConnection->query('SELECT 
+                    evento.evento_id,
+                    freelancer.user_id,
+                    freelancer.nome AS freelancer, 
+                    eventos.nome AS evento,
+                    cargos.cargo,
+                    DATE_FORMAT(eventos.finalizado_em, "%d/%m/%Y") as finalizado_em
+                FROM freelancer
+                JOIN contratados ON contratados.freelancer_id = freelancer.user_id
+                JOIN eventos ON contratados.evento_id = eventos.id
+                JOIN vagas ON contratados.vagas_id = vagas.id
+                JOIN cargos ON cargos.id = vagas.cargo_id
+                WHERE contratados.status = TRUE AND eventos.status = TRUE;')
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\avaliacaoFreelancerController->avaliacaoFreelancer()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\avaliacaoFreelancerController))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-13 19:10:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-13 19:10:51 --> ErrorException: Undefined array key "id"
+[Method: GET, Route: contratante/avaliacao]
+in APPPATH\Views\contratante\avaliacao.php on line 225.
+ 1 APPPATH\Views\contratante\avaliacao.php(225): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "id"', 'C:\\xampp\\htdocs\\projeto-e-jobs\\app\\Views\\contratante\\avaliacao.php', 225)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\projeto-e-jobs\\app\\Views\\contratante\\avaliacao.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('contratante/avaliacao', [], true)
+ 5 APPPATH\Controllers\AvaliacaoFreelancerController.php(39): view('contratante/avaliacao', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\avaliacaoFreelancerController->avaliacaoFreelancer()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\avaliacaoFreelancerController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-13 19:10:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-13 19:10:52 --> ErrorException: Undefined array key "id"
+[Method: GET, Route: contratante/avaliacao]
+in APPPATH\Views\contratante\avaliacao.php on line 225.
+ 1 APPPATH\Views\contratante\avaliacao.php(225): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "id"', 'C:\\xampp\\htdocs\\projeto-e-jobs\\app\\Views\\contratante\\avaliacao.php', 225)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\projeto-e-jobs\\app\\Views\\contratante\\avaliacao.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('contratante/avaliacao', [], true)
+ 5 APPPATH\Controllers\AvaliacaoFreelancerController.php(39): view('contratante/avaliacao', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\avaliacaoFreelancerController->avaliacaoFreelancer()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\avaliacaoFreelancerController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-13 19:11:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 19:11:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 19:13:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 19:13:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 19:14:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 19:14:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 19:20:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 19:20:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 19:20:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-13 19:20:58 --> Error: Class "App\Models\avaliacaoFreelancerModel" not found
+[Method: POST, Route: contratante/avaliacao]
+in APPPATH\Controllers\AvaliacaoFreelancerController.php on line 32.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\avaliacaoFreelancerController->avaliacaoFreelancer()
+ 2 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\avaliacaoFreelancerController))
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-13 19:21:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 19:21:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 19:21:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 19:21:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 19:22:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 19:22:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 19:22:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 19:22:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 19:23:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 19:23:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 19:23:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 19:23:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 19:23:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 19:23:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 19:27:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 19:27:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 19:27:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-13 19:27:11 --> TypeError: App\Controllers\avaliacaoFreelancerController::avaliacaoFreelancer(): Return value must be of type string, CodeIgniter\HTTP\RedirectResponse returned
+[Method: POST, Route: contratante/avaliacao]
+in APPPATH\Controllers\AvaliacaoFreelancerController.php on line 44.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\avaliacaoFreelancerController->avaliacaoFreelancer()
+ 2 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\avaliacaoFreelancerController))
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-13 19:28:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-13 19:28:44 --> TypeError: App\Controllers\avaliacaoFreelancerController::avaliacaoFreelancer(): Return value must be of type string, CodeIgniter\HTTP\RedirectResponse returned
+[Method: POST, Route: contratante/avaliacao]
+in APPPATH\Controllers\AvaliacaoFreelancerController.php on line 44.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\avaliacaoFreelancerController->avaliacaoFreelancer()
+ 2 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\avaliacaoFreelancerController))
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-05-13 19:29:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 19:29:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 19:29:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 19:29:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 19:29:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 19:36:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 19:36:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 19:36:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 19:38:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 19:38:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 19:51:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 19:51:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:06:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:06:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:06:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:20:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:20:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:20:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:20:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:20:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:20:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:20:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:20:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:20:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:20:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:21:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:21:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:21:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:21:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:21:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:21:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:21:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:21:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:21:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:21:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:21:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:21:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:21:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:21:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:21:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:21:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:21:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:21:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:21:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:21:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:21:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:21:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:21:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:21:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:22:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:23:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:23:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-13 20:23:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

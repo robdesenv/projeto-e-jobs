@@ -265,7 +265,7 @@
                     <div class="rating-title">Qualidade do Trabalho</div>
                     <div class="rating-scale">
                         <span>0 (Péssimo)</span>
-                        <span>10 (Excelente)</span>
+                        <span>5 (Excelente)</span>
                     </div>
                     <div class="rating-options">
                         <div class="rating-option">
@@ -288,26 +288,6 @@
                             <input type="radio" id="quality5" name="quality" value="5">
                             <label for="quality5">5</label>
                         </div>
-                        <div class="rating-option">
-                            <input type="radio" id="quality6" name="quality" value="6">
-                            <label for="quality6">6</label>
-                        </div>
-                        <div class="rating-option">
-                            <input type="radio" id="quality7" name="quality" value="7">
-                            <label for="quality7">7</label>
-                        </div>
-                        <div class="rating-option">
-                            <input type="radio" id="quality8" name="quality" value="8">
-                            <label for="quality8">8</label>
-                        </div>
-                        <div class="rating-option">
-                            <input type="radio" id="quality9" name="quality" value="9">
-                            <label for="quality9">9</label>
-                        </div>
-                        <div class="rating-option">
-                            <input type="radio" id="quality10" name="quality" value="10">
-                            <label for="quality10">10</label>
-                        </div>
                     </div>
                 </div>
 
@@ -315,7 +295,7 @@
                     <div class="rating-title">Comunicação</div>
                     <div class="rating-scale">
                         <span>0 (Péssimo)</span>
-                        <span>10 (Excelente)</span>
+                        <span>5 (Excelente)</span>
                     </div>
                     <div class="rating-options">
                         <div class="rating-option">
@@ -338,26 +318,6 @@
                             <input type="radio" id="communication5" name="communication" value="5">
                             <label for="communication5">5</label>
                         </div>
-                        <div class="rating-option">
-                            <input type="radio" id="communication6" name="communication" value="6">
-                            <label for="communication6">6</label>
-                        </div>
-                        <div class="rating-option">
-                            <input type="radio" id="communication7" name="communication" value="7">
-                            <label for="communication7">7</label>
-                        </div>
-                        <div class="rating-option">
-                            <input type="radio" id="communication8" name="communication" value="8">
-                            <label for="communication8">8</label>
-                        </div>
-                        <div class="rating-option">
-                            <input type="radio" id="communication9" name="communication" value="9">
-                            <label for="communication9">9</label>
-                        </div>
-                        <div class="rating-option">
-                            <input type="radio" id="communication10" name="communication" value="10">
-                            <label for="communication10">10</label>
-                        </div>
                     </div>
                 </div>
 
@@ -365,7 +325,7 @@
                     <div class="rating-title">Cumprimento de Prazos</div>
                     <div class="rating-scale">
                         <span>0 (Péssimo)</span>
-                        <span>10 (Excelente)</span>
+                        <span>5 (Excelente)</span>
                     </div>
                     <div class="rating-options">
                         <div class="rating-option">
@@ -387,26 +347,6 @@
                         <div class="rating-option">
                             <input type="radio" id="deadline5" name="deadline" value="5">
                             <label for="deadline5">5</label>
-                        </div>
-                        <div class="rating-option">
-                            <input type="radio" id="deadline6" name="deadline" value="6">
-                            <label for="deadline6">6</label>
-                        </div>
-                        <div class="rating-option">
-                            <input type="radio" id="deadline7" name="deadline" value="7">
-                            <label for="deadline7">7</label>
-                        </div>
-                        <div class="rating-option">
-                            <input type="radio" id="deadline8" name="deadline" value="8">
-                            <label for="deadline8">8</label>
-                        </div>
-                        <div class="rating-option">
-                            <input type="radio" id="deadline9" name="deadline" value="9">
-                            <label for="deadline9">9</label>
-                        </div>
-                        <div class="rating-option">
-                            <input type="radio" id="deadline10" name="deadline" value="10">
-                            <label for="deadline10">10</label>
                         </div>
                     </div>
                 </div>

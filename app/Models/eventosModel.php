@@ -14,7 +14,7 @@ class eventosModel extends Model
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['nome','endereco', 'cidade','estado', 'data','user_id', 'descricao', 'status'];
+    protected $allowedFields = ['nome','endereco', 'cidade','estado', 'data','user_id', 'descricao', 'status', 'finalizado_em'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;

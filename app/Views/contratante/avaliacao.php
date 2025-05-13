@@ -209,45 +209,24 @@
 <body>
 
 
-    <?php include 'menuFreelancer.php'; ?>
+    <?php include 'menuContratante.php'; ?>
 
     <div class="container">
         <div class="avaliacoes-section">
             <h1>Avaliar Freelancers </h1>
 
             <div class="services-list" id="servicesList">
-                <!-- Exemplo -->
-                <div class="service-card">
-                    <div class="service-title"> Nome do evento</div>
-                    <div class="service-client">Cliente: Robson</div>
-                    <div class="service-client">Cargo: Motorista</div>
-                    <div class="service-date">Finalizado em: 15/05/2025</div>
+                <?php foreach($avaliacao as $avaliacoes): ?>
+                    <div class="service-card">
+                    <div class="service-title"> <?php echo $avaliacoes['evento'] ?></div>
+                    <div class="service-client">Freelancer: <?php echo $avaliacoes['freelancer'] ?></div>
+                    <div class="service-client">Cargo: <?php echo $avaliacoes['cargo'] ?></div>
+                    <div class="service-date">Finalizado em: <?php echo $avaliacoes['finalizado_em'] ?></div>
                     <button class="rate-btn" onclick="openModal('1')">
                         <i class="fas fa-star"></i> Avaliar Serviço
                     </button>
                 </div>
-
-                <!-- Exemplo -->
-                <div class="service-card">
-                    <div class="service-title"> Nome do evento</div>
-                    <div class="service-client">Cliente: Roobson</div>
-                    <div class="service-client">Cargo: Garçom</div>
-                    <div class="service-date">Finalizado em: 10/05/2025</div>
-                    <button class="rate-btn" onclick="openModal('2')">
-                        <i class="fas fa-star"></i> Avaliar Serviço
-                    </button>
-                </div>
-
-                <!-- Exemplo -->
-                <div class="service-card">
-                    <div class="service-title"> Nome do evento</div>
-                    <div class="service-client">Cliente: Robson</div>
-                    <div class="service-client">Cargo: Cantor</div>
-                    <div class="service-date">Finalizado em: 05/05/2025</div>
-                    <button class="rate-btn" onclick="openModal('3')">
-                        <i class="fas fa-star"></i> Avaliar Serviço
-                    </button>
-                </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </div>

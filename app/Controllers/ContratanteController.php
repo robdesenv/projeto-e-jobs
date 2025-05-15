@@ -390,6 +390,7 @@ class ContratanteController extends BaseController
 
             $idVaga = $this->request->getPost('idVaga');
             $idFreelancer = $this->request->getPost('idFreelancer');
+            $idEvento = $this->request->getPost('idEvento');
 
             $db = db_connect();
             $sql = 'SELECT vagas_id, freelancer_id FROM contratados WHERE vagas_id = ? AND freelancer_id = ?';
@@ -399,27 +400,35 @@ class ContratanteController extends BaseController
             $result = $stmt->get_result();
             $num_rows = $result->num_rows;
 
-            if($num_rows >= 1)
-            {
-                session()->setFlashdata('msg', '<div class="alert alert-warning" role="alert">
-                                            Já foi criada uma solicitação deste Freelancer para esta vaga.
-                                        </div>');
-            }else
-            {
-                $contratadosModel = new contratadosModel();
 
-                $contratadosModel->set('evento_id', $this->request->getPost('idEvento'));
-                $contratadosModel->set('solicitante_id', user_id());
-                $contratadosModel->set('freelancer_id', $this->request->getPost('idFreelancer'));
-                $contratadosModel->set('vagas_id', $this->request->getPost('idVaga'));
-                $contratadosModel->set('status', null);
-
-                if($contratadosModel->insert())
+            if($this->VerificaFreelancerContratado($idFreelancer, $idEvento) == 0){
+                if($num_rows >= 1)
                 {
-                    session()->setFlashdata('msg', '<div class="alert alert-success" role="alert">Solicitação enviada com sucesso.</div>');
-                    
-                } 
+                    session()->setFlashdata('msg', '<div class="alert alert-warning" role="alert">
+                                                Já foi criada uma solicitação deste Freelancer para esta vaga.
+                                            </div>');
+                }else
+                {
+                    $contratadosModel = new contratadosModel();
+
+                    $contratadosModel->set('evento_id', $this->request->getPost('idEvento'));
+                    $contratadosModel->set('solicitante_id', user_id());
+                    $contratadosModel->set('freelancer_id', $this->request->getPost('idFreelancer'));
+                    $contratadosModel->set('vagas_id', $this->request->getPost('idVaga'));
+                    $contratadosModel->set('status', null);
+
+                    if($contratadosModel->insert())
+                    {
+                        session()->setFlashdata('msg', '<div class="alert alert-success" role="alert">Solicitação enviada com sucesso.</div>');
+                        
+                    } 
+                }
+            }else{
+                session()->setFlashdata('msg', '<div class="alert alert-danger" role="alert">
+                                                Freelancer já contratado para o Evento.
+                                            </div>');
             }
+            
         }
 
         return view('contratante/busca',$data);

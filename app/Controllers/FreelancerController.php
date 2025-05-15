@@ -215,7 +215,7 @@ class FreelancerController extends BaseController
 
         $db = db_connect();
         $user_id = user_id();
-        $sql = 'SELECT contratados.id,contratados.solicitante_id, contratados.freelancer_id, eventos.nome,eventos.endereco,eventos.cidade,eventos.data,eventos.descricao,cargos.cargo,contratados.status, vagas.valor
+        $sql = 'SELECT contratados.id,contratados.solicitante_id, contratados.freelancer_id, contratados.evento_id, eventos.nome,eventos.endereco,eventos.cidade,eventos.data,eventos.descricao,cargos.cargo,contratados.status, vagas.valor
         FROM contratados JOIN eventos on contratados.evento_id = eventos.id 
         JOIN vagas on contratados.vagas_id = vagas.id 
         JOIN cargos on vagas.cargo_id = cargos.id
@@ -232,19 +232,24 @@ class FreelancerController extends BaseController
         $data['contratados'] = $stmt->get_result();
 
         $idVaga = $this->request->getGet('idVaga');
+        $idEvento = $this->request->getGet('idEvento');
         $btn = $this->request->getGet('btn');
 
         if($idVaga){
             if($btn == 'aceitar'){
-                $contratadosModel = new contratadosModel();
+                if($this->VerificaFreelancerContratado($user_id, $idEvento) == 0){
+                    $contratadosModel = new contratadosModel();
             
-                $contratados['status'] = true;
+                    $contratados['status'] = true;
 
-                if($contratadosModel->update($idVaga, $contratados))
-                {
-                    $resposta = ['msg'=> 'atualizado','btn'=> $btn];
-                    header("Refresh: 0");
+                    if($contratadosModel->update($idVaga, $contratados))
+                    {
+                        $resposta = ['msg'=> 'atualizado'];
+                    }
+                }else{
+                    $resposta = ['msg'=> 'Já contratado para este evento'];
                 }
+                
                 
             }elseif($btn == 'recusar'){
                 $contratadosModel = new contratadosModel();

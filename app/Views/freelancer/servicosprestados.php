@@ -176,7 +176,7 @@
                                     onclick="recusarServico(<?php echo htmlspecialchars($contratado['id']); ?>)">Recusar</button>
                                 <button type="button" name="btn-cargo" id="btn-contratar" class="btn btn-success"
                                     data-bs-dismiss="modal"
-                                    onclick="aceitarServico(<?php echo htmlspecialchars($contratado['id']); ?>)">Aceitar</button>
+                                    onclick="aceitarServico(<?php echo htmlspecialchars($contratado['id']); ?>, <?php echo htmlspecialchars($contratado['evento_id']); ?>)">Aceitar</button>
                             </div>
                         </div>
                     <?php endif; ?>
@@ -207,9 +207,10 @@
             modal.show();
         }
 
-        async function aceitarServico(idServico) {
-            const response = await fetch('<?php echo base_url("/freelancer/servicosprestados?idVaga=") ?>' + idServico + "&btn=aceitar");
+        async function aceitarServico(idServico, idEvento) {
+            const response = await fetch('<?php echo base_url("/freelancer/servicosprestados?idVaga=") ?>' + idServico + "&idEvento=" + idEvento + "&btn=aceitar");
             const data = await response.json();
+            console.log(data);
             window.location.reload();
 
         }

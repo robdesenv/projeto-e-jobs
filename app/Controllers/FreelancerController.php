@@ -36,6 +36,18 @@ class FreelancerController extends BaseController
         return $num_rows;
     }
 
+    public function VerificaFreelancerContratado($freelancerId, $eventoId){
+        //verifica se o freelancer já foi contratado para o evento
+        $db = db_connect();
+        $sql = 'SELECT * FROM `contratados` WHERE freelancer_id = ? and evento_id = ? AND contratados.status = true' ;
+        $stmt = $db->connID->prepare($sql);
+        $stmt->bind_param('ii', $freelancerId, $eventoId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $num_rows = $result->num_rows;
+        return $num_rows;
+    }
+
 
     public function index()
     {
@@ -224,7 +236,6 @@ class FreelancerController extends BaseController
 
         if($idVaga){
             if($btn == 'aceitar'){
-
                 $contratadosModel = new contratadosModel();
             
                 $contratados['status'] = true;
@@ -298,29 +309,37 @@ class FreelancerController extends BaseController
 
         if($this->VerificaCadastroCurriculo() >= 1)
         {
+            if($this->VerificaFreelancerContratado($user_id, $idEvento) == 0){
 
-            if($num_rows == 0)
-            {
-                $contratadosModel = new contratadosModel();
-                $contratadosModel->set('evento_id',$idEvento);
-                $contratadosModel->set('freelancer_id', user_id());
-                $contratadosModel->set('solicitante_id', user_id());
-                $contratadosModel->set('vagas_id', $idVaga);
-                $contratadosModel->set('status', NULL);
-                $contratadosModel->insert();
-        
-                $resposta = ['msg' => "Candidatou-se a vaga com sucesso.", 'success' => true];
-        
+                if($num_rows == 0)
+                {
+                    $contratadosModel = new contratadosModel();
+                    $contratadosModel->set('evento_id',$idEvento);
+                    $contratadosModel->set('freelancer_id', user_id());
+                    $contratadosModel->set('solicitante_id', user_id());
+                    $contratadosModel->set('vagas_id', $idVaga);
+                    $contratadosModel->set('status', NULL);
+                    $contratadosModel->insert();
+            
+                    $resposta = ['msg' => "Candidatou-se a vaga com sucesso.", 'success' => true];
+            
+                    return $this->response->setJSON($resposta);
+
+                }
+                else
+                {
+
+                    $resposta = ['msg' => "Já se candidatou a essa vaga ou o contratante já solicitou seu serviço. Verifique a tela de serviços", "success"=> false];
+
+                    return $this->response->setJSON($resposta);
+                }
+
+            }else{
+                $resposta = ['msg' => "Já foi contratado para esse evento", "success"=> false];
+
                 return $this->response->setJSON($resposta);
-
             }
-            else
-            {
-
-                $resposta = ['msg' => "Já se candidatou a essa vaga ou o contratante já solicitou seu serviço. Verifique a tela de serviços", "success"=> false];
-
-                return $this->response->setJSON($resposta);
-            }
+            
                 
         }
         else

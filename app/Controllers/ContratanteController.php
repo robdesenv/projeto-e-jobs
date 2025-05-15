@@ -23,6 +23,17 @@ class ContratanteController extends BaseController
         return $num_rows;
     }
     
+    public function VerificaFreelancerContratado($freelancerId, $eventoId){
+        //verifica se o freelancer já foi contratado para o evento
+        $db = db_connect();
+        $sql = 'SELECT * FROM `contratados` WHERE freelancer_id = ? and evento_id = ? AND contratados.status = true' ;
+        $stmt = $db->connID->prepare($sql);
+        $stmt->bind_param('ii', $freelancerId, $eventoId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $num_rows = $result->num_rows;
+        return $num_rows;
+    }
 
 
     public function index()
@@ -155,7 +166,7 @@ class ContratanteController extends BaseController
         {
             if(!empty($idVaga))
             {
-                $sql = 'SELECT contratados.id, freelancer.id as freelancer_id, freelancer.nome, contratados.status, vagas.id as vaga_id, contratados.solicitante_id 
+                $sql = 'SELECT contratados.id, contratados.evento_id, freelancer.id as freelancer_id, freelancer.nome, contratados.status, vagas.id as vaga_id, contratados.solicitante_id, freelancer.user_id
                 FROM contratados 
                 JOIN freelancer on contratados.freelancer_id = freelancer.user_id 
                 JOIN vagas ON contratados.vagas_id=vagas.id
@@ -299,21 +310,38 @@ class ContratanteController extends BaseController
     public function solicitacoes()
     {
         $idSolicitacao = $this->request->getGet('IdSolicitacao');
+        $idEvento = $this->request->getGet('IdEvento');
+        $UserId = $this->request->getGet('UserId');
         $btn = $this->request->getGet('btn');
+
+        
 
         if($idSolicitacao)
         {
 
             if($btn == 'contratar')
             {
-                $contratadosModel = new contratadosModel();
+                if($this->VerificaFreelancerContratado($UserId,$idEvento) == 0){
+                    $contratadosModel = new contratadosModel();
             
-                $contratados['status'] = true;
+                    $contratados['status'] = true;
 
-                if($contratadosModel->update($idSolicitacao, $contratados))
-                {
-                    $resposta = ['msg'=> 'atualizado','btn'=> $btn];
+                    if($contratadosModel->update($idSolicitacao, $contratados))
+                    {
+                        $resposta = ['msg'=> 'atualizado','btn'=> $btn, 'evento'=>$idEvento, 'userid' => $UserId];
+                    }
+                }else{
+                    $resposta = ['msg'=> 'Freelancer já contratado para este evento.'];
+
+                    $contratadosModel = new contratadosModel();
+            
+                    $contratados['status'] = false;
+
+                    $contratadosModel->update($idSolicitacao, $contratados);
                 }
+                
+
+                
 
             }elseif($btn == 'recusar')
             {

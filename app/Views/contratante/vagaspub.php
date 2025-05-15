@@ -705,6 +705,8 @@
         let freelancerId = null;
         let vagaId = null;
         let eventoIdFinalizar = null;
+        let freelancerUserId = null;
+        let eventoIdSolicitacao = null;
 
         function abrirModalAdicionar() {
 
@@ -796,30 +798,39 @@
 
                             if (solicitacao.solicitante_id != <?php echo user_id(); ?>) {
                                 html += `
-                        <div>
-                            <div class="vaga-item">
-                                <div class="vaga-info">
-                                    <span class="vaga-cargo">${solicitacao.nome}</span>
-                                    ${statusLabel}
+                                <div>
+                                    <div class="vaga-item">
+                                        <div class="vaga-info">
+                                            <span class="vaga-cargo">${solicitacao.nome}</span>
+                                            ${statusLabel}
+                                        </div>
+                                        `;
+                                if(solicitacao.status === null){
+                                html +=`
+                                    <div class="vaga-actions">
+                                            <button class="btn btn-sm btn-outline-primary btn-vaga" data-bs-dismiss="modal" onclick="verInformacoes(${solicitacao.freelancer_id},${solicitacao.id},${solicitacao.evento_id}, ${solicitacao.user_id})">
+                                                Ver informações
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="vaga-actions">
-                                    <button class="btn btn-sm btn-outline-primary btn-vaga" data-bs-dismiss="modal" onclick="verInformacoes(${solicitacao.freelancer_id},${solicitacao.id})">
-                                        Ver informações
-                                    </button>
+                                `;
+                                }else{
+                                    html +=`
                                 </div>
-                            </div>
-                        </div>
-                    `;
-                            } else if (solicitacao.solicitante_id == <?php echo user_id(); ?>) {
-                                html2 += `
-                        <div class="vaga-item">
-                            <div class="vaga-info">
-                                <span class="vaga-cargo">${solicitacao.nome}</span>
-                                ${statusLabel}
-                            </div>
-                        </div>
-                    `;
-                            }
+                                `;
+                                }
+                                        
+                                } else if (solicitacao.solicitante_id == <?php echo user_id(); ?>) {
+                                    html2 += `
+                                    <div class="vaga-item">
+                                        <div class="vaga-info">
+                                            <span class="vaga-cargo">${solicitacao.nome}</span>
+                                                ${statusLabel}
+                                        </div>
+                                    </div>
+                                        `;
+                                    }
 
 
                         });
@@ -855,10 +866,13 @@
         }
 
 
-        function verInformacoes(idFreelancer, idSolicitacao) {
+        function verInformacoes(idFreelancer, idSolicitacao, idEvento, UserId) {
 
             solicitacaoId = idSolicitacao;
             freelancerId = idFreelancer;
+            eventoIdSolicitacao =idEvento;
+            freelancerUserId = UserId;
+
 
             const listarInformacoes = async (idFreelancer) => {
                 try {
@@ -977,9 +991,11 @@
         document.getElementById('btn-contratar').addEventListener('click', async function () {
             if (solicitacaoId) {
                 try {
-                    const response = await fetch('<?php echo base_url("/contratante/solicitacoes?IdSolicitacao=") ?>' + solicitacaoId + "&btn=contratar");
+                    const response = await fetch('<?php echo base_url("/contratante/solicitacoes?IdSolicitacao=") ?>' + solicitacaoId + "&IdEvento=" + eventoIdSolicitacao + "&UserId=" + freelancerUserId + "&btn=contratar");
                     const data = await response.json();
+                    console.log(data);
                     abrirModalSolicitações(vagaId);
+
                 } catch (error) {
                     console.error('Erro na requisição:', error);
                 }

@@ -213,40 +213,27 @@
 
     <div class="container">
         <div class="avaliacoes-section">
-            <h1>Serviços para Avaliar</h1>
+            <h1>Contratantes para Avaliar</h1>
+
+            <?php if (session()->getFlashdata('msg')): ?>
+                <?= session()->getFlashdata('msg'); ?>
+            <?php endif; ?>
 
             <div class="services-list" id="servicesList">
-                <!-- Exemplo -->
+                <?php foreach($avaliacao as $avaliacoes):?>
+
                 <div class="service-card">
-                    <div class="service-title"> Nome do evento</div>
-                    <div class="service-client">Cliente: Robson</div>
-                    <div class="service-client">Cargo: Garçom</div>
-                    <div class="service-date">Finalizado em: 15/05/2025</div>
-                    <button class="rate-btn" onclick="openModal('1')">
+                    <div class="service-title"> Contratante: <?php echo $avaliacoes['contratante'] ?></div>
+                    <div class="service-client">Evento: <?php echo $avaliacoes['evento'] ?></div>
+                    <div class="service-client">Cargo Trabalhado: <?php echo $avaliacoes['cargo'] ?></div>
+                    <div class="service-date">Finalizado em: <?php echo $avaliacoes['finalizado_em'] ?></div>
+                    <button class="rate-btn" onclick="openModal(<?php echo $avaliacoes['user_id'] ?>,<?php echo $avaliacoes['id'] ?>)">
                         <i class="fas fa-star"></i> Avaliar Serviço
                     </button>
                 </div>
-
-
-                <div class="service-card">
-                    <div class="service-title"> Nome do evento</div>
-                    <div class="service-client">Cliente: Roobson</div>
-                    <div class="service-client">Cargo: Motorista</div>
-                    <div class="service-date">Finalizado em: 10/05/2025</div>
-                    <button class="rate-btn" onclick="openModal('2')">
-                        <i class="fas fa-star"></i> Avaliar Serviço
-                    </button>
-                </div>
-
-
-                <div class="service-card">
-                    <div class="service-title"> Nome do evento</div>
-                    <div class="service-client">Cliente: Robson</div>
-                    <div class="service-client">Cargo: Garçom</div>
-                    <div class="service-date">Finalizado em: 05/05/2025</div>
-                    <button class="rate-btn" onclick="openModal('3')">
-                        <i class="fas fa-star"></i> Avaliar Serviço
-                    </button>
+                
+                <?php endforeach;?>
+                
                 </div>
             </div>
         </div>
@@ -256,10 +243,11 @@
     <div id="ratingModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
-            <h2 style="color: #004182;">Avaliar empresa</h2>
+            <h2 style="color: #004182;">Avaliar contratante</h2>
 
-            <form id="ratingForm">
-                <input type="hidden" id="serviceId">
+            <form id="ratingForm" method="post">
+                <input type="hidden" id="eventoId" name="eventoId">
+                <input type="hidden" id="contratanteId" name="contratanteId">
 
                 <div class="rating-section">
                     <div class="rating-title">Qualidade do Serviço</div>
@@ -299,56 +287,25 @@
                     </div>
                     <div class="rating-options">
                         <div class="rating-option">
-                            <input type="radio" id="communication1" name="communication" value="1">
-                            <label for="communication1">1</label>
+                            <input type="radio" id="ambiente1" name="ambiente" value="1">
+                            <label for="ambiente1">1</label>
                         </div>
                         <div class="rating-option">
-                            <input type="radio" id="communication2" name="communication" value="2">
-                            <label for="communication2">2</label>
+                            <input type="radio" id="ambiente2" name="ambiente" value="2">
+                            <label for="ambiente2">2</label>
                         </div>
                         <div class="rating-option">
-                            <input type="radio" id="communication3" name="communication" value="3">
-                            <label for="communication3">3</label>
+                            <input type="radio" id="ambiente3" name="ambiente" value="3">
+                            <label for="ambiente3">3</label>
                         </div>
                         <div class="rating-option">
-                            <input type="radio" id="communication4" name="communication" value="4">
-                            <label for="communication4">4</label>
+                            <input type="radio" id="ambiente4" name="ambiente" value="4">
+                            <label for="ambiente4">4</label>
                         </div>
                         <div class="rating-option">
-                            <input type="radio" id="communication5" name="communication" value="5">
-                            <label for="communication5">5</label>
+                            <input type="radio" id="ambiente5" name="ambiente" value="5">
+                            <label for="ambiente5">5</label>
                         </div>
-                    </div>
-                </div>
-
-                <div class="rating-section">
-                    <div class="rating-title">Colaboradores</div>
-                    <div class="rating-scale">
-                        <span>0 (Péssimo)</span>
-                        <span>5 (Excelente)</span>
-                    </div>
-                    <div class="rating-options">
-                        <div class="rating-option">
-                            <input type="radio" id="deadline1" name="deadline" value="1">
-                            <label for="deadline1">1</label>
-                        </div>
-                        <div class="rating-option">
-                            <input type="radio" id="deadline2" name="deadline" value="2">
-                            <label for="deadline2">2</label>
-                        </div>
-                        <div class="rating-option">
-                            <input type="radio" id="deadline3" name="deadline" value="3">
-                            <label for="deadline3">3</label>
-                        </div>
-                        <div class="rating-option">
-                            <input type="radio" id="deadline4" name="deadline" value="4">
-                            <label for="deadline4">4</label>
-                        </div>
-                        <div class="rating-option">
-                            <input type="radio" id="deadline5" name="deadline" value="5">
-                            <label for="deadline5">5</label>
-                        </div>
-
                     </div>
                 </div>
 
@@ -358,7 +315,7 @@
                         placeholder="Deixe seu comentário sobre o serviço..."></textarea>
                 </div>
 
-                <button type="button" class="publish-btn" onclick="publishRating()">
+                <button type="submit" class="publish-btn" onclick="publishRating()">
                     <i class="fas fa-check"></i> Publicar Avaliação
                 </button>
             </form>
@@ -370,8 +327,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Função para abrir o modal
-        function openModal(serviceId) {
-            document.getElementById('serviceId').value = serviceId;
+        function openModal(contratanteId,eventoId) {
+            document.getElementById('eventoId').value = eventoId;
+            document.getElementById('contratanteId').value = contratanteId;
             document.getElementById('ratingModal').style.display = 'block';
 
             // Limpar 

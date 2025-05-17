@@ -74,6 +74,10 @@
                             serviços</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="<?php echo base_url('freelancer/avaliacao') ?>"><i
+                                class=""></i> Avaliações</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link btn-logout" href="<?php echo base_url('logout') ?>"><i
                                 class="fas fa-sign-out-alt"></i> Sair</a>
                     </li>

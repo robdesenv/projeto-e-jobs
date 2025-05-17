@@ -24,6 +24,9 @@ $routes->get('/freelancer/telabusca', 'FreelancerController::telabusca', ['filte
 $routes->get('/freelancer/candidatarvaga', 'FreelancerController::candidatarvaga', ['filter' => 'group:freelancer'] );
 $routes->get('/freelancer/transrecebidas', 'FreelancerController::transrecebidas', ['filter' => 'group:freelancer']);
 
+$routes->get('/freelancer/avaliacao', 'AvaliacaoContratanteController::avaliacaoContratante', ['filter' => 'group:freelancer']);
+$routes->post('/freelancer/avaliacao', 'AvaliacaoContratanteController::avaliacaoContratante', ['filter' => 'group:freelancer']);
+
 //contratante
 $routes->get('/contratante', 'ContratanteController::index', ['filter' => 'group:contratante']);
 

@@ -3,7 +3,7 @@
 namespace App\Controllers;
 use \App\Models\avaliacaoFreelancerModel;
 
-class avaliacaoFreelancerController extends BaseController
+class AvaliacaoFreelancerController extends BaseController
 {
     public function avaliacaoFreelancer()
     {

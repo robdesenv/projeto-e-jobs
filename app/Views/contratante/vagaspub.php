@@ -527,7 +527,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <?php if($evento['status'] == false): ?>
                             <div class="vagas-container">
                                 <h6>Vagas disponíveis:</h6>
                                 <button class="btn btn-sm btn-success mb-2"
@@ -560,13 +560,13 @@
                         </div>
 
                         <div class="evento-actions">
-                            <?php if($evento['status'] == false): ?>
+                            
                                 <div id="finalizarEvento">
                                     <button type="button" class="btn btn-outline-secondary" onclick="finalizarEvento(<?php echo $evento['id']; ?>)">
                                         Finalizar evento
                                     </button>
                                 </div>
-                            <?php endif; ?>
+                            
                             
                             <button class="btn btn-sm btn-primary btn-acao" title="Editar"
                                 onclick="editarEvento(<?php echo $evento['id']; ?>)">
@@ -576,7 +576,15 @@
                                 onclick="confirmarExclusao(<?php echo $evento['id']; ?>)">
                                 <i class="fas fa-trash-alt"></i> Excluir
                             </button>
+                            <?php endif; ?>
+
+                            <?php if($evento['status'] == true): ?>
+                                <div class="alert alert-success" role="alert">
+                                    <h4 class="alert-heading">Evento Finalizado!</h4>
+                                </div>
+                            <?php endif; ?>
                         </div>
+                        
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -952,7 +960,7 @@
 
                         document.getElementById("conteudoInformacoes").innerHTML = html;
                     }
-                    
+
                 } catch (error) {
                     console.log("erro");
                 }

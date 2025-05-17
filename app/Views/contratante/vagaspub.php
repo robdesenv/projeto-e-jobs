@@ -879,6 +879,7 @@
                 try {
                     const response2 = await fetch('<?php echo base_url("/contratante/exibirInformacoesFreelancer?idFreelancer=") ?>' + idFreelancer);
                     const data2 = await response2.json();
+                    console.log(data2);
 
                     if (data2.informacoes && data2.informacoes.length > 0) {
                         let html = '';
@@ -927,20 +928,31 @@
                         `;
                         });
 
+                        if (data2.cargosFreelancer && data2.cargosFreelancer.length > 0) {
+                            html += `
+                                <div class="info-item">
+                                    <div class="info-icon"><i class="fas fa-briefcase"></i></div>
+                                    <div class="info-content">
+                                        <h4>Habilidades</h4>
+                                        <div class="habilidades-list">
+                            `;
+
+                            data2.cargosFreelancer.forEach(cargo => {
+                                html += `<span class="habilidade-badge">${cargo.cargo}</span>`;
+                            });
+
+                            html += `
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        }
+
+                        html += `</div>`;
+
                         document.getElementById("conteudoInformacoes").innerHTML = html;
                     }
-
-                    if (data2.cargosFreelancer && data2.cargosFreelancer.length > 0) {
-                        let html = '';
-                        data2.cargosFreelancer.forEach(cargosFreelancer => {
-                            html += `
-                            <p>${cargosFreelancer.cargo}</p>
-                                 
-                        `;
-                        });
-
-                        document.getElementById("habilidades").innerHTML = html;
-                    }
+                    
                 } catch (error) {
                     console.log("erro");
                 }

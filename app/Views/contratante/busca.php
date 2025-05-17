@@ -370,8 +370,13 @@
             <div class="freelancers-container" id="listarFreelancers">
                 <!-- informações dos freelancers retornadas da função filtrarFreelancers -->
             </div>
+
+            <div id="NoFreelancers">
+
+            </div>
         </div>
     </div>
+
 
     <!--informações do freelancer -->
     <div class="modal fade" id="modalInformacoes" tabindex="-1" aria-labelledby="modalInformacoesLabel"
@@ -584,6 +589,9 @@
             const data = await response.json();
 
             if (data.freelancers && data.freelancers.length > 0) {
+
+                document.getElementById('NoFreelancers').innerHTML = '';
+
                 data.freelancers.forEach((freelancers, indice) => {
                     let html2 = '';
 
@@ -591,6 +599,8 @@
                         data.cargosFreelancer[indice].forEach(cargos => {
                             html2 += `<span class="habilidade-badge">${cargos.cargo}</span>`;
                         })
+                    }else{
+                        html2 += `<span class="">Nenhuma Habilidade Cadastrada</span>`;
                     }
 
                     // link do WhatsApp
@@ -603,12 +613,17 @@
                                 <h3 class="freelancer-title">${freelancers.nome}</h3>
                             </div>
                             
-                            <div class="freelancer-body">
+                            <div class="info-item">
+
                                 <div class="freelancer-info">
                                     <i class="fas fa-briefcase"></i>
                                     <div>
-                                        <div class="freelancer-label" id="cargosFreelancer">Habilidades</div>
+                                        <div class="freelancer-label">Habilidades</div>
+                                        <div class="freelancer-value">
+                                            <div class="habilidades-list">
                                         ${html2}
+                                    </div>
+                                        </div>
                                     </div>
                                 </div>
                                 
@@ -646,7 +661,8 @@
 
                 document.getElementById('listarFreelancers').innerHTML = html;
             } else if (data.freelancers.length == 0) {
-                document.getElementById('listarFreelancers').innerHTML = '<p class="text-center py-4">Nenhum freelancer encontrado com os filtros selecionados.</p>';
+                document.getElementById('listarFreelancers').innerHTML = "";
+                document.getElementById('NoFreelancers').innerHTML = '<p class="text-center py-4">Nenhum freelancer encontrado com os filtros selecionados.</p>';
             }
         }
     </script>

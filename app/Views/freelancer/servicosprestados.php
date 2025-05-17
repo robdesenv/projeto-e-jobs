@@ -213,12 +213,7 @@
         async function aceitarServico(idServico, idEvento) {
             const response = await fetch('<?php echo base_url("/freelancer/servicosprestados?idVaga=") ?>' + idServico + "&idEvento=" + idEvento + "&btn=aceitar");
             const data = await response.json();
-            console.log(data);
-            if(data.msg){
-                document.getElementById('msg').innerHTML = data.msg;
-            }
-            //window.location.reload();
-
+            window.location.reload();
         }
 
         async function recusarServico(idServico) {
@@ -228,16 +223,6 @@
 
         }
 
-        /* document.getElementById('btn-contratar').addEventListener('click', async function() {
-        if (idVaga) {
-            try {
-                
-            } catch (error) {
-                console.error('Erro na requisição:', error);
-            }
-        }
-
-        });*/
 
 
     </script>

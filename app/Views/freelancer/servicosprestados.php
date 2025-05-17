@@ -132,7 +132,7 @@
                             <p><strong>Data do evento:</strong> <?php echo htmlspecialchars($contratado['data']); ?></p>
                             <p><strong>Valor:</strong> R$ <?php echo htmlspecialchars($contratado['valor']); ?></p>
                             <p><strong>Descrição:</strong> <?php echo htmlspecialchars($contratado['descricao']); ?></p>
-                            <?php if ($contratado['status'] == NULL) {
+                            <?php if ($contratado['status'] === NULL) {
                                 echo '<p class="alert alert-warning"><strong >Status: </strong>Agradando confirmação...</p>';
                             } elseif ($contratado['status'] == true) {
                                 echo '<p class="alert alert-success"><strong >Status: </strong>Contratado</p>';
@@ -148,6 +148,8 @@
 
         <div class="servicos-section">
             <h1>Solicitações dos contratantes</h1>
+
+            <span id="msg"></span>
 
             <div class="servicos-container" id="listaServicos">
                 <?php foreach ($contratados as $contratado):
@@ -171,13 +173,14 @@
                                 echo '<p class="alert alert-danger"><strong >Status: </strong>Recusado</p>';
                             }
                             ?>
+                            <?php if($contratado['status'] === null):?>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" id="btn-recusar" data-bs-dismiss="modal"
+                                <button type="button" class="btn btn-danger" id="btn-recusar"
                                     onclick="recusarServico(<?php echo htmlspecialchars($contratado['id']); ?>)">Recusar</button>
                                 <button type="button" name="btn-cargo" id="btn-contratar" class="btn btn-success"
-                                    data-bs-dismiss="modal"
                                     onclick="aceitarServico(<?php echo htmlspecialchars($contratado['id']); ?>, <?php echo htmlspecialchars($contratado['evento_id']); ?>)">Aceitar</button>
                             </div>
+                            <?php endif;?>
                         </div>
                     <?php endif; ?>
                 <?php endforeach; ?>
@@ -211,7 +214,10 @@
             const response = await fetch('<?php echo base_url("/freelancer/servicosprestados?idVaga=") ?>' + idServico + "&idEvento=" + idEvento + "&btn=aceitar");
             const data = await response.json();
             console.log(data);
-            window.location.reload();
+            if(data.msg){
+                document.getElementById('msg').innerHTML = data.msg;
+            }
+            //window.location.reload();
 
         }
 

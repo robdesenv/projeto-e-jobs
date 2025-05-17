@@ -222,8 +222,8 @@
             <div class="services-list" id="servicesList">
                 <?php foreach($avaliacao as $avaliacoes): ?>
                     <div class="service-card">
-                    <div class="service-title"> <?php echo $avaliacoes['evento'] ?></div>
-                    <div class="service-client">Freelancer: <?php echo $avaliacoes['freelancer'] ?></div>
+                    <div class="service-title"> <?php echo $avaliacoes['freelancer'] ?></div>
+                    <div class="service-client">Evento: <b><?php echo $avaliacoes['evento'] ?></b></div>
                     <div class="service-client">Cargo: <?php echo $avaliacoes['cargo'] ?></div>
                     <div class="service-date">Finalizado em: <?php echo $avaliacoes['finalizado_em'] ?></div>
                     <button class="rate-btn" onclick="openModal(<?php echo $avaliacoes['evento_id'] ?>, <?php echo $avaliacoes['user_id'] ?>)">

@@ -641,7 +641,7 @@
         </div>
     </div>
 
-
+    <!-- Modal de solicitações do freelancer e contratante-->
     <div class="modal fade" id="modalSolicitacoes" tabindex="-1" aria-labelledby="modalAdicionarServicoLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -650,6 +650,7 @@
                     <h5 class="modal-title" id="modalAdicionarServicoLabel">Solicitações</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <p id="msg"></p>
                 <h6 class="modal-title" id="modalAdicionarServicoLabel">Solicitações dos Freelancers</h6>
                 <div class="modal-body">
                     <div class="modal-body" id="conteudoSolicitacoesFreelancer">
@@ -993,8 +994,10 @@
                 try {
                     const response = await fetch('<?php echo base_url("/contratante/solicitacoes?IdSolicitacao=") ?>' + solicitacaoId + "&IdEvento=" + eventoIdSolicitacao + "&UserId=" + freelancerUserId + "&btn=contratar");
                     const data = await response.json();
-                    console.log(data);
                     abrirModalSolicitações(vagaId);
+                    if(data.msg){
+                        document.getElementById("msg").innerHTML = data.msg;
+                    }
 
                 } catch (error) {
                     console.error('Erro na requisição:', error);

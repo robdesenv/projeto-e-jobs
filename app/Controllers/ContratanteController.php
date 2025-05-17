@@ -328,10 +328,24 @@ class ContratanteController extends BaseController
 
                     if($contratadosModel->update($idSolicitacao, $contratados))
                     {
-                        $resposta = ['msg'=> 'atualizado','btn'=> $btn, 'evento'=>$idEvento, 'userid' => $UserId];
+                        $contratadosModel = new contratadosModel();
+                        
+                        $contratados = $contratadosModel->where('freelancer_id',$UserId)->where('evento_id',$idEvento)->where('id !=', $idSolicitacao)->findAll();
+
+                        foreach($contratados as $contratado){
+                            $contratado['status'] = false;
+
+                            $contratadosModel->update($contratado['id'], $contratado);
+                        }
+
+                        $resposta = ['msg'=> '  <div class="alert alert-success" role="alert">
+                                                Freelancer contratado.
+                                                </div>'];
                     }
                 }else{
-                    $resposta = ['msg'=> 'Freelancer já contratado para este evento.'];
+                    $resposta = ['msg'=> '  <div class="alert alert-danger" role="alert">
+                                                Freelancer já contratado para este evento.
+                                            </div>'];
 
                     $contratadosModel = new contratadosModel();
             

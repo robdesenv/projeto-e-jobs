@@ -244,10 +244,28 @@ class FreelancerController extends BaseController
 
                     if($contratadosModel->update($idVaga, $contratados))
                     {
-                        $resposta = ['msg'=> 'atualizado'];
+                        $contratadosModel = new contratadosModel();
+                        
+                        $contratados = $contratadosModel->where('freelancer_id',$user_id)->where('evento_id',$idEvento)->where('id !=', $idVaga)->findAll();
+
+                        foreach($contratados as $contratado){
+                            $contratado['status'] = false;
+
+                            $contratadosModel->update($contratado['id'], $contratado);
+                        }
+
+                        $resposta = ['msg'=> '<div class="alert alert-success" role="alert">
+                                                Contratado.
+                                            </div>', 'contratados' => $contratados];
                     }
                 }else{
-                    $resposta = ['msg'=> 'Já contratado para este evento'];
+                    $resposta = ['msg'=> '<div class="alert alert-danger" role="alert">
+                                                Freelancer já contratado para este evento.
+                                            </div>'];
+
+                    $contratadosModel = new contratadosModel();
+                    $contratados['status'] = false;
+                    $contratadosModel->update($idVaga, $contratados);
                 }
                 
                 

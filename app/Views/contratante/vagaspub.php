@@ -213,18 +213,6 @@
             margin: 0;
         }
 
-        .modal-info-header {
-            background-color: #004182;
-            color: white;
-            padding: 15px 20px;
-        }
-
-        .modal-info-title {
-            font-weight: 600;
-            margin: 0;
-        }
-
-
         .info-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -302,14 +290,6 @@
             font-weight: 500;
         }
 
-
-        .info-item:hover {
-            background-color: #f0f7ff;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Estilos para as vagas */
         .vagas-container {
             margin-top: 15px;
             border-top: 1px solid #eee;
@@ -358,7 +338,6 @@
             font-size: 0.75rem;
         }
 
-        /* Estilo para o modal de vagas */
         #modalAdicionarNovaVaga .modal-content {
             border-radius: 12px;
         }
@@ -387,6 +366,81 @@
             box-shadow: 0 0 0 0.25rem rgba(0, 65, 130, 0.25);
         }
 
+        /* Estilo para os alertas (notificações) */
+        .alert-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1100;
+            min-width: 300px;
+            max-width: 400px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border: none;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            animation: slideIn 0.5s forwards;
+        }
+
+        .alert-notification.success {
+            background-color: #28a745;
+        }
+
+        .alert-notification.error {
+            background-color: #dc3545;
+        }
+
+        .alert-notification.info {
+            background-color: #17a2b8;
+        }
+
+        .alert-notification.warning {
+            background-color: #ffc107;
+            color: #212529;
+        }
+
+        .alert-notification .close {
+            color: inherit;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+            line-height: 1;
+            padding: 0;
+            margin-left: 15px;
+        }
+
+        .alert-notification .close:hover {
+            opacity: 1;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
         @media (max-width: 768px) {
             .freelancers-container {
                 grid-template-columns: 1fr;
@@ -408,6 +462,13 @@
             .info-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .alert-notification {
+                min-width: calc(100% - 40px);
+                max-width: calc(100% - 40px);
+                right: 20px;
+                left: 20px;
+            }
         }
     </style>
 </head>
@@ -423,25 +484,8 @@
                 <i class="fas fa-plus"></i> Criar Novo Evento
             </button>
 
-            <?php if (isset($msg) && !empty($msg)): ?>
-                <p class="alert alert-info"><?php echo $msg; ?></p>
-            <?php endif; ?>
-
-            <?php if (session()->getFlashdata('msg')): ?>
-                <div class="alert alert-danger">
-                    <?= session()->getFlashdata('msg'); ?>
-                </div>
-            <?php endif; ?>
-
-            <?php if (session()->getFlashdata('msg-success')): ?>
-                <div class="alert alert-success">
-                    <?= session()->getFlashdata('msg-success'); ?>
-                </div>
-            <?php endif; ?>
-
             <!-- Modal Adicionar e Editar Evento -->
-            <div class="modal fade" id="modalAdicionarServico" tabindex="-1"
-                aria-labelledby="modalAdicionarServicoLabel" aria-hidden="true">
+            <div class="modal fade" id="modalAdicionarServico" tabindex="-1" aria-labelledby="modalAdicionarServicoLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -457,8 +501,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="descricaoServico" class="form-label">Descrição:</label>
-                                    <textarea class="form-control" id="descricaoServico" name="descricao" rows="3"
-                                        required></textarea>
+                                    <textarea class="form-control" id="descricaoServico" name="descricao" rows="3" required></textarea>
                                 </div>
                                 <div class="mb-3">
                                     <label for="dataServico" class="form-label">Data:</label>
@@ -477,10 +520,8 @@
                                     <input type="text" class="form-control" id="estado" name="estado" required>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Fechar</button>
-                                    <button type="submit" id="btneditEventos" name="btn-eventos" value="adicionarevento"
-                                        class="btn btn-primary">Salvar</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                    <button type="submit" id="btneditEventos" name="btn-eventos" value="adicionarevento" class="btn btn-primary">Salvar</button>
                                 </div>
                             </form>
                         </div>
@@ -495,8 +536,7 @@
                     <div class="evento-card" id="evento-<?php echo $evento['id']; ?>">
                         <div class="evento-header">
                             <h3 class="evento-title"><?php echo htmlspecialchars($evento['nome']); ?></h3>
-                            <span
-                                class="evento-status <?php echo $evento['status'] == true ? 'status-disponivel' : 'status-esgotado'; ?>">
+                            <span class="evento-status <?php echo $evento['status'] == true ? 'status-disponivel' : 'status-esgotado'; ?>">
                                 <?php echo htmlspecialchars($evento['status'] == true ? 'Concluído' : 'Em andamento'); ?>
                             </span>
                         </div>
@@ -530,8 +570,7 @@
                             <?php if($evento['status'] == false): ?>
                             <div class="vagas-container">
                                 <h6>Vagas disponíveis:</h6>
-                                <button class="btn btn-sm btn-success mb-2"
-                                    onclick="abrirModalNovaVaga(<?php echo $evento['id'] ?>)">
+                                <button class="btn btn-sm btn-success mb-2" onclick="abrirModalNovaVaga(<?php echo $evento['id'] ?>)">
                                     <i class="fas fa-plus"></i> Adicionar Vaga
                                 </button>
 
@@ -540,16 +579,13 @@
                                         <div class="vaga-item">
                                             <div class="vaga-info">
                                                 <span class="vaga-cargo"><?php echo htmlspecialchars($vaga['cargo']); ?></span>
-                                                <span class="vaga-quantidade"><?php echo htmlspecialchars($vaga['quantidade']); ?>
-                                                    vaga(s)</span>
+                                                <span class="vaga-quantidade"><?php echo htmlspecialchars($vaga['quantidade']); ?> vaga(s)</span>
                                             </div>
                                             <div class="vaga-actions">
-                                                <button class="btn btn-sm btn-outline-primary btn-vaga"
-                                                    onclick="abrirModalSolicitações(<?php echo htmlspecialchars($vaga['id']); ?>)">
+                                                <button class="btn btn-sm btn-outline-primary btn-vaga" onclick="abrirModalSolicitações(<?php echo htmlspecialchars($vaga['id']); ?>)">
                                                     Solicitações
                                                 </button>
-                                                <button class="btn btn-sm btn-outline-danger btn-vaga" id="btnExcluirVaga"
-                                                    onclick="excluirVaga(<?php echo $vaga['id']; ?>)" title="Excluir">
+                                                <button class="btn btn-sm btn-outline-danger btn-vaga" id="btnExcluirVaga" onclick="excluirVaga(<?php echo $vaga['id']; ?>)" title="Excluir">
                                                     <i class="fas fa-trash-alt"></i>
                                                 </button>
                                             </div>
@@ -560,20 +596,16 @@
                         </div>
 
                         <div class="evento-actions">
+                            <div id="finalizarEvento">
+                                <button type="button" class="btn btn-outline-secondary" onclick="finalizarEvento(<?php echo $evento['id']; ?>)">
+                                    Finalizar evento
+                                </button>
+                            </div>
                             
-                                <div id="finalizarEvento">
-                                    <button type="button" class="btn btn-outline-secondary" onclick="finalizarEvento(<?php echo $evento['id']; ?>)">
-                                        Finalizar evento
-                                    </button>
-                                </div>
-                            
-                            
-                            <button class="btn btn-sm btn-primary btn-acao" title="Editar"
-                                onclick="editarEvento(<?php echo $evento['id']; ?>)">
+                            <button class="btn btn-sm btn-primary btn-acao" title="Editar" onclick="editarEvento(<?php echo $evento['id']; ?>)">
                                 <i class="fas fa-edit"></i> Editar
                             </button>
-                            <button class="btn btn-sm btn-danger btn-acao" title="Excluir"
-                                onclick="confirmarExclusao(<?php echo $evento['id']; ?>)">
+                            <button class="btn btn-sm btn-danger btn-acao" title="Excluir" onclick="confirmarExclusao(<?php echo $evento['id']; ?>)">
                                 <i class="fas fa-trash-alt"></i> Excluir
                             </button>
                             <?php endif; ?>
@@ -584,7 +616,6 @@
                                 </div>
                             <?php endif; ?>
                         </div>
-                        
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -611,8 +642,7 @@
     </div>
 
     <!-- Modal para adicionar vagas-->
-    <div class="modal fade" id="modalAdicionarNovaVaga" tabindex="-1" aria-labelledby="modalAdicionarServicoLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="modalAdicionarNovaVaga" tabindex="-1" aria-labelledby="modalAdicionarServicoLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -640,8 +670,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                            <button type="submit" name="btn-eventos" value="adicionarvaga"
-                                class="btn btn-primary">Salvar</button>
+                            <button type="submit" name="btn-eventos" value="adicionarvaga" class="btn btn-primary">Salvar</button>
                         </div>
                     </form>
                 </div>
@@ -650,34 +679,28 @@
     </div>
 
     <!-- Modal de solicitações do freelancer e contratante-->
-    <div class="modal fade" id="modalSolicitacoes" tabindex="-1" aria-labelledby="modalAdicionarServicoLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="modalSolicitacoes" tabindex="-1" aria-labelledby="modalAdicionarServicoLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalAdicionarServicoLabel">Solicitações</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <p id="msg"></p>
+                <div id="msg-container"></div>
                 <h6 class="modal-title" id="modalAdicionarServicoLabel">Solicitações dos Freelancers</h6>
                 <div class="modal-body">
-                    <div class="modal-body" id="conteudoSolicitacoesFreelancer">
-
-                    </div>
+                    <div class="modal-body" id="conteudoSolicitacoesFreelancer"></div>
                 </div>
                 <h6 class="modal-title" id="modalAdicionarServicoLabel">Suas Solicitações</h6>
                 <div class="modal-body">
-                    <div class="modal-body" id="conteudoSolicitacoes">
-
-                    </div>
+                    <div class="modal-body" id="conteudoSolicitacoes"></div>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Modal para informações do freelancer-->
-    <div class="modal fade" id="modalInformacoes" tabindex="-1" aria-labelledby="modalAdicionarServicoLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="modalInformacoes" tabindex="-1" aria-labelledby="modalAdicionarServicoLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -685,14 +708,10 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="modal-body" id="conteudoInformacoes">
-
-                    </div>
+                    <div class="modal-body" id="conteudoInformacoes"></div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" id="btn-recusar"
-                            data-bs-dismiss="modal">Recusar</button>
-                        <button type="submit" name="btn-cargo" id="btn-contratar" class="btn btn-success"
-                            data-bs-dismiss="modal">Contratar</button>
+                        <button type="button" class="btn btn-danger" id="btn-recusar" data-bs-dismiss="modal">Recusar</button>
+                        <button type="submit" name="btn-cargo" id="btn-contratar" class="btn btn-success" data-bs-dismiss="modal">Contratar</button>
                     </div>
                 </div>
             </div>
@@ -717,38 +736,72 @@
         let freelancerUserId = null;
         let eventoIdSolicitacao = null;
 
-        function abrirModalAdicionar() {
+        // Função para mostrar alertas
+        function showAlert(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `alert-notification ${type}`;
+            notification.innerHTML = `
+                <span>${message}</span>
+                <button class="close">&times;</button>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Fechar ao clicar no botão
+            notification.querySelector('.close').addEventListener('click', () => {
+                closeNotification(notification);
+            });
+            
+            // Fechar automaticamente após 5 segundos
+            setTimeout(() => {
+                closeNotification(notification);
+            }, 5000);
+        }
 
+        function closeNotification(notification) {
+            notification.style.animation = 'slideOut 0.5s forwards';
+            notification.addEventListener('animationend', () => {
+                notification.remove();
+            });
+        }
+
+        // Mostrar mensagens do PHP com tipos apropriados
+        document.addEventListener('DOMContentLoaded', function() {
+            <?php if (isset($msg) && !empty($msg)): ?>
+                showAlert('<?php echo addslashes($msg); ?>', 'info');
+            <?php endif; ?>
+
+            <?php if (session()->getFlashdata('msg')): ?>
+                showAlert('<?php echo addslashes(session()->getFlashdata('msg')); ?>', 'error');
+            <?php endif; ?>
+
+            <?php if (session()->getFlashdata('msg-success')): ?>
+                showAlert('<?php echo addslashes(session()->getFlashdata('msg-success')); ?>', 'success');
+            <?php endif; ?>
+        });
+
+        function abrirModalAdicionar() {
             document.getElementById('formAdicionarServico').reset();
             document.getElementById('eventoId').value = '';
-
             document.getElementById('modalAdicionarServicoLabel').textContent = 'Criar Evento';
-
-
             const modal = new bootstrap.Modal(document.getElementById('modalAdicionarServico'));
             modal.show();
         }
 
         function editarEvento(id) {
-
             const eventoElement = document.getElementById(`evento-${id}`);
-
             if (!eventoElement) return;
 
             document.getElementById('eventoId').value = id;
             document.getElementById('nomeServico').value = eventoElement.querySelector('.evento-title').textContent;
 
-
             const descricao = eventoElement.querySelectorAll('.evento-value')[0].textContent;
             document.getElementById('descricaoServico').value = descricao.trim();
-
 
             const localInfo = eventoElement.querySelectorAll('.evento-value')[1].textContent.trim().split('\n');
             document.getElementById('endereco').value = localInfo[0].trim();
             document.getElementById('cidade').value = localInfo[1].trim();
             document.getElementById('estado').value = localInfo[2].trim();
-
-
 
             const dataDia = eventoElement.querySelector('.data-dia').textContent;
             const dataMes = eventoElement.querySelector('.data-mes').textContent;
@@ -757,8 +810,6 @@
             const meses = {
                 'Jan': '01', 'Fev': '02', 'Mar': '03', 'Abr': '04', 'Mai': '05', 'Jun': '06',
                 'Jul': '07', 'Ago': '08', 'Set': '09', 'Out': '10', 'Nov': '11', 'Dez': '12'
-
-
             };
             const mesNumero = meses[dataMes] || '01';
 
@@ -766,13 +817,8 @@
             document.getElementById('dataServico').value = dataFormatada;
 
             document.getElementById('modalAdicionarServicoLabel').textContent = 'Editar Evento';
-
-
             const modal = new bootstrap.Modal(document.getElementById('modalAdicionarServico'));
             modal.show();
-
-
-
         }
 
         function abrirModalNovaVaga(id) {
@@ -781,9 +827,7 @@
             modal.show();
         }
 
-
         function abrirModalSolicitações(idVaga) {
-
             vagaId = idVaga;
 
             const listarSolicitacoes = async (idVaga) => {
@@ -840,8 +884,6 @@
                                     </div>
                                         `;
                                     }
-
-
                         });
 
                         if (html == '') {
@@ -856,8 +898,6 @@
                             document.getElementById("conteudoSolicitacoes").innerHTML = html2;
                         }
 
-
-
                     } else {
                         document.getElementById("conteudoSolicitacoes").innerHTML = "<p class='text-muted'>Nenhuma solicitação encontrada.</p>";
                     }
@@ -869,25 +909,20 @@
             };
 
             listarSolicitacoes(idVaga);
-
             const modal = new bootstrap.Modal(document.getElementById('modalSolicitacoes'));
             modal.show();
         }
 
-
         function verInformacoes(idFreelancer, idSolicitacao, idEvento, UserId) {
-
             solicitacaoId = idSolicitacao;
             freelancerId = idFreelancer;
-            eventoIdSolicitacao =idEvento;
+            eventoIdSolicitacao = idEvento;
             freelancerUserId = UserId;
-
 
             const listarInformacoes = async (idFreelancer) => {
                 try {
                     const response2 = await fetch('<?php echo base_url("/contratante/exibirInformacoesFreelancer?idFreelancer=") ?>' + idFreelancer);
                     const data2 = await response2.json();
-                    console.log(data2);
 
                     if (data2.informacoes && data2.informacoes.length > 0) {
                         let html = '';
@@ -957,7 +992,6 @@
                         }
 
                         html += `</div>`;
-
                         document.getElementById("conteudoInformacoes").innerHTML = html;
                     }
 
@@ -967,80 +1001,82 @@
             }
 
             listarInformacoes(idFreelancer);
-
             const modal = new bootstrap.Modal(document.getElementById('modalInformacoes'));
             modal.show();
         }
 
         function confirmarExclusao(id) {
             eventoIdParaExcluir = id;
+            document.getElementById("titulo-confirmacao").textContent = "Confirmar Exclusão";
+            document.getElementById("msg-confirmacao").textContent = "Tem certeza que deseja excluir este evento? Esta ação não pode ser desfeita.";
+            document.getElementById("btnConfirmar").textContent = "Excluir";
             const modal = new bootstrap.Modal(document.getElementById('modalConfirmacao'));
             modal.show();
         }
 
         function excluirVaga(id) {
             vagaIdExcluir = id;
-            document.getElementById("msg-confirmacao").innerHTML = "Tem certeza que deseja excluir esta vaga?";
+            document.getElementById("titulo-confirmacao").textContent = "Confirmar Exclusão";
+            document.getElementById("msg-confirmacao").textContent = "Tem certeza que deseja excluir esta vaga?";
+            document.getElementById("btnConfirmar").textContent = "Excluir";
             const modal = new bootstrap.Modal(document.getElementById('modalConfirmacao'));
             modal.show();
         }
 
-        function finalizarEvento(id){
+        function finalizarEvento(id) {
             eventoIdFinalizar = id;
-            document.getElementById("titulo-confirmacao").textContent  = "Finalizar Evento";
-            document.getElementById("msg-confirmacao").innerHTML = "Tem certeza que deseja Finalizar o evento?";
+            document.getElementById("titulo-confirmacao").textContent = "Finalizar Evento";
+            document.getElementById("msg-confirmacao").textContent = "Tem certeza que deseja Finalizar o evento?";
             document.getElementById("btnConfirmar").textContent = "Finalizar";
-            
             const modal = new bootstrap.Modal(document.getElementById('modalConfirmacao'));
             modal.show();
         }
 
-
-
-        document.getElementById('btnConfirmar').addEventListener('click', function () {
+        document.getElementById('btnConfirmar').addEventListener('click', function() {
             if (eventoIdParaExcluir) {
                 window.location.href = '<?php echo base_url("contratante/excluirevento/"); ?>' + eventoIdParaExcluir;
-            }else if (vagaIdExcluir) {
+            } else if (vagaIdExcluir) {
                 window.location.href = '<?php echo base_url("contratante/excluirvaga/"); ?>' + vagaIdExcluir;
-            }else if (eventoIdFinalizar){
+            } else if (eventoIdFinalizar) {
                 window.location.href = '<?php echo base_url("contratante/finalizarevento/"); ?>' + eventoIdFinalizar;
             }
         });
 
-        
-
-        document.getElementById('btn-contratar').addEventListener('click', async function () {
+        document.getElementById('btn-contratar').addEventListener('click', async function() {
             if (solicitacaoId) {
                 try {
                     const response = await fetch('<?php echo base_url("/contratante/solicitacoes?IdSolicitacao=") ?>' + solicitacaoId + "&IdEvento=" + eventoIdSolicitacao + "&UserId=" + freelancerUserId + "&btn=contratar");
                     const data = await response.json();
-                    abrirModalSolicitações(vagaId);
-                    if(data.msg){
-                        document.getElementById("msg").innerHTML = data.msg;
+                    
+                    if (data.msg) {
+                        showAlert(data.msg, data.tipo || 'success');
                     }
-
+                    
+                    abrirModalSolicitações(vagaId);
                 } catch (error) {
                     console.error('Erro na requisição:', error);
+                    showAlert('Ocorreu um erro ao processar sua solicitação', 'error');
                 }
             }
-
         });
 
-        document.getElementById('btn-recusar').addEventListener('click', async function () {
+        document.getElementById('btn-recusar').addEventListener('click', async function() {
             if (solicitacaoId) {
                 try {
                     const response = await fetch('<?php echo base_url("/contratante/solicitacoes?IdSolicitacao=") ?>' + solicitacaoId + "&btn=recusar");
                     const data = await response.json();
+                    
+                    if (data.msg) {
+                        showAlert(data.msg, data.tipo || 'info');
+                    }
+                    
                     abrirModalSolicitações(vagaId);
                 } catch (error) {
                     console.error('Erro na requisição:', error);
+                    showAlert('Ocorreu um erro ao processar sua solicitação', 'error');
                 }
             }
-
         });
-
-
     </script>
 </body>
-
 </html>

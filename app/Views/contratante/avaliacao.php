@@ -2,12 +2,12 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Avaliações - Freelancer</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
 
     <style>
         body {
@@ -84,7 +84,6 @@
             background-color: #0a66c2;
         }
 
-
         .modal {
             display: none;
             position: fixed;
@@ -106,6 +105,7 @@
             width: 80%;
             max-width: 500px;
             border: none;
+            position: relative;
         }
 
         .close {
@@ -203,33 +203,112 @@
         .footer a:hover {
             color: #cce4ff;
         }
+
+        /* Estilo para os alertas (notificações) */
+        .alert-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1100;
+            min-width: 300px;
+            max-width: 400px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border: none;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            animation: slideIn 0.5s forwards;
+        }
+
+        .alert-notification.success {
+            background-color: #28a745;
+        }
+
+        .alert-notification.error {
+            background-color: #dc3545;
+        }
+
+        .alert-notification.info {
+            background-color: #17a2b8;
+        }
+
+        .alert-notification.warning {
+            background-color: #ffc107;
+            color: #212529;
+        }
+
+        .alert-notification .close {
+            color: inherit;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+            line-height: 1;
+            padding: 0;
+            margin-left: 15px;
+        }
+
+        .alert-notification .close:hover {
+            opacity: 1;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .alert-notification {
+                min-width: calc(100% - 40px);
+                max-width: calc(100% - 40px);
+                right: 20px;
+                left: 20px;
+            }
+        }
     </style>
 </head>
 
 <body>
 
-
     <?php include 'menuContratante.php'; ?>
 
     <div class="container">
         <div class="avaliacoes-section">
-            <h1>Avaliar Freelancers </h1>
-
-            <?php if (session()->getFlashdata('msg')): ?>
-                <?= session()->getFlashdata('msg'); ?>
-            <?php endif; ?>
+            <h1>Avaliar Freelancers</h1>
 
             <div class="services-list" id="servicesList">
-                <?php foreach($avaliacao as $avaliacoes): ?>
+                <?php foreach ($avaliacao as $avaliacoes) : ?>
                     <div class="service-card">
-                    <div class="service-title"> <?php echo $avaliacoes['freelancer'] ?></div>
-                    <div class="service-client">Evento: <b><?php echo $avaliacoes['evento'] ?></b></div>
-                    <div class="service-client">Cargo: <?php echo $avaliacoes['cargo'] ?></div>
-                    <div class="service-date">Finalizado em: <?php echo $avaliacoes['finalizado_em'] ?></div>
-                    <button class="rate-btn" onclick="openModal(<?php echo $avaliacoes['evento_id'] ?>, <?php echo $avaliacoes['user_id'] ?>)">
-                        <i class="fas fa-star"></i> Avaliar Serviço
-                    </button>
-                </div>
+                        <div class="service-title"><?php echo $avaliacoes['freelancer'] ?></div>
+                        <div class="service-client">Evento: <b><?php echo $avaliacoes['evento'] ?></b></div>
+                        <div class="service-client">Cargo: <?php echo $avaliacoes['cargo'] ?></div>
+                        <div class="service-date">Finalizado em: <?php echo $avaliacoes['finalizado_em'] ?></div>
+                        <button class="rate-btn" onclick="openModal(<?php echo $avaliacoes['evento_id'] ?>, <?php echo $avaliacoes['user_id'] ?>)">
+                            <i class="fas fa-star"></i> Avaliar Serviço
+                        </button>
+                    </div>
                 <?php endforeach; ?>
             </div>
         </div>
@@ -242,8 +321,8 @@
             <h2 style="color: #004182;">Avaliar Serviço</h2>
 
             <form id="ratingForm" method="post">
-                <input type="hidden" id="eventoId" name= "eventoId">
-                <input type="hidden" id="freelancerId" name="freelancerId">
+                <input type="hidden" id="eventoId" name="eventoId" />
+                <input type="hidden" id="freelancerId" name="freelancerId" />
 
                 <div class="rating-section">
                     <div class="rating-title">Qualidade do Trabalho</div>
@@ -253,23 +332,23 @@
                     </div>
                     <div class="rating-options">
                         <div class="rating-option">
-                            <input type="radio" id="quality1" name="quality" value="1">
+                            <input type="radio" id="quality1" name="quality" value="1" />
                             <label for="quality1">1</label>
                         </div>
                         <div class="rating-option">
-                            <input type="radio" id="quality2" name="quality" value="2">
+                            <input type="radio" id="quality2" name="quality" value="2" />
                             <label for="quality2">2</label>
                         </div>
                         <div class="rating-option">
-                            <input type="radio" id="quality3" name="quality" value="3">
+                            <input type="radio" id="quality3" name="quality" value="3" />
                             <label for="quality3">3</label>
                         </div>
                         <div class="rating-option">
-                            <input type="radio" id="quality4" name="quality" value="4">
+                            <input type="radio" id="quality4" name="quality" value="4" />
                             <label for="quality4">4</label>
                         </div>
                         <div class="rating-option">
-                            <input type="radio" id="quality5" name="quality" value="5">
+                            <input type="radio" id="quality5" name="quality" value="5" />
                             <label for="quality5">5</label>
                         </div>
                     </div>
@@ -283,23 +362,23 @@
                     </div>
                     <div class="rating-options">
                         <div class="rating-option">
-                            <input type="radio" id="communication1" name="communication" value="1">
+                            <input type="radio" id="communication1" name="communication" value="1" />
                             <label for="communication1">1</label>
                         </div>
                         <div class="rating-option">
-                            <input type="radio" id="communication2" name="communication" value="2">
+                            <input type="radio" id="communication2" name="communication" value="2" />
                             <label for="communication2">2</label>
                         </div>
                         <div class="rating-option">
-                            <input type="radio" id="communication3" name="communication" value="3">
+                            <input type="radio" id="communication3" name="communication" value="3" />
                             <label for="communication3">3</label>
                         </div>
                         <div class="rating-option">
-                            <input type="radio" id="communication4" name="communication" value="4">
+                            <input type="radio" id="communication4" name="communication" value="4" />
                             <label for="communication4">4</label>
                         </div>
                         <div class="rating-option">
-                            <input type="radio" id="communication5" name="communication" value="5">
+                            <input type="radio" id="communication5" name="communication" value="5" />
                             <label for="communication5">5</label>
                         </div>
                     </div>
@@ -307,27 +386,57 @@
 
                 <div class="rating-section">
                     <label for="comment" class="rating-title">Comentário (opcional)</label>
-                    <textarea id="comment" name="comment"
-                        placeholder="Deixe seu comentário sobre o serviço..."></textarea>
+                    <textarea id="comment" name="comment" placeholder="Deixe seu comentário sobre o serviço..."></textarea>
                 </div>
 
-                <button type="submit" class="publish-btn" onclick="publishRating()">
+                <button type="submit" class="publish-btn">
                     <i class="fas fa-check"></i> Publicar Avaliação
                 </button>
             </form>
         </div>
     </div>
 
-
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 e-Jobs. Todos os direitos reservados.</p>
+            <p><a href="#">Política de Privacidade</a> | <a href="#">Termos de Uso</a></p>
+        </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-
         if (window.history.replaceState) {
             window.history.replaceState(null, null, window.location.href);
         }
-        // Função para abrir o modal
-        function openModal(eventoId,freelancerId) {
+
+        // Função para mostrar alertas
+        function showAlert(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `alert-notification ${type}`;
+            notification.innerHTML = `
+                <span>${message}</span>
+                <button class="close">&times;</button>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            notification.querySelector('.close').addEventListener('click', () => {
+                closeNotification(notification);
+            });
+            
+            setTimeout(() => {
+                closeNotification(notification);
+            }, 5000);
+        }
+
+        function closeNotification(notification) {
+            notification.style.animation = 'slideOut 0.5s forwards';
+            notification.addEventListener('animationend', () => {
+                notification.remove();
+            });
+        }
+
+        function openModal(eventoId, freelancerId) {
             document.getElementById('eventoId').value = eventoId;
             document.getElementById('freelancerId').value = freelancerId;
             document.getElementById('ratingModal').style.display = 'block';
@@ -335,27 +444,77 @@
             document.getElementById('ratingForm').reset();
         }
 
-        // Função para fechar
         function closeModal() {
             document.getElementById('ratingModal').style.display = 'none';
         }
 
-
-        // Fechar o modal sem clicar
         window.onclick = function (event) {
-            const modal = document.getElementById('ratingModal');
-            if (event.target == modal) {
+            const ratingModal = document.getElementById('ratingModal');
+            if (event.target == ratingModal) {
                 closeModal();
             }
         }
 
+        <?php if (session()->getFlashdata('msg')) : ?>
+            window.addEventListener('DOMContentLoaded', () => {
+                showAlert(`<?= addslashes(session()->getFlashdata('msg')) ?>`, 'error');
+            });
+        <?php endif; ?>
+
+        <?php if (session()->getFlashdata('msg-success')) : ?>
+            window.addEventListener('DOMContentLoaded', () => {
+                showAlert(`<?= addslashes(session()->getFlashdata('msg-success')) ?>`, 'success');
+            });
+        <?php endif; ?>
+
+        <?php if (session()->getFlashdata('msg-info')) : ?>
+            window.addEventListener('DOMContentLoaded', () => {
+                showAlert(`<?= addslashes(session()->getFlashdata('msg-info')) ?>`, 'info');
+            });
+        <?php endif; ?>
+
+        <?php if (session()->getFlashdata('msg-warning')) : ?>
+            window.addEventListener('DOMContentLoaded', () => {
+                showAlert(`<?= addslashes(session()->getFlashdata('msg-warning')) ?>`, 'warning');
+            });
+        <?php endif; ?>
+
+        document.getElementById('ratingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const qualitySelected = document.querySelector('input[name="quality"]:checked');
+            const communicationSelected = document.querySelector('input[name="communication"]:checked');
+            
+            if (!qualitySelected || !communicationSelected) {
+                showAlert('Por favor, avalie todos os critérios antes de enviar.', 'warning');
+                return;
+            }
+            
+        
+            const formData = new FormData(this);
+            
+            fetch(window.location.href, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showAlert(data.message, 'success');
+                    closeModal();
+                    // Recarregar a página após 2 segundos
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 2000);
+                } else {
+                    showAlert(data.message, 'error');
+                }
+            })
+            .catch(error => {
+                showAlert('Ocorreu um erro ao enviar a avaliação.', 'error');
+                console.error('Error:', error);
+            });
+        });
     </script>
 </body>
-
 </html>
-<footer class="footer">
-    <div class="container">
-        <p>&copy; 2025 e-Jobs. Todos os direitos reservados.</p>
-        <p><a href="#">Política de Privacidade</a> | <a href="#">Termos de Uso</a></p>
-    </div>
-</footer>

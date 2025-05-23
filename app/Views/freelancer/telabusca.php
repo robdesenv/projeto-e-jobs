@@ -115,6 +115,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             width: 100%;
+            margin-bottom: 10px;
         }
 
         .btn-candidatar:hover {
@@ -125,6 +126,41 @@
             background-color: var(--disabled);
             cursor: not-allowed;
             opacity: 1;
+        }
+
+        .btn-informacoes {
+            background-color: var(--primary);
+            color: #ffffff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-informacoes:hover {
+            background-color: var(--secondary);
+        }
+
+        .modal-info-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px 20px;
+        }
+
+        .modal-info-title {
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .btn-close-white {
+            filter: invert(1);
         }
 
         .footer {
@@ -217,7 +253,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label>&nbsp;</label>
+                            <label> </label>
                             <button onclick="filtrarServicos()" class="btn btn-primary">
                                 <i class="fas fa-search"></i> Buscar
                             </button>
@@ -251,15 +287,42 @@
                             onclick="candidatarServico(<?php echo $vaga['id']; ?>, <?php echo $vaga['evento_id']; ?>, this)">
                             <i class="fas fa-paper-plane"></i> Candidatar-se
                         </button>
+                        <button class="btn-informacoes"
+                            onclick="verInformacoes(<?php echo $vaga['id']; ?>, <?php echo $vaga['evento_id']; ?>)">
+                            <i class="fas fa-info-circle"></i> Ver Informações
+                        </button>
                     </div>
                 <?php endforeach; ?>
             </div>
         </div>
     </div>
 
+    <!-- Modal para Informações -->
+    <div class="modal fade" id="modalInformacoes" tabindex="-1" aria-labelledby="modalInformacoesLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-info-header">
+                    <h5 class="modal-info-title"><i class="fas fa-info-circle"></i> Informações do Serviço</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="conteudoInformacoes">
+                 
+
+
+                
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 e-Jobs. Todos os direitos reservados.</p>
+            <p>© 2025 e-Jobs. Todos os direitos reservados.</p>
             <p><a href="#">Política de Privacidade</a> | <a href="#">Termos de Uso</a></p>
         </div>
     </footer>
@@ -276,6 +339,15 @@
                     btn.disabled = true;
                 }
             });
+        }
+
+        function verInformacoes(idVaga, idEvento) {
+            // Placeholder 
+            document.getElementById("conteudoInformacoes").innerHTML =
+                `<p class="text-center py-4"> coloocar para puchar, voce e o cara!</p>`;
+
+            const modal = new bootstrap.Modal(document.getElementById('modalInformacoes'));
+            modal.show();
         }
 
         async function candidatarServico(idVaga, idEvento, btnElement) {
@@ -361,7 +433,7 @@
             // Aplicar desativação aos já candidatados
             desativarBotoesJaCandidatados();
 
-            // Filtro automático via URL
+            // Filtro automático
             const urlParams = new URLSearchParams(window.location.search);
             const categoriaParam = urlParams.get('categoria');
             const localizacaoParam = urlParams.get('localizacao');
@@ -369,7 +441,6 @@
             if (categoriaParam) document.getElementById('categoria').value = categoriaParam;
             if (localizacaoParam) document.getElementById('localizacao').value = localizacaoParam;
             if (categoriaParam || localizacaoParam) filtrarServicos();
-
 
             document.getElementById('localizacao').addEventListener('input', filtrarServicos);
             document.getElementById('categoria').addEventListener('change', filtrarServicos);

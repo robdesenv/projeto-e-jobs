@@ -268,6 +268,32 @@
             font-weight: 500;
         }
 
+        /* Rating styles */
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .rating i {
+            color: #ffd700; /* Gold color for stars */
+            font-size: 1rem;
+        }
+
+        .rating .fa-star-half-alt {
+            color: #ffd700;
+        }
+
+        .rating .fa-star.empty {
+            color: #ccc; /* Gray for empty stars */
+        }
+
+        .rating-text {
+            color: #555;
+            font-size: 0.9rem;
+            margin-left: 5px;
+        }
+
         @media (max-width: 768px) {
             .freelancers-container {
                 grid-template-columns: 1fr;
@@ -372,21 +398,17 @@
             </div>
 
             <div id="NoFreelancers">
-
             </div>
         </div>
     </div>
 
-
-    <!--informações do freelancer -->
-    <div class="modal fade" id="modalInformacoes" tabindex="-1" aria-labelledby="modalInformacoesLabel"
-        aria-hidden="true">
+    <!-- Informações do freelancer -->
+    <div class="modal fade" id="modalInformacoes" tabindex="-1" aria-labelledby="modalInformacoesLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-info-header">
                     <h5 class="modal-info-title"><i class="fas fa-user-tie"></i> Informações do Freelancer</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
                 <div class="modal-body" id="conteudoInformacoes">
@@ -409,8 +431,7 @@
             <div class="modal-content">
                 <div class="modal-header" style="background-color: #004182; color: white;">
                     <h5 class="modal-title"><i class="fas fa-briefcase"></i> Vagas disponíveis</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
                 <div class="modal-body">
@@ -419,8 +440,7 @@
                             <form action="" method="post" class="vaga-item">
                                 <input type="hidden" id="idFreelancer" class="idFreelancer" name="idFreelancer">
                                 <input type="hidden" name="idVaga" value="<?php echo htmlspecialchars($vaga['id']); ?>">
-                                <input type="hidden" name="idEvento"
-                                    value="<?php echo htmlspecialchars($vaga['evento_id']); ?>">
+                                <input type="hidden" name="idEvento" value="<?php echo htmlspecialchars($vaga['evento_id']); ?>">
 
                                 <div class="vaga-info">
                                     <h6><?php echo htmlspecialchars($vaga['cargo']); ?></h6>
@@ -444,9 +464,8 @@
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 e-Jobs. Todos os direitos reservados.</p>
-            <p><a href="#" style="color: #ffffff;">Política de Privacidade</a> | <a href="#"
-                    style="color: #ffffff;">Termos de Uso</a></p>
+            <p>© 2025 e-Jobs. Todos os direitos reservados.</p>
+            <p><a href="#" style="color: #ffffff;">Política de Privacidade</a> | <a href="#" style="color: #ffffff;">Termos de Uso</a></p>
         </div>
     </footer>
 
@@ -475,6 +494,17 @@
                     if (data.informacoes && data.informacoes.length > 0) {
                         const info = data.informacoes[0];
 
+                        // Generate star rating HTML
+                        const rating = info.avaliacao_media || 0;
+                        const fullStars = Math.floor(rating);
+                        const halfStar = rating % 1 >= 0.5 ? 1 : 0;
+                        const emptyStars = 5 - fullStars - halfStar;
+                        let ratingHtml = '';
+                        for (let i = 0; i < fullStars; i++) ratingHtml += `<i class="fas fa-star"></i>`;
+                        if (halfStar) ratingHtml += `<i class="fas fa-star-half-alt"></i>`;
+                        for (let i = 0; i < emptyStars; i++) ratingHtml += `<i class="fas fa-star empty"></i>`;
+                        ratingHtml += `<span class="rating-text">(${rating.toFixed(1)})</span>`;
+
                         html += `
                             <div class="info-grid">
                                 <div class="info-item">
@@ -482,6 +512,14 @@
                                     <div class="info-content">
                                         <h4>Nome Completo</h4>
                                         <p>${info.nome}</p>
+                                    </div>
+                                </div>
+
+                                <div class="info-item">
+                                    <div class="info-icon"><i class="fas fa-star"></i></div>
+                                    <div class="info-content">
+                                        <h4>Avaliação</h4>
+                                        <div class="rating">${ratingHtml}</div>
                                     </div>
                                 </div>
 
@@ -544,10 +582,7 @@
                     }
 
                     document.getElementById("conteudoInformacoes").innerHTML = html;
-
-                    // Mostra o botão de contratar apenas se houver informações
                     document.getElementById("btn-contratar").style.display = data.informacoes && data.informacoes.length > 0 ? "block" : "none";
-
                 } catch (error) {
                     console.error("Erro ao carregar informações:", error);
                     document.getElementById("conteudoInformacoes").innerHTML =
@@ -564,17 +599,14 @@
         function contratarFreelancer() {
             if (!UserIdGlobal) return;
 
-            // Preenche o campo hidden com o ID do freelancer
             var idFreelancerInputs = document.querySelectorAll('.idFreelancer');
             idFreelancerInputs.forEach(function (input) {
                 input.value = UserIdGlobal;
             });
 
-            // Fecha o modal de informações
             const infoModal = bootstrap.Modal.getInstance(document.getElementById('modalInformacoes'));
             infoModal.hide();
 
-            // Abre o modal de vagas
             const vagasModal = new bootstrap.Modal(document.getElementById('vagasModal'));
             vagasModal.show();
         }
@@ -583,13 +615,11 @@
             let html = '';
             let cargos = "";
 
-            // Implemente a lógica de filtragem aqui
             var cargoId = document.getElementById('cargo').value;
             const response = await fetch('<?php echo base_url('/contratante/filtrarFreelancers?cargoId=') ?>' + cargoId);
             const data = await response.json();
 
             if (data.freelancers && data.freelancers.length > 0) {
-
                 document.getElementById('NoFreelancers').innerHTML = '';
 
                 data.freelancers.forEach((freelancers, indice) => {
@@ -598,12 +628,22 @@
                     if (data.cargosFreelancer[indice] && data.cargosFreelancer[indice].length > 0) {
                         data.cargosFreelancer[indice].forEach(cargos => {
                             html2 += `<span class="habilidade-badge">${cargos.cargo}</span>`;
-                        })
-                    }else{
+                        });
+                    } else {
                         html2 += `<span class="">Nenhuma Habilidade Cadastrada</span>`;
                     }
 
-                    // link do WhatsApp
+                    // Generate star rating HTML
+                    const rating = freelancers.avaliacao_media || 0;
+                    const fullStars = Math.floor(rating);
+                    const halfStar = rating % 1 >= 0.5 ? 1 : 0;
+                    const emptyStars = 5 - fullStars - halfStar;
+                    let ratingHtml = '';
+                    for (let i = 0; i < fullStars; i++) ratingHtml += `<i class="fas fa-star"></i>`;
+                    if (halfStar) ratingHtml += `<i class="fas fa-star-half-alt"></i>`;
+                    for (let i = 0; i < emptyStars; i++) ratingHtml += `<i class="fas fa-star empty"></i>`;
+                    ratingHtml += `<span class="rating-text">(${rating.toFixed(1)})</span>`;
+
                     const telefoneFormatado = freelancers.telefone.replace(/\D/g, '');
                     const mensagemWhatsApp = encodeURIComponent(`Olá ${freelancers.nome.split(' ')[0]}, encontrei seu perfil no e-Jobs e gostaria de conversar sobre um serviço.`);
 
@@ -614,15 +654,24 @@
                             </div>
                             
                             <div class="info-item">
-
                                 <div class="freelancer-info">
                                     <i class="fas fa-briefcase"></i>
                                     <div>
                                         <div class="freelancer-label">Habilidades</div>
                                         <div class="freelancer-value">
                                             <div class="habilidades-list">
-                                        ${html2}
+                                                ${html2}
+                                            </div>
+                                        </div>
                                     </div>
+                                </div>
+                                
+                                <div class="freelancer-info">
+                                    <i class="fas fa-star"></i>
+                                    <div>
+                                        <div class="freelancer-label">Avaliação</div>
+                                        <div class="freelancer-value rating">
+                                            ${ratingHtml}
                                         </div>
                                     </div>
                                 </div>
@@ -660,7 +709,7 @@
                 });
 
                 document.getElementById('listarFreelancers').innerHTML = html;
-            } else if (data.freelancers.length == 0) {
+            } else {
                 document.getElementById('listarFreelancers').innerHTML = "";
                 document.getElementById('NoFreelancers').innerHTML = '<p class="text-center py-4">Nenhum freelancer encontrado com os filtros selecionados.</p>';
             }

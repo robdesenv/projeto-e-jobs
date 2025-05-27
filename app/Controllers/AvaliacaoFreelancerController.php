@@ -40,16 +40,30 @@ class AvaliacaoFreelancerController extends BaseController
             $avaliacaoModel->set('comentario',$this->request->getPost('comment'));
 
             if($avaliacaoModel->insert()){
-                session()->setFlashdata('msg', '<div class="alert alert-success" role="alert">
+                $response = ['message' => "Avaliação cadastrada com sucesso!!", "success" => true ];
+                /*session()->setFlashdata('msg-success', '<div class="alert alert-success" role="alert">
                                                     Avaliação cadastrada com sucesso!!
-                                                </div>');
-                return redirect()->to(base_url("contratante/avaliacao"));
+                                                </div>');*/
+                //return redirect()->to(base_url("contratante/avaliacao"));
+                return  $this->response->setJSON($response);
             }
 
         }
 
 
         return view('contratante/avaliacao',$data);
+    }
+
+    
+
+    public function mediaAvaliacao($id){
+        $db = db_connect();
+        $sql = 'SELECT ROUND(AVG(avaliacao_freelancer.qualidade_trabalho),1) as avaliacao_media  from freelancer 
+        JOIN avaliacao_freelancer ON freelancer.user_id = avaliacao_freelancer.freelancer_id
+        WHERE freelancer.user_id = ?';
+        $query = $db->query($sql, [$id]);
+        
+        return $query->getResultArray();
     }
 
 }

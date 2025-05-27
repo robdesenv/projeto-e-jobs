@@ -7,6 +7,7 @@ use App\Models\contratadosModel;
 use CodeIgniter\HTTP\ResponseInterface;
 use \App\Models\contratanteModel;
 use \App\Controllers\CargosFreelancerController;
+use \App\Controllers\AvaliacaoFreelancerController;
 use LengthException;
 
 class ContratanteController extends BaseController
@@ -456,7 +457,8 @@ class ContratanteController extends BaseController
         if(!empty($cargoId))
         {
             $db = db_connect();
-            $sql = 'SELECT * from freelancer join cargo_freelancer ON cargo_freelancer.user_id = freelancer.user_id WHERE cargo_freelancer.cargo_id = ?';
+            $sql = 'SELECT * from freelancer join cargo_freelancer ON cargo_freelancer.user_id = freelancer.user_id 
+            WHERE cargo_freelancer.cargo_id = ?';
             $query = $db->query($sql, [$cargoId]);
             $freelancers = $query->getResultArray();
             $num_rows = count($freelancers);
@@ -464,12 +466,16 @@ class ContratanteController extends BaseController
             if($num_rows > 0){
                 //procurar cargos caso exista freelancers
                 $CargosFreelancerController = new  CargosFreelancerController();
+                $AvaliacaoFreelancerController =  new AvaliacaoFreelancerController();
+
                 foreach($freelancers as $resultado)
                 {
                     $cargosfreelancer[] = $CargosFreelancerController->ExibirCargosFreelancer($resultado['user_id']);
+
+                     $avaliacoesFreelancers[] = $AvaliacaoFreelancerController->mediaAvaliacao($resultado['user_id']);
                 }
 
-            $reponse = ['id' => $cargoId, 'freelancers' => $freelancers, 'cargosFreelancer'=> $cargosfreelancer ];
+            $reponse = ['id' => $cargoId, 'freelancers' => $freelancers, 'cargosFreelancer'=> $cargosfreelancer, 'media_avaliacao' => $avaliacoesFreelancers ];
             }else{
                 $reponse = ['id' => $cargoId, 'freelancers' => $freelancers ];
             }
@@ -488,12 +494,22 @@ class ContratanteController extends BaseController
             $freelancer = $freelancerModel->findAll();
 
             $CargosFreelancerController = new  CargosFreelancerController();
+            $AvaliacaoFreelancerController =  new AvaliacaoFreelancerController();
+
                 foreach($freelancer as $resultado)
                 {
                     $cargosfreelancer[] = $CargosFreelancerController->ExibirCargosFreelancer($resultado['user_id']);
+
+
+                    
+
+                    $avaliacoesFreelancers[] = $AvaliacaoFreelancerController->mediaAvaliacao($resultado['user_id']);
+ 
+
+                    
                 }
 
-            $response = ['freelancers' => $freelancer, 'cargosFreelancer'=> $cargosfreelancer ];
+            $response = ['freelancers' => $freelancer, 'cargosFreelancer'=> $cargosfreelancer, 'media_avaliacao' => $avaliacoesFreelancers];
 
             return  $this->response->setJSON($response);
         }

@@ -619,11 +619,20 @@
             const response = await fetch('<?php echo base_url('/contratante/filtrarFreelancers?cargoId=') ?>' + cargoId);
             const data = await response.json();
 
-            if (data.freelancers && data.freelancers.length > 0) {
+            if (data.freelancers && data.freelancers.length > 0 && data.freelancers[0].id != null) {
                 document.getElementById('NoFreelancers').innerHTML = '';
 
                 data.freelancers.forEach((freelancers, indice) => {
                     let html2 = '';
+                    let media = 0;
+
+                    if (data.media_avaliacao[indice] && data.media_avaliacao[indice].length > 0) {
+                        data.media_avaliacao[indice].forEach(medias => {
+                            media += Number(medias.avaliacao_media);
+                        });
+                    } else {
+                        media = 0
+                    }
 
                     if (data.cargosFreelancer[indice] && data.cargosFreelancer[indice].length > 0) {
                         data.cargosFreelancer[indice].forEach(cargos => {
@@ -634,7 +643,7 @@
                     }
 
                     // Generate star rating HTML
-                    const rating = freelancers.avaliacao_media || 0;
+                    const rating = media;
                     const fullStars = Math.floor(rating);
                     const halfStar = rating % 1 >= 0.5 ? 1 : 0;
                     const emptyStars = 5 - fullStars - halfStar;

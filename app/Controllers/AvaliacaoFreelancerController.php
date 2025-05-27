@@ -36,7 +36,6 @@ class AvaliacaoFreelancerController extends BaseController
             $avaliacaoModel->set('evento_id',$this->request->getPost('eventoId'));
             $avaliacaoModel->set('freelancer_id',$this->request->getPost('freelancerId'));
             $avaliacaoModel->set('qualidade_trabalho',$this->request->getPost('quality'));
-            $avaliacaoModel->set('comunicacao',$this->request->getPost('communication'));
             $avaliacaoModel->set('comentario',$this->request->getPost('comment'));
 
             if($avaliacaoModel->insert()){
@@ -62,7 +61,7 @@ class AvaliacaoFreelancerController extends BaseController
         JOIN avaliacao_freelancer ON freelancer.user_id = avaliacao_freelancer.freelancer_id
         WHERE freelancer.user_id = ?';
         $query = $db->query($sql, [$id]);
-        
+
         return $query->getResultArray();
     }
 

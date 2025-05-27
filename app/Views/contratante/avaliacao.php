@@ -355,36 +355,6 @@
                 </div>
 
                 <div class="rating-section">
-                    <div class="rating-title">Comunicação</div>
-                    <div class="rating-scale">
-                        <span>0 (Péssimo)</span>
-                        <span>5 (Excelente)</span>
-                    </div>
-                    <div class="rating-options">
-                        <div class="rating-option">
-                            <input type="radio" id="communication1" name="communication" value="1" />
-                            <label for="communication1">1</label>
-                        </div>
-                        <div class="rating-option">
-                            <input type="radio" id="communication2" name="communication" value="2" />
-                            <label for="communication2">2</label>
-                        </div>
-                        <div class="rating-option">
-                            <input type="radio" id="communication3" name="communication" value="3" />
-                            <label for="communication3">3</label>
-                        </div>
-                        <div class="rating-option">
-                            <input type="radio" id="communication4" name="communication" value="4" />
-                            <label for="communication4">4</label>
-                        </div>
-                        <div class="rating-option">
-                            <input type="radio" id="communication5" name="communication" value="5" />
-                            <label for="communication5">5</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="rating-section">
                     <label for="comment" class="rating-title">Comentário (opcional)</label>
                     <textarea id="comment" name="comment" placeholder="Deixe seu comentário sobre o serviço..."></textarea>
                 </div>
@@ -483,9 +453,8 @@
             e.preventDefault();
             
             const qualitySelected = document.querySelector('input[name="quality"]:checked');
-            const communicationSelected = document.querySelector('input[name="communication"]:checked');
             
-            if (!qualitySelected || !communicationSelected) {
+            if (!qualitySelected) {
                 showAlert('Por favor, avalie todos os critérios antes de enviar.', 'warning');
                 return;
             }

@@ -14,7 +14,7 @@ class avaliacaoFreelancerModel extends Model
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['evento_id','freelancer_id', 'qualidade_trabalho', 'comunicacao', 'comentario'];
+    protected $allowedFields = ['evento_id','freelancer_id', 'qualidade_trabalho', 'comentario'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;

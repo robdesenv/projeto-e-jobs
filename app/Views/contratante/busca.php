@@ -516,14 +516,6 @@
                                 </div>
 
                                 <div class="info-item">
-                                    <div class="info-icon"><i class="fas fa-star"></i></div>
-                                    <div class="info-content">
-                                        <h4>Avaliação</h4>
-                                        <div class="rating">${ratingHtml}</div>
-                                    </div>
-                                </div>
-
-                                <div class="info-item">
                                     <div class="info-icon"><i class="fas fa-phone"></i></div>
                                     <div class="info-content">
                                         <h4>Telefone</h4>
@@ -576,7 +568,15 @@
                             `;
                         }
 
-                        html += `</div>`;
+                        html += `
+                         <div class="info-item">
+                                    <div class="info-icon"><i class="fas fa-star"></i></div>
+                                    <div class="info-content">
+                                        <h4>Avaliação</h4>
+                                        <div class="rating">${ratingHtml}</div>
+                                    </div>
+                                </div>
+                        </div>`;
                     } else {
                         html = `<p class="text-center py-4">Nenhuma informação encontrada para este freelancer.</p>`;
                     }
@@ -626,12 +626,10 @@
                     let html2 = '';
                     let media = 0;
 
-                    if (data.media_avaliacao[indice] && data.media_avaliacao[indice].length > 0) {
-                        data.media_avaliacao[indice].forEach(medias => {
-                            media += Number(medias.avaliacao_media);
-                        });
-                    } else {
-                        media = 0
+                    if (data.media_avaliacao[indice] && data.media_avaliacao[indice].length > 0 && data.media_avaliacao[indice][0].avaliacao_media != null) {
+                            media = Number(data.media_avaliacao[indice][0].avaliacao_media);
+                    }else {
+                        media = -1;
                     }
 
                     if (data.cargosFreelancer[indice] && data.cargosFreelancer[indice].length > 0) {
@@ -648,10 +646,16 @@
                     const halfStar = rating % 1 >= 0.5 ? 1 : 0;
                     const emptyStars = 5 - fullStars - halfStar;
                     let ratingHtml = '';
-                    for (let i = 0; i < fullStars; i++) ratingHtml += `<i class="fas fa-star"></i>`;
-                    if (halfStar) ratingHtml += `<i class="fas fa-star-half-alt"></i>`;
-                    for (let i = 0; i < emptyStars; i++) ratingHtml += `<i class="fas fa-star empty"></i>`;
-                    ratingHtml += `<span class="rating-text">(${rating.toFixed(1)})</span>`;
+
+                    if(rating >= 0){
+                        for (let i = 0; i < fullStars; i++) ratingHtml += `<i class="fas fa-star"></i>`;
+                        if (halfStar) ratingHtml += `<i class="fas fa-star-half-alt"></i>`;
+                        for (let i = 0; i < emptyStars; i++) ratingHtml += `<i class="fas fa-star empty"></i>`;
+                        ratingHtml += `<span class="rating-text">(${rating.toFixed(1)})</span>`;
+                    }else{
+                        ratingHtml += `<span>Nenhuma Avaliação Encontrada<\span>`;
+                    }
+                    
 
                     const telefoneFormatado = freelancers.telefone.replace(/\D/g, '');
                     const mensagemWhatsApp = encodeURIComponent(`Olá ${freelancers.nome.split(' ')[0]}, encontrei seu perfil no e-Jobs e gostaria de conversar sobre um serviço.`);

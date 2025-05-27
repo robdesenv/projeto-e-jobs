@@ -500,13 +500,8 @@ class ContratanteController extends BaseController
                 {
                     $cargosfreelancer[] = $CargosFreelancerController->ExibirCargosFreelancer($resultado['user_id']);
 
-
-                    
-
                     $avaliacoesFreelancers[] = $AvaliacaoFreelancerController->mediaAvaliacao($resultado['user_id']);
  
-
-                    
                 }
 
             $response = ['freelancers' => $freelancer, 'cargosFreelancer'=> $cargosfreelancer, 'media_avaliacao' => $avaliacoesFreelancers];

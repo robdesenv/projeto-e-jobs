@@ -27,6 +27,8 @@ $routes->get('/freelancer/transrecebidas', 'FreelancerController::transrecebidas
 $routes->get('/freelancer/avaliacao', 'AvaliacaoContratanteController::avaliacaoContratante', ['filter' => 'group:freelancer']);
 $routes->post('/freelancer/avaliacao', 'AvaliacaoContratanteController::avaliacaoContratante', ['filter' => 'group:freelancer']);
 
+$routes->get('/freelancer/exibirInformacoesContratante', 'FreelancerController::exibirInformacoesContratante', ['filter' => 'group:freelancer']);
+
 //contratante
 $routes->get('/contratante', 'ContratanteController::index', ['filter' => 'group:contratante']);
 

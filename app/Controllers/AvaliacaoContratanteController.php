@@ -53,4 +53,14 @@ class AvaliacaoContratanteController extends BaseController
         return view('freelancer/avaliacao',$data);
     }
 
+    public function mediaAvaliacao($id){
+        $db = db_connect();
+        $sql = 'SELECT ROUND(AVG(avaliacao_contratante.qualidade_trabalho),1) as avaliacao_media from contratante 
+        JOIN avaliacao_contratante ON contratante.user_id = avaliacao_contratante.contratante_id
+        WHERE contratante.user_id = ?';
+        $query = $db->query($sql, [$id]);
+
+        return $query->getResultArray();
+    }
+
 }

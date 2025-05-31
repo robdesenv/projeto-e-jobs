@@ -288,7 +288,7 @@
                             <i class="fas fa-paper-plane"></i> Candidatar-se
                         </button>
                         <button class="btn-informacoes"
-                            onclick="verInformacoes(<?php echo $vaga['id']; ?>, <?php echo $vaga['evento_id']; ?>)">
+                            onclick="verInformacoes(<?php echo $vaga['user_id']; ?>)">
                             <i class="fas fa-info-circle"></i> Ver Informações
                         </button>
                     </div>
@@ -341,11 +341,92 @@
             });
         }
 
-        function verInformacoes(idVaga, idEvento) {
-            // Placeholder 
-            document.getElementById("conteudoInformacoes").innerHTML =
-                `<p class="text-center py-4"> coloocar para puchar, voce e o cara!</p>`;
+        async function verInformacoes(UserId) {
+            let html = '';
 
+            const response = await fetch('<?php echo base_url("/freelancer/exibirInformacoesContratante?idContratante=") ?>' + UserId);
+            const data = await response.json();
+            console.log(data);
+
+            if (data.contratante && data.contratante.length > 0) {
+                const info = data.contratante[0];
+
+                if (data.media_avaliacao[0] && data.media_avaliacao[0].length > 0 && data.media_avaliacao[0][0].avaliacao_media != null) {
+                    media = Number(data.media_avaliacao[0][0].avaliacao_media);
+                }else {
+                    media = -1;
+                }
+
+                const rating = media || 0;
+                        const fullStars = Math.floor(rating);
+                        const halfStar = rating % 1 >= 0.5 ? 1 : 0;
+                        const emptyStars = 5 - fullStars - halfStar;
+                        let ratingHtml = '';
+
+                        if(rating >= 0){
+                            for (let i = 0; i < fullStars; i++) ratingHtml += `<i class="fas fa-star"></i>`;
+                            if (halfStar) ratingHtml += `<i class="fas fa-star-half-alt"></i>`;
+                            for (let i = 0; i < emptyStars; i++) ratingHtml += `<i class="fas fa-star empty"></i>`;
+                            ratingHtml += `<span class="rating-text">(${rating.toFixed(1)})</span>`;
+                        }else{
+                            ratingHtml += `<span>Nenhuma Avaliação Encontrada<\span>`;
+                        }
+             
+                html += `
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <div class="info-icon"><i class="fas fa-user"></i></div>
+                                    <div class="info-content">
+                                        <h4>Nome Completo</h4>
+                                        <p>${info.nome}</p>
+                                    </div>
+                                </div>
+
+                                <div class="info-item">
+                                    <div class="info-icon"><i class="fas fa-phone"></i></div>
+                                    <div class="info-content">
+                                        <h4>Telefone</h4>
+                                        <p>${info.telefone}</p>
+                                    </div>
+                                </div>
+
+                                <div class="info-item">
+                                    <div class="info-icon"><i class="fas fa-envelope"></i></div>
+                                    <div class="info-content">
+                                        <h4>E-mail</h4>
+                                        <p>${info.email}</p>
+                                    </div>
+                                </div>
+
+                                <div class="info-item">
+                                    <div class="info-icon"><i class="fas fa-birthday-cake"></i></div>
+                                    <div class="info-content">
+                                        <h4>Data de Nascimento</h4>
+                                        <p>${info.data_nasc}</p>
+                                    </div>
+                                </div>
+
+                                <div class="info-item">
+                                    <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                                    <div class="info-content">
+                                        <h4>Localização</h4>
+                                        <p>${info.cidade}, ${info.estado}</p>
+                                    </div>
+                                </div>
+                        `;
+
+                        html += `
+                         <div class="info-item">
+                                    <div class="info-icon"><i class="fas fa-star"></i></div>
+                                    <div class="info-content">
+                                        <h4>Avaliação</h4>
+                                        <div class="rating">${ratingHtml}</div>
+                                    </div>
+                                </div>
+                        </div>`;
+
+                        document.getElementById("conteudoInformacoes").innerHTML = html;
+            }
             const modal = new bootstrap.Modal(document.getElementById('modalInformacoes'));
             modal.show();
         }

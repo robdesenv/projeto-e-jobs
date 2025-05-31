@@ -208,15 +208,19 @@ class ContratanteController extends BaseController
                 $query = $db->query($sql,[$idFreelancer]);
                 $resultados = $query->getResultArray();
 
-                //exibe os cargos do freelancer
+                //exibe os cargos e avaliações do freelancer
+                $AvaliacaoFreelancerController =  new AvaliacaoFreelancerController();
                 $CargosFreelancerController = new  CargosFreelancerController();
+
                 foreach($resultados as $resultado)
                 {
                     $cargosfreelancer = $CargosFreelancerController->ExibirCargosFreelancer($resultado['user_id']);
+
+                    $avaliacoesFreelancers[] = $AvaliacaoFreelancerController->mediaAvaliacao($resultado['user_id']);
                 }
                 
 
-                $retorna = ['informacoes' => $resultados, 'cargosFreelancer'=> $cargosfreelancer];
+                $retorna = ['informacoes' => $resultados, 'cargosFreelancer'=> $cargosfreelancer, 'media_avaliacao' => $avaliacoesFreelancers];
             }
             return $this->response->setJSON($retorna);
         }

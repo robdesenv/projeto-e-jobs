@@ -494,16 +494,27 @@
                     if (data.informacoes && data.informacoes.length > 0) {
                         const info = data.informacoes[0];
 
+                        if (data.media_avaliacao[0] && data.media_avaliacao[0].length > 0 && data.media_avaliacao[0][0].avaliacao_media != null) {
+                            media = Number(data.media_avaliacao[0][0].avaliacao_media);
+                        }else {
+                            media = -1;
+                        }
+
                         // Generate star rating HTML
-                        const rating = info.avaliacao_media || 0;
+                        const rating = media;
                         const fullStars = Math.floor(rating);
                         const halfStar = rating % 1 >= 0.5 ? 1 : 0;
                         const emptyStars = 5 - fullStars - halfStar;
                         let ratingHtml = '';
-                        for (let i = 0; i < fullStars; i++) ratingHtml += `<i class="fas fa-star"></i>`;
-                        if (halfStar) ratingHtml += `<i class="fas fa-star-half-alt"></i>`;
-                        for (let i = 0; i < emptyStars; i++) ratingHtml += `<i class="fas fa-star empty"></i>`;
-                        ratingHtml += `<span class="rating-text">(${rating.toFixed(1)})</span>`;
+
+                        if(rating >= 0){
+                            for (let i = 0; i < fullStars; i++) ratingHtml += `<i class="fas fa-star"></i>`;
+                            if (halfStar) ratingHtml += `<i class="fas fa-star-half-alt"></i>`;
+                            for (let i = 0; i < emptyStars; i++) ratingHtml += `<i class="fas fa-star empty"></i>`;
+                            ratingHtml += `<span class="rating-text">(${rating.toFixed(1)})</span>`;
+                        }else{
+                            ratingHtml += `<span>Nenhuma Avaliação Encontrada<\span>`;
+                        }
 
                         html += `
                             <div class="info-grid">

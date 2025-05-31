@@ -322,9 +322,11 @@ class FreelancerController extends BaseController
             foreach($contratante as $resultado)
                 {
                      $avaliacoesContratante[] = $AvaliacaoContratanteController->mediaAvaliacao($resultado['user_id']);
+
+                     $comentariosAvaliacoes[] = $AvaliacaoContratanteController->comentariosAvaliacao($resultado['user_id']);
                 }
 
-            $reponse = ['id' => $contratanteId, 'contratante' =>$contratante, 'media_avaliacao' => $avaliacoesContratante];
+            $reponse = ['id' => $contratanteId, 'contratante' =>$contratante, 'media_avaliacao' => $avaliacoesContratante, 'comentarios' => $comentariosAvaliacoes];
 
             return  $this->response->setJSON($reponse);
         }

@@ -346,7 +346,6 @@
 
             const response = await fetch('<?php echo base_url("/freelancer/exibirInformacoesContratante?idContratante=") ?>' + UserId);
             const data = await response.json();
-            console.log(data);
 
             if (data.contratante && data.contratante.length > 0) {
                 const info = data.contratante[0];
@@ -416,14 +415,35 @@
                         `;
 
                         html += `
-                         <div class="info-item">
+                                <div class="info-item">
                                     <div class="info-icon"><i class="fas fa-star"></i></div>
                                     <div class="info-content">
                                         <h4>Avaliação</h4>
                                         <div class="rating">${ratingHtml}</div>
                                     </div>
                                 </div>
-                        </div>`;
+                                </div>`;
+
+                        if (data.comentarios[0] && data.comentarios[0].length > 0){
+
+                            html += `
+                                <div class="info-item">
+                                    <div class="info-content">
+                                        <h4>Comentários</h4>
+                                        <hr>`
+                            
+                            data.comentarios[0].forEach(comentarios => {
+                                
+                                html += `
+                                        <div>${comentarios.comentario}</div>
+                                        <hr>`;
+                        
+                            });
+
+                            html += `
+                                    </div>
+                                    </div>`;
+                        }
 
                         document.getElementById("conteudoInformacoes").innerHTML = html;
             }

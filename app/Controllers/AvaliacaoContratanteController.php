@@ -63,4 +63,14 @@ class AvaliacaoContratanteController extends BaseController
         return $query->getResultArray();
     }
 
+    public function comentariosAvaliacao($id){
+        $db = db_connect();
+        $sql = 'SELECT comentario from contratante 
+        JOIN avaliacao_contratante ON contratante.user_id = avaliacao_contratante.contratante_id
+        WHERE contratante.user_id = ?';
+        $query = $db->query($sql, [$id]);
+
+        return $query->getResultArray();
+    }
+
 }

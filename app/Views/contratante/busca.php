@@ -488,6 +488,7 @@
                 try {
                     const response = await fetch('<?php echo base_url("/contratante/exibirInformacoesFreelancer?idFreelancer=") ?>' + idFreelancer);
                     const data = await response.json();
+                    console.log(data);
 
                     let html = '';
 
@@ -587,7 +588,30 @@
                                         <div class="rating">${ratingHtml}</div>
                                     </div>
                                 </div>
-                        </div>`;
+                                </div>`;
+                        
+                        if (data.comentarios[0] && data.comentarios[0].length > 0){
+
+                            html += `
+                                <div class="info-item">
+                                    <div class="info-content">
+                                        <h4>Comentários</h4>
+                                        <hr>`
+
+                            data.comentarios[0].forEach(comentarios => {
+                                
+                                html += `
+                                        <div>${comentarios.comentario}</div>
+                                        <hr>`;
+
+                            });
+
+                            html += `
+                                    </div>
+                                    </div>
+                                `;
+                        }
+                        
                     } else {
                         html = `<p class="text-center py-4">Nenhuma informação encontrada para este freelancer.</p>`;
                     }

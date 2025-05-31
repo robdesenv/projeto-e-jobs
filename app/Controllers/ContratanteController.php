@@ -217,10 +217,12 @@ class ContratanteController extends BaseController
                     $cargosfreelancer = $CargosFreelancerController->ExibirCargosFreelancer($resultado['user_id']);
 
                     $avaliacoesFreelancers[] = $AvaliacaoFreelancerController->mediaAvaliacao($resultado['user_id']);
+
+                    $comentariosAvaliacoes[] = $AvaliacaoFreelancerController->comentariosAvaliacao($resultado['user_id']);
                 }
                 
 
-                $retorna = ['informacoes' => $resultados, 'cargosFreelancer'=> $cargosfreelancer, 'media_avaliacao' => $avaliacoesFreelancers];
+                $retorna = ['informacoes' => $resultados, 'cargosFreelancer'=> $cargosfreelancer, 'media_avaliacao' => $avaliacoesFreelancers, 'comentarios' => $comentariosAvaliacoes];
             }
             return $this->response->setJSON($retorna);
         }

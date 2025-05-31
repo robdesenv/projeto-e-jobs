@@ -65,4 +65,14 @@ class AvaliacaoFreelancerController extends BaseController
         return $query->getResultArray();
     }
 
+    public function comentariosAvaliacao($id){
+        $db = db_connect();
+        $sql = 'SELECT comentario  from freelancer 
+        JOIN avaliacao_freelancer ON freelancer.user_id = avaliacao_freelancer.freelancer_id
+        WHERE freelancer.user_id = ?';
+        $query = $db->query($sql, [$id]);
+
+        return $query->getResultArray();
+    }
+
 }

@@ -71,7 +71,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo base_url('contratante/avaliacao') ?>"><i
-                                class=""></i> Avaliação Freelancer</a>
+                                class="fas fa-star"></i> Avaliar</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link btn-logout" href="<?php echo base_url('logout') ?>"><i

@@ -75,7 +75,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo base_url('freelancer/avaliacao') ?>"><i
-                                class=""></i> Avaliações</a>
+                                class="fas fa-star"></i> Avaliar</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link btn-logout" href="<?php echo base_url('logout') ?>"><i
@@ -86,7 +86,5 @@
         </div>
     </nav>
 </body>
-
-
 
 </html>

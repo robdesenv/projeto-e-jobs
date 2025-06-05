@@ -10,9 +10,22 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
 
     <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             font-family: 'Segoe UI', sans-serif;
             background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .main-content {
+            flex: 1 0 auto;
         }
 
         .avaliacoes-section {
@@ -191,7 +204,8 @@
             padding: 20px;
             background-color: #004182;
             color: #ffffff;
-            margin-top: 40px;
+            flex-shrink: 0;
+            width: 100%;
         }
 
         .footer a {
@@ -291,84 +305,85 @@
 </head>
 
 <body>
+    <div class="main-content">
+        <?php include 'menuContratante.php'; ?>
 
-    <?php include 'menuContratante.php'; ?>
+        <div class="container">
+            <div class="avaliacoes-section">
+                <h1>Avaliar Freelancers</h1>
 
-    <div class="container">
-        <div class="avaliacoes-section">
-            <h1>Avaliar Freelancers</h1>
-
-            <div class="services-list" id="servicesList">
-                <?php foreach ($avaliacao as $avaliacoes) : ?>
-                    <div class="service-card">
-                        <div class="service-title"><?php echo $avaliacoes['freelancer'] ?></div>
-                        <div class="service-client">Evento: <b><?php echo $avaliacoes['evento'] ?></b></div>
-                        <div class="service-client">Cargo: <?php echo $avaliacoes['cargo'] ?></div>
-                        <div class="service-date">Finalizado em: <?php echo $avaliacoes['finalizado_em'] ?></div>
-                        <button class="rate-btn" onclick="openModal(<?php echo $avaliacoes['evento_id'] ?>, <?php echo $avaliacoes['user_id'] ?>)">
-                            <i class="fas fa-star"></i> Avaliar Serviço
-                        </button>
-                    </div>
-                <?php endforeach; ?>
+                <div class="services-list" id="servicesList">
+                    <?php foreach ($avaliacao as $avaliacoes) : ?>
+                        <div class="service-card">
+                            <div class="service-title"><?php echo $avaliacoes['freelancer'] ?></div>
+                            <div class="service-client">Evento: <b><?php echo $avaliacoes['evento'] ?></b></div>
+                            <div class="service-client">Cargo: <?php echo $avaliacoes['cargo'] ?></div>
+                            <div class="service-date">Finalizado em: <?php echo $avaliacoes['finalizado_em'] ?></div>
+                            <button class="rate-btn" onclick="openModal(<?php echo $avaliacoes['evento_id'] ?>, <?php echo $avaliacoes['user_id'] ?>)">
+                                <i class="fas fa-star"></i> Avaliar Serviço
+                            </button>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- Modal de Avaliação -->
-    <div id="ratingModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2 style="color: #004182;">Avaliar Serviço</h2>
+        <!-- Modal de Avaliação -->
+        <div id="ratingModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">×</span>
+                <h2 style="color: #004182;">Avaliar Serviço</h2>
 
-            <form id="ratingForm" method="post">
-                <input type="hidden" id="eventoId" name="eventoId" />
-                <input type="hidden" id="freelancerId" name="freelancerId" />
+                <form id="ratingForm" method="post">
+                    <input type="hidden" id="eventoId" name="eventoId" />
+                    <input type="hidden" id="freelancerId" name="freelancerId" />
 
-                <div class="rating-section">
-                    <div class="rating-title">Qualidade do Trabalho</div>
-                    <div class="rating-scale">
-                        <span>0 (Péssimo)</span>
-                        <span>5 (Excelente)</span>
+                    <div class="rating-section">
+                        <div class="rating-title">Qualidade do Trabalho</div>
+                        <div class="rating-scale">
+                            <span>0 (Péssimo)</span>
+                            <span>5 (Excelente)</span>
+                        </div>
+                        <div class="rating-options">
+                            <div class="rating-option">
+                                <input type="radio" id="quality1" name="quality" value="1" />
+                                <label for="quality1">1</label>
+                            </div>
+                            <div class="rating-option">
+                                <input type="radio" id="quality2" name="quality" value="2" />
+                                <label for="quality2">2</label>
+                            </div>
+                            <div class="rating-option">
+                                <input type="radio" id="quality3" name="quality" value="3" />
+                                <label for="quality3">3</label>
+                            </div>
+                            <div class="rating-option">
+                                <input type="radio" id="quality4" name="quality" value="4" />
+                                <label for="quality4">4</label>
+                            </div>
+                            <div class="rating-option">
+                                <input type="radio" id="quality5" name="quality" value="5" />
+                                <label for="quality5">5</label>
+                            </div>
+                        </div>
                     </div>
-                    <div class="rating-options">
-                        <div class="rating-option">
-                            <input type="radio" id="quality1" name="quality" value="1" />
-                            <label for="quality1">1</label>
-                        </div>
-                        <div class="rating-option">
-                            <input type="radio" id="quality2" name="quality" value="2" />
-                            <label for="quality2">2</label>
-                        </div>
-                        <div class="rating-option">
-                            <input type="radio" id="quality3" name="quality" value="3" />
-                            <label for="quality3">3</label>
-                        </div>
-                        <div class="rating-option">
-                            <input type="radio" id="quality4" name="quality" value="4" />
-                            <label for="quality4">4</label>
-                        </div>
-                        <div class="rating-option">
-                            <input type="radio" id="quality5" name="quality" value="5" />
-                            <label for="quality5">5</label>
-                        </div>
+
+                    <div class="rating-section">
+                        <label for="comment" class="rating-title">Comentário (opcional)</label>
+                        <textarea id="comment" name="comment" placeholder="Deixe seu comentário sobre o serviço..."></textarea>
                     </div>
-                </div>
 
-                <div class="rating-section">
-                    <label for="comment" class="rating-title">Comentário (opcional)</label>
-                    <textarea id="comment" name="comment" placeholder="Deixe seu comentário sobre o serviço..."></textarea>
-                </div>
-
-                <button type="submit" class="publish-btn">
-                    <i class="fas fa-check"></i> Publicar Avaliação
-                </button>
-            </form>
+                    <button type="submit" class="publish-btn">
+                        <i class="fas fa-check"></i> Publicar Avaliação
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 e-Jobs. Todos os direitos reservados.</p>
+            <p>© 2025 e-Jobs. Todos os direitos reservados.</p>
             <p><a href="#">Política de Privacidade</a> | <a href="#">Termos de Uso</a></p>
         </div>
     </footer>
@@ -385,7 +400,7 @@
             notification.className = `alert-notification ${type}`;
             notification.innerHTML = `
                 <span>${message}</span>
-                <button class="close">&times;</button>
+                <button class="close">×</button>
             `;
             
             document.body.appendChild(notification);

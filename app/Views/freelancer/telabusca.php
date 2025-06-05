@@ -151,16 +151,43 @@
         .modal-info-header {
             background-color: var(--primary);
             color: white;
-            padding: 15px 20px;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .modal-info-title {
-            font-weight: 600;
             margin: 0;
+            font-size: 1.4rem;
+            font-weight: 600;
         }
 
         .btn-close-white {
             filter: invert(1);
+            width: 20px;
+            height: 20px;
+            padding: 4px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-close-white:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .modal-footer {
+            border-top: 1px solid #eee;
+            padding: 15px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            background-color: #f9f9f9;
         }
 
         .footer {
@@ -218,6 +245,102 @@
             .servicos-container {
                 grid-template-columns: 1fr;
             }
+        }
+
+        .freelancer-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+
+        .freelancer-header {
+            background-color: #004182;
+            color: white;
+            padding: 15px;
+            position: relative;
+        }
+
+        .freelancer-title {
+            margin: 0;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .freelancer-body {
+            padding: 20px;
+        }
+
+        .freelancer-info {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .freelancer-info i {
+            margin-right: 10px;
+            color: #004182;
+            min-width: 20px;
+            text-align: center;
+            margin-top: 3px;
+        }
+
+        .freelancer-info div {
+            flex: 1;
+        }
+
+        .freelancer-label {
+            font-weight: 600;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        .freelancer-value {
+            color: #333;
+            word-break: break-word;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .rating i {
+            color: #ffd700;
+            font-size: 1rem;
+        }
+
+        .rating .fa-star-half-alt {
+            color: #ffd700;
+        }
+
+        .rating .fa-star.empty {
+            color: #ccc;
+        }
+
+        .rating-text {
+            color: #555;
+            font-size: 0.9rem;
+            margin-left: 5px;
+        }
+
+        .habilidades-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 5px;
+        }
+
+        .habilidade-badge {
+            background-color: #e9f0f8;
+            color: #004182;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
         }
     </style>
 </head>
@@ -297,21 +420,62 @@
         </div>
     </div>
 
-    <!-- Modal para Informações -->
-    <div class="modal fade" id="modalInformacoes" tabindex="-1" aria-labelledby="modalInformacoesLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="modalInformacoes" tabindex="-1" aria-labelledby="modalInformacoesLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-info-header">
-                    <h5 class="modal-info-title"><i class="fas fa-info-circle"></i> Informações do Serviço</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
+                    <h5 class="modal-info-title"><i class="fas fa-info-circle"></i> Informações do Contratante</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body" id="conteudoInformacoes">
-                 
-
-
-                
+                <div class="modal-body">
+                    <div class="freelancer-card">
+                        <div class="freelancer-header">
+                            <h3 class="freelancer-title" id="modalNome"></h3>
+                        </div>
+                        <div class="freelancer-body">
+                            <div class="freelancer-info" id="modalLocalizacao">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <div class="freelancer-label">Localização</div>
+                                    <div class="freelancer-value" id="modalLocalizacaoValue"></div>
+                                </div>
+                            </div>
+                            <div class="freelancer-info" id="modalTelefone">
+                                <i class="fas fa-phone"></i>
+                                <div>
+                                    <div class="freelancer-label">Telefone</div>
+                                    <div class="freelancer-value" id="modalTelefoneValue"></div>
+                                </div>
+                            </div>
+                            <div class="freelancer-info" id="modalEmail">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <div class="freelancer-label">E-mail</div>
+                                    <div class="freelancer-value" id="modalEmailValue"></div>
+                                </div>
+                            </div>
+                            <div class="freelancer-info" id="modalDataNasc">
+                                <i class="fas fa-birthday-cake"></i>
+                                <div>
+                                    <div class="freelancer-label">Data de Nascimento</div>
+                                    <div class="freelancer-value" id="modalDataNascValue"></div>
+                                </div>
+                            </div>
+                            <div class="freelancer-info" id="modalAvaliacao">
+                                <i class="fas fa-star"></i>
+                                <div>
+                                    <div class="freelancer-label">Avaliação</div>
+                                    <div class="freelancer-value rating" id="modalAvaliacaoValue"></div>
+                                </div>
+                            </div>
+                            <div class="freelancer-info" id="modalComentarios">
+                                <div>
+                                    <div class="freelancer-label">Comentários</div>
+                                    <div class="freelancer-value" id="modalComentariosValue"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
@@ -342,113 +506,78 @@
         }
 
         async function verInformacoes(UserId) {
-            let html = '';
+            try {
+                const response = await fetch('<?php echo base_url("/freelancer/exibirInformacoesContratante?idContratante=") ?>' + UserId);
+                const data = await response.json();
 
-            const response = await fetch('<?php echo base_url("/freelancer/exibirInformacoesContratante?idContratante=") ?>' + UserId);
-            const data = await response.json();
+                if (data.contratante && data.contratante.length > 0) {
+                    const info = data.contratante[0];
 
-            if (data.contratante && data.contratante.length > 0) {
-                const info = data.contratante[0];
+                    let media = -1;
+                    if (data.media_avaliacao[0] && data.media_avaliacao[0].length > 0 && data.media_avaliacao[0][0].avaliacao_media != null) {
+                        media = Number(data.media_avaliacao[0][0].avaliacao_media);
+                    }
 
-                if (data.media_avaliacao[0] && data.media_avaliacao[0].length > 0 && data.media_avaliacao[0][0].avaliacao_media != null) {
-                    media = Number(data.media_avaliacao[0][0].avaliacao_media);
-                }else {
-                    media = -1;
+                    const rating = media;
+                    const fullStars = Math.floor(rating);
+                    const decimalPart = rating - fullStars;
+                    const halfStar = decimalPart >= 0.5 ? 1 : 0;
+                    const emptyStars = 5 - fullStars - halfStar;
+
+                    console.log(`Rating: ${rating}, Full Stars: ${fullStars}, Half Star: ${halfStar}, Empty Stars: ${emptyStars}`);
+
+                    let ratingHtml = '';
+                    if (rating >= 0) {
+                        for (let i = 0; i < fullStars; i++) {
+                            ratingHtml += `<i class="fas fa-star"></i>`;
+                        }
+                        if (halfStar) {
+                            ratingHtml += `<i class="fas fa-star-half-alt"></i>`;
+                        }
+                        for (let i = 0; i < emptyStars; i++) {
+                            ratingHtml += `<i class="fas fa-star empty"></i>`;
+                        }
+                        ratingHtml += `<span class="rating-text">(${rating.toFixed(1)})</span>`;
+                    } else {
+                        ratingHtml += `<span>Nenhuma Avaliação Encontrada</span>`;
+                    }
+
+                    document.getElementById("modalNome").textContent = info.nome;
+                    document.getElementById("modalLocalizacaoValue").textContent = `${info.cidade}, ${info.estado}`;
+                    document.getElementById("modalTelefoneValue").textContent = info.telefone;
+                    document.getElementById("modalEmailValue").textContent = info.email;
+                    document.getElementById("modalDataNascValue").textContent = info.data_nasc;
+                    document.getElementById("modalAvaliacaoValue").innerHTML = ratingHtml;
+
+                    const comentariosHtml = data.comentarios[0] && data.comentarios[0].length > 0
+                        ? data.comentarios[0].map(comentario => `<p>${comentario.comentario}</p>`).join('<hr>')
+                        : `<p>Nenhum comentário encontrado</p>`;
+                    document.getElementById("modalComentariosValue").innerHTML = comentariosHtml;
+                } else {
+                    document.getElementById("modalNome").textContent = "Contratante Desconhecido";
+                    document.getElementById("modalLocalizacaoValue").textContent = "";
+                    document.getElementById("modalTelefoneValue").textContent = "";
+                    document.getElementById("modalEmailValue").textContent = "";
+                    document.getElementById("modalDataNascValue").textContent = "";
+                    document.getElementById("modalAvaliacaoValue").innerHTML = `<span>Nenhuma Avaliação Encontrada</span>`;
+                    document.getElementById("modalComentariosValue").innerHTML = `<p>Nenhuma informação encontrada para este contratante.</p>`;
                 }
 
-                const rating = media || 0;
-                        const fullStars = Math.floor(rating);
-                        const halfStar = rating % 1 >= 0.5 ? 1 : 0;
-                        const emptyStars = 5 - fullStars - halfStar;
-                        let ratingHtml = '';
-
-                        if(rating >= 0){
-                            for (let i = 0; i < fullStars; i++) ratingHtml += `<i class="fas fa-star"></i>`;
-                            if (halfStar) ratingHtml += `<i class="fas fa-star-half-alt"></i>`;
-                            for (let i = 0; i < emptyStars; i++) ratingHtml += `<i class="fas fa-star empty"></i>`;
-                            ratingHtml += `<span class="rating-text">(${rating.toFixed(1)})</span>`;
-                        }else{
-                            ratingHtml += `<span>Nenhuma Avaliação Encontrada<\span>`;
-                        }
-             
-                html += `
-                            <div class="info-grid">
-                                <div class="info-item">
-                                    <div class="info-icon"><i class="fas fa-user"></i></div>
-                                    <div class="info-content">
-                                        <h4>Nome Completo</h4>
-                                        <p>${info.nome}</p>
-                                    </div>
-                                </div>
-
-                                <div class="info-item">
-                                    <div class="info-icon"><i class="fas fa-phone"></i></div>
-                                    <div class="info-content">
-                                        <h4>Telefone</h4>
-                                        <p>${info.telefone}</p>
-                                    </div>
-                                </div>
-
-                                <div class="info-item">
-                                    <div class="info-icon"><i class="fas fa-envelope"></i></div>
-                                    <div class="info-content">
-                                        <h4>E-mail</h4>
-                                        <p>${info.email}</p>
-                                    </div>
-                                </div>
-
-                                <div class="info-item">
-                                    <div class="info-icon"><i class="fas fa-birthday-cake"></i></div>
-                                    <div class="info-content">
-                                        <h4>Data de Nascimento</h4>
-                                        <p>${info.data_nasc}</p>
-                                    </div>
-                                </div>
-
-                                <div class="info-item">
-                                    <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
-                                    <div class="info-content">
-                                        <h4>Localização</h4>
-                                        <p>${info.cidade}, ${info.estado}</p>
-                                    </div>
-                                </div>
-                        `;
-
-                        html += `
-                                <div class="info-item">
-                                    <div class="info-icon"><i class="fas fa-star"></i></div>
-                                    <div class="info-content">
-                                        <h4>Avaliação</h4>
-                                        <div class="rating">${ratingHtml}</div>
-                                    </div>
-                                </div>
-                                </div>`;
-
-                        if (data.comentarios[0] && data.comentarios[0].length > 0){
-
-                            html += `
-                                <div class="info-item">
-                                    <div class="info-content">
-                                        <h4>Comentários</h4>
-                                        <hr>`
-                            
-                            data.comentarios[0].forEach(comentarios => {
-                                
-                                html += `
-                                        <div>${comentarios.comentario}</div>
-                                        <hr>`;
-                        
-                            });
-
-                            html += `
-                                    </div>
-                                    </div>`;
-                        }
-
-                        document.getElementById("conteudoInformacoes").innerHTML = html;
+                const modal = new bootstrap.Modal(document.getElementById('modalInformacoes'));
+                modal.show();
+            } catch (error) {
+                console.error("Erro ao carregar informações:", error);
+                document.getElementById("modalNome").textContent = "Erro";
+                document.getElementById("modalLocalizacaoValue").textContent = "";
+                document.getElementById("modalTelefoneValue").textContent = "";
+                document.getElementById("modalEmailValue").textContent = "";
+                document.getElementById("modalDataNascValue").textContent = "";
+                document.getElementById("modalAvaliacaoValue").innerHTML = `<span>Nenhuma Avaliação Encontrada</span>`;
+                document.getElementById("modalComentariosValue").innerHTML = `<p>Ocorreu um erro ao carregar as informações.</p>`;
+                
+                const modal = new bootstrap.Modal(document.getElementById('modalInformacoes'));
+                modal.show();
             }
-            const modal = new bootstrap.Modal(document.getElementById('modalInformacoes'));
-            modal.show();
         }
 
         async function candidatarServico(idVaga, idEvento, btnElement) {
@@ -531,10 +660,8 @@
         }
 
         document.addEventListener('DOMContentLoaded', function () {
-            // Aplicar desativação aos já candidatados
             desativarBotoesJaCandidatados();
 
-            // Filtro automático
             const urlParams = new URLSearchParams(window.location.search);
             const categoriaParam = urlParams.get('categoria');
             const localizacaoParam = urlParams.get('localizacao');

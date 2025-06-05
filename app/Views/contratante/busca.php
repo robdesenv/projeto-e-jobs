@@ -10,9 +10,20 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
     <style>
+        html, body {
+            height: 100%;
+        }
+
         body {
             font-family: 'Segoe UI', sans-serif;
             background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            flex: 1;
         }
 
         .busca-section {
@@ -179,63 +190,32 @@
             min-width: 200px;
         }
 
-        /* modal de informações */
         .modal-info-header {
             background-color: #004182;
             color: white;
-            padding: 15px 20px;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .modal-info-title {
-            font-weight: 600;
             margin: 0;
+            font-size: 1.4rem;
+            font-weight: 600;
         }
 
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
+        .modal-body {
             padding: 20px;
-        }
-
-        .info-item {
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            padding: 15px;
-            border: 1px solid #e0e0e0;
-            transition: all 0.3s ease;
-        }
-
-        .info-item:hover {
-            background-color: #f0f7ff;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .info-icon {
-            color: #004182;
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-        }
-
-        .info-content h4 {
-            color: #004182;
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .info-content p {
-            color: #333;
-            margin: 0;
         }
 
         .modal-info-footer {
             border-top: 1px solid #eee;
-            padding: 15px 20px;
+            padding: 15px;
             display: flex;
             justify-content: flex-end;
             gap: 10px;
+            background-color: #f9f9f9;
         }
 
         .btn-contratar {
@@ -268,7 +248,6 @@
             font-weight: 500;
         }
 
-        /* Rating styles */
         .rating {
             display: flex;
             align-items: center;
@@ -276,7 +255,7 @@
         }
 
         .rating i {
-            color: #ffd700; /* Gold color for stars */
+            color: #ffd700;
             font-size: 1rem;
         }
 
@@ -285,7 +264,7 @@
         }
 
         .rating .fa-star.empty {
-            color: #ccc; /* Gray for empty stars */
+            color: #ccc;
         }
 
         .rating-text {
@@ -311,10 +290,6 @@
             .filtro-item {
                 min-width: 100%;
             }
-
-            .info-grid {
-                grid-template-columns: 1fr;
-            }
         }
 
         .footer {
@@ -322,10 +297,10 @@
             padding: 20px;
             background-color: #004182;
             color: #ffffff;
-            margin-top: 40px;
+            margin-top: auto;
+            width: 100%;
         }
 
-        /* vagas */
         .vaga-item {
             display: flex;
             justify-content: space-between;
@@ -350,6 +325,16 @@
 
         .btn-close-white {
             filter: invert(1);
+            width: 20px;
+            height: 20px;
+            padding: 4px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-close-white:hover {
+            background-color: rgba(255, 255, 255, 0.4);
         }
 
         .modal-header {
@@ -410,11 +395,63 @@
                     <h5 class="modal-info-title"><i class="fas fa-user-tie"></i> Informações do Freelancer</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-
-                <div class="modal-body" id="conteudoInformacoes">
-                    <!-- inserido via JavaScript -->
+                <div class="modal-body">
+                    <div class="freelancer-card">
+                        <div class="freelancer-header">
+                            <h3 class="freelancer-title" id="modalNome"></h3>
+                        </div>
+                        <div class="freelancer-body">
+                            <div class="freelancer-info" id="modalLocalizacao">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <div class="freelancer-label">Localização</div>
+                                    <div class="freelancer-value" id="modalLocalizacaoValue"></div>
+                                </div>
+                            </div>
+                            <div class="freelancer-info" id="modalTelefone">
+                                <i class="fas fa-phone"></i>
+                                <div>
+                                    <div class="freelancer-label">Telefone</div>
+                                    <div class="freelancer-value" id="modalTelefoneValue"></div>
+                                </div>
+                            </div>
+                            <div class="freelancer-info" id="modalEmail">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <div class="freelancer-label">E-mail</div>
+                                    <div class="freelancer-value" id="modalEmailValue"></div>
+                                </div>
+                            </div>
+                            <div class="freelancer-info" id="modalDataNasc">
+                                <i class="fas fa-birthday-cake"></i>
+                                <div>
+                                    <div class="freelancer-label">Data de Nascimento</div>
+                                    <div class="freelancer-value" id="modalDataNascValue"></div>
+                                </div>
+                            </div>
+                            <div class="freelancer-info" id="modalHabilidades">
+                                <i class="fas fa-briefcase"></i>
+                                <div>
+                                    <div class="freelancer-label">Habilidades</div>
+                                    <div class="freelancer-value habilidades-list" id="modalHabilidadesValue"></div>
+                                </div>
+                            </div>
+                            <div class="freelancer-info" id="modalAvaliacao">
+                                <i class="fas fa-star"></i>
+                                <div>
+                                    <div class="freelancer-label">Avaliação</div>
+                                    <div class="freelancer-value rating" id="modalAvaliacaoValue"></div>
+                                </div>
+                            </div>
+                            <div class="freelancer-info" id="modalComentarios">
+                                <div>
+                                    <div class="freelancer-label">Comentários</div>
+                                    <div class="freelancer-value" id="modalComentariosValue"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
                 <div class="modal-info-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                     <button type="button" class="btn-contratar" id="btn-contratar" onclick="contratarFreelancer()">
@@ -490,14 +527,12 @@
                     const data = await response.json();
                     console.log(data);
 
-                    let html = '';
-
                     if (data.informacoes && data.informacoes.length > 0) {
                         const info = data.informacoes[0];
 
                         if (data.media_avaliacao[0] && data.media_avaliacao[0].length > 0 && data.media_avaliacao[0][0].avaliacao_media != null) {
                             media = Number(data.media_avaliacao[0][0].avaliacao_media);
-                        }else {
+                        } else {
                             media = -1;
                         }
 
@@ -508,120 +543,55 @@
                         const emptyStars = 5 - fullStars - halfStar;
                         let ratingHtml = '';
 
-                        if(rating >= 0){
+                        if (rating >= 0) {
                             for (let i = 0; i < fullStars; i++) ratingHtml += `<i class="fas fa-star"></i>`;
                             if (halfStar) ratingHtml += `<i class="fas fa-star-half-alt"></i>`;
                             for (let i = 0; i < emptyStars; i++) ratingHtml += `<i class="fas fa-star empty"></i>`;
                             ratingHtml += `<span class="rating-text">(${rating.toFixed(1)})</span>`;
-                        }else{
-                            ratingHtml += `<span>Nenhuma Avaliação Encontrada<\span>`;
+                        } else {
+                            ratingHtml += `<span>Nenhuma Avaliação Encontrada</span>`;
                         }
 
-                        html += `
-                            <div class="info-grid">
-                                <div class="info-item">
-                                    <div class="info-icon"><i class="fas fa-user"></i></div>
-                                    <div class="info-content">
-                                        <h4>Nome Completo</h4>
-                                        <p>${info.nome}</p>
-                                    </div>
-                                </div>
+                        document.getElementById("modalNome").textContent = info.nome;
+                        document.getElementById("modalLocalizacaoValue").textContent = `${info.cidade}, ${info.estado}`;
+                        document.getElementById("modalTelefoneValue").textContent = info.telefone;
+                        document.getElementById("modalEmailValue").textContent = info.email;
+                        document.getElementById("modalDataNascValue").textContent = info.dataNasc;
+                        document.getElementById("modalAvaliacaoValue").innerHTML = ratingHtml;
 
-                                <div class="info-item">
-                                    <div class="info-icon"><i class="fas fa-phone"></i></div>
-                                    <div class="info-content">
-                                        <h4>Telefone</h4>
-                                        <p>${info.telefone}</p>
-                                    </div>
-                                </div>
+                        const habilidadesHtml = data.cargosFreelancer && data.cargosFreelancer.length > 0
+                            ? data.cargosFreelancer.map(cargo => `<span class="habilidade-badge">${cargo.cargo}</span>`).join('')
+                            : `<span>Nenhuma Habilidade Cadastrada</span>`;
+                        document.getElementById("modalHabilidadesValue").innerHTML = habilidadesHtml;
 
-                                <div class="info-item">
-                                    <div class="info-icon"><i class="fas fa-envelope"></i></div>
-                                    <div class="info-content">
-                                        <h4>E-mail</h4>
-                                        <p>${info.email}</p>
-                                    </div>
-                                </div>
+                        const comentariosHtml = data.comentarios[0] && data.comentarios[0].length > 0
+                            ? data.comentarios[0].map(comentario => `<p>${comentario.comentario}</p>`).join('<hr>')
+                            : `<p>Nenhum comentário encontrado</p>`;
+                        document.getElementById("modalComentariosValue").innerHTML = comentariosHtml;
 
-                                <div class="info-item">
-                                    <div class="info-icon"><i class="fas fa-birthday-cake"></i></div>
-                                    <div class="info-content">
-                                        <h4>Data de Nascimento</h4>
-                                        <p>${info.dataNasc}</p>
-                                    </div>
-                                </div>
-
-                                <div class="info-item">
-                                    <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
-                                    <div class="info-content">
-                                        <h4>Localização</h4>
-                                        <p>${info.cidade}, ${info.estado}</p>
-                                    </div>
-                                </div>
-                        `;
-
-                        if (data.cargosFreelancer && data.cargosFreelancer.length > 0) {
-                            html += `
-                                <div class="info-item">
-                                    <div class="info-icon"><i class="fas fa-briefcase"></i></div>
-                                    <div class="info-content">
-                                        <h4>Habilidades</h4>
-                                        <div class="habilidades-list">
-                            `;
-
-                            data.cargosFreelancer.forEach(cargo => {
-                                html += `<span class="habilidade-badge">${cargo.cargo}</span>`;
-                            });
-
-                            html += `
-                                        </div>
-                                    </div>
-                                </div>
-                            `;
-                        }
-
-                        html += `
-                         <div class="info-item">
-                                    <div class="info-icon"><i class="fas fa-star"></i></div>
-                                    <div class="info-content">
-                                        <h4>Avaliação</h4>
-                                        <div class="rating">${ratingHtml}</div>
-                                    </div>
-                                </div>
-                                </div>`;
-                        
-                        if (data.comentarios[0] && data.comentarios[0].length > 0){
-
-                            html += `
-                                <div class="info-item">
-                                    <div class="info-content">
-                                        <h4>Comentários</h4>
-                                        <hr>`
-
-                            data.comentarios[0].forEach(comentarios => {
-                                
-                                html += `
-                                        <div>${comentarios.comentario}</div>
-                                        <hr>`;
-
-                            });
-
-                            html += `
-                                    </div>
-                                    </div>
-                                `;
-                        }
-                        
+                        document.getElementById("btn-contratar").style.display = "block";
                     } else {
-                        html = `<p class="text-center py-4">Nenhuma informação encontrada para este freelancer.</p>`;
+                        document.getElementById("modalNome").textContent = "Freelancer Desconhecido";
+                        document.getElementById("modalLocalizacaoValue").textContent = "";
+                        document.getElementById("modalTelefoneValue").textContent = "";
+                        document.getElementById("modalEmailValue").textContent = "";
+                        document.getElementById("modalDataNascValue").textContent = "";
+                        document.getElementById("modalHabilidadesValue").innerHTML = `<span>Nenhuma Habilidade Cadastrada</span>`;
+                        document.getElementById("modalAvaliacaoValue").innerHTML = `<span>Nenhuma Avaliação Encontrada</span>`;
+                        document.getElementById("modalComentariosValue").innerHTML = `<p>Nenhuma informação encontrada para este freelancer.</p>`;
+                        document.getElementById("btn-contratar").style.display = "none";
                     }
-
-                    document.getElementById("conteudoInformacoes").innerHTML = html;
-                    document.getElementById("btn-contratar").style.display = data.informacoes && data.informacoes.length > 0 ? "block" : "none";
                 } catch (error) {
                     console.error("Erro ao carregar informações:", error);
-                    document.getElementById("conteudoInformacoes").innerHTML =
-                        `<p class="text-center py-4 text-danger">Ocorreu um erro ao carregar as informações.</p>`;
+                    document.getElementById("modalNome").textContent = "Erro";
+                    document.getElementById("modalLocalizacaoValue").textContent = "";
+                    document.getElementById("modalTelefoneValue").textContent = "";
+                    document.getElementById("modalEmailValue").textContent = "";
+                    document.getElementById("modalDataNascValue").textContent = "";
+                    document.getElementById("modalHabilidadesValue").innerHTML = `<span>Nenhuma Habilidade Cadastrada</span>`;
+                    document.getElementById("modalAvaliacaoValue").innerHTML = `<span>Nenhuma Avaliação Encontrada</span>`;
+                    document.getElementById("modalComentariosValue").innerHTML = `<p>Ocorreu um erro ao carregar as informações.</p>`;
+                    document.getElementById("btn-contratar").style.display = "none";
                 }
             };
 
@@ -662,8 +632,8 @@
                     let media = 0;
 
                     if (data.media_avaliacao[indice] && data.media_avaliacao[indice].length > 0 && data.media_avaliacao[indice][0].avaliacao_media != null) {
-                            media = Number(data.media_avaliacao[indice][0].avaliacao_media);
-                    }else {
+                        media = Number(data.media_avaliacao[indice][0].avaliacao_media);
+                    } else {
                         media = -1;
                     }
 
@@ -672,7 +642,7 @@
                             html2 += `<span class="habilidade-badge">${cargos.cargo}</span>`;
                         });
                     } else {
-                        html2 += `<span class="">Nenhuma Habilidade Cadastrada</span>`;
+                        html2 += `<span>Nenhuma Habilidade Cadastrada</span>`;
                     }
 
                     // Generate star rating HTML
@@ -682,15 +652,14 @@
                     const emptyStars = 5 - fullStars - halfStar;
                     let ratingHtml = '';
 
-                    if(rating >= 0){
+                    if (rating >= 0) {
                         for (let i = 0; i < fullStars; i++) ratingHtml += `<i class="fas fa-star"></i>`;
                         if (halfStar) ratingHtml += `<i class="fas fa-star-half-alt"></i>`;
                         for (let i = 0; i < emptyStars; i++) ratingHtml += `<i class="fas fa-star empty"></i>`;
                         ratingHtml += `<span class="rating-text">(${rating.toFixed(1)})</span>`;
-                    }else{
-                        ratingHtml += `<span>Nenhuma Avaliação Encontrada<\span>`;
+                    } else {
+                        ratingHtml += `<span>Nenhuma Avaliação Encontrada</span>`;
                     }
-                    
 
                     const telefoneFormatado = freelancers.telefone.replace(/\D/g, '');
                     const mensagemWhatsApp = encodeURIComponent(`Olá ${freelancers.nome.split(' ')[0]}, encontrei seu perfil no e-Jobs e gostaria de conversar sobre um serviço.`);
@@ -700,8 +669,7 @@
                             <div class="freelancer-header">
                                 <h3 class="freelancer-title">${freelancers.nome}</h3>
                             </div>
-                            
-                            <div class="info-item">
+                            <div class="freelancer-body">
                                 <div class="freelancer-info">
                                     <i class="fas fa-briefcase"></i>
                                     <div>
@@ -713,7 +681,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                
                                 <div class="freelancer-info">
                                     <i class="fas fa-star"></i>
                                     <div>
@@ -723,7 +690,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                
                                 <div class="freelancer-info">
                                     <i class="fas fa-map-marker-alt"></i>
                                     <div>
@@ -733,7 +699,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                
                                 <div class="freelancer-info">
                                     <i class="fas fa-phone"></i>
                                     <div>
@@ -742,12 +707,10 @@
                                     </div>
                                 </div>
                             </div>
-                            
                             <div class="freelancer-actions">
                                 <a href="https://wa.me/55${telefoneFormatado}?text=${mensagemWhatsApp}" target="_blank" class="btn-contato">
                                     <i class="fab fa-whatsapp"></i> WhatsApp
                                 </a>
-
                                 <button class="btn-contato" onclick="verInformacoes(${freelancers.id}, ${freelancers.user_id})">
                                     <i class="fas fa-info-circle"></i> Informações
                                 </button>

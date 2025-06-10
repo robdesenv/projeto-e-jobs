@@ -75,7 +75,7 @@
         }
 
         .transferencias-section .status.recebido {
-            color: #28a745; 
+            color: #28a745;
         }
 
         .transferencias-section .status.pendente {
@@ -98,6 +98,35 @@
 
         .footer a:hover {
             color: #cce4ff;
+        }
+
+        html,
+        body {
+            height: 100%;
+            /* Ensure the html and body take up the full height */
+            margin: 0;
+            /* Remove default margins */
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            flex: 1 0 auto;
+            /* Allow the container to grow and take available space */
+        }
+
+        .footer {
+            flex-shrink: 0;
+            /* Prevent the footer from shrinking */
+            text-align: center;
+            padding: 25px;
+            background-color: #004182;
+            color: #ffffff;
         }
     </style>
 </head>
@@ -138,7 +167,7 @@
                         <td>Empresa B</td>
                         <td>R$ 200,00</td>
                         <td>15/10/2023</td>
-                        <td>  </td>
+                        <td> </td>
                         <td class="status pendente">Pendente</td>
                     </tr>
                     <tr>

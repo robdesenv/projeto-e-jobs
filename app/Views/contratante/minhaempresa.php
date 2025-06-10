@@ -93,6 +93,8 @@
             color: #cce4ff;
             text-decoration: underline;
         }
+
+        
     </style>
 </head>
 
@@ -163,7 +165,7 @@
 
                 <div class="row mt-4">
                     <div class="col-md-12 text-center">
-                        <button type="submit" class="btn-enviar">Enviar
+                        <button type="submit" class="btn-enviar">Atualizar dados
                         </button>
                     </div>
                 </div>

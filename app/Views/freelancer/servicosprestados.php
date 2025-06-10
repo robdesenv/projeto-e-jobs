@@ -106,6 +106,35 @@
         .footer a:hover {
             color: #cce4ff;
         }
+
+        html,
+        body {
+            height: 100%;
+            /* Ensure the html and body take up the full height */
+            margin: 0;
+            /* Remove default margins */
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            flex: 1 0 auto;
+            /* Allow the container to grow and take available space */
+        }
+
+        .footer {
+            flex-shrink: 0;
+            /* Prevent the footer from shrinking */
+            text-align: center;
+            padding: 25px;
+            background-color: #004182;
+            color: #ffffff;
+        }
     </style>
 </head>
 
@@ -173,14 +202,14 @@
                                 echo '<p class="alert alert-danger"><strong >Status: </strong>Recusado</p>';
                             }
                             ?>
-                            <?php if($contratado['status'] === null):?>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" id="btn-recusar"
-                                    onclick="recusarServico(<?php echo htmlspecialchars($contratado['id']); ?>)">Recusar</button>
-                                <button type="button" name="btn-cargo" id="btn-contratar" class="btn btn-success"
-                                    onclick="aceitarServico(<?php echo htmlspecialchars($contratado['id']); ?>, <?php echo htmlspecialchars($contratado['evento_id']); ?>)">Aceitar</button>
-                            </div>
-                            <?php endif;?>
+                            <?php if ($contratado['status'] === null): ?>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" id="btn-recusar"
+                                        onclick="recusarServico(<?php echo htmlspecialchars($contratado['id']); ?>)">Recusar</button>
+                                    <button type="button" name="btn-cargo" id="btn-contratar" class="btn btn-success"
+                                        onclick="aceitarServico(<?php echo htmlspecialchars($contratado['id']); ?>, <?php echo htmlspecialchars($contratado['evento_id']); ?>)">Aceitar</button>
+                                </div>
+                            <?php endif; ?>
                         </div>
                     <?php endif; ?>
                 <?php endforeach; ?>

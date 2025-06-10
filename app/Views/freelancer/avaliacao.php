@@ -256,11 +256,41 @@
             opacity: 1;
         }
 
+        html,
+        body {
+            height: 100%;
+            /* Ensure the html and body take up the full height */
+            margin: 0;
+            /* Remove default margins */
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            flex: 1 0 auto;
+            /* Allow the container to grow and take available space */
+        }
+
+        .footer {
+            flex-shrink: 0;
+            /* Prevent the footer from shrinking */
+            text-align: center;
+            padding: 25px;
+            background-color: #004182;
+            color: #ffffff;
+        }
+
         @keyframes slideIn {
             from {
                 transform: translateX(100%);
                 opacity: 0;
             }
+
             to {
                 transform: translateX(0);
                 opacity: 1;
@@ -272,6 +302,7 @@
                 transform: translateX(0);
                 opacity: 1;
             }
+
             to {
                 transform: translateX(100%);
                 opacity: 0;
@@ -298,16 +329,17 @@
             <h1>Contratantes para Avaliar</h1>
 
             <div class="services-list" id="servicesList">
-                <?php foreach($avaliacao as $avaliacoes): ?>
-                <div class="service-card">
-                    <div class="service-title"> Contratante: <?php echo $avaliacoes['contratante'] ?></div>
-                    <div class="service-client">Evento: <?php echo $avaliacoes['evento'] ?></div>
-                    <div class="service-client">Cargo Trabalhado: <?php echo $avaliacoes['cargo'] ?></div>
-                    <div class="service-date">Finalizado em: <?php echo $avaliacoes['finalizado_em'] ?></div>
-                    <button class="rate-btn" onclick="openModal(<?php echo $avaliacoes['user_id'] ?>,<?php echo $avaliacoes['id'] ?>)">
-                        <i class="fas fa-star"></i> Avaliar Serviço
-                    </button>
-                </div>
+                <?php foreach ($avaliacao as $avaliacoes): ?>
+                    <div class="service-card">
+                        <div class="service-title"> Contratante: <?php echo $avaliacoes['contratante'] ?></div>
+                        <div class="service-client">Evento: <?php echo $avaliacoes['evento'] ?></div>
+                        <div class="service-client">Cargo Trabalhado: <?php echo $avaliacoes['cargo'] ?></div>
+                        <div class="service-date">Finalizado em: <?php echo $avaliacoes['finalizado_em'] ?></div>
+                        <button class="rate-btn"
+                            onclick="openModal(<?php echo $avaliacoes['user_id'] ?>,<?php echo $avaliacoes['id'] ?>)">
+                            <i class="fas fa-star"></i> Avaliar Serviço
+                        </button>
+                    </div>
                 <?php endforeach; ?>
             </div>
         </div>
@@ -385,7 +417,8 @@
 
                 <div class="rating-section">
                     <label for="comment" class="rating-title">Comentário (opcional)</label>
-                    <textarea id="comment" name="comment" placeholder="Deixe seu comentário sobre o serviço..."></textarea>
+                    <textarea id="comment" name="comment"
+                        placeholder="Deixe seu comentário sobre o serviço..."></textarea>
                 </div>
 
                 <button type="submit" class="publish-btn">
@@ -412,13 +445,13 @@
                 <span>${message}</span>
                 <button class="close">&times;</button>
             `;
-            
+
             document.body.appendChild(notification);
-            
+
             notification.querySelector('.close').addEventListener('click', () => {
                 closeNotification(notification);
             });
-            
+
             setTimeout(() => {
                 closeNotification(notification);
             }, 5000);
@@ -449,64 +482,65 @@
             }
         }
 
-        <?php if (session()->getFlashdata('msg')) : ?>
+        <?php if (session()->getFlashdata('msg')): ?>
             window.addEventListener('DOMContentLoaded', () => {
                 showAlert(`<?= addslashes(session()->getFlashdata('msg')) ?>`, 'error');
             });
         <?php endif; ?>
 
-        <?php if (session()->getFlashdata('msg-success')) : ?>
+        <?php if (session()->getFlashdata('msg-success')): ?>
             window.addEventListener('DOMContentLoaded', () => {
                 showAlert(`<?= addslashes(session()->getFlashdata('msg-success')) ?>`, 'success');
             });
         <?php endif; ?>
 
-        <?php if (session()->getFlashdata('msg-info')) : ?>
+        <?php if (session()->getFlashdata('msg-info')): ?>
             window.addEventListener('DOMContentLoaded', () => {
                 showAlert(`<?= addslashes(session()->getFlashdata('msg-info')) ?>`, 'info');
             });
         <?php endif; ?>
 
-        <?php if (session()->getFlashdata('msg-warning')) : ?>
+        <?php if (session()->getFlashdata('msg-warning')): ?>
             window.addEventListener('DOMContentLoaded', () => {
                 showAlert(`<?= addslashes(session()->getFlashdata('msg-warning')) ?>`, 'warning');
             });
         <?php endif; ?>
 
-        document.getElementById('ratingForm').addEventListener('submit', function(e) {
+        document.getElementById('ratingForm').addEventListener('submit', function (e) {
             e.preventDefault();
-            
+
             const qualitySelected = document.querySelector('input[name="quality"]:checked');
             const ambienteSelected = document.querySelector('input[name="ambiente"]:checked');
-            
+
             if (!qualitySelected || !ambienteSelected) {
                 showAlert('Por favor, avalie todos os critérios antes de enviar.', 'warning');
                 return;
             }
-            
+
             const formData = new FormData(this);
-            
+
             fetch(window.location.href, {
                 method: 'POST',
                 body: formData
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    showAlert(data.message, 'success');
-                    closeModal();
-                    setTimeout(() => {
-                        window.location.reload();
-                    }, 2000);
-                } else {
-                    showAlert(data.message, 'error');
-                }
-            })
-            .catch(error => {
-                showAlert('Ocorreu um erro ao enviar a avaliação.', 'error');
-                console.error('Error:', error);
-            });
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showAlert(data.message, 'success');
+                        closeModal();
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 2000);
+                    } else {
+                        showAlert(data.message, 'error');
+                    }
+                })
+                .catch(error => {
+                    showAlert('Ocorreu um erro ao enviar a avaliação.', 'error');
+                    console.error('Error:', error);
+                });
         });
     </script>
 </body>
+
 </html>

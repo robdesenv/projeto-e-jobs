@@ -342,6 +342,35 @@
             font-size: 0.8rem;
             font-weight: 500;
         }
+
+        html,
+        body {
+            height: 100%;
+            /* Ensure the html and body take up the full height */
+            margin: 0;
+            /* Remove default margins */
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            flex: 1 0 auto;
+            /* Allow the container to grow and take available space */
+        }
+
+        .footer {
+            flex-shrink: 0;
+            /* Prevent the footer from shrinking */
+            text-align: center;
+            padding: 25px;
+            background-color: #004182;
+            color: #ffffff;
+        }
     </style>
 </head>
 
@@ -410,8 +439,7 @@
                             onclick="candidatarServico(<?php echo $vaga['id']; ?>, <?php echo $vaga['evento_id']; ?>, this)">
                             <i class="fas fa-paper-plane"></i> Candidatar-se
                         </button>
-                        <button class="btn-informacoes"
-                            onclick="verInformacoes(<?php echo $vaga['user_id']; ?>)">
+                        <button class="btn-informacoes" onclick="verInformacoes(<?php echo $vaga['user_id']; ?>)">
                             <i class="fas fa-info-circle"></i> Ver Informações
                         </button>
                     </div>
@@ -420,12 +448,14 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modalInformacoes" tabindex="-1" aria-labelledby="modalInformacoesLabel" aria-hidden="true">
+    <div class="modal fade" id="modalInformacoes" tabindex="-1" aria-labelledby="modalInformacoesLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-info-header">
                     <h5 class="modal-info-title"><i class="fas fa-info-circle"></i> Informações do Contratante</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="freelancer-card">
@@ -574,7 +604,7 @@
                 document.getElementById("modalDataNascValue").textContent = "";
                 document.getElementById("modalAvaliacaoValue").innerHTML = `<span>Nenhuma Avaliação Encontrada</span>`;
                 document.getElementById("modalComentariosValue").innerHTML = `<p>Ocorreu um erro ao carregar as informações.</p>`;
-                
+
                 const modal = new bootstrap.Modal(document.getElementById('modalInformacoes'));
                 modal.show();
             }
